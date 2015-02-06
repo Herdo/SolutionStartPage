@@ -1,0 +1,29 @@
+﻿<ScrollViewer xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:vsfx="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.12.0"
+              xmlns:basicControls="clr-namespace:SolutionStartPage.Controls.BasicPart;assembly=SolutionStartPage.Controls"
+              xmlns:solutionPartControls="clr-namespace:SolutionStartPage.Controls.SolutionsPart;assembly=SolutionStartPage.Controls"
+              VerticalScrollBarVisibility="Auto"
+              HorizontalScrollBarVisibility="Disabled">
+    
+    <ScrollViewer.Resources>
+        <ResourceDictionary Source="pack://application:,,,/SolutionStartPage.Controls;component/Content/Styling.xaml"/>
+    </ScrollViewer.Resources>
+    
+    <!-- Root Page Layout -->
+    <Grid Style="{DynamicResource StartPage.OuterGridStyle}"
+          Background="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowBackgroundKey}}">
+            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="275" Width="3*" MaxWidth="330" />
+            <ColumnDefinition Width="7*" MinWidth="0"/>
+        </Grid.ColumnDefinitions>
+            
+        <!-- Left Column -->
+        <basicControls:VisualStudioOverviewPageControl Grid.Column="0"/>
+            
+        <!-- Right Column -->
+        <solutionPartControls:SolutionPageControl Grid.Column="1"
+                                                  DataContext="{Binding}"/>
+    </Grid>
+</ScrollViewer>
