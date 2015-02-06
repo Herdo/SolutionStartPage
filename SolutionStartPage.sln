@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolutionStartPage", "SolutionStartPage.csproj", "{4E90E2AC-C800-410D-877B-2D8E4BBE4D92}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolutionStartPage", "SolutionStartPage\SolutionStartPage.csproj", "{4E90E2AC-C800-410D-877B-2D8E4BBE4D92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolutionStartPage.Controls", "..\SolutionStartPage.Controls\SolutionStartPage.Controls.csproj", "{700F36DD-97F2-48F4-8796-46986FA2EFB5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolutionStartPage.Controls", "SolutionStartPage.Controls\SolutionStartPage.Controls.csproj", "{700F36DD-97F2-48F4-8796-46986FA2EFB5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
