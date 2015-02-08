@@ -19,7 +19,7 @@
     </UserControl.CommandBindings>
     
     <UserControl.Resources>
-        <ResourceDictionary Source="../Content/Styling.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/SolutionStartPage.Controls;component/Content/Styling.xaml"/>
     </UserControl.Resources>
     
     <Grid>

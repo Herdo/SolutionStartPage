@@ -76,7 +76,7 @@
         [XmlElement]
         public string SolutionDirectory
         {
-            get { return _solutionDirectory; }
+            get { return _solutionDirectory ?? String.Empty; }
             set
             {
                 if (value == _solutionDirectory) return;

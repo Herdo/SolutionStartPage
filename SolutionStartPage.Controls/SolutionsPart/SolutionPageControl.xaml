@@ -21,7 +21,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Content/Styling.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/SolutionStartPage.Controls;component/Content/Styling.xaml" />
                 <ResourceDictionary>
                     <!-- Styles -->
                     <Style TargetType="TextBlock">
