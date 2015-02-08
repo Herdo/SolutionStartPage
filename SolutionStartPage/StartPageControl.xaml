@@ -1,14 +1,12 @@
-﻿<ScrollViewer xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-              xmlns:vsfx="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.12.0"
-              xmlns:basicControls="clr-namespace:SolutionStartPage.Controls.BasicPart;assembly=SolutionStartPage.Controls"
-              xmlns:solutionPartControls="clr-namespace:SolutionStartPage.Controls.SolutionsPart;assembly=SolutionStartPage.Controls"
-              VerticalScrollBarVisibility="Auto"
-              HorizontalScrollBarVisibility="Disabled">
+﻿<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:vsfx="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.12.0"
+      xmlns:basicControls="clr-namespace:SolutionStartPage.Controls.BasicPart;assembly=SolutionStartPage.Controls"
+      xmlns:solutionPartControls="clr-namespace:SolutionStartPage.Controls.SolutionsPart;assembly=SolutionStartPage.Controls">
     
-    <ScrollViewer.Resources>
+    <Grid.Resources>
         <ResourceDictionary Source="pack://application:,,,/SolutionStartPage.Controls;component/Content/Styling.xaml"/>
-    </ScrollViewer.Resources>
+    </Grid.Resources>
     
     <!-- Root Page Layout -->
     <Grid Style="{DynamicResource StartPage.OuterGridStyle}"
@@ -20,10 +18,13 @@
         </Grid.ColumnDefinitions>
             
         <!-- Left Column -->
-        <basicControls:VisualStudioOverviewPageControl Grid.Column="0"/>
+        <basicControls:VisualStudioOverviewPageControl Grid.Column="0"
+                                                       DataContext="{Binding}"/>
             
         <!-- Right Column -->
         <solutionPartControls:SolutionPageControl Grid.Column="1"
+                                                  VerticalAlignment="Stretch"
+                                                  HorizontalAlignment="Stretch"
                                                   DataContext="{Binding}"/>
     </Grid>
-</ScrollViewer>
+</Grid>

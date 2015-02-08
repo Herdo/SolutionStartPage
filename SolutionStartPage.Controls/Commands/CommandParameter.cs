@@ -1,0 +1,14 @@
+﻿namespace SolutionStartPage.Controls.Commands
+{
+    public static class CommandParameter
+    {
+        public const string OPEN_SOLUTION_OPEN = "OpenSolutionOpen";
+        public const string OPEN_SOLUTION_OPEN_EXPLORER = "OpenSolutionOpenExplorer";
+        public const string ALTER_PAGE_ADD_GROUP = "AddGroup";
+        public const string ALTER_PAGE_DELETE_ALL_GROUPS = "DeleteAllGroups";
+        public const string ALTER_SOLUTION_GROUP_MOVE_GROUP_BACK = "MoveGroupBack";
+        public const string ALTER_SOLUTION_GROUP_MOVE_GROUP_FORWARD = "MoveGroupForward";
+        public const string ALTER_SOLUTION_GROUP_REMOVE_GROUP = "RemoveGroup";
+        public const string ALTER_SOLUTION_GROUP_ADD_SOLUTION = "AddSolution";
+    }
+}

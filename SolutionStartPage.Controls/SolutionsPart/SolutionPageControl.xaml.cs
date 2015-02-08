@@ -1,28 +1,62 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-namespace SolutionStartPage.Controls.SolutionsPart
+﻿namespace SolutionStartPage.Controls.SolutionsPart
 {
+    using System;
+    using System.Windows.Input;
+    using Extensions;
+
     /// <summary>
     /// Interaction logic for SolutionPageControl.xaml
     /// </summary>
-    public partial class SolutionPageControl : UserControl
+    public partial class SolutionPageControl
     {
+        /////////////////////////////////////////////////////////
+        #region Events
+
+        public event EventHandler<CanExecuteRoutedEventArgs> AlterPageCanExecute; 
+        public event EventHandler<ExecutedRoutedEventArgs> AlterPageExecuted; 
+
+        #endregion
+
+        /////////////////////////////////////////////////////////
+        #region Constructors
+
         public SolutionPageControl()
         {
             InitializeComponent();
+
+            Loaded += SolutionPageControl_Loaded;
         }
+
+        #endregion
+
+        /////////////////////////////////////////////////////////
+        #region Public Methods
+
+        public void ConnectDataSource(SolutionPageViewModel vm)
+        {
+            DataContext = vm;
+        }
+
+        #endregion
+
+        /////////////////////////////////////////////////////////
+        #region Event Handler
+        
+        void SolutionPageControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            new SolutionPagePresenter(this);
+        }
+
+        private void AlterPage_OnCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            AlterPageCanExecute.SafeInvoke(sender, e);
+        }
+
+        private void AlterPage_OnExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            AlterPageExecuted.SafeInvoke(sender, e);
+        }
+
+        #endregion
     }
 }

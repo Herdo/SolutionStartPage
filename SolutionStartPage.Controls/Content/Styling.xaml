@@ -2,37 +2,75 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:markup="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:vs="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.12.0"
-                    xmlns:vsfx="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.12.0">
+                    xmlns:vsfx="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.12.0"
+                    xmlns:converter="clr-namespace:SolutionStartPage.Controls.Converter"
+                    xmlns:solutionsPart="clr-namespace:SolutionStartPage.Controls.SolutionsPart">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Microsoft.VisualStudio.Shell.12.0;component/ui/styles/startpageresources.xaml" />
         <ResourceDictionary>
+            <!-- Effects -->
+            <DropShadowEffect x:Key="DropShadow"
+                              BlurRadius="10"
+                              Direction="315"/>
+            
+            <!-- Converter -->
+            <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <converter:PathToSystemImageConverter x:Key="PathToSystemImageConverter"/>
+            
+            <!-- Styles -->
+            
+            <!-- Solution Image -->
+            <Style x:Key="SolutionImageStyle"
+                   TargetType="Image">
+                <Setter Property="Width" Value="16"/>
+                <Setter Property="Height" Value="16"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+            </Style>
+            
+            <!-- Link Style -->
             <Style x:Key="StartPage.ProjectCommand.LinkStyle" TargetType="{markup:Type vs:ImageButton}" BasedOn="{StaticResource StartPage.ProjectCommand.ButtonStyle}">
                 <Setter Property="Control.Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{markup:Type vs:ImageButton}">
-                            <TextBlock Grid.Column="1"
-                                                    x:Name="PART_Text" x:Uid="PART_Text"
-                                                    Text="{TemplateBinding ContentControl.Content}"
-                                                    VerticalAlignment="Center"
-                                                    Style="{StaticResource StartPage.NormalTextStyle}"
-                                                    Foreground="{DynamicResource {markup:Static vsfx:VsBrushes.StartPageTextControlLinkSelectedKey}}"
-                                                    FocusVisualStyle="{DynamicResource StartPage.CommandButtonFocusVisual}"/>
+                            <TextBlock x:Name="PART_Text"
+                                       x:Uid="PART_Text"
+                                       Text="{TemplateBinding ContentControl.Content}"
+                                       VerticalAlignment="Center"
+                                       Style="{StaticResource StartPage.NormalTextStyle}"
+                                       Foreground="{DynamicResource {markup:Static vsfx:VsBrushes.StartPageTextControlLinkSelectedKey}}"
+                                       FocusVisualStyle="{DynamicResource StartPage.CommandButtonFocusVisual}"/>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="UIElement.IsMouseOver" Value="true">
                                     <Setter Property="FrameworkElement.Cursor" Value="Hand"/>
                                     <Setter TargetName="PART_Text"
-                                                        Value="{DynamicResource {markup:Static vsfx:VsBrushes.StartPageTextControlLinkSelectedHoverKey}}"
-                                                        Property="TextBlock.Foreground"/>
+                                            Value="{DynamicResource {markup:Static vsfx:VsBrushes.StartPageTextControlLinkSelectedHoverKey}}"
+                                            Property="TextBlock.Foreground"/>
                                 </Trigger>
                                 <Trigger Property="UIElement.IsFocused" Value="true">
                                     <Setter TargetName="PART_Text"
-                                                        Value="{DynamicResource {markup:Static vsfx:VsBrushes.StartPageTextControlLinkSelectedHoverKey}}"
-                                                        Property="TextBlock.Foreground"/>
+                                            Value="{DynamicResource {markup:Static vsfx:VsBrushes.StartPageTextControlLinkSelectedHoverKey}}"
+                                            Property="TextBlock.Foreground"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
+            </Style>
+            
+            <!-- Solution Group Style -->
+            <Style TargetType="solutionsPart:SolutionGroupControl">
+                <Setter Property="Background" Value="Transparent"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver"
+                             Value="True">
+                        <Trigger.Setters>
+                            <Setter Property="Background" Value="{DynamicResource {x:Static vsfx:VsBrushes.TitleBarActiveKey}}"/>
+                            <Setter Property="Effect" Value="{StaticResource DropShadow}"/>
+                        </Trigger.Setters>
+                    </Trigger>
+                </Style.Triggers>
             </Style>
         </ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>

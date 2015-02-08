@@ -30,27 +30,63 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="EnvDTE80, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.OLE.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.VisualStudio.Shell.12.0, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.Shell.Immutable.11.0, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xaml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.3\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasicPart\VisualStudioOverviewPageControl.xaml.cs">
       <DependentUpon>VisualStudioOverviewPageControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Commands\CommandParameter.cs" />
+    <Compile Include="Commands\Commands.cs" />
+    <Compile Include="Converter\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converter\PathToSystemImageConverter.cs" />
+    <Compile Include="Extensions\EventHandlerExtension.cs" />
+    <Compile Include="IDE\IIde.cs" />
+    <Compile Include="IDE\VsIde.cs" />
+    <Compile Include="Models\Solution.cs" />
+    <Compile Include="Models\SolutionGroup.cs" />
+    <Compile Include="Models\SolutionPageConfiguration.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SolutionsPart\SolutionControl.xaml.cs">
+      <DependentUpon>SolutionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SolutionsPart\SolutionGroupControl.xaml.cs">
+      <DependentUpon>SolutionGroupControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SolutionsPart\SolutionPageControl.xaml.cs">
       <DependentUpon>SolutionPageControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SolutionsPart\SolutionPageModel.cs" />
+    <Compile Include="SolutionsPart\SolutionPagePresenter.cs" />
+    <Compile Include="SolutionsPart\SolutionPageViewModel.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <ItemGroup>
     <Page Include="BasicPart\VisualStudioOverviewPageControl.xaml">
       <SubType>Designer</SubType>
@@ -60,10 +96,30 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SolutionsPart\SolutionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SolutionsPart\SolutionGroupControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SolutionsPart\SolutionPageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\add.png" />
+    <Resource Include="Content\back.png" />
+    <Resource Include="Content\forward.png" />
+    <Resource Include="Content\remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\delete_all.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\folder.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

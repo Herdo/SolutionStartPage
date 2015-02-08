@@ -48,7 +48,7 @@
                             Margin="0,3"
                             Content="Open Project..."
                             Style="{StaticResource StartPage.ProjectCommand.LinkStyle}"
-                            Command="{x:Static vsfxim:VSCommands.ExecuteCommand}" CommandParameter="File.OpenProject"/>
+                            Command="{x:Static vsfxim:VSCommands.ExecuteCommand}" CommandParameter="File.OpenSolution"/>
             <platformUi:ImageButton Grid.Row="3"
                             Margin="0,3"
                             Content="Open from Source Control..."
