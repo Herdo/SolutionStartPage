@@ -13,6 +13,9 @@
         <CommandBinding Command="commands:Commands.OpenSolution"
                         Executed="OpenSolution_OnExecuted"
                         CanExecute="OpenSolution_OnCanExecute"/>
+        <CommandBinding Command="commands:Commands.AlterSolution"
+                        Executed="AlterSolution_OnExecuted"
+                        CanExecute="AlterSolution_OnCanExecute"/>
     </UserControl.CommandBindings>
     
     <UserControl.Resources>
@@ -21,6 +24,7 @@
     
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -99,7 +103,44 @@
             </StackPanel>
         </StackPanel>
         
-        <Separator Grid.Row="3"
+        <!-- Commands -->
+        <StackPanel Grid.Row="3"
+                    Orientation="Horizontal"
+                    Visibility="{Binding ElementName=SolutionPageRootControl, Path=DataContext.EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}}">
+            <Button ToolTip="Move Up"
+                    Command="commands:Commands.AlterSolution"
+                    CommandParameter="{x:Static commands:CommandParameter.ALTER_SOLUTION_MOVE_UP}"
+                    Margin="5"
+                    Height="24"
+                    Width="24">
+                <Image Source="../Content/up.png"
+                       Height="16"
+                       Width="16"/>
+            </Button>
+            <Button ToolTip="Move Down"
+                    Command="commands:Commands.AlterSolution"
+                    CommandParameter="{x:Static commands:CommandParameter.ALTER_SOLUTION_MOVE_DOWN}"
+                    Margin="5"
+                    Height="24"
+                    Width="24">
+                <Image Source="../Content/down.png"
+                       Height="16"
+                       Width="16"/>
+            </Button>
+            <Button ToolTip="Remove Solution"
+                    Command="commands:Commands.AlterSolution"
+                    CommandParameter="{x:Static commands:CommandParameter.ALTER_SOLUTION_REMOVE_SOLUTION}"
+                    Margin="5"
+                    Height="24"
+                    Width="24">
+                <Image Source="../Content/remove.png"
+                       Height="16"
+                       Width="16"/>
+            </Button>
+        </StackPanel>
+        
+        <!-- Seperator -->
+        <Separator Grid.Row="4"
                    Grid.ColumnSpan="2"
                    Margin="0,5,0,5"/>
     </Grid>

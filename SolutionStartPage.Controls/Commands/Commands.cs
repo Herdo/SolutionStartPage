@@ -19,6 +19,21 @@
 
         #endregion
 
+        #region AlterSolution
+
+        private static RoutedUICommand _alterSolution;
+        public static RoutedCommand AlterSolution
+        {
+            get
+            {
+                return _alterSolution ?? (_alterSolution = new RoutedUICommand("AlterSolution",
+                                                                               "AlterSolution",
+                                                                               typeof(Commands)));
+            }
+        }
+
+        #endregion
+
         #region AlterSolutionGroup
 
         private static RoutedUICommand _alterSolutionGroup;

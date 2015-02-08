@@ -14,14 +14,17 @@
         /////////////////////////////////////////////////////////
         #region Events
 
-        public event EventHandler<CanExecuteRoutedEventArgs> OpenSolutionCanExecute; 
-        public event EventHandler<ExecutedRoutedEventArgs> OpenSolutionExecuted; 
+        public event EventHandler<CanExecuteRoutedEventArgs> OpenSolutionCanExecute;
+        public event EventHandler<ExecutedRoutedEventArgs> OpenSolutionExecuted;
+        public event EventHandler<CanExecuteRoutedEventArgs> AlterSolutionCanExecute;
+        public event EventHandler<ExecutedRoutedEventArgs> AlterSolutionExecuted; 
 
         #endregion
 
         /////////////////////////////////////////////////////////
         #region Fields
 
+        private readonly SolutionGroup _parentGroup;
         private string _solutionDisplayName;
         private string _solutionPath;
         private string _solutionDirectory;
@@ -31,6 +34,9 @@
 
         /////////////////////////////////////////////////////////
         #region Properties
+
+        [XmlIgnore]
+        public SolutionGroup ParentGroup { get { return _parentGroup; } }
 
         /// <summary>
         /// The name for the solution, displayed in the GUI.
@@ -99,9 +105,16 @@
 
         /////////////////////////////////////////////////////////
         #region Constructors
-
+        
+        /// <summary>
+        /// Design-time constructor.
+        /// </summary>
         public Solution()
+        {}
+
+        public Solution(SolutionGroup group)
         {
+            _parentGroup = group;
             SolutionDisplayName = null;
             SolutionPath = String.Empty;
             SolutionDirectory = String.Empty;
@@ -153,6 +166,16 @@
         public void TriggerOpenSolution_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             OpenSolutionCanExecute.SafeInvoke(sender, e);
+        }
+
+        public void TriggerAlterSolution_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            AlterSolutionExecuted.SafeInvoke(sender, e);
+        }
+
+        public void TriggerAlterSolution_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            AlterSolutionCanExecute.SafeInvoke(sender, e);
         }
 
         #endregion

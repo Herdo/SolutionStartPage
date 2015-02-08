@@ -3,6 +3,7 @@
     using System.ComponentModel;
     using System.Diagnostics;
     using System.IO;
+    using System.Linq;
     using System.Windows.Input;
     using Commands;
     using EnvDTE80;
@@ -126,16 +127,28 @@
         private void AddSolution(SolutionGroup group, Solution solution = null)
         {
             if (solution == null)
-                solution = BrowseSolution();
+                solution = BrowseSolution(group);
             if (solution == null)
                 return;
 
             solution.OpenSolutionCanExecute += solution_OpenSolutionCanExecute;
             solution.OpenSolutionExecuted += solution_OpenSolutionExecuted;
+            solution.AlterSolutionCanExecute += solution_AlterSolutionCanExecute;
+            solution.AlterSolutionExecuted += solution_AlterSolutionExecuted;
             group.Solutions.Add(solution);
         }
 
-        private Solution BrowseSolution()
+        private void RemoveSolution(Solution solution)
+        {
+            solution.OpenSolutionCanExecute -= solution_OpenSolutionCanExecute;
+            solution.OpenSolutionExecuted -= solution_OpenSolutionExecuted;
+            solution.AlterSolutionCanExecute -= solution_AlterSolutionCanExecute;
+            solution.AlterSolutionExecuted -= solution_AlterSolutionExecuted;
+
+            solution.ParentGroup.Solutions.Remove(solution);
+        }
+
+        private Solution BrowseSolution(SolutionGroup group)
         {
             var ofd = new OpenFileDialog
             {
@@ -152,7 +165,7 @@
 
             if (ofd.ShowDialog() == true)
             {
-                return new Solution
+                return new Solution(group)
                 {
                     SolutionPath = ofd.FileName
                 };
@@ -282,6 +295,50 @@
                     break;
                 case CommandParameter.OPEN_SOLUTION_OPEN_EXPLORER:
                     Process.Start(solution.ComputedSolutionDirectory);
+                    break;
+            }
+        }
+
+        void solution_AlterSolutionExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            var param = e.Parameter.ToString();
+            var solution = (Solution)sender;
+            int oldIdx;
+            int newIdx;
+
+            switch (param)
+            {
+                case CommandParameter.ALTER_SOLUTION_MOVE_UP:
+                    oldIdx = solution.ParentGroup.Solutions.IndexOf(solution);
+                    newIdx = oldIdx - 1;
+                    solution.ParentGroup.Solutions.Move(oldIdx, newIdx);
+                    break;
+                case CommandParameter.ALTER_SOLUTION_MOVE_DOWN:
+                    oldIdx = solution.ParentGroup.Solutions.IndexOf(solution);
+                    newIdx = oldIdx + 1;
+                    solution.ParentGroup.Solutions.Move(oldIdx, newIdx);
+                    break;
+                case CommandParameter.ALTER_SOLUTION_REMOVE_SOLUTION:
+                    RemoveSolution(solution);
+                    break;
+            }
+        }
+
+        void solution_AlterSolutionCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            var param = e.Parameter.ToString();
+            var solution = (Solution)sender;
+            switch (param)
+            {
+                case CommandParameter.ALTER_SOLUTION_MOVE_UP:
+                    e.CanExecute = solution.ParentGroup.Solutions.IndexOf(solution) != 0;
+                    break;
+                case CommandParameter.ALTER_SOLUTION_MOVE_DOWN:
+                    e.CanExecute = solution.ParentGroup.Solutions.IndexOf(solution) !=
+                                   solution.ParentGroup.Solutions.Count - 1;
+                    break;
+                case CommandParameter.ALTER_SOLUTION_REMOVE_SOLUTION:
+                    e.CanExecute = true;
                     break;
             }
         }

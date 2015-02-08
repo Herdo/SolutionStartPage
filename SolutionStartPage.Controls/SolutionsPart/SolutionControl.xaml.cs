@@ -3,7 +3,6 @@
     using System;
     using System.Windows.Controls;
     using System.Windows.Input;
-    using Extensions;
     using Models;
 
     /// <summary>
@@ -47,5 +46,17 @@
         }
 
         #endregion
+
+        private void AlterSolution_OnExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (Solution != null)
+                Solution.TriggerAlterSolution_Executed(Solution, e);
+        }
+
+        private void AlterSolution_OnCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (Solution != null)
+                Solution.TriggerAlterSolution_CanExecute(Solution, e);
+        }
     }
 }
