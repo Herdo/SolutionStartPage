@@ -6,6 +6,8 @@
              xmlns:models="clr-namespace:SolutionStartPage.Control.Models"
              xmlns:commands="clr-namespace:SolutionStartPage.Control.Commands"
              xmlns:converter="clr-namespace:SolutionStartPage.Control.Converter"
+             xmlns:platformUi="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.12.0"
+             xmlns:vsfx="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.12.0"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=models:Solution, IsDesignTimeCreatable=True}"
              Margin="0,5,0,0">
@@ -37,6 +39,35 @@
                         <Setter Property="VerticalAlignment" Value="Center"/>
                         <Setter Property="HorizontalAlignment" Value="Center"/>
                     </Style>
+                    <Style x:Key="StartPage.ProjectCommand.LinkStyle" TargetType="{x:Type platformUi:ImageButton}" BasedOn="{StaticResource StartPage.ProjectCommand.ButtonStyle}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type platformUi:ImageButton}">
+                                    <TextBlock x:Name="PART_Text"
+                                               x:Uid="PART_Text"
+                                               Text="{TemplateBinding ContentControl.Content}" 
+                                               VerticalAlignment="Center"
+                                               Style="{StaticResource StartPage.NormalTextStyle}"
+                                               Foreground="{DynamicResource {x:Static vsfx:VsBrushes.StartPageTextControlLinkSelectedKey}}"
+                                               FocusVisualStyle="{DynamicResource StartPage.CommandButtonFocusVisual}"
+                                               TextTrimming="CharacterEllipsis"/>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="UIElement.IsMouseOver" Value="true">
+                                            <Setter Property="FrameworkElement.Cursor" Value="Hand"/>
+                                            <Setter TargetName="PART_Text"
+                                                    Value="{DynamicResource {x:Static vsfx:VsBrushes.StartPageTextControlLinkSelectedHoverKey}}"
+                                                    Property="TextBlock.Foreground"/>
+                                        </Trigger>
+                                        <Trigger Property="UIElement.IsFocused" Value="true">
+                                            <Setter TargetName="PART_Text"
+                                                    Value="{DynamicResource {x:Static vsfx:VsBrushes.StartPageTextControlLinkSelectedHoverKey}}"
+                                                    Property="TextBlock.Foreground"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -52,27 +83,21 @@
         </Grid.RowDefinitions>
         
         <!-- Display Name -->
-        <Button Grid.Row="0"
-                Command="commands:Commands.OpenSolution"
-                CommandParameter="{x:Static commands:CommandParameter.OPEN_SOLUTION_OPEN}"
-                Background="Transparent"
-                BorderBrush="Transparent"
-                BorderThickness="0"
-                HorizontalAlignment="Left"
-                HorizontalContentAlignment="Left"
-                Visibility="{Binding ElementName=SolutionPageRootControl, Path=DataContext.EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}">
-            <StackPanel Orientation="Horizontal">
-                <Image Source="{Binding SolutionPath, Converter={StaticResource PathToSystemImageConverter}}"
-                       Style="{StaticResource SolutionImageStyle}"/>
-                <TextBlock x:Name="DisplayNameTextBlock"
-                           Text="{Binding SolutionDisplayName}"
-                           Style="{DynamicResource StartPage.DiscoverVS.RegularTextStyle}"
-                           FontStyle="Italic"
-                           TextTrimming="CharacterEllipsis"
-                           ToolTip="{Binding SolutionPath}"
-                           VerticalAlignment="Center"/>
-            </StackPanel>
-        </Button>
+        <StackPanel Grid.Row="0"
+                    Orientation="Horizontal"
+                    Visibility="{Binding ElementName=SolutionPageRootControl, Path=DataContext.EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}">
+            <Image Source="{Binding SolutionPath, Converter={StaticResource PathToSystemImageConverter}}"
+                   Style="{StaticResource SolutionImageStyle}"/>
+            <platformUi:ImageButton Margin="5,0,0,0"
+                                    Content="{Binding SolutionDisplayName}"
+                                    Style="{StaticResource StartPage.ProjectCommand.LinkStyle}"
+                                    Command="commands:Commands.OpenSolution"
+                                    CommandParameter="{x:Static commands:CommandParameter.OPEN_SOLUTION_OPEN}"
+                                    HorizontalAlignment="Left"
+                                    HorizontalContentAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center"/>
+        </StackPanel>
 
         <TextBox Grid.Row="0"
                  Text="{Binding SolutionDisplayName, UpdateSourceTrigger=PropertyChanged}"
@@ -82,26 +107,22 @@
                  Visibility="{Binding ElementName=SolutionPageRootControl, Path=DataContext.EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}}"/>
 
         <!-- Solution Directory -->
-        <Button Grid.Row="1"
-                Command="commands:Commands.OpenSolution"
-                CommandParameter="{x:Static commands:CommandParameter.OPEN_SOLUTION_OPEN_EXPLORER}"
-                Background="Transparent"
-                BorderBrush="Transparent"
-                BorderThickness="0"
-                HorizontalAlignment="Left"
-                HorizontalContentAlignment="Left"
-                Visibility="{Binding ElementName=SolutionPageRootControl, Path=DataContext.EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}">
-            <StackPanel Orientation="Horizontal">
-                <Image Source="../Content/folder.png"
-                       Style="{StaticResource SolutionImageStyle}"/>
-                <TextBlock Text="{Binding ComputedSolutionDirectory}"
-                           x:Name="SolutionDirectoryTextBlock"
-                           Style="{DynamicResource StartPage.DiscoverVS.RegularTextStyle}"
-                           FontStyle="Italic"
-                           VerticalAlignment="Center"
-                           TextTrimming="CharacterEllipsis"/>
-            </StackPanel>
-        </Button>
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    Visibility="{Binding ElementName=SolutionPageRootControl, Path=DataContext.EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}">
+            <Image Source="../Content/folder.png"
+                   Style="{StaticResource SolutionImageStyle}"/>
+            <platformUi:ImageButton Margin="5,0,0,0"
+                                    Content="{Binding ComputedSolutionDirectory}"
+                                    Style="{StaticResource StartPage.ProjectCommand.LinkStyle}"
+                                    Command="commands:Commands.OpenSolution"
+                                    CommandParameter="{x:Static commands:CommandParameter.OPEN_SOLUTION_OPEN_EXPLORER}"
+                                    HorizontalAlignment="Left"
+                                    HorizontalContentAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center"/>
+        </StackPanel>
+        
         <StackPanel Grid.Row="2"
                     Visibility="{Binding ElementName=SolutionPageRootControl, Path=DataContext.EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}}">
             <TextBox Text="{Binding SolutionDirectory, UpdateSourceTrigger=PropertyChanged}"
