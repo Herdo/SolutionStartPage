@@ -3,7 +3,7 @@
   <Identifier Id="080E4A52-2AA6-4554-B4A3-5861BF34B0AE">
     <Name>Solution Start Page</Name>
     <Author>Stefan Over</Author>
-    <Version>1.0</Version>
+    <Version>1.1</Version>
     <Description xml:space="preserve">
 This is a start page based on the default VS2013 one.
 The 'news' section is replaced by a customizable overview of your solutions.
