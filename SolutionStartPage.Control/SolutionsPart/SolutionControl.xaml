@@ -96,7 +96,8 @@
                                     HorizontalAlignment="Left"
                                     HorizontalContentAlignment="Left"
                                     VerticalAlignment="Center"
-                                    VerticalContentAlignment="Center"/>
+                                    VerticalContentAlignment="Center"
+                                    ToolTip="{Binding SolutionDisplayName}"/>
         </StackPanel>
 
         <TextBox Grid.Row="0"
@@ -120,7 +121,8 @@
                                     HorizontalAlignment="Left"
                                     HorizontalContentAlignment="Left"
                                     VerticalAlignment="Center"
-                                    VerticalContentAlignment="Center"/>
+                                    VerticalContentAlignment="Center"
+                                    ToolTip="{Binding ComputedSolutionDirectory}"/>
         </StackPanel>
         
         <StackPanel Grid.Row="2"
