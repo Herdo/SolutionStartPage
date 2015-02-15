@@ -1,15 +1,21 @@
 ﻿﻿namespace SolutionStartPage.Control.SolutionsPart
  {
+     using System;
+     using System.Collections.Generic;
+     using System.Collections.ObjectModel;
      using System.ComponentModel;
      using System.Diagnostics;
      using System.IO;
+     using System.Linq;
+     using System.Windows.Forms;
      using System.Windows.Input;
      using Commands;
      using EnvDTE80;
      using IDE;
      using Microsoft.Internal.VisualStudio.PlatformUI;
-     using Microsoft.Win32;
      using Models;
+     using DialogResult = System.Windows.Forms.DialogResult;
+     using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
      public class SolutionPagePresenter
      {
@@ -99,15 +105,56 @@
                  AddGroup();
          }
 
-         private void AddGroup()
+         private SolutionGroup AddGroup(string groupName = "Group Name")
          {
              var newGroup = new SolutionGroup
              {
-                 GroupName = "Group Name"
+                 GroupName = groupName
              };
              newGroup.AlterSolutionGroupCanExecute += solutionGroup_AlterSolutionGroupCanExecute;
              newGroup.AlterSolutionGroupExecuted += solutionGroup_AlterSolutionGroupExecuted;
              _vm.SolutionGroups.Add(newGroup);
+             return newGroup;
+         }
+
+         private void AddSolutionsBulk(bool singleGroup)
+         {
+             var fbd = new FolderBrowserDialog
+             {
+                 Description = @"Browse for a root folder...",
+                 ShowNewFolderButton = false,
+                 RootFolder = Environment.SpecialFolder.Desktop
+             };
+             var dialogResult = fbd.ShowDialog();
+             if (dialogResult == DialogResult.OK)
+                 AddSolutionsByBulk(fbd.SelectedPath, singleGroup);
+         }
+
+         private void AddSolutionsByBulk(string selectedPath, bool singleGroup)
+         {
+             // Get *.sln files
+             var di = new DirectoryInfo(selectedPath);
+             var files = di.GetFiles("*.sln", SearchOption.AllDirectories);
+
+             // Order solution files into groups
+             var groups = new Dictionary<string, List<FileInfo>>();
+             foreach (var fileInfo in files)
+             {
+                 var rootDir = (singleGroup ? selectedPath : fileInfo.DirectoryName) ?? String.Empty;
+                 if (!groups.ContainsKey(rootDir))
+                     groups.Add(rootDir, new List<FileInfo>());
+                 var group = groups[rootDir];
+                 group.Add(fileInfo);
+             }
+
+             // Create groups
+             foreach (var group in groups)
+             {
+                 var g = AddGroup(group.Key);
+                 foreach (var sln in group.Value
+                     .Select(fileInfo => new Solution(g) {SolutionPath = fileInfo.FullName}))
+                     AddSolution(g, sln);
+             }
          }
 
          private void RemoveGroup(SolutionGroup group)
@@ -245,6 +292,10 @@
                  case CommandParameter.ALTER_PAGE_ADD_GROUP:
                      e.CanExecute = true;
                      break;
+                 case CommandParameter.ALTER_PAGE_ADD_GROUP_BULK_SINGLE:
+                 case CommandParameter.ALTER_PAGE_ADD_GROUP_BULK_MULTIPLE:
+                     e.CanExecute = true;
+                     break;
                  case CommandParameter.ALTER_PAGE_DELETE_ALL_GROUPS:
                      e.CanExecute = _vm.SolutionGroups.Count > 0;
                      break;
@@ -258,6 +309,12 @@
              {
                  case CommandParameter.ALTER_PAGE_ADD_GROUP:
                      AddGroup();
+                     break;
+                 case CommandParameter.ALTER_PAGE_ADD_GROUP_BULK_SINGLE:
+                     AddSolutionsBulk(true);
+                     break;
+                 case CommandParameter.ALTER_PAGE_ADD_GROUP_BULK_MULTIPLE:
+                     AddSolutionsBulk(false);
                      break;
                  case CommandParameter.ALTER_PAGE_DELETE_ALL_GROUPS:
                      DeleteGroups();

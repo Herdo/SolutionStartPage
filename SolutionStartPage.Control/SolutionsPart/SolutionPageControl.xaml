@@ -100,18 +100,45 @@
                             Command="commands:Commands.AlterPage"
                             CommandParameter="{x:Static commands:CommandParameter.ALTER_PAGE_ADD_GROUP}"
                             Margin="5"
-                            Height="24"
-                            Width="24">
+                            Height="{Binding ElementName=BulkAddDropDownButton, Path=Height}"
+                            Width="{Binding ElementName=BulkAddDropDownButton, Path=Width}">
                         <Image Source="../Content/add.png"
                                Height="16"
                                Width="16"/>
                     </Button>
+                    <xctk:DropDownButton x:Name="BulkAddDropDownButton"
+                                         Margin="5"
+                                         VerticalAlignment="Center"
+                                         HorizontalAlignment="Left"
+                                         ToolTip="Bulk add solutions...">
+                        <xctk:DropDownButton.Content>
+                            <Image Source="../Content/folder.png"
+                                   Height="16"
+                                   Width="16"/>
+                        </xctk:DropDownButton.Content>
+                        <xctk:DropDownButton.DropDownContent>
+                            <StackPanel>
+                                <Button Content="Bulk add solutions (single group)"
+                                        ToolTip="Adds all solutions found below a root directory to a single group."
+                                        Command="commands:Commands.AlterPage"
+                                        CommandParameter="{x:Static commands:CommandParameter.ALTER_PAGE_ADD_GROUP_BULK_SINGLE}"
+                                        Margin="5"
+                                        Height="24"/>
+                                <Button Content="Bulk add solutions (multiple groups)"
+                                        ToolTip="Adds all solutions found below a root directory to a group for their parent directory."
+                                        Command="commands:Commands.AlterPage"
+                                        CommandParameter="{x:Static commands:CommandParameter.ALTER_PAGE_ADD_GROUP_BULK_MULTIPLE}"
+                                        Margin="5"
+                                        Height="24"/>
+                            </StackPanel>
+                        </xctk:DropDownButton.DropDownContent>
+                    </xctk:DropDownButton>
                     <Button ToolTip="Delete All Groups"
                             Command="commands:Commands.AlterPage"
                             CommandParameter="{x:Static commands:CommandParameter.ALTER_PAGE_DELETE_ALL_GROUPS}"
                             Margin="5"
-                            Height="24"
-                            Width="24">
+                            Height="{Binding ElementName=BulkAddDropDownButton, Path=Height}"
+                            Width="{Binding ElementName=BulkAddDropDownButton, Path=Width}">
                         <Image Source="../Content/delete_all.png"
                                Height="16"
                                Width="16"/>

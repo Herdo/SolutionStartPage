@@ -5,6 +5,8 @@
         public const string OPEN_SOLUTION_OPEN = "OpenSolutionOpen";
         public const string OPEN_SOLUTION_OPEN_EXPLORER = "OpenSolutionOpenExplorer";
         public const string ALTER_PAGE_ADD_GROUP = "AddGroup";
+        public const string ALTER_PAGE_ADD_GROUP_BULK_SINGLE = "AddGroupBulkSingleGroup";
+        public const string ALTER_PAGE_ADD_GROUP_BULK_MULTIPLE = "AddGroupBulkMultipleGroups";
         public const string ALTER_PAGE_DELETE_ALL_GROUPS = "DeleteAllGroups";
         public const string ALTER_SOLUTION_MOVE_UP = "MoveUp";
         public const string ALTER_SOLUTION_MOVE_DOWN = "MoveDown";
