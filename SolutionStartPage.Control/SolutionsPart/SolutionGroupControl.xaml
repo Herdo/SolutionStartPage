@@ -25,35 +25,14 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Microsoft.VisualStudio.Shell.12.0;component/ui/styles/startpageresources.xaml" />
                 <ResourceDictionary>
-                    <!-- Effects -->
-                    <DropShadowEffect x:Key="DropShadow"
-                                      BlurRadius="10"
-                                      Direction="315"/>
-                    
                     <!-- Converter -->
                     <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-
-                    <!-- Solution Group Style -->
-                    <Style TargetType="Grid"
-                           x:Key="DropShadowGroupStyle">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver"
-                                     Value="True">
-                                <Trigger.Setters>
-                                    <Setter Property="Background" Value="{DynamicResource {x:Static vsfx:VsBrushes.TitleBarActiveKey}}"/>
-                                    <Setter Property="Effect" Value="{StaticResource DropShadow}"/>
-                                </Trigger.Setters>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Margin="10"
-          Style="{StaticResource DropShadowGroupStyle}">
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
