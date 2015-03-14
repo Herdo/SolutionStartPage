@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{221B199F-4D2F-4F3D-A04E-6C3A389F73C3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SolutionStartPage.Shared</RootNamespace>
+    <AssemblyName>SolutionStartPage.Shared</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commands\CommandParameter.cs" />
+    <Compile Include="Commands\Commands.cs" />
+    <Compile Include="Converter\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converter\PathToSystemImageConverter.cs" />
+    <Compile Include="Extensions\EventHandlerExtension.cs" />
+    <Compile Include="Funtionality\UnityFactory.cs" />
+    <Compile Include="IBootstrapper.cs" />
+    <Compile Include="Models\IIde.cs" />
+    <Compile Include="Models\IIdeModel.cs" />
+    <Compile Include="Models\Solution.cs" />
+    <Compile Include="Models\SolutionGroup.cs" />
+    <Compile Include="Models\SolutionPageConfiguration.cs" />
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\BasicPart\IVisualStudioOverviewPageView.cs" />
+    <Compile Include="Views\IBasicControlSubject.cs" />
+    <Compile Include="Views\IViewStateProvider.cs" />
+    <Compile Include="Views\PageRootView\IPageRootView.cs" />
+    <Compile Include="Views\SolutionPageView\ISolutionControl.cs" />
+    <Compile Include="Views\SolutionPageView\ISolutionGroupControl.cs" />
+    <Compile Include="Views\SolutionPageView\ISolutionPageModel.cs" />
+    <Compile Include="Views\SolutionPageView\ISolutionPagePresenter.cs" />
+    <Compile Include="Views\SolutionPageView\ISolutionPageView.cs" />
+    <Compile Include="Views\SolutionPageView\ISolutionPageViewModel.cs" />
+    <Compile Include="Views\SolutionPageView\SolutionPageModelBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\delete_all.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\forward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\up.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
