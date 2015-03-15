@@ -1,4 +1,4 @@
-﻿﻿namespace SolutionStartPage.Vs2013.Views.SolutionPageView
+﻿﻿namespace SolutionStartPage.Vs2010.Views.SolutionPageView
  {
      using System.Collections.ObjectModel;
      using System.ComponentModel;

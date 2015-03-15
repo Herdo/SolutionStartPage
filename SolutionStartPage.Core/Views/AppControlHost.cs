@@ -11,6 +11,7 @@
     using Shared.Views.PageRootView;
     using Shared.Views.SolutionPageView;
     using SolutionPageView;
+    using Vs2010;
     using Vs2013;
 
     /// <summary>
@@ -53,6 +54,7 @@
                 .RegisterType<VisualStudioVersion>(new ContainerControlledLifetimeManager())
                 .RegisterType<IViewStateProvider, ViewStateProvider>(new ContainerControlledLifetimeManager())
                 // Register Bootstrappers for each VS Version
+                .RegisterType<IBootstrapper, Vs2010Bootstrapper>(new Version(10, 0).ToString(_VERSION_STRING_DETAIL_SPECIFIC))
                 .RegisterType<IBootstrapper, Vs2013Bootstrapper>(new Version(12, 0).ToString(_VERSION_STRING_DETAIL_SPECIFIC))
                 );
         }

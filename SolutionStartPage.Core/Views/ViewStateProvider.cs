@@ -2,7 +2,7 @@
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
-    using Control.Annotations;
+    using Annotations;
     using Shared.Extensions;
     using Shared.Views;
 

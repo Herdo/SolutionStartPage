@@ -16,6 +16,9 @@ The 'news' section is replaced by a customizable overview of your solutions.
     <ReleaseNotes>ReleaseNotes.md</ReleaseNotes>
     <MoreInfoUrl>https://github.com/Herdo/SolutionStartPage</MoreInfoUrl>
     <SupportedProducts>
+      <VisualStudio Version="10.0">
+        <Edition>Pro</Edition>
+      </VisualStudio>
       <VisualStudio Version="12.0">
         <Edition>Pro</Edition>
       </VisualStudio>
