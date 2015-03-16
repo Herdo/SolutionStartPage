@@ -7,6 +7,8 @@
              xmlns:commands="clr-namespace:SolutionStartPage.Shared.Commands;assembly=SolutionStartPage.Shared"
              xmlns:converter="clr-namespace:SolutionStartPage.Shared.Converter;assembly=SolutionStartPage.Shared"
              xmlns:views="clr-namespace:SolutionStartPage.Proxies.Views;assembly=SolutionStartPage.Proxies"
+             xmlns:platformUi="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.10.0"
+             xmlns:vsfx="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.10.0"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=models:SolutionGroup, IsDesignTimeCreatable=True}"
              MinHeight="150"
@@ -26,6 +28,58 @@
                 <ResourceDictionary>
                     <!-- Converter -->
                     <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+                    
+                    <!-- Styles -->
+                    <Style x:Key="StartPage.SubHeadingTextStyle"
+                           x:Uid="Style_6"
+                           BasedOn="{StaticResource StartPage.NormalTextStyle}"
+                           TargetType="{x:Type TextBlock}">
+                        <Setter x:Uid="Setter_14"
+                                Property="Foreground"
+                                Value="{DynamicResource {x:Static vsfx:VsBrushes.StartPageTextSubHeadingKey}}"/>
+                        <Setter x:Uid="Setter_15"
+                                Property="HorizontalAlignment"
+                                Value="Left"/>
+                        <Setter x:Uid="Setter_16"
+                                Property="platformUi:FontScaling.PreScaledFontSize"
+                                Value="{DynamicResource VsFont.EnvironmentFontSize}"/>
+                        <Setter x:Uid="Setter_17"
+                                Property="FontSize">
+                            <Setter.Value>
+                                <Binding x:Uid="Binding_2"
+                                         Path="(platformUi:FontScaling.PreScaledFontSize)"
+                                         RelativeSource="{RelativeSource Self}">
+                                    <Binding.Converter>
+                                        <platformUi:MultiplicationConverter x:Uid="vsui:MultiplicationConverter_2" MultiplicationFactor="1.3"/>
+                                    </Binding.Converter>
+                                </Binding>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                    
+                    <Style x:Key="StartPage.DiscoverTitleTextStyle"
+                           x:Uid="Style_DiscoverTitleTextStyle"
+                           BasedOn="{StaticResource StartPage.SubHeadingTextStyle}"
+                           TargetType="{x:Type TextBlock}">
+                        <Setter x:Uid="Setter_1_DiscoverTitleTextStyle"
+                                Property="Foreground"
+                                Value="SteelBlue"/>
+                        <Setter x:Uid="Setter_3_DiscoverTitleTextStyle"
+                                Property="FontFamily"
+                                Value="Segoe UI Light, Segoe UI"/>
+                        <Setter x:Uid="Setter_4_DiscoverTitleTextStyle"
+                                Property="FontSize">
+                            <Setter.Value>
+                                <Binding x:Uid="Binding_1_DiscoverTitleTextStyle"
+                                         Path="(platformUi:FontScaling.PreScaledFontSize)"
+                                         RelativeSource="{RelativeSource Self}">
+                                    <Binding.Converter>
+                                        <platformUi:MultiplicationConverter x:Uid="vsui:MultiplicationConverter_DiscoverTitleTextStyle" MultiplicationFactor="2.3"/>
+                                    </Binding.Converter>
+                                </Binding>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
