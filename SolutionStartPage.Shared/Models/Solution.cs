@@ -134,7 +134,6 @@
             SolutionPath = solutionPath;
 
             SolutionDisplayName = null;
-            SolutionPath = String.Empty;
             SolutionDirectory = String.Empty;
         }
 
