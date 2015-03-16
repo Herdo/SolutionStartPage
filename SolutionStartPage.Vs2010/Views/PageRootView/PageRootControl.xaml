@@ -11,23 +11,42 @@
         <Grid.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="/Microsoft.VisualStudio.Shell.StartPage;component/Styles/startpageresources.xaml" />
+                    <ResourceDictionary Source="pack://application:,,,/Microsoft.VisualStudio.Shell.StartPage;component/Styles/startpageresources.xaml" />
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
         </Grid.Resources>
 
         <Grid Style="{DynamicResource StartPage.OuterGridStyle}"
-              Background="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowBackgroundKey}}">
+              Background="{DynamicResource {x:Static vsfx:VsBrushes.StartPageBackgroundKey}}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition MinWidth="275" Width="3*" MaxWidth="330" />
-                <ColumnDefinition Width="7*" MinWidth="0"/>
+                <ColumnDefinition MinWidth="275" Width="3*" MaxWidth="330" />   <!-- VS Basic Overview -->
+                <ColumnDefinition Width="6"/>                                   <!-- Gutter -->
+                <ColumnDefinition Width="7*" MinWidth="0"/>                     <!-- Content -->
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="130"/>   <!-- Logo -->
+                <RowDefinition Height="*"/>     <!-- Content -->
+            </Grid.RowDefinitions>
+            
+            <!-- Logo -->
+            <Image Grid.Row="0"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="3"
+                   Source="{Binding Background.Logo}"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Width="1600" />
 
             <!-- Left Column -->
-            <views:VisualStudioOverviewPageControlProxy/>
+            <views:VisualStudioOverviewPageControlProxy Grid.Row="1"
+                                                        Grid.Column="0"
+                                                        Margin="15,-35,15,15"
+                                                        VerticalAlignment="Stretch"/>
 
             <!-- Right Column -->
-            <views:SolutionPageControlProxy Grid.Column="1"/>
+            <views:SolutionPageControlProxy Grid.Row="1"
+                                            Grid.Column="2"
+                                            Margin="0,-35,15,15"/>
         </Grid>
     </Grid>
 </UserControl>
