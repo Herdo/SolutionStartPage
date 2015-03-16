@@ -22,7 +22,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Microsoft.VisualStudio.Shell.StartPage;component/Styles/startpageresources.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Microsoft.VisualStudio.Shell.StartPage;component/Styles/startpageresources.xaml" />
                 <ResourceDictionary>
                     <!-- Converter -->
                     <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>

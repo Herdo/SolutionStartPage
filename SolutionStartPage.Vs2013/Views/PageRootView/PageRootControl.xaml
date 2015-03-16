@@ -17,7 +17,7 @@
         </Grid.Resources>
 
         <Grid Style="{DynamicResource StartPage.OuterGridStyle}"
-              Background="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowBackgroundKey}}">
+              Background="{DynamicResource {x:Static vsfx:VsBrushes.StartPageBackgroundKey}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition MinWidth="275" Width="3*" MaxWidth="330" />
                 <ColumnDefinition Width="7*" MinWidth="0"/>

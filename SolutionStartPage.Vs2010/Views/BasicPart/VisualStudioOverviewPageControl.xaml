@@ -7,7 +7,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Microsoft.VisualStudio.Shell.StartPage;component/Styles/startpageresources.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Microsoft.VisualStudio.Shell.StartPage;component/Styles/startpageresources.xaml" />
                 <ResourceDictionary>
                     <Style x:Key="StartPage.ProjectCommand.LinkStyle" TargetType="{x:Type vs:ImageButton}" BasedOn="{StaticResource StartPage.ProjectCommand.ButtonStyle}">
                         <Setter Property="Template">
@@ -44,81 +44,92 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>  <!-- Header -->
             <RowDefinition Height="Auto"/>  <!-- Start -->
             <RowDefinition Height="*"/>     <!-- Recent Project / Solution List -->
             <RowDefinition Height="Auto" /> <!-- Options -->
         </Grid.RowDefinitions>
 
-        <!-- Header -->
-        <TextBlock Style="{DynamicResource StartPage.AnnouncementsHeadingTextStyle}"
-                   Margin="30"
-                   Text="Visual Studio"/>
-
         <!-- Start -->
-        <Grid Grid.Row="1"
-              Margin="30,0,30,0">
+        <Grid Grid.Row="0"
+              Margin="0,15,0,30">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="3"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="3"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0"
-                       Margin="0,10"
-                       Style="{DynamicResource StartPage.ItemHeadingTextStyle}"
-                       Text="Start"/>
-            <vs:ImageButton Grid.Row="1"
-                            Margin="0,3"
-                            Content="New Project..."
-                            Style="{StaticResource StartPage.ProjectCommand.LinkStyle}"
-                            Command="{x:Static sp:VSCommands.ExecuteCommand}" CommandParameter="File.NewProject"/>
-            <vs:ImageButton Grid.Row="2"
-                            Margin="0,3"
-                            Content="Open Project..."
-                            Style="{StaticResource StartPage.ProjectCommand.LinkStyle}"
-                            Command="{x:Static sp:VSCommands.ExecuteCommand}" CommandParameter="File.OpenProject"/>
-            <vs:ImageButton Grid.Row="3"
-                            Margin="0,3"
-                            Content="Open from Source Control..."
-                            Style="{StaticResource StartPage.ProjectCommand.LinkStyle}"
-                            Command="{x:Static sp:VSCommands.ExecuteCommand}" CommandParameter="File.OpenfromSourceControl"/>
+
+            <vs:ImageButton 
+                    x:Uid="ConnectToTSButton"
+                    Margin="15,2,15,2"
+                    Width="Auto" 
+                    Content="Connect To Team Foundation Server"
+                    Visibility="{Binding Path=TeamFoundationClientSupported, Converter={StaticResource boolToVisibilityConverter}}"	
+                    Style="{DynamicResource StartPage.ProjectCommand.ButtonStyle}"
+                    Command="{x:Static sp:VSCommands.ExecuteCommand}" CommandParameter="Team.ConnecttoTeamFoundationServer"
+                    ImageNormal="pack://application:,,,/Microsoft.VisualStudio.Shell.StartPage;component/Images/StartPage/ConnectToTFS.png"
+                    ImageHover="pack://application:,,,/Microsoft.VisualStudio.Shell.StartPage;component/Images/StartPage/ConnectToTFSMouseOver.png"
+                    ImagePressed="pack://application:,,,/Microsoft.VisualStudio.Shell.StartPage;component/Images/StartPage/ConnectToTFSMouseDown.png">
+            </vs:ImageButton>
+
+            <vs:ImageButton
+                    Grid.Row="2"
+                    x:Uid="NewProjectButton"
+                    Margin="15,2,0,2"
+                    Width="Auto" 
+                    Content="New Project..."
+                    Style="{DynamicResource StartPage.ProjectCommand.ButtonStyle}"
+                    Command="{x:Static sp:VSCommands.ExecuteCommand}" CommandParameter="File.NewProject"
+                    ImageNormal="pack://application:,,,/Microsoft.VisualStudio.Shell.StartPage;component/Images/StartPage/NewProject.png"
+                    ImageHover="pack://application:,,,/Microsoft.VisualStudio.Shell.StartPage;component/Images/StartPage/NewProjectMouseOver.png"
+                    ImagePressed="pack://application:,,,/Microsoft.VisualStudio.Shell.StartPage;component/Images/StartPage/NewProjectMouseDown.png">
+            </vs:ImageButton>
+
+            <vs:ImageButton
+                    Grid.Row="4"
+                    x:Uid="OpenProjectButton"
+                    Margin="15,2,0,2"
+                    Width="Auto"        
+                    Content="Open Project..."
+                    Style="{DynamicResource StartPage.ProjectCommand.ButtonStyle}"
+                    Command="{x:Static sp:VSCommands.ExecuteCommand}" CommandParameter="File.OpenProject"
+                    ImageNormal="pack://application:,,,/Microsoft.VisualStudio.Shell.StartPage;component/Images/StartPage/OpenProject.png"
+                    ImageHover="pack://application:,,,/Microsoft.VisualStudio.Shell.StartPage;component/Images/StartPage/OpenProjectMouseOver.png"
+                    ImagePressed="pack://application:,,,/Microsoft.VisualStudio.Shell.StartPage;component/Images/StartPage/OpenProjectMouseDown.png">
+            </vs:ImageButton>
         </Grid>
 
-        <!-- Recent Project / Solution List -->
-        <Grid Grid.Row="2"
-              Margin="30,5,30,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0"
-                       Margin="0,10"
-                       Style="{DynamicResource StartPage.ItemHeadingTextStyle}"
-                       Text="Recent"/>
 
-            <sp:MruListBox Grid.Row="1"
-                           Margin="-28,0,0,0"
-                           DataContext="{Binding RecentProjects}"
-                           ItemsSource="{Binding Path=Items}"
-                           Background="Transparent"
-                           BorderThickness="0"
-                           AutomationProperties.AutomationId="MruList"/>
+        <!-- Recent Projects Section -->
+        <Grid Grid.Row="1" HorizontalAlignment="Left" Width="Auto">
+            <Grid.RowDefinitions>
+                <!-- Heading -->
+                <RowDefinition Height="Auto" />
+                <!-- MRU Container -->
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Recent Projects Heading-->
+            <StackPanel Grid.Row="0" Margin="0,0,0,10" Orientation="Horizontal">
+                <TextBlock Text="Recent Projects" VerticalAlignment="Top" Style="{DynamicResource StartPage.HeadingTextStyle}" x:Uid="RecentProjects"/>
+                <Path VerticalAlignment="Center" Margin="6,0,0,-4" Width="Auto" Height="1" Stretch="Fill" StrokeThickness="1" StrokeLineJoin="Round" Stroke="{DynamicResource {x:Static vsfx:VsBrushes.StartPageSeparatorKey}}" Data="F1 M 0.5,0.5L 199.5,0.5"/>
+            </StackPanel>
+            <!-- MRU List Container -->
+            <ScrollViewer Grid.Row="1" HorizontalAlignment="Stretch" Style="{DynamicResource StartPage.ScrollViewerStyle}" VerticalAlignment="Stretch"  VerticalScrollBarVisibility="Auto">
+                <sp:MruListBox 
+                        DataContext="{Binding RecentProjects}" 
+                        ItemsSource="{Binding Path=Items}"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        AutomationProperties.AutomationId="MruList"/>
+            </ScrollViewer>
         </Grid>
 
         <!-- Options -->
-        <StackPanel Grid.Row="3"
-                    Grid.Column="0"
-                    Margin="30,0,30,30">
-            <CheckBox Style="{StaticResource StartPage.CheckBoxStyle}"
-                      Margin="0,5"
-                      Content="Close page after project load"
-                      IsChecked="{Binding ClosePageOnOpenProject, Mode=TwoWay}"/>
-            <CheckBox Style="{StaticResource StartPage.CheckBoxStyle}"
-                      Margin="0,5"
-                      Content="Show page on startup"
-                      IsChecked="{Binding ShowPageAtStartup, Mode=TwoWay}"/>
+        <StackPanel Margin="0,5,0,0" Grid.Column="0" Grid.Row="2">
+            <CheckBox x:Uid="AutoClose_Option" Content="Close page after project load" IsChecked="{Binding ClosePageOnOpenProject, Mode=TwoWay}" Margin="0,0,2,0"/>
+            <CheckBox x:Uid="ShowOnStartUp_Option" Content="Show page on startup" IsChecked="{Binding ShowPageAtStartup, Mode=TwoWay}" Margin="0,2,0,0"/>
         </StackPanel>
     </Grid>
 </UserControl>
