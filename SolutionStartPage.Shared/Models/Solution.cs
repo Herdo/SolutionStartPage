@@ -4,6 +4,7 @@
     using System.ComponentModel;
     using System.IO;
     using System.Runtime.CompilerServices;
+    using System.Web;
     using System.Windows.Input;
     using System.Xml.Serialization;
     using Annotations;
@@ -99,7 +100,7 @@
             private set
             {
                 if (value == _computedSolutionDirectory) return;
-                _computedSolutionDirectory = value;
+                _computedSolutionDirectory = HttpUtility.UrlDecode(value);
                 OnPropertyChanged();
             }
         }
