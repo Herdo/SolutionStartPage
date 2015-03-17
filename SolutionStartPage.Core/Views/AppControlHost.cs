@@ -1,6 +1,7 @@
 ﻿namespace SolutionStartPage.Core.Views
 {
     using System;
+    using System.Windows;
     using System.Windows.Controls;
     using Microsoft.Practices.Unity;
     using Models;
@@ -18,7 +19,8 @@
     /// Basic app control host.
     /// Takes care about dependency injection and basic business logic.
     /// </summary>
-    public class AppControlHost : UserControl
+    public class AppControlHost : UserControl,
+                                  IAppControlHost
     {
         /////////////////////////////////////////////////////////
         #region Constants
@@ -32,6 +34,8 @@
 
         public AppControlHost()
         {
+            Loaded += AppControlHost_Loaded;
+
             PreConfigureApp();
             ConfigureApp();
             Content = UnityFactory.Resolve<IPageRootView>();
@@ -73,6 +77,20 @@
             bootstrapper.Configure();
         }
 
+        #endregion
+
+        /////////////////////////////////////////////////////////
+        #region Event Handler
+
+        void AppControlHost_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (UnityFactory.IsRegistered<IIde>(Constants.IIDE_REGISTRATION_NAME)) return;
+
+            var ideModel = UnityFactory.Resolve<IIdeModel>();
+            var ide = ideModel.GetIde(DataContext);
+            UnityFactory.RegisterInstance(ide, Constants.IIDE_REGISTRATION_NAME, new ContainerControlledLifetimeManager());
+        }
+        
         #endregion
     }
 }

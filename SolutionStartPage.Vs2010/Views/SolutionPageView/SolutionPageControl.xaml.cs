@@ -41,12 +41,6 @@
          public event EventHandler<CanExecuteRoutedEventArgs> AlterPageCanExecute;
          public event EventHandler<ExecutedRoutedEventArgs> AlterPageExecuted;
 
-         public object Context
-         {
-             get { return DataContext; }
-             set { DataContext = value; }
-         }
-
          void ISolutionPageView.ConnectDataSource(ISolutionPageViewModel vm)
          {
              DataContext = vm;

@@ -7,9 +7,6 @@
     {
         event EventHandler<CanExecuteRoutedEventArgs> AlterPageCanExecute;
         event EventHandler<ExecutedRoutedEventArgs> AlterPageExecuted;
-
-        object Context { get; set; }
-
         void ConnectDataSource(ISolutionPageViewModel vm);
     }
 }

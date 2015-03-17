@@ -30,6 +30,12 @@
         /////////////////////////////////////////////////////////
         #region Public Methods
 
+        #region Util
+
+        /// <summary>
+        /// Initializes the factory.
+        /// </summary>
+        /// <param name="initializeAction">The action to run in the factory to initialize the container.</param>
         public static void Initialize(Action<IUnityContainer> initializeAction)
         {
             if (_isInitialized) return;
@@ -37,6 +43,11 @@
             initializeAction(PrivateContainer);
         }
 
+        /// <summary>
+        /// Configures the factory.
+        /// </summary>
+        /// <param name="configureAction">The action to run in the factory to configure the container.</param>
+        /// <remarks><see cref="Initialize"/> must be executed, before the Factory can be configured.</remarks>
         public static void Configure(Action<IUnityContainer> configureAction)
         {
             if (!_isInitialized)
@@ -48,7 +59,23 @@
             if (_isConfigured) return;
             _isConfigured = true;
             configureAction(PrivateContainer);
+        } 
+
+        /// <summary>
+        /// Check if a particular type has been registered with the container with the
+        /// default name, or the specific name, if set.
+        /// </summary>
+        /// <typeparam name="T">Type to check registration for.</typeparam>
+        /// <param name="nameToCheck">The name to lookup.</param>
+        /// <returns>True if this type has been registered, false if not.</returns>
+        public static bool IsRegistered<T>(string nameToCheck = null)
+        {
+            return String.IsNullOrWhiteSpace(nameToCheck)
+                ? PrivateContainer.IsRegistered<T>()
+                : PrivateContainer.IsRegistered<T>(nameToCheck);
         }
+
+        #endregion
 
         #region Registration
 
@@ -57,7 +84,7 @@
         /// the container.  No type mapping is performed for this type.
         /// </summary>
         /// <typeparam name="T">The type to apply the lifetimeManager to.</typeparam>
-        /// <param name="lifetimeManager">The <see cref="Microsoft.Practices.Unity.LifetimeManager"/> that controls the lifetime
+        /// <param name="lifetimeManager">The <see cref="Microsoft.Practices.Unity.LifetimeManager"/> that controls the lifetimeManager
         /// of the returned instance.</param>
         /// <param name="injectionMembers">Injection configuration objects.</param>
         /// <returns>The <see cref="Microsoft.Practices.Unity.UnityContainer"/> object that this method was
@@ -88,7 +115,7 @@
         /// <param name="from"><see cref="System.Type"/> that will be requested.</param>
         /// <param name="to"><see cref="System.Type"/> that will actually be returned.</param>
         /// <param name="name">Name to use for registration, null if a default registration.</param>
-        /// <param name="lifetimeManager">The <see cref="Microsoft.Practices.Unity.LifetimeManager"/> that controls the lifetime
+        /// <param name="lifetimeManager">The <see cref="Microsoft.Practices.Unity.LifetimeManager"/> that controls the lifetimeManager
         /// of the returned instance.</param>
         /// <param name="injectionMembers">Injection configuration objects.</param>
         /// <returns>The <see cref="Microsoft.Practices.Unity.UnityContainer"/> object that this method was
@@ -106,7 +133,7 @@
         /// the full type).</param>
         /// <param name="name">Name for registration.</param>
         /// <param name="instance">Object to returned.</param>
-        /// <param name="lifetime"><see cref="Microsoft.Practices.Unity.LifetimeManager"/> object that controls how this instance
+        /// <param name="lifetimeManager"><see cref="Microsoft.Practices.Unity.LifetimeManager"/> object that controls how this instance
         /// will be managed by the container.</param>
         /// <returns>The <see cref="Microsoft.Practices.Unity.UnityContainer"/> object that this method was
         /// called on (this in C#, Me in Visual Basic).</returns>
@@ -114,9 +141,23 @@
         /// that instead of the container creating the instance the first time it is
         /// requested, the user creates the instance ahead of type and adds that instance
         /// to the container.</remarks>
-        public static IUnityContainer RegisterInstance(Type t, string name, object instance, LifetimeManager lifetime)
+        public static IUnityContainer RegisterInstance(Type t, string name, object instance, LifetimeManager lifetimeManager)
         {
-            return PrivateContainer.RegisterInstance(t, name, instance, lifetime);
+            return PrivateContainer.RegisterInstance(t, name, instance, lifetimeManager);
+        }
+
+        /// <summary>
+        /// Register an instance with the container.
+        /// </summary>
+        /// <typeparam name="T">The type to apply the lifetimeManager to.</typeparam>
+        /// <param name="instance">Object to returned.</param>
+        /// <param name="name">Name for registration.</param>
+        /// <param name="lifetimeManager">The <see cref="Microsoft.Practices.Unity.LifetimeManager"/> that controls the lifetimeManager
+        /// of the returned instance.</param>
+        /// <returns></returns>
+        public static IUnityContainer RegisterInstance<T>(T instance, string name, LifetimeManager lifetimeManager)
+        {
+            return PrivateContainer.RegisterInstance(typeof(T), name, instance, lifetimeManager);
         }
 
         /// <summary>
@@ -125,7 +166,7 @@
         /// </summary>
         /// <typeparam name="TFrom"><see cref="System.Type"/> that will be requested.</typeparam>
         /// <typeparam name="TTo"><see cref="System.Type"/> that will actually be returned.</typeparam>
-        /// <param name="lifetimeManager">The <see cref="Microsoft.Practices.Unity.LifetimeManager"/> that controls the lifetime
+        /// <param name="lifetimeManager">The <see cref="Microsoft.Practices.Unity.LifetimeManager"/> that controls the lifetimeManager
         /// of the returned instance.</param>
         /// <param name="injectionMembers">Injection configuration objects.</param>
         /// <returns>The <see cref="Microsoft.Practices.Unity.UnityContainer"/> object that this method was
@@ -161,7 +202,7 @@
         /// <typeparam name="TFrom"><see cref="System.Type"/> that will be requested.</typeparam>
         /// <typeparam name="TTo"><see cref="System.Type"/> that will actually be returned.</typeparam>
         /// <param name="name">Name to use for registration, null if a default registration.</param>
-        /// <param name="lifetimeManager">The <see cref="Microsoft.Practices.Unity.LifetimeManager"/> that controls the lifetime
+        /// <param name="lifetimeManager">The <see cref="Microsoft.Practices.Unity.LifetimeManager"/> that controls the lifetimeManager
         /// of the returned instance.</param>
         /// <param name="injectionMembers">Injection configuration objects.</param>
         /// <returns>The <see cref="Microsoft.Practices.Unity.UnityContainer"/> object that this method was

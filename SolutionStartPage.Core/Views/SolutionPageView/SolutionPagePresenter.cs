@@ -9,6 +9,7 @@
      using System.Windows.Forms;
      using System.Windows.Input;
      using Microsoft.Practices.Unity;
+     using Shared;
      using Shared.Commands;
      using Shared.Funtionality;
      using Shared.Models;
@@ -23,18 +24,28 @@
          private readonly ISolutionPageView _view;
          private readonly ISolutionPageViewModel _vm;
          private readonly ISolutionPageModel _model;
-         private readonly IIde _ide;
+
+         private IIde _ide;
+
+         #endregion
+
+         /////////////////////////////////////////////////////////
+         #region Properties
+
+         private IIde Ide
+         {
+             get { return _ide ?? (_ide = UnityFactory.Resolve<IIde>(Constants.IIDE_REGISTRATION_NAME)); }
+         }
 
          #endregion
 
          /////////////////////////////////////////////////////////
          #region Constructors
 
-         public SolutionPagePresenter(ISolutionPageView view, ISolutionPageModel model, IIdeModel ideModel)
+         public SolutionPagePresenter(ISolutionPageView view, ISolutionPageModel model)
          {
              _view = view;
              _model = model;
-             _ide = ideModel.GetIde(_view.Context);
 
              var config = _model.LoadConfiguration();
              _vm = UnityFactory.Resolve<ISolutionPageViewModel>(new ParameterOverride("config", config));
@@ -320,8 +331,8 @@
              switch (param)
              {
                  case CommandParameter.OPEN_SOLUTION_OPEN:
-                     if (_ide != null)
-                         _ide.OpenSolution(solution.SolutionPath);
+                     if (Ide != null)
+                         Ide.OpenSolution(solution.SolutionPath);
                      break;
                  case CommandParameter.OPEN_SOLUTION_OPEN_EXPLORER:
                      Process.Start(solution.ComputedSolutionDirectory);

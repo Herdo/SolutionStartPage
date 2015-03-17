@@ -35,16 +35,6 @@
             remove { RealSubject.AlterPageExecuted -= value; }
         }
 
-        /// <summary>
-        /// As the proxy is hosted, and not the RealSubject, the DataContext
-        /// of the proxy should be used to resolve the DTE.
-        /// </summary>
-        public object Context
-        {
-            get { return DataContext; }
-            set { DataContext = value; }
-        }
-
         public void ConnectDataSource(ISolutionPageViewModel vm)
         {
             RealSubject.ConnectDataSource(vm);
