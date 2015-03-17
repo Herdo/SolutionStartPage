@@ -1,3 +1,6 @@
+# 1.4
+- Fixed "Invalid Manifest" for VS 2010
+
 # 1.3
 - Added support for VS2010
 
