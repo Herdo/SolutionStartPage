@@ -9,7 +9,8 @@ The 'news' section is replaced by a customizable overview of your solutions.
 ## Installation
 
 - Install the Extension from the [Visual Studio Extension Gallery](https://visualstudiogallery.msdn.microsoft.com/de5a8b10-d521-43ba-8af4-938c19b10ec9)
-- Type "Startup" in the Quick Launch box or go to Tools --> Options --> Environment --> Startup and select the 'Solution Start Page' as start page
+- Select the proper Visual Studio version(s) you want to install the extension for
+- Type "Startup" in the Quick Launch box (in newer VS versions) or go to Tools --> Options --> Environment --> Startup and select the 'Solution Start Page' as start page
 
 ## Usage
 

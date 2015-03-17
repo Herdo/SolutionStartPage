@@ -1,3 +1,6 @@
+# 1.3
+- Added support for VS2010
+
 # 1.2
 - Fixed "Open project..." link in the left pane
 
