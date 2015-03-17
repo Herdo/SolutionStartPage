@@ -1,6 +1,5 @@
 ﻿namespace SolutionStartPage.Vs2013
 {
-    using Control.SolutionsPart;
     using Microsoft.Practices.Unity;
     using Models;
     using Shared;

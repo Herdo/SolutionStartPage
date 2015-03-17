@@ -1,4 +1,4 @@
-﻿﻿namespace SolutionStartPage.Control.SolutionsPart
+﻿﻿namespace SolutionStartPage.Vs2013.Views.SolutionPageView
  {
      using System;
      using System.Windows.Input;
