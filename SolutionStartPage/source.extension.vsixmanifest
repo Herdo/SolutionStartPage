@@ -12,8 +12,7 @@ The 'news' section is replaced by a customizable overview of your solutions.
     <Icon>StartPage_Icon.png</Icon>
     <PreviewImage>StartPage_Preview.png</PreviewImage>
     <License>License.txt</License>
-    <GettingStartedGuide>GettingStarted.md</GettingStartedGuide>
-    <ReleaseNotes>ReleaseNotes.md</ReleaseNotes>
+    <GettingStartedGuide>https://github.com/Herdo/SolutionStartPage/blob/master/SolutionStartPage/GettingStarted.md</GettingStartedGuide>
     <MoreInfoUrl>https://github.com/Herdo/SolutionStartPage</MoreInfoUrl>
     <SupportedProducts>
       <VisualStudio Version="10.0">
