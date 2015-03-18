@@ -1,3 +1,9 @@
+# 1.5
+- Fixed "Solution Buttons are always disabled"
+- New layout for the Settings region
+- Added text trimming for long solution names and directories
+- Added tooltip during edit mode for the directory preview
+
 # 1.4
 - Fixed "Invalid Manifest" for VS 2010
 
@@ -13,5 +19,4 @@
 - Changed styling of links
 
 # 1.0
-
 - First Release
