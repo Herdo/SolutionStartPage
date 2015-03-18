@@ -28,7 +28,6 @@
         #region Fields
 
         private readonly IViewStateProvider _viewStateProvider;
-        private readonly SolutionGroup _parentGroup;
         private string _solutionDisplayName;
         private string _solutionPath;
         private string _solutionDirectory;
@@ -40,7 +39,7 @@
         #region Properties
 
         [XmlIgnore]
-        public SolutionGroup ParentGroup { get { return _parentGroup; } }
+        public SolutionGroup ParentGroup { get; set; }
 
         /// <summary>
         /// The name for the solution, displayed in the GUI.
@@ -131,7 +130,7 @@
             _viewStateProvider = viewStateProvider;
             _viewStateProvider.PropertyChanged += viewStateProvider_PropertyChanged;
 
-            _parentGroup = group;
+            ParentGroup = group;
             SolutionPath = solutionPath;
 
             SolutionDisplayName = null;

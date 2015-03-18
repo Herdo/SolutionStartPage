@@ -11,6 +11,5 @@ The solution is structured into several projects, seperated into their concerns:
 - SolutionStartPage.Proxies --> Contains proxie classes, used for runtime specific resolving of controls
 - SolutionStartPage.Vs#### --> Visual Studio Version specific implementation of controls
 
-The SolutionStartPage project must reference the following projects (even if declared as "Unused Reference" by ReSharper), in order to include them inside the VSIX:
-- SolutionStartPage.Core
-- SolutionStartPage.Proxies
+The SolutionStartPage project (main project, containing the StartPage.xaml file) must reference
+the all other projects (even if declared as "Unused Reference" by ReSharper), in order to include them inside the VSIX.

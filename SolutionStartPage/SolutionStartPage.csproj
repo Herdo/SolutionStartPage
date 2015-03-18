@@ -142,6 +142,18 @@
       <Project>{fcdf6c72-fde2-45af-b53b-e95427f2540e}</Project>
       <Name>SolutionStartPage.Proxies</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SolutionStartPage.Shared\SolutionStartPage.Shared.csproj">
+      <Project>{221b199f-4d2f-4f3d-a04e-6c3a389f73c3}</Project>
+      <Name>SolutionStartPage.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SolutionStartPage.Vs2010\SolutionStartPage.Vs2010.csproj">
+      <Project>{837dd941-6370-4d38-9142-4d9064c1a7a3}</Project>
+      <Name>SolutionStartPage.Vs2010</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SolutionStartPage.Vs2013\SolutionStartPage.Vs2013.csproj">
+      <Project>{d338e438-f108-4b43-9d22-a99066c1aa5e}</Project>
+      <Name>SolutionStartPage.Vs2013</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v12.0\VSSDK\Microsoft.VsSDK.targets" />

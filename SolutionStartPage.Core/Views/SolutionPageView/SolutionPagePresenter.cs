@@ -51,6 +51,8 @@
              _vm = UnityFactory.Resolve<ISolutionPageViewModel>(new ParameterOverride("config", config));
 
              _view.ConnectDataSource(_vm);
+
+             PrepareLoadedData();
              ConnectEventHandler();
 
              FillDefault();
@@ -61,24 +63,33 @@
          /////////////////////////////////////////////////////////
          #region Private Methods
 
+         private void PrepareLoadedData()
+         {
+             foreach (var solutionGroup in _vm.SolutionGroups)
+             {
+                 // Connect loaded solution groups
+                 solutionGroup.AlterSolutionGroupCanExecute += solutionGroup_AlterSolutionGroupCanExecute;
+                 solutionGroup.AlterSolutionGroupExecuted += solutionGroup_AlterSolutionGroupExecuted;
+                 foreach (var solution in solutionGroup.Solutions)
+                 {
+                     // Apply parent group - is not set by XmlSerializer when deserializing
+                     solution.ParentGroup = solutionGroup;
+
+                     // Connect loaded solutions
+                     solution.OpenSolutionCanExecute += solution_OpenSolutionCanExecute;
+                     solution.OpenSolutionExecuted += solution_OpenSolutionExecuted;
+                     solution.AlterSolutionCanExecute += solution_AlterSolutionCanExecute;
+                     solution.AlterSolutionExecuted += solution_AlterSolutionExecuted;
+                 }
+             }
+         }
+
          private void ConnectEventHandler()
          {
              _vm.PropertyChanged += vm_PropertyChanged;
 
              _view.AlterPageCanExecute += view_AlterPageCanExecute;
              _view.AlterPageExecuted += view_AlterPageExecuted;
-
-             // Connect loaded solution groups and solutions
-             foreach (var solutionGroup in _vm.SolutionGroups)
-             {
-                 solutionGroup.AlterSolutionGroupCanExecute += solutionGroup_AlterSolutionGroupCanExecute;
-                 solutionGroup.AlterSolutionGroupExecuted += solutionGroup_AlterSolutionGroupExecuted;
-                 foreach (var solution in solutionGroup.Solutions)
-                 {
-                     solution.OpenSolutionCanExecute += solution_OpenSolutionCanExecute;
-                     solution.OpenSolutionExecuted += solution_OpenSolutionExecuted;
-                 }
-             }
          }
 
          private void FillDefault()
