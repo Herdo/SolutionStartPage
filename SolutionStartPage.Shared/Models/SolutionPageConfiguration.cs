@@ -1,6 +1,7 @@
 ﻿namespace SolutionStartPage.Shared.Models
 {
     using System.Linq;
+    using System.Windows;
     using System.Xml.Serialization;
     using Views.SolutionPageView;
 
@@ -48,10 +49,17 @@
             SolutionGroups = new SolutionGroup[0];
         }
 
-        public SolutionPageConfiguration(ISolutionPageViewModel vm)
+        #endregion
+
+        /////////////////////////////////////////////////////////
+        #region Public Methods
+
+        public SolutionPageConfiguration ApplyViewModel(ISolutionPageViewModel vm)
         {
             Columns = vm.Columns;
             SolutionGroups = vm.SolutionGroups.ToArray();
+
+            return this;
         }
 
         #endregion

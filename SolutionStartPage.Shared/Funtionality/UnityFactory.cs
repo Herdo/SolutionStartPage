@@ -161,6 +161,19 @@
         }
 
         /// <summary>
+        /// Register an instance with the container.
+        /// </summary>
+        /// <typeparam name="T">The type to apply the lifetimeManager to.</typeparam>
+        /// <param name="instance">Object to returned.</param>
+        /// <param name="lifetimeManager">The <see cref="Microsoft.Practices.Unity.LifetimeManager"/> that controls the lifetimeManager
+        /// of the returned instance.</param>
+        /// <returns></returns>
+        public static IUnityContainer RegisterInstance<T>(T instance, LifetimeManager lifetimeManager)
+        {
+            return PrivateContainer.RegisterInstance(instance, lifetimeManager);
+        }
+
+        /// <summary>
         /// Register a type mapping with the container, where the created instances will
         /// use the given <see cref="Microsoft.Practices.Unity.LifetimeManager"/>.
         /// </summary>

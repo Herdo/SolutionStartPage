@@ -31,6 +31,10 @@
                     <Style TargetType="TextBlock">
                         <Setter Property="Foreground" Value="{DynamicResource {x:Static vsfx:VsBrushes.StartPageTextControlLinkSelectedKey}}"/>
                     </Style>
+                    
+                    <Style TargetType="GroupBox">
+                        <Setter Property="BorderBrush" Value="{DynamicResource {x:Static vsfx:VsBrushes.StartPageTextControlLinkSelectedKey}}"/>
+                    </Style>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -68,7 +72,7 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
-        
+
         <!-- Configuration -->
         <Border Grid.Row="1"
                 Visibility="{Binding EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}}"
@@ -76,13 +80,15 @@
                 Padding="10">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Header & Actions Row -->
                     <RowDefinition/>
-                    <RowDefinition/>
+                    <!-- Advanced Settings -->
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="10"/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <!-- Header -->
@@ -91,73 +97,86 @@
                            TextDecorations="Underline"
                            FontSize="24"
                            Margin="0, 0, 0, 15"/>
-                <StackPanel Grid.Row="0"
-                            Grid.Column="2"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Left"
-                            Orientation="Horizontal">
-                    <Button ToolTip="Add Group"
-                            Command="commands:Commands.AlterPage"
-                            CommandParameter="{x:Static commands:CommandParameter.ALTER_PAGE_ADD_GROUP}"
-                            Margin="5"
-                            Height="{Binding ElementName=BulkAddDropDownButton, Path=Height}"
-                            Width="{Binding ElementName=BulkAddDropDownButton, Path=Width}">
-                        <Image Source="pack://application:,,,/SolutionStartPage.Shared;component/Content/add.png"
-                               Height="16"
-                               Width="16"/>
-                    </Button>
-                    <xctk:DropDownButton x:Name="BulkAddDropDownButton"
-                                         Margin="5"
-                                         VerticalAlignment="Center"
-                                         HorizontalAlignment="Left"
-                                         ToolTip="Bulk add solutions...">
-                        <xctk:DropDownButton.Content>
-                            <Image Source="pack://application:,,,/SolutionStartPage.Shared;component/Content/folder.png"
+
+                <GroupBox Grid.Row="0"
+                          Grid.Column="2"
+                          Header="Actions">
+                    <StackPanel VerticalAlignment="Center"
+                                HorizontalAlignment="Left"
+                                Orientation="Horizontal">
+                        <Button ToolTip="Add Group"
+                                Command="commands:Commands.AlterPage"
+                                CommandParameter="{x:Static commands:CommandParameter.ALTER_PAGE_ADD_GROUP}"
+                                Margin="5"
+                                Height="{Binding ElementName=BulkAddDropDownButton, Path=Height}"
+                                Width="{Binding ElementName=BulkAddDropDownButton, Path=Width}">
+                            <Image Source="pack://application:,,,/SolutionStartPage.Shared;component/Content/add.png"
                                    Height="16"
                                    Width="16"/>
-                        </xctk:DropDownButton.Content>
-                        <xctk:DropDownButton.DropDownContent>
-                            <StackPanel>
-                                <Button Content="Bulk add solutions (single group)"
-                                        ToolTip="Adds all solutions found below a root directory to a single group."
-                                        Command="commands:Commands.AlterPage"
-                                        CommandParameter="{x:Static commands:CommandParameter.ALTER_PAGE_ADD_GROUP_BULK_SINGLE}"
-                                        Margin="5"
-                                        Height="24"/>
-                                <Button Content="Bulk add solutions (multiple groups)"
-                                        ToolTip="Adds all solutions found below a root directory to a group for their parent directory."
-                                        Command="commands:Commands.AlterPage"
-                                        CommandParameter="{x:Static commands:CommandParameter.ALTER_PAGE_ADD_GROUP_BULK_MULTIPLE}"
-                                        Margin="5"
-                                        Height="24"/>
-                            </StackPanel>
-                        </xctk:DropDownButton.DropDownContent>
-                    </xctk:DropDownButton>
-                    <Button ToolTip="Delete All Groups"
-                            Command="commands:Commands.AlterPage"
-                            CommandParameter="{x:Static commands:CommandParameter.ALTER_PAGE_DELETE_ALL_GROUPS}"
-                            Margin="5"
-                            Height="{Binding ElementName=BulkAddDropDownButton, Path=Height}"
-                            Width="{Binding ElementName=BulkAddDropDownButton, Path=Width}">
-                        <Image Source="pack://application:,,,/SolutionStartPage.Shared;component/Content/delete_all.png"
-                               Height="16"
-                               Width="16"/>
-                    </Button>
-                </StackPanel>
-            
-                <!-- Columns -->
-                <TextBlock Grid.Row="1"
-                           Grid.Column="0"
-                           Style="{DynamicResource StartPage.ItemHeadingTextStyle}"
-                           Text="Columns:"/>
-                <xctk:IntegerUpDown Grid.Row="1"
-                                    Grid.Column="2"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Left"
-                                    Width="40"
-                                    Value="{Binding Columns}"
-                                    Minimum="1"
-                                    Maximum="3"/>
+                        </Button>
+                        <xctk:DropDownButton x:Name="BulkAddDropDownButton"
+                                             Margin="5"
+                                             VerticalAlignment="Center"
+                                             HorizontalAlignment="Left"
+                                             ToolTip="Bulk add solutions...">
+                            <xctk:DropDownButton.Content>
+                                <Image Source="pack://application:,,,/SolutionStartPage.Shared;component/Content/folder.png"
+                                       Height="16"
+                                       Width="16"/>
+                            </xctk:DropDownButton.Content>
+                            <xctk:DropDownButton.DropDownContent>
+                                <StackPanel>
+                                    <Button Content="Bulk add solutions (single group)"
+                                            ToolTip="Adds all solutions found below a root directory to a single group."
+                                            Command="commands:Commands.AlterPage"
+                                            CommandParameter="{x:Static commands:CommandParameter.ALTER_PAGE_ADD_GROUP_BULK_SINGLE}"
+                                            Margin="5"
+                                            Height="24"/>
+                                    <Button Content="Bulk add solutions (multiple groups)"
+                                            ToolTip="Adds all solutions found below a root directory to a group for their parent directory."
+                                            Command="commands:Commands.AlterPage"
+                                            CommandParameter="{x:Static commands:CommandParameter.ALTER_PAGE_ADD_GROUP_BULK_MULTIPLE}"
+                                            Margin="5"
+                                            Height="24"/>
+                                </StackPanel>
+                            </xctk:DropDownButton.DropDownContent>
+                        </xctk:DropDownButton>
+                        <Button ToolTip="Delete All Groups"
+                                Command="commands:Commands.AlterPage"
+                                CommandParameter="{x:Static commands:CommandParameter.ALTER_PAGE_DELETE_ALL_GROUPS}"
+                                Margin="5"
+                                Height="{Binding ElementName=BulkAddDropDownButton, Path=Height}"
+                                Width="{Binding ElementName=BulkAddDropDownButton, Path=Width}">
+                            <Image Source="pack://application:,,,/SolutionStartPage.Shared;component/Content/delete_all.png"
+                                   Height="16"
+                                   Width="16"/>
+                        </Button>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Grid.Row="1"
+                          Grid.Column="0"
+                          Grid.ColumnSpan="3"
+                          Header="Layout">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Columns -->
+                        <TextBlock Style="{DynamicResource StartPage.ItemHeadingTextStyle}"
+                                   Text="Columns:"/>
+                        <xctk:IntegerUpDown Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Left"
+                                            Width="40"
+                                            Margin="5,0,0,0"
+                                            Value="{Binding Columns}"
+                                            Minimum="1"
+                                            Maximum="3"/>
+                    </Grid>
+                </GroupBox>
             </Grid>
         </Border>
     </Grid>

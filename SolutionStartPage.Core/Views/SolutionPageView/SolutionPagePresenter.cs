@@ -24,6 +24,7 @@
          private readonly ISolutionPageView _view;
          private readonly ISolutionPageViewModel _vm;
          private readonly ISolutionPageModel _model;
+         private readonly SolutionPageConfiguration _configuration;
 
          private IIde _ide;
 
@@ -47,8 +48,17 @@
              _view = view;
              _model = model;
 
-             var config = _model.LoadConfiguration();
-             _vm = UnityFactory.Resolve<ISolutionPageViewModel>(new ParameterOverride("config", config));
+             if (UnityFactory.IsRegistered<SolutionPageConfiguration>())
+             {
+                 _configuration = UnityFactory.Resolve<SolutionPageConfiguration>();
+             }
+             else
+             {
+                 _configuration = _model.LoadConfiguration();
+                 UnityFactory.RegisterInstance(_configuration, new ContainerControlledLifetimeManager());
+             }
+
+             _vm = UnityFactory.Resolve<ISolutionPageViewModel>();
 
              _view.ConnectDataSource(_vm);
 
@@ -226,7 +236,7 @@
              if (e.PropertyName == "EditModeEnabled"
               && _vm.EditModeEnabled == false)
              {
-                 await _model.SaveConfiguration(new SolutionPageConfiguration(_vm));
+                 await _model.SaveConfiguration(_configuration.ApplyViewModel(_vm));
              }
          }
 

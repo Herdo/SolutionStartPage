@@ -4,6 +4,7 @@
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
+    using System.Windows;
     using System.Windows.Input;
     using System.Xml.Serialization;
     using Annotations;
@@ -51,7 +52,12 @@
         public bool EditModeEnabled
         {
             get { return _viewStateProvider.EditModeEnabled; }
-            set { _viewStateProvider.EditModeEnabled = value; }
+        }
+
+        [XmlIgnore]
+        public FontWeight GroupHeaderFontWeight
+        {
+            get { return _viewStateProvider.GroupHeaderFontWeight; }
         }
 
         #endregion

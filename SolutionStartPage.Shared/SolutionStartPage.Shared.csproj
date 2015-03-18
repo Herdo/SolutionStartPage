@@ -71,6 +71,7 @@
     <Compile Include="Views\SolutionPageView\ISolutionPageView.cs" />
     <Compile Include="Views\SolutionPageView\ISolutionPageViewModel.cs" />
     <Compile Include="Views\SolutionPageView\SolutionPageModelBase.cs" />
+    <Compile Include="Views\SolutionPageView\SolutionPageViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
