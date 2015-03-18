@@ -1,7 +1,6 @@
 ﻿namespace SolutionStartPage.Shared.Models
 {
     using System.Linq;
-    using System.Windows;
     using System.Xml.Serialization;
     using Views.SolutionPageView;
 

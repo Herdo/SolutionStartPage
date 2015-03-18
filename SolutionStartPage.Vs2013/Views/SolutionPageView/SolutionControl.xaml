@@ -10,7 +10,8 @@
              xmlns:converter="clr-namespace:SolutionStartPage.Shared.Converter;assembly=SolutionStartPage.Shared"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=models:Solution, IsDesignTimeCreatable=True}"
-             Margin="0,5,0,0">
+             Margin="0,5,0,0"
+             x:Name="SolutionUserControlRoot">
     
     <UserControl.CommandBindings>
         <CommandBinding Command="commands:Commands.OpenSolution"
@@ -29,6 +30,7 @@
                     <!-- Converter -->
                     <converter:PathToSystemImageConverter x:Key="PathToSystemImageConverter"/>
                     <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+                    <converter:SolutionWidthToTextWidthConverter x:Key="SolutionWidthToTextWidthConverter"/>
                     
                     <!-- Styles -->
                     <Style x:Key="SolutionImageStyle"
@@ -50,7 +52,9 @@
                                                Style="{StaticResource StartPage.NormalTextStyle}"
                                                Foreground="{DynamicResource {x:Static vsfx:VsBrushes.StartPageTextControlLinkSelectedKey}}"
                                                FocusVisualStyle="{DynamicResource StartPage.CommandButtonFocusVisual}"
-                                               TextTrimming="CharacterEllipsis"/>
+                                               TextTrimming="CharacterEllipsis"
+                                               TextWrapping="NoWrap"
+                                               Width="{TemplateBinding Width}"/>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="UIElement.IsMouseOver" Value="true">
                                             <Setter Property="FrameworkElement.Cursor" Value="Hand"/>
@@ -97,7 +101,8 @@
                                     HorizontalContentAlignment="Left"
                                     VerticalAlignment="Center"
                                     VerticalContentAlignment="Center"
-                                    ToolTip="{Binding SolutionDisplayName}"/>
+                                    ToolTip="{Binding SolutionDisplayName}"
+                                    Width="{Binding ElementName=SolutionUserControlRoot, Path=ActualWidth, Converter={StaticResource SolutionWidthToTextWidthConverter}}"/>
         </StackPanel>
 
         <TextBox Grid.Row="0"
@@ -122,7 +127,8 @@
                                     HorizontalContentAlignment="Left"
                                     VerticalAlignment="Center"
                                     VerticalContentAlignment="Center"
-                                    ToolTip="{Binding ComputedSolutionDirectory}"/>
+                                    ToolTip="{Binding ComputedSolutionDirectory}"
+                                    Width="{Binding ElementName=SolutionUserControlRoot, Path=ActualWidth, Converter={StaticResource SolutionWidthToTextWidthConverter}}"/>
         </StackPanel>
         
         <StackPanel Grid.Row="2"
@@ -142,7 +148,8 @@
                            FontSize="{Binding ElementName=SolutionDirectoryTextBlock, Path=FontSize}"
                            Style="{DynamicResource StartPage.DiscoverVS.RegularTextStyle}"
                            VerticalAlignment="Top"
-                           FontStyle="Italic"/>
+                           FontStyle="Italic"
+                           ToolTip="{Binding ComputedSolutionDirectory}"/>
             </StackPanel>
         </StackPanel>
         
