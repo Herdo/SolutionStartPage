@@ -226,6 +226,24 @@
              return null;
          }
 
+         private static void OpenSolutionDirectoryExplorer(Solution solution)
+         {
+             if (Keyboard.Modifiers == ModifierKeys.Shift)
+             {
+                 if (Directory.GetParent(solution.ComputedSolutionDirectory) == null) return;
+                 // If shift, open the parent directory of the computed
+                 // directory, and select the computed directory.
+                 var argument = String.Format(@"/select,{0}", new Uri(solution.ComputedSolutionDirectory).LocalPath);
+                 Process.Start("explorer", argument);
+             }
+             else
+             {
+                 if (Directory.Exists(solution.ComputedSolutionDirectory))
+                     // If no shift, just open the computed directory.
+                     Process.Start(solution.ComputedSolutionDirectory);
+             }
+         }
+
          #endregion
 
          /////////////////////////////////////////////////////////
@@ -356,7 +374,7 @@
                          Ide.OpenSolution(solution.SolutionPath);
                      break;
                  case CommandParameter.OPEN_SOLUTION_OPEN_EXPLORER:
-                     Process.Start(solution.ComputedSolutionDirectory);
+                     OpenSolutionDirectoryExplorer(solution);
                      break;
              }
          }
