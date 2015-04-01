@@ -25,7 +25,8 @@
                 // Root View
                 .RegisterType<IPageRootView, PageRootControl>()
                 // Basic Part
-                .RegisterType<IVisualStudioOverviewPageView, VisualStudioOverviewPageControl>()
+                .RegisterType<IVsoPageView, VsoPageControl>()
+                .RegisterType<IVsoPageViewModel, VsoPageViewModel>()
                 // Solution Page
                 .RegisterType<ISolutionPageView, SolutionPageControl>()
                 .RegisterType<ISolutionGroupControl, SolutionGroupControl>()

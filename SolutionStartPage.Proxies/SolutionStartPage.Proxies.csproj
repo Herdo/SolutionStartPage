@@ -45,7 +45,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\ContentProxyBaseControl.cs" />
     <Compile Include="Views\PageRootControlProxy.cs" />
-    <Compile Include="Views\VisualStudioOverviewPageControlProxy.cs" />
+    <Compile Include="Views\VsoPageControlProxy.cs" />
     <Compile Include="Views\SolutionControlProxy.cs" />
     <Compile Include="Views\SolutionGroupControlProxy.cs" />
     <Compile Include="Views\SolutionPageControlProxy.cs" />

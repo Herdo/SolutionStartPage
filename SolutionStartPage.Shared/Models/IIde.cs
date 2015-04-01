@@ -2,6 +2,8 @@
 {
     public interface IIde
     {
+        string Edition { get; }
+
         void OpenSolution(string path);
     }
 }

@@ -80,10 +80,11 @@
   <ItemGroup>
     <Compile Include="Models\IdeModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="Views\BasicPart\VisualStudioOverviewPageControl.xaml.cs">
-      <DependentUpon>VisualStudioOverviewPageControl.xaml</DependentUpon>
+    <Compile Include="Views\BasicPart\VsoPageControl.xaml.cs">
+      <DependentUpon>VsoPageControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\VsIde.cs" />
+    <Compile Include="Views\BasicPart\VsoPageViewModel.cs" />
     <Compile Include="Views\SolutionPageView\SolutionControl.xaml.cs">
       <DependentUpon>SolutionControl.xaml</DependentUpon>
     </Compile>
@@ -96,7 +97,7 @@
     </Compile>
     <Compile Include="Views\SolutionPageView\SolutionPageViewModel.cs" />
     <Compile Include="Vs2013Bootstrapper.cs" />
-    <Page Include="Views\BasicPart\VisualStudioOverviewPageControl.xaml">
+    <Page Include="Views\BasicPart\VsoPageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

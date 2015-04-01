@@ -1,6 +1,5 @@
 ﻿namespace SolutionStartPage.Vs2010
 {
-    using Control.SolutionsPart;
     using Microsoft.Practices.Unity;
     using Models;
     using Shared;
@@ -26,7 +25,8 @@
                 // Root View
                 .RegisterType<IPageRootView, PageRootControl>()
                 // Basic Part
-                .RegisterType<IVisualStudioOverviewPageView, VisualStudioOverviewPageControl>()
+                .RegisterType<IVsoPageView, VsoPageControl>()
+                .RegisterType<IVsoPageViewModel, VsoPageViewModel>()
                 // Solution Page
                 .RegisterType<ISolutionPageView, SolutionPageControl>()
                 .RegisterType<ISolutionGroupControl, SolutionGroupControl>()

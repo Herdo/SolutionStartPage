@@ -149,6 +149,25 @@
         /// <summary>
         /// Register an instance with the container.
         /// </summary>
+        /// <typeparam name="T">Type of instance to register (may be an implemented interface instead of
+        /// the full type).</typeparam>
+        /// <param name="instance">Object to returned.</param>
+        /// <returns>The Microsoft.Practices.Unity.UnityContainer object that this method was
+        /// called on (this in C#, Me in Visual Basic).</returns>
+        /// <remarks>Instance registration is much like setting a type as a singleton, except
+        /// that instead of the container creating the instance the first time it is
+        /// requested, the user creates the instance ahead of type and adds that instance
+        /// to the container.
+        /// This overload does a default registration and has the container take over
+        /// the lifetime of the instance.</remarks>
+        public static IUnityContainer RegisterInstance<T>(T instance)
+        {
+            return PrivateContainer.RegisterInstance(instance);
+        }
+
+        /// <summary>
+        /// Register an instance with the container.
+        /// </summary>
         /// <typeparam name="T">The type to apply the lifetimeManager to.</typeparam>
         /// <param name="instance">Object to returned.</param>
         /// <param name="name">Name for registration.</param>

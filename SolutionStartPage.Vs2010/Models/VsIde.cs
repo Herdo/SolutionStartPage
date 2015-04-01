@@ -30,6 +30,11 @@
         /////////////////////////////////////////////////////////
         #region IIde Member
 
+        public string Edition
+        {
+            get { return _dte.Edition; }
+        }
+
         public void OpenSolution(string path)
         {
             if (path != null)

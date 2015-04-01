@@ -38,7 +38,7 @@
                    Width="1600" />
 
             <!-- Left Column -->
-            <views:VisualStudioOverviewPageControlProxy Grid.Row="1"
+            <views:VsoPageControlProxy Grid.Row="1"
                                                         Grid.Column="0"
                                                         Margin="15,-35,15,15"
                                                         VerticalAlignment="Stretch"/>

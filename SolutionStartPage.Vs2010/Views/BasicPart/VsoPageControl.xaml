@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="SolutionStartPage.Vs2010.Views.BasicPart.VisualStudioOverviewPageControl"
+﻿<UserControl x:Class="SolutionStartPage.Vs2010.Views.BasicPart.VsoPageControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:sp="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.StartPage"

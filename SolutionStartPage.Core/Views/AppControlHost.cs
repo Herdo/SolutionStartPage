@@ -3,12 +3,15 @@
     using System;
     using System.Windows;
     using System.Windows.Controls;
+    using BasicPart;
     using Microsoft.Practices.Unity;
     using Models;
     using Shared;
+    using Shared.Extensions;
     using Shared.Funtionality;
     using Shared.Models;
     using Shared.Views;
+    using Shared.Views.BasicPart;
     using Shared.Views.PageRootView;
     using Shared.Views.SolutionPageView;
     using SolutionPageView;
@@ -30,10 +33,20 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+        #region Events
+
+        public event EventHandler<EventArgs> AppRegistrationCompleted;
+
+        #endregion
+
+        /////////////////////////////////////////////////////////
         #region Constructors
 
         public AppControlHost()
         {
+            // Always register self (and overwrite any existing registration), before doing anything else
+            UnityFactory.RegisterInstance<IAppControlHost>(this);
+
             Loaded += AppControlHost_Loaded;
 
             PreConfigureApp();
@@ -51,6 +64,7 @@
             UnityFactory.Initialize(c => c
                 // Register Presenters
                 .RegisterType<ISolutionPagePresenter, SolutionPagePresenter>()
+                .RegisterType<IVsoPagePresenter, VsoPagePresenter>()
                 // Register Models
                 .RegisterType<Solution>()
                 .RegisterType<SolutionGroup>()
@@ -89,6 +103,8 @@
             var ideModel = UnityFactory.Resolve<IIdeModel>();
             var ide = ideModel.GetIde(DataContext);
             UnityFactory.RegisterInstance(ide, Constants.IIDE_REGISTRATION_NAME, new ContainerControlledLifetimeManager());
+
+            AppRegistrationCompleted.SafeInvoke(this, new EventArgs());
         }
         
         #endregion

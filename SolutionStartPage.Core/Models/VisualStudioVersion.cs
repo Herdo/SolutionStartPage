@@ -10,6 +10,7 @@
         #region Fields
 
         private readonly Version _vsVersion;
+        private readonly string _longVersion;
 
         #endregion
 
@@ -19,6 +20,11 @@
         public Version FullVersion
         {
             get { return _vsVersion; }
+        }
+
+        public string LongVersion
+        {
+            get { return _longVersion; }
         }
 
         public bool Vs2013OrLater
@@ -93,9 +99,34 @@
                         }
                     }
                     _vsVersion = new Version(verName);
+                    _longVersion = GetLongVisualStudioVersion();
                 }
                 else
                     _vsVersion = new Version(0, 0); // Not running inside Visual Studio!
+            }
+        }
+
+        #endregion
+
+        /////////////////////////////////////////////////////////
+        #region Private Methods
+
+        private string GetLongVisualStudioVersion()
+        {
+            switch (_vsVersion.Major)
+            {
+                case 8:
+                    return "2005";
+                case 9:
+                    return "2008";
+                case 10:
+                    return "2010";
+                case 11:
+                    return "2012";
+                case 12:
+                    return "2013";
+                default:
+                    throw new NotSupportedException("Version is not supported.");
             }
         }
 

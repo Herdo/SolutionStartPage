@@ -60,7 +60,10 @@
     <Compile Include="Models\SolutionPageConfiguration.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\BasicPart\IVisualStudioOverviewPageView.cs" />
+    <Compile Include="Views\BasicPart\IVsoPagePresenter.cs" />
+    <Compile Include="Views\BasicPart\IVsoPageView.cs" />
+    <Compile Include="Views\BasicPart\IVsoPageViewModel.cs" />
+    <Compile Include="Views\BasicPart\VsoPageViewModelBase.cs" />
     <Compile Include="Views\IAppControlHost.cs" />
     <Compile Include="Views\IBasicControlSubject.cs" />
     <Compile Include="Views\IViewStateProvider.cs" />

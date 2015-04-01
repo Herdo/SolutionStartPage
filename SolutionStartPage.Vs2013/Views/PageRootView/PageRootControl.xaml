@@ -24,7 +24,7 @@
             </Grid.ColumnDefinitions>
 
             <!-- Left Column -->
-            <views:VisualStudioOverviewPageControlProxy/>
+            <views:VsoPageControlProxy/>
 
             <!-- Right Column -->
             <views:SolutionPageControlProxy Grid.Column="1"/>
