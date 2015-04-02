@@ -11,13 +11,16 @@
     using System.Windows.Interop;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
+    using DAL;
+    using Funtionality;
 
     public class PathToSystemImageConverter : IValueConverter
     {
         /////////////////////////////////////////////////////////
         #region Fields
 
-        private readonly Dictionary<string, ImageSource> _sourceCache; 
+        private readonly Dictionary<string, ImageSource> _sourceCache;
+        private readonly IFileSystem _fileSystem;
 
         #endregion
 
@@ -25,8 +28,13 @@
         #region Constructors
 
         public PathToSystemImageConverter()
+            : this(UnityFactory.Resolve<IFileSystem>())
+        {}
+
+        public PathToSystemImageConverter(IFileSystem fileSystem)
         {
             _sourceCache = new Dictionary<string, ImageSource>();
+            _fileSystem = fileSystem;
         }
 
         #endregion
@@ -44,15 +52,15 @@
             return _sourceCache[extension];
         }
 
-        private static ImageSource GetFileIcon(string fileName)
+        private ImageSource GetFileIcon(string fileName)
         {
             // if file does not exist, create a temp file with the same file extension
             var isTemp = false;
-            if (!File.Exists(fileName) && !Directory.Exists(fileName))
+            if (!_fileSystem.FileExists(fileName) && !_fileSystem.DirectoryExists(fileName))
             {
                 isTemp = true;
                 fileName = Path.Combine(Path.GetTempPath(), Guid.NewGuid() + Path.GetExtension(fileName));
-                File.WriteAllText(fileName, string.Empty);
+                _fileSystem.WriteAllTextToFile(fileName, String.Empty);
             }
             var shinfo = new Natives.SHFILEINFO();
             var flags = Natives.SHGFI_SYSICONINDEX;
@@ -72,9 +80,7 @@
             {
                 Natives.DeleteObject(hBitmap);
                 if (isTemp)
-                {
-                    File.Delete(fileName);
-                }
+                    _fileSystem.DeleteFile(fileName);
             }
         }
 

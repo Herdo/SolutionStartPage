@@ -1,8 +1,8 @@
 ﻿namespace SolutionStartPage.Core.Models
 {
     using System;
-    using System.Diagnostics;
     using System.IO;
+    using Shared.DAL;
 
     public class VisualStudioVersion
     {
@@ -77,15 +77,15 @@
         /////////////////////////////////////////////////////////
         #region Constructors
 
-        public VisualStudioVersion()
+        public VisualStudioVersion(IFileSystem fileSystem)
         {
             if (_vsVersion == null)
             {
                 var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "devenv.exe");
 
-                if (File.Exists(path))
+                if (fileSystem.FileExists(path))
                 {
-                    var fvi = FileVersionInfo.GetVersionInfo(path);
+                    var fvi = fileSystem.GetFileVersionInfo(path);
 
                     var verName = fvi.ProductVersion;
 

@@ -8,6 +8,7 @@
     using System.Windows.Input;
     using System.Xml.Serialization;
     using Annotations;
+    using DAL;
     using Extensions;
     using Funtionality;
     using Views;
@@ -28,6 +29,8 @@
         #region Fields
 
         private readonly IViewStateProvider _viewStateProvider;
+        private readonly IFileSystem _fileSystem;
+
         private string _solutionDisplayName;
         private string _solutionPath;
         private string _solutionDirectory;
@@ -149,12 +152,16 @@
         {
             _viewStateProvider = UnityFactory.Resolve<IViewStateProvider>();
             _viewStateProvider.PropertyChanged += viewStateProvider_PropertyChanged;
+
+            _fileSystem = UnityFactory.Resolve<IFileSystem>();
         }
 
-        public Solution(IViewStateProvider viewStateProvider, SolutionGroup group, string solutionPath)
+        public Solution(IViewStateProvider viewStateProvider, IFileSystem fileSystem, SolutionGroup group, string solutionPath)
         {
             _viewStateProvider = viewStateProvider;
             _viewStateProvider.PropertyChanged += viewStateProvider_PropertyChanged;
+
+            _fileSystem = fileSystem;
 
             ParentGroup = group;
             SolutionPath = solutionPath;
@@ -183,8 +190,8 @@
             {
                 // Make directory, even if file path given
                 if (!String.IsNullOrWhiteSpace(SolutionDirectory)
-                 && !Directory.Exists(SolutionDirectory)
-                 && File.Exists(SolutionDirectory))
+                 && !_fileSystem.DirectoryExists(SolutionDirectory)
+                 && _fileSystem.FileExists(SolutionDirectory))
                     _solutionDirectory = Path.GetDirectoryName(SolutionDirectory);
 
                 // Default, use solution file directory
@@ -193,7 +200,7 @@
 
                 // Check if relative or absolute
                 ComputedSolutionDirectory = Path.IsPathRooted(SolutionDirectory)
-                                         && Directory.Exists(SolutionDirectory)
+                                         && _fileSystem.DirectoryExists(SolutionDirectory)
                     ? SolutionDirectory
                     : new Uri(Path.Combine(Path.GetDirectoryName(SolutionPath) ?? @"\\", SolutionDirectory)).AbsolutePath;
             }

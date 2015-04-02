@@ -5,6 +5,7 @@
     using System.IO;
     using System.Threading.Tasks;
     using System.Xml.Serialization;
+    using DAL;
     using Models;
 
     public abstract class SolutionPageModelBase : ISolutionPageModel
@@ -19,6 +20,7 @@
         /////////////////////////////////////////////////////////
         #region Fields
 
+        private readonly IFileSystem _fileSystem;
         private readonly XmlSerializer _serializer;
         private readonly string _settingsFilePath;
 
@@ -27,8 +29,9 @@
         /////////////////////////////////////////////////////////
         #region Constructors
 
-        protected SolutionPageModelBase(string settingsFileName)
+        protected SolutionPageModelBase(IFileSystem fileSystem, string settingsFileName)
         {
+            _fileSystem = fileSystem;
             _serializer = new XmlSerializer(typeof(SolutionPageConfiguration));
             _settingsFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), settingsFileName);
         }
@@ -40,7 +43,7 @@
 
         SolutionPageConfiguration ISolutionPageModel.LoadConfiguration()
         {
-            if (!File.Exists(_settingsFilePath))
+            if (!_fileSystem.FileExists(_settingsFilePath))
                 return new SolutionPageConfiguration();
 
             for (var i = 0; i <= _MAXIMUM_RETRIES; i++)
@@ -82,23 +85,22 @@
 
         IEnumerable<FileInfo> ISolutionPageModel.GetFilesInDirectory(string directory, string pattern)
         {
-            var di = new DirectoryInfo(directory);
-            return di.GetFiles(pattern, SearchOption.AllDirectories);
+            return _fileSystem.GetFilesInDirectory(directory, pattern);
         }
 
         DirectoryInfo ISolutionPageModel.GetParentDirectory(string directory)
         {
-            return Directory.GetParent(directory);
+            return _fileSystem.GetParentDirectory(directory);
         }
 
         bool ISolutionPageModel.DirectoryExists(string directory)
         {
-            return Directory.Exists(directory);
+            return _fileSystem.DirectoryExists(directory);
         }
 
         bool ISolutionPageModel.FileExists(string file)
         {
-            return File.Exists(file);
+            return _fileSystem.FileExists(file);
         }
 
         #endregion

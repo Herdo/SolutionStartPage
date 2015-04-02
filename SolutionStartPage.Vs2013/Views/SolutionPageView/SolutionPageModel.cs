@@ -1,5 +1,6 @@
 ﻿namespace SolutionStartPage.Vs2013.Views.SolutionPageView
 {
+    using Shared.DAL;
     using Shared.Views.SolutionPageView;
 
     public class SolutionPageModel : SolutionPageModelBase
@@ -14,8 +15,8 @@
         /////////////////////////////////////////////////////////
         #region Constructors
 
-        public SolutionPageModel()
-            : base(_SETTINGS_FILE_NAME_2013)
+        public SolutionPageModel(IFileSystem fileSystem)
+            : base(fileSystem, _SETTINGS_FILE_NAME_2013)
         {}
 
         #endregion

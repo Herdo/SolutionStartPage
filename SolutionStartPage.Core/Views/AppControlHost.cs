@@ -4,9 +4,11 @@
     using System.Windows;
     using System.Windows.Controls;
     using BasicPart;
+    using DAL;
     using Microsoft.Practices.Unity;
     using Models;
     using Shared;
+    using Shared.DAL;
     using Shared.Extensions;
     using Shared.Funtionality;
     using Shared.Models;
@@ -71,6 +73,8 @@
                 // Determine Singletons
                 .RegisterType<VisualStudioVersion>(new ContainerControlledLifetimeManager())
                 .RegisterType<IViewStateProvider, ViewStateProvider>(new ContainerControlledLifetimeManager())
+                // Register DAL
+                .RegisterType<IFileSystem, FileSystem>(new ContainerControlledLifetimeManager())
                 // Register Bootstrappers for each VS Version
                 .RegisterType<IBootstrapper, Vs2010Bootstrapper>(new Version(10, 0).ToString(_VERSION_STRING_DETAIL_SPECIFIC))
                 .RegisterType<IBootstrapper, Vs2013Bootstrapper>(new Version(12, 0).ToString(_VERSION_STRING_DETAIL_SPECIFIC))
