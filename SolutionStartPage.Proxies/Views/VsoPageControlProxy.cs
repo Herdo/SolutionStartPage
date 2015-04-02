@@ -21,7 +21,7 @@
         /////////////////////////////////////////////////////////
         #region IVsoPageView Member
 
-        public void ConnectDataSource(IVsoPageViewModel vm)
+        void IVsoPageView.ConnectDataSource(IVsoPageViewModel vm)
         {
             RealSubject.ConnectDataSource(vm);
         }

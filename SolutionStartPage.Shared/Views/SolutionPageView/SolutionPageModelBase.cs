@@ -1,6 +1,7 @@
 ﻿namespace SolutionStartPage.Shared.Views.SolutionPageView
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Threading.Tasks;
     using System.Xml.Serialization;
@@ -77,6 +78,27 @@
                 }
                 await Task.Delay(200);
             }
+        }
+
+        IEnumerable<FileInfo> ISolutionPageModel.GetFilesInDirectory(string directory, string pattern)
+        {
+            var di = new DirectoryInfo(directory);
+            return di.GetFiles(pattern, SearchOption.AllDirectories);
+        }
+
+        DirectoryInfo ISolutionPageModel.GetParentDirectory(string directory)
+        {
+            return Directory.GetParent(directory);
+        }
+
+        bool ISolutionPageModel.DirectoryExists(string directory)
+        {
+            return Directory.Exists(directory);
+        }
+
+        bool ISolutionPageModel.FileExists(string file)
+        {
+            return File.Exists(file);
         }
 
         #endregion

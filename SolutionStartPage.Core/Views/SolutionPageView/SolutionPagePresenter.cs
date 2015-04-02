@@ -6,7 +6,6 @@
      using System.Diagnostics;
      using System.IO;
      using System.Linq;
-     using System.Windows.Forms;
      using System.Windows.Input;
      using Microsoft.Practices.Unity;
      using Shared;
@@ -14,7 +13,6 @@
      using Shared.Funtionality;
      using Shared.Models;
      using Shared.Views.SolutionPageView;
-     using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
      public class SolutionPagePresenter : ISolutionPagePresenter
      {
@@ -120,22 +118,14 @@
 
          private void AddSolutionsBulk(bool singleGroup)
          {
-             var fbd = new FolderBrowserDialog
-             {
-                 Description = @"Browse for a root folder...",
-                 ShowNewFolderButton = false,
-                 RootFolder = Environment.SpecialFolder.Desktop
-             };
-             var dialogResult = fbd.ShowDialog();
-             if (dialogResult == DialogResult.OK)
-                 AddSolutionsByBulk(fbd.SelectedPath, singleGroup);
+             var selectedPath = _view.BrowseBulkAddRootFolder();
+             if (!String.IsNullOrEmpty(selectedPath))
+                 AddSolutionsByBulk(selectedPath, singleGroup);
          }
 
          private void AddSolutionsByBulk(string selectedPath, bool singleGroup)
          {
-             // Get *.sln files
-             var di = new DirectoryInfo(selectedPath);
-             var files = di.GetFiles("*.sln", SearchOption.AllDirectories);
+             var files = _model.GetFilesInDirectory(selectedPath, "*.sln");
 
              // Order solution files into groups
              var groups = new Dictionary<string, List<FileInfo>>();
@@ -178,7 +168,7 @@
          private void AddSolution(SolutionGroup group, Solution solution = null)
          {
              if (solution == null)
-                 solution = BrowseSolution(group);
+                 solution = _view.BrowseSolution(group);
              if (solution == null)
                  return;
 
@@ -199,38 +189,11 @@
              solution.ParentGroup.Solutions.Remove(solution);
          }
 
-         private Solution BrowseSolution(SolutionGroup group)
-         {
-             var ofd = new OpenFileDialog
-             {
-                 CheckFileExists = true,
-                 CheckPathExists = true,
-                 DefaultExt = ".sln",
-                 Filter = "Solution (*.sln)|*.sln|" +
-                          "All files (*.*)|*.*",
-                 AddExtension = true,
-                 Multiselect = false,
-                 ValidateNames = true,
-                 Title = "Browse for solution or other file..."
-             };
-
-             if (ofd.ShowDialog() == true)
-             {
-                 return UnityFactory.Resolve<Solution>(new ParameterOverrides
-                 {
-                     {"group", group},
-                     {"solutionPath", ofd.FileName}
-                 });
-             }
-
-             return null;
-         }
-
-         private static void OpenSolutionDirectoryExplorer(Solution solution)
+         private void OpenSolutionDirectoryExplorer(Solution solution)
          {
              if (Keyboard.Modifiers == ModifierKeys.Shift)
              {
-                 if (Directory.GetParent(solution.ComputedSolutionDirectory) == null) return;
+                 if (_model.GetParentDirectory(solution.ComputedSolutionDirectory) == null) return;
                  // If shift, open the parent directory of the computed
                  // directory, and select the computed directory.
                  var argument = String.Format(@"/select,{0}", new Uri(solution.ComputedSolutionDirectory).LocalPath);
@@ -238,7 +201,7 @@
              }
              else
              {
-                 if (Directory.Exists(solution.ComputedSolutionDirectory))
+                 if (_model.DirectoryExists(solution.ComputedSolutionDirectory))
                      // If no shift, just open the computed directory.
                      Process.Start(solution.ComputedSolutionDirectory);
              }
@@ -354,11 +317,11 @@
              {
                  case CommandParameter.OPEN_SOLUTION_OPEN:
                      e.CanExecute = !_vm.EditModeEnabled
-                                 && File.Exists(solution.SolutionPath);
+                                 && _model.FileExists(solution.SolutionPath);
                      break;
                  case CommandParameter.OPEN_SOLUTION_OPEN_EXPLORER:
                      e.CanExecute = !_vm.EditModeEnabled
-                                 && Directory.Exists(solution.ComputedSolutionDirectory);
+                                 && _model.DirectoryExists(solution.ComputedSolutionDirectory);
                      break;
              }
          }

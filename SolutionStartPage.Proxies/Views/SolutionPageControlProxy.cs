@@ -4,6 +4,7 @@
     using System.Windows.Input;
     using Microsoft.Practices.Unity;
     using Shared.Funtionality;
+    using Shared.Models;
     using Shared.Views.SolutionPageView;
 
     public class SolutionPageControlProxy : ContentProxyBaseControl<ISolutionPageView>,
@@ -23,21 +24,31 @@
         /////////////////////////////////////////////////////////
         #region ISolutionPageView Member
 
-        public event EventHandler<CanExecuteRoutedEventArgs> AlterPageCanExecute
+        event EventHandler<CanExecuteRoutedEventArgs> ISolutionPageView.AlterPageCanExecute
         {
             add { RealSubject.AlterPageCanExecute += value; }
             remove { RealSubject.AlterPageCanExecute -= value; }
         }
 
-        public event EventHandler<ExecutedRoutedEventArgs> AlterPageExecuted
+        event EventHandler<ExecutedRoutedEventArgs> ISolutionPageView.AlterPageExecuted
         {
             add { RealSubject.AlterPageExecuted += value; }
             remove { RealSubject.AlterPageExecuted -= value; }
         }
 
-        public void ConnectDataSource(ISolutionPageViewModel vm)
+        void ISolutionPageView.ConnectDataSource(ISolutionPageViewModel vm)
         {
             RealSubject.ConnectDataSource(vm);
+        }
+
+        string ISolutionPageView.BrowseBulkAddRootFolder()
+        {
+            return RealSubject.BrowseBulkAddRootFolder();
+        }
+
+        Solution ISolutionPageView.BrowseSolution(SolutionGroup solutionGroup)
+        {
+            return RealSubject.BrowseSolution(solutionGroup);
         }
 
         #endregion
