@@ -316,10 +316,12 @@
              switch (param)
              {
                  case CommandParameter.OPEN_SOLUTION_OPEN:
+                     solution.SolutionAvailable =
                      e.CanExecute = !_vm.EditModeEnabled
                                  && _model.FileExists(solution.SolutionPath);
                      break;
                  case CommandParameter.OPEN_SOLUTION_OPEN_EXPLORER:
+                     solution.SolutionDirectoryAvailable =
                      e.CanExecute = !_vm.EditModeEnabled
                                  && _model.DirectoryExists(solution.ComputedSolutionDirectory);
                      break;

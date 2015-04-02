@@ -47,6 +47,7 @@
     <Compile Include="Commands\CommandParameter.cs" />
     <Compile Include="Commands\Commands.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Converter\BoolToOpacityConverter.cs" />
     <Compile Include="Converter\BoolToVisibilityConverter.cs" />
     <Compile Include="Converter\PathToSystemImageConverter.cs" />
     <Compile Include="Converter\SolutionWidthToTextWidthConverter.cs" />
@@ -103,6 +104,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Content\up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\warning.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

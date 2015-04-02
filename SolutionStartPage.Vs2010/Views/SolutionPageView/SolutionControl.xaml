@@ -31,6 +31,7 @@
                     <converter:PathToSystemImageConverter x:Key="PathToSystemImageConverter"/>
                     <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
                     <converter:SolutionWidthToTextWidthConverter x:Key="SolutionWidthToTextWidthConverter"/>
+                    <converter:BoolToOpacityConverter x:Key="BoolToOpacityConverter"/>
                     
                     <!-- Styles -->
                     <Style x:Key="SolutionImageStyle"
@@ -72,6 +73,16 @@
                             </Setter.Value>
                         </Setter>
                     </Style>
+                    <Style x:Key="ResourceNotAvailableWarningStyle"
+                           TargetType="{x:Type Image}">
+                        <Style.Setters>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="Width" Value="24"/>
+                            <Setter Property="Height" Value="24"/>
+                            <Setter Property="Source" Value="pack://application:,,,/SolutionStartPage.Shared;component/Content/warning.png"/>
+                        </Style.Setters>
+                    </Style>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -87,23 +98,28 @@
         </Grid.RowDefinitions>
         
         <!-- Display Name -->
-        <StackPanel Grid.Row="0"
-                    Orientation="Horizontal"
-                    Visibility="{Binding EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}">
-            <Image Source="{Binding SolutionPath, Converter={StaticResource PathToSystemImageConverter}}"
-                   Style="{StaticResource SolutionImageStyle}"/>
-            <vs:ImageButton Margin="5,0,0,0"
-                            Content="{Binding SolutionDisplayName}"
-                            Style="{StaticResource StartPage.ProjectCommand.LinkStyle}"
-                            Command="commands:Commands.OpenSolution"
-                            CommandParameter="{x:Static commands:CommandParameter.OPEN_SOLUTION_OPEN}"
-                            HorizontalAlignment="Left"
-                            HorizontalContentAlignment="Left"
-                            VerticalAlignment="Center"
-                            VerticalContentAlignment="Center"
-                            ToolTip="{Binding SolutionDisplayName}"
-                            Width="{Binding ElementName=SolutionUserControlRoot, Path=ActualWidth, Converter={StaticResource SolutionWidthToTextWidthConverter}}"/>
-        </StackPanel>
+        <Grid Grid.Row="0"
+              Visibility="{Binding EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}">
+            <StackPanel Orientation="Horizontal"
+                        Opacity="{Binding SolutionAvailable, Converter={StaticResource BoolToOpacityConverter}, ConverterParameter=0.3, Mode=OneWay}">
+                <Image Source="{Binding SolutionPath, Converter={StaticResource PathToSystemImageConverter}}"
+                       Style="{StaticResource SolutionImageStyle}"/>
+                <vs:ImageButton Margin="5,0,0,0"
+                                Content="{Binding SolutionDisplayName}"
+                                Style="{StaticResource StartPage.ProjectCommand.LinkStyle}"
+                                Command="commands:Commands.OpenSolution"
+                                CommandParameter="{x:Static commands:CommandParameter.OPEN_SOLUTION_OPEN}"
+                                HorizontalAlignment="Left"
+                                HorizontalContentAlignment="Left"
+                                VerticalAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                ToolTip="{Binding SolutionDisplayName}"
+                                Width="{Binding ElementName=SolutionUserControlRoot, Path=ActualWidth, Converter={StaticResource SolutionWidthToTextWidthConverter}}"/>
+            </StackPanel>
+            <Image Style="{StaticResource ResourceNotAvailableWarningStyle}"
+                   Visibility="{Binding SolutionAvailable, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}"
+                   ToolTip="The solution file doesn't exist."/>
+        </Grid>
 
         <TextBox Grid.Row="0"
                  Text="{Binding SolutionDisplayName, UpdateSourceTrigger=PropertyChanged}"
@@ -113,23 +129,28 @@
                  Visibility="{Binding EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}}"/>
 
         <!-- Solution Directory -->
-        <StackPanel Grid.Row="1"
-                    Orientation="Horizontal"
-                    Visibility="{Binding EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}">
-            <Image Source="pack://application:,,,/SolutionStartPage.Shared;component/Content/folder.png"
-                   Style="{StaticResource SolutionImageStyle}"/>
-            <vs:ImageButton Margin="5,0,0,0"
-                            Content="{Binding ComputedSolutionDirectory}"
-                            Style="{StaticResource StartPage.ProjectCommand.LinkStyle}"
-                            Command="commands:Commands.OpenSolution"
-                            CommandParameter="{x:Static commands:CommandParameter.OPEN_SOLUTION_OPEN_EXPLORER}"
-                            HorizontalAlignment="Left"
-                            HorizontalContentAlignment="Left"
-                            VerticalAlignment="Center"
-                            VerticalContentAlignment="Center"
-                            ToolTip="{Binding ComputedSolutionDirectory}"
-                            Width="{Binding ElementName=SolutionUserControlRoot, Path=ActualWidth, Converter={StaticResource SolutionWidthToTextWidthConverter}}"/>
-        </StackPanel>
+        <Grid Grid.Row="1"
+              Visibility="{Binding EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}">
+            <StackPanel Orientation="Horizontal"
+                        Opacity="{Binding SolutionDirectoryAvailable, Converter={StaticResource BoolToOpacityConverter}, ConverterParameter=0.3, Mode=OneWay}">
+                <Image Source="pack://application:,,,/SolutionStartPage.Shared;component/Content/folder.png"
+                       Style="{StaticResource SolutionImageStyle}"/>
+                <vs:ImageButton Margin="5,0,0,0"
+                                Content="{Binding ComputedSolutionDirectory}"
+                                Style="{StaticResource StartPage.ProjectCommand.LinkStyle}"
+                                Command="commands:Commands.OpenSolution"
+                                CommandParameter="{x:Static commands:CommandParameter.OPEN_SOLUTION_OPEN_EXPLORER}"
+                                HorizontalAlignment="Left"
+                                HorizontalContentAlignment="Left"
+                                VerticalAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                ToolTip="{Binding ComputedSolutionDirectory}"
+                                Width="{Binding ElementName=SolutionUserControlRoot, Path=ActualWidth, Converter={StaticResource SolutionWidthToTextWidthConverter}}"/>
+            </StackPanel>
+            <Image Style="{StaticResource ResourceNotAvailableWarningStyle}"
+                   Visibility="{Binding SolutionDirectoryAvailable, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}"
+                   ToolTip="The directory doesn't exist."/>
+        </Grid>
         
         <Grid Grid.Row="2"
               Visibility="{Binding EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}}">

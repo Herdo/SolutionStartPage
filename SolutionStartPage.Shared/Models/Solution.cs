@@ -32,6 +32,8 @@
         private string _solutionPath;
         private string _solutionDirectory;
         private string _computedSolutionDirectory;
+        private bool _solutionAvailable;
+        private bool _solutionDirectoryAvailable;
 
         #endregion
 
@@ -111,6 +113,30 @@
             set { _viewStateProvider.EditModeEnabled = value; }
         }
 
+        [XmlIgnore]
+        public bool SolutionAvailable
+        {
+            get { return _solutionAvailable; }
+            set
+            {
+                if (value.Equals(_solutionAvailable)) return;
+                _solutionAvailable = value;
+                OnPropertyChanged();
+            }
+        }
+
+        [XmlIgnore]
+        public bool SolutionDirectoryAvailable
+        {
+            get { return _solutionDirectoryAvailable; }
+            set
+            {
+                if (value.Equals(_solutionDirectoryAvailable)) return;
+                _solutionDirectoryAvailable = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         /////////////////////////////////////////////////////////
@@ -135,6 +161,9 @@
 
             SolutionDisplayName = null;
             SolutionDirectory = String.Empty;
+
+            SolutionAvailable = true;
+            SolutionDirectoryAvailable = true;
         }
 
         #endregion
