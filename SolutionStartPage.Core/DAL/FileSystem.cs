@@ -2,9 +2,11 @@
 {
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using Shared.DAL;
 
+    [ExcludeFromCodeCoverage]
     public class FileSystem : IFileSystem
     {
         IEnumerable<FileInfo> IFileSystem.GetFilesInDirectory(string directory, string pattern)

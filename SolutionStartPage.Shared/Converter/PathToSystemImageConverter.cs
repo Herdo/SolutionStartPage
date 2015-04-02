@@ -45,7 +45,7 @@
         private ImageSource GetFromCache(string file)
         {
             var extension = Path.GetExtension(file);
-            if (extension == null)
+            if (String.IsNullOrEmpty(extension))
                 return null;
             if (!_sourceCache.ContainsKey(extension))
                 _sourceCache[extension] = GetFileIcon(file);

@@ -1,7 +1,9 @@
 ﻿namespace SolutionStartPage.Shared.Commands
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Windows.Input;
 
+    [ExcludeFromCodeCoverage]
     public static class Commands
     {
         #region OpenSolution
