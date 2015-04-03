@@ -28,7 +28,6 @@
                 <ResourceDictionary Source="pack://application:,,,/Microsoft.VisualStudio.Shell.StartPage;component/Styles/startpageresources.xaml" />
                 <ResourceDictionary>
                     <!-- Converter -->
-                    <!--<converter:PathToSystemImageConverter x:Key="PathToSystemImageConverter"/>-->
                     <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
                     <converter:SolutionWidthToTextWidthConverter x:Key="SolutionWidthToTextWidthConverter"/>
                     <converter:BoolToOpacityConverter x:Key="BoolToOpacityConverter"/>
@@ -102,8 +101,8 @@
               Visibility="{Binding EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}">
             <StackPanel Orientation="Horizontal"
                         Opacity="{Binding SolutionAvailable, Converter={StaticResource BoolToOpacityConverter}, ConverterParameter=0.3, Mode=OneWay}">
-                <!--<Image Source="{Binding SolutionPath, Converter={StaticResource PathToSystemImageConverter}}"
-                       Style="{StaticResource SolutionImageStyle}"/>-->
+                <Image x:Name="SolutionFileImage"
+                       Style="{StaticResource SolutionImageStyle}"/>
                 <vs:ImageButton Margin="5,0,0,0"
                                 Content="{Binding SolutionDisplayName}"
                                 Style="{StaticResource StartPage.ProjectCommand.LinkStyle}"

@@ -35,6 +35,7 @@
         private string _computedSolutionDirectory;
         private bool _solutionAvailable;
         private bool _solutionDirectoryAvailable;
+        private IFileSystem _fileSystem;
 
         #endregion
 
@@ -58,7 +59,15 @@
         }
 
         [XmlIgnore]
-        public IFileSystem FileSystem { get; set; }
+        public IFileSystem FileSystem
+        {
+            get { return _fileSystem; }
+            set
+            {
+                _fileSystem = value;
+                ComputeSolutionDirectory();
+            }
+        }
 
         [XmlIgnore]
         public SolutionGroup ParentGroup { get; set; }
@@ -191,8 +200,9 @@
         private void ComputeSolutionDirectory()
         {
             // If nothing set, return empty
-            if (String.IsNullOrWhiteSpace(SolutionPath)
+            if ((String.IsNullOrWhiteSpace(SolutionPath)
              && String.IsNullOrWhiteSpace(SolutionDirectory))
+             || FileSystem == null)
             {
                 ComputedSolutionDirectory = String.Empty;
             }

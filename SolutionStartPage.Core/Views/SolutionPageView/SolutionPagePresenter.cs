@@ -40,11 +40,11 @@
              _ide = ide;
 
              _configuration = _model.LoadConfiguration();
-
-             View.ConnectDataSource(ViewModel);
-
+             
              PrepareLoadedData();
              ConnectEventHandler();
+
+             View.ConnectDataSource(ViewModel);
 
              FillDefault();
          }
@@ -71,6 +71,7 @@
                  {
                      // Apply view state provider
                      solution.ViewStateProvider = _viewStateProvider;
+                     solution.FileSystem = _fileSystem;
 
                      // Apply parent group - is not set by XmlSerializer when deserializing
                      solution.ParentGroup = solutionGroup;
