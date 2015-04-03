@@ -5,7 +5,6 @@
              mc:Ignorable="d" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:views="clr-namespace:SolutionStartPage.Proxies.Views;assembly=SolutionStartPage.Proxies"
              d:DesignHeight="600" d:DesignWidth="800">
     <Grid>
         <Grid.Resources>
@@ -16,7 +15,8 @@
             </ResourceDictionary>
         </Grid.Resources>
 
-        <Grid Style="{DynamicResource StartPage.OuterGridStyle}"
+        <Grid x:Name="LayoutGrid"
+              Style="{DynamicResource StartPage.OuterGridStyle}"
               Background="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowBackgroundKey}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition MinWidth="275" Width="3*" MaxWidth="330" />
@@ -24,10 +24,10 @@
             </Grid.ColumnDefinitions>
 
             <!-- Left Column -->
-            <views:VsoPageControlProxy/>
+            <!-- VsoPageControl -->
 
             <!-- Right Column -->
-            <views:SolutionPageControlProxy Grid.Column="1"/>
+            <!-- SolutionPageControl -->
         </Grid>
     </Grid>
 </UserControl>

@@ -3,7 +3,6 @@
     using Microsoft.Practices.Unity;
     using Models;
     using Shared;
-    using Shared.Funtionality;
     using Shared.Models;
     using Shared.Views.BasicPart;
     using Shared.Views.PageRootView;
@@ -14,9 +13,9 @@
 
     public class Vs2010Bootstrapper : IBootstrapper
     {
-        public void Configure()
+        public void Configure(IUnityContainer container)
         {
-            UnityFactory.Configure(c => c
+            container
                 // Register Models
                 .RegisterType<IIdeModel, IdeModel>(new ContainerControlledLifetimeManager())
                 .RegisterType<IIde, VsIde>(new ContainerControlledLifetimeManager())
@@ -33,7 +32,7 @@
                 .RegisterType<ISolutionControl, SolutionControl>()
                 .RegisterType<ISolutionPageModel, SolutionPageModel>()
                 .RegisterType<ISolutionPageViewModel, SolutionPageViewModel>()
-                );
+            ;
         }
     }
 }

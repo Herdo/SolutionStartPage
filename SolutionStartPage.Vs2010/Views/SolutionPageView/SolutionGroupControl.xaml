@@ -6,9 +6,9 @@
              xmlns:models="clr-namespace:SolutionStartPage.Shared.Models;assembly=SolutionStartPage.Shared"
              xmlns:commands="clr-namespace:SolutionStartPage.Shared.Commands;assembly=SolutionStartPage.Shared"
              xmlns:converter="clr-namespace:SolutionStartPage.Shared.Converter;assembly=SolutionStartPage.Shared"
-             xmlns:views="clr-namespace:SolutionStartPage.Proxies.Views;assembly=SolutionStartPage.Proxies"
              xmlns:platformUi="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.10.0"
              xmlns:vsfx="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.10.0"
+             xmlns:solutionPageView="clr-namespace:SolutionStartPage.Vs2010.Views.SolutionPageView"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=models:SolutionGroup, IsDesignTimeCreatable=True}"
              MinHeight="150"
@@ -173,7 +173,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <views:SolutionControlProxy DataContext="{Binding}"/>
+                    <solutionPageView:SolutionControl DataContext="{Binding}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

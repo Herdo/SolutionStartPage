@@ -9,33 +9,24 @@
         /////////////////////////////////////////////////////////
         #region Fields
 
-        private readonly DTE2 _dte;
-
-        #endregion
-
-        /////////////////////////////////////////////////////////
-        #region Constructors
-
-        public VsIde(object dte)
-        {
-            var dteAccessor = dte as DTE2;
-            if (dteAccessor == null)
-                throw new ArgumentException(@"Invalid dte object.", "dte");
-
-            _dte = dteAccessor;
-        }
+        private DTE2 _dte;
 
         #endregion
 
         /////////////////////////////////////////////////////////
         #region IIde Member
 
-        public string Edition
+        string IIde.Edition
         {
             get { return _dte.Edition; }
         }
 
-        public void OpenSolution(string path)
+        object IIde.IdeAccess
+        {
+            set { _dte = value as DTE2; }
+        }
+
+        void IIde.OpenSolution(string path)
         {
             if (path != null)
                 _dte.ExecuteCommand("File.OpenProject", String.Format("\"{0}\"", path));

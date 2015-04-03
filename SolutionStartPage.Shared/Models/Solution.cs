@@ -10,7 +10,6 @@
     using Annotations;
     using DAL;
     using Extensions;
-    using Funtionality;
     using Views;
 
     public class Solution : INotifyPropertyChanged
@@ -28,8 +27,7 @@
         /////////////////////////////////////////////////////////
         #region Fields
 
-        private readonly IViewStateProvider _viewStateProvider;
-        private readonly IFileSystem _fileSystem;
+        private IViewStateProvider _viewStateProvider;
 
         private string _solutionDisplayName;
         private string _solutionPath;
@@ -42,6 +40,25 @@
 
         /////////////////////////////////////////////////////////
         #region Properties
+
+        [XmlIgnore]
+        public IViewStateProvider ViewStateProvider
+        {
+            get { return _viewStateProvider; }
+            set
+            {
+                if (_viewStateProvider != null)
+                    _viewStateProvider.PropertyChanged -= viewStateProvider_PropertyChanged;
+
+                _viewStateProvider = value;
+
+                if (_viewStateProvider != null)
+                    _viewStateProvider.PropertyChanged += viewStateProvider_PropertyChanged;
+            }
+        }
+
+        [XmlIgnore]
+        public IFileSystem FileSystem { get; set; }
 
         [XmlIgnore]
         public SolutionGroup ParentGroup { get; set; }
@@ -112,8 +129,8 @@
         [XmlIgnore]
         public bool EditModeEnabled
         {
-            get { return _viewStateProvider.EditModeEnabled; }
-            set { _viewStateProvider.EditModeEnabled = value; }
+            get { return ViewStateProvider.EditModeEnabled; }
+            set { ViewStateProvider.EditModeEnabled = value; }
         }
 
         [XmlIgnore]
@@ -149,19 +166,12 @@
         /// <see cref="XmlSerializer"/> constructor.
         /// </summary>
         public Solution()
-        {
-            _viewStateProvider = UnityFactory.Resolve<IViewStateProvider>();
-            _viewStateProvider.PropertyChanged += viewStateProvider_PropertyChanged;
-
-            _fileSystem = UnityFactory.Resolve<IFileSystem>();
-        }
+        {}
 
         public Solution(IViewStateProvider viewStateProvider, IFileSystem fileSystem, SolutionGroup group, string solutionPath)
         {
-            _viewStateProvider = viewStateProvider;
-            _viewStateProvider.PropertyChanged += viewStateProvider_PropertyChanged;
-
-            _fileSystem = fileSystem;
+            ViewStateProvider = viewStateProvider;
+            FileSystem = fileSystem;
 
             ParentGroup = group;
             SolutionPath = solutionPath;
@@ -190,8 +200,8 @@
             {
                 // Make directory, even if file path given
                 if (!String.IsNullOrWhiteSpace(SolutionDirectory)
-                 && !_fileSystem.DirectoryExists(SolutionDirectory)
-                 && _fileSystem.FileExists(SolutionDirectory))
+                 && !FileSystem.DirectoryExists(SolutionDirectory)
+                 && FileSystem.FileExists(SolutionDirectory))
                     _solutionDirectory = Path.GetDirectoryName(SolutionDirectory);
 
                 // Default, use solution file directory
@@ -200,7 +210,7 @@
 
                 // Check if relative or absolute
                 ComputedSolutionDirectory = Path.IsPathRooted(SolutionDirectory)
-                                         && _fileSystem.DirectoryExists(SolutionDirectory)
+                                         && FileSystem.DirectoryExists(SolutionDirectory)
                     ? SolutionDirectory
                     : new Uri(Path.Combine(Path.GetDirectoryName(SolutionPath) ?? @"\\", SolutionDirectory)).AbsolutePath;
             }

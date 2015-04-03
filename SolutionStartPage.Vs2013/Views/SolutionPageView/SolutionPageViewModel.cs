@@ -1,6 +1,5 @@
 ﻿﻿namespace SolutionStartPage.Vs2013.Views.SolutionPageView
  {
-     using Shared.Models;
      using Shared.Views;
      using Shared.Views.SolutionPageView;
 
@@ -9,8 +8,8 @@
          /////////////////////////////////////////////////////////
          #region Constructors
          
-         public SolutionPageViewModel(IViewStateProvider viewStateProvider, SolutionPageConfiguration config)
-             : base(viewStateProvider, config)
+         public SolutionPageViewModel(IViewStateProvider viewStateProvider)
+             : base(viewStateProvider)
          {
          }
 

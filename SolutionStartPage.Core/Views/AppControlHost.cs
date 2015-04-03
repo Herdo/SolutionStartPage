@@ -10,7 +10,6 @@
     using Shared;
     using Shared.DAL;
     using Shared.Extensions;
-    using Shared.Funtionality;
     using Shared.Models;
     using Shared.Views;
     using Shared.Views.BasicPart;
@@ -35,35 +34,42 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-        #region Events
-
-        public event EventHandler<EventArgs> AppRegistrationCompleted;
-
-        #endregion
-
-        /////////////////////////////////////////////////////////
         #region Constructors
 
         public AppControlHost()
         {
-            // Always register self (and overwrite any existing registration), before doing anything else
-            UnityFactory.RegisterInstance<IAppControlHost>(this);
-
             Loaded += AppControlHost_Loaded;
-
-            PreConfigureApp();
-            ConfigureApp();
-            Content = UnityFactory.Resolve<IPageRootView>();
         }
 
         #endregion
 
         /////////////////////////////////////////////////////////
         #region Private Methods
-        
-        private void PreConfigureApp()
+
+        private void Initialize()
         {
-            UnityFactory.Initialize(c => c
+            using (IUnityContainer container = new UnityContainer())
+            {
+                // Always register self, before doing anything else
+                container.RegisterInstance<IAppControlHost>(this);
+                PreConfigureApp(container);
+                ConfigureApp(container);
+                ConfigureSelf(container);
+
+                Content = container.Resolve<IPageRootView>();
+            }
+        }
+
+        private void ConfigureSelf(IUnityContainer container)
+        {
+            var ideModel = container.Resolve<IIdeModel>();
+            var ide = ideModel.GetIde(DataContext, container.Resolve<Func<IIde>>());
+            container.RegisterInstance(ide, new ContainerControlledLifetimeManager());
+        }
+
+        private void PreConfigureApp(IUnityContainer container)
+        {
+            container
                 // Register Presenters
                 .RegisterType<ISolutionPagePresenter, SolutionPagePresenter>()
                 .RegisterType<IVsoPagePresenter, VsoPagePresenter>()
@@ -78,21 +84,24 @@
                 // Register Bootstrappers for each VS Version
                 .RegisterType<IBootstrapper, Vs2010Bootstrapper>(new Version(10, 0).ToString(_VERSION_STRING_DETAIL_SPECIFIC))
                 .RegisterType<IBootstrapper, Vs2013Bootstrapper>(new Version(12, 0).ToString(_VERSION_STRING_DETAIL_SPECIFIC))
-                );
+            ;
         }
 
-        private void ConfigureApp()
+        private void ConfigureApp(IUnityContainer container)
         {
-            var version = UnityFactory.Resolve<VisualStudioVersion>();
-            var bootstrapper =
-                UnityFactory.ResolveIfRegistered<IBootstrapper>(
-                    version.FullVersion.ToString(_VERSION_STRING_DETAIL_SPECIFIC));
-
-            if (bootstrapper == null)
+            var version = container.Resolve<VisualStudioVersion>();
+            IBootstrapper bootstrapper;
+            try
+            {
+                bootstrapper = container.Resolve<IBootstrapper>(version.FullVersion.ToString(_VERSION_STRING_DETAIL_SPECIFIC));
+            }
+            catch (ResolutionFailedException)
+            {
                 throw new NotSupportedException(
                     String.Format("Visual Studio Version {0} is not supported by this extension!", version.FullVersion));
-
-            bootstrapper.Configure();
+            }
+            
+            bootstrapper.Configure(container);
         }
 
         #endregion
@@ -102,13 +111,7 @@
 
         void AppControlHost_Loaded(object sender, RoutedEventArgs e)
         {
-            if (UnityFactory.IsRegistered<IIde>(Constants.IIDE_REGISTRATION_NAME)) return;
-
-            var ideModel = UnityFactory.Resolve<IIdeModel>();
-            var ide = ideModel.GetIde(DataContext);
-            UnityFactory.RegisterInstance(ide, Constants.IIDE_REGISTRATION_NAME, new ContainerControlledLifetimeManager());
-
-            AppRegistrationCompleted.SafeInvoke(this, new EventArgs());
+            Initialize();
         }
         
         #endregion

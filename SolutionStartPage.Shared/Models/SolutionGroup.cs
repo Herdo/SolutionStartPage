@@ -8,7 +8,6 @@
     using System.Windows.Input;
     using System.Xml.Serialization;
     using Annotations;
-    using Funtionality;
     using Extensions;
     using Views;
 
@@ -25,13 +24,30 @@
         /////////////////////////////////////////////////////////
         #region Fields
 
-        private readonly IViewStateProvider _viewStateProvider;
+        private IViewStateProvider _viewStateProvider;
+
         private string _groupName;
 
         #endregion
 
         /////////////////////////////////////////////////////////
         #region Properties
+
+        [XmlIgnore]
+        public IViewStateProvider ViewStateProvider
+        {
+            get { return _viewStateProvider; }
+            set
+            {
+                if (_viewStateProvider != null)
+                    _viewStateProvider.PropertyChanged -= viewStateProvider_PropertyChanged;
+
+                _viewStateProvider = value;
+
+                if (_viewStateProvider != null)
+                    _viewStateProvider.PropertyChanged += viewStateProvider_PropertyChanged;
+            }
+        }
 
         [XmlElement]
         public string GroupName
@@ -69,15 +85,11 @@
         /// <see cref="XmlSerializer"/> constructor.
         /// </summary>
         public SolutionGroup()
-        {
-            _viewStateProvider = UnityFactory.Resolve<IViewStateProvider>();
-            _viewStateProvider.PropertyChanged += viewStateProvider_PropertyChanged;
-        }
+        {}
 
         public SolutionGroup(IViewStateProvider viewStateProvider)
         {
-            _viewStateProvider = viewStateProvider;
-            _viewStateProvider.PropertyChanged += viewStateProvider_PropertyChanged;
+            ViewStateProvider = viewStateProvider;
 
             GroupName = String.Empty;
             Solutions = new ObservableCollection<Solution>();

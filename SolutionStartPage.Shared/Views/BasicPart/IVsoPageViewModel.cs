@@ -1,8 +1,6 @@
 ﻿namespace SolutionStartPage.Shared.Views.BasicPart
 {
-    using System.ComponentModel;
-
-    public interface IVsoPageViewModel : INotifyPropertyChanged
+    public interface IVsoPageViewModel : IViewModel
     {
         string FullEditionName { get; set; }
     }

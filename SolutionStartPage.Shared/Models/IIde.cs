@@ -4,6 +4,8 @@
     {
         string Edition { get; }
 
+        object IdeAccess { set; }
+
         void OpenSolution(string path);
     }
 }

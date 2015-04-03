@@ -2,63 +2,46 @@
  {
      using System;
      using System.Collections.Generic;
+     using System.Collections.ObjectModel;
      using System.ComponentModel;
      using System.Diagnostics;
      using System.IO;
      using System.Linq;
      using System.Windows.Input;
-     using Microsoft.Practices.Unity;
-     using Shared;
      using Shared.Commands;
-     using Shared.Funtionality;
+     using Shared.DAL;
      using Shared.Models;
+     using Shared.Views;
      using Shared.Views.SolutionPageView;
 
-     public class SolutionPagePresenter : ISolutionPagePresenter
+     public class SolutionPagePresenter : BasePresenter<ISolutionPageView, ISolutionPageViewModel>,
+                                          ISolutionPagePresenter
      {
          /////////////////////////////////////////////////////////
          #region Fields
 
-         private readonly ISolutionPageView _view;
-         private readonly ISolutionPageViewModel _vm;
          private readonly ISolutionPageModel _model;
          private readonly SolutionPageConfiguration _configuration;
-
-         private IIde _ide;
-
-         #endregion
-
-         /////////////////////////////////////////////////////////
-         #region Properties
-
-         private IIde Ide
-         {
-             get { return _ide ?? (_ide = UnityFactory.Resolve<IIde>(Constants.IIDE_REGISTRATION_NAME)); }
-         }
+         private readonly IIde _ide;
+         private readonly IViewStateProvider _viewStateProvider;
+         private readonly IFileSystem _fileSystem;
 
          #endregion
 
          /////////////////////////////////////////////////////////
          #region Constructors
 
-         public SolutionPagePresenter(ISolutionPageView view, ISolutionPageModel model)
+         public SolutionPagePresenter(ISolutionPageView view, ISolutionPageViewModel viewModel, ISolutionPageModel model, IViewStateProvider viewStateProvider, IFileSystem fileSystem, IIde ide)
+             : base(view, viewModel)
          {
-             _view = view;
              _model = model;
+             _viewStateProvider = viewStateProvider;
+             _fileSystem = fileSystem;
+             _ide = ide;
 
-             if (UnityFactory.IsRegistered<SolutionPageConfiguration>())
-             {
-                 _configuration = UnityFactory.Resolve<SolutionPageConfiguration>();
-             }
-             else
-             {
-                 _configuration = _model.LoadConfiguration();
-                 UnityFactory.RegisterInstance(_configuration, new ContainerControlledLifetimeManager());
-             }
+             _configuration = _model.LoadConfiguration();
 
-             _vm = UnityFactory.Resolve<ISolutionPageViewModel>();
-
-             _view.ConnectDataSource(_vm);
+             View.ConnectDataSource(ViewModel);
 
              PrepareLoadedData();
              ConnectEventHandler();
@@ -73,13 +56,22 @@
 
          private void PrepareLoadedData()
          {
-             foreach (var solutionGroup in _vm.SolutionGroups)
+             ViewModel.Columns = _configuration.Columns;
+             ViewModel.SolutionGroups = new ObservableCollection<SolutionGroup>(_configuration.SolutionGroups);
+
+             foreach (var solutionGroup in ViewModel.SolutionGroups)
              {
+                 // Apply view state provider
+                 solutionGroup.ViewStateProvider = _viewStateProvider;
+
                  // Connect loaded solution groups
                  solutionGroup.AlterSolutionGroupCanExecute += solutionGroup_AlterSolutionGroupCanExecute;
                  solutionGroup.AlterSolutionGroupExecuted += solutionGroup_AlterSolutionGroupExecuted;
                  foreach (var solution in solutionGroup.Solutions)
                  {
+                     // Apply view state provider
+                     solution.ViewStateProvider = _viewStateProvider;
+
                      // Apply parent group - is not set by XmlSerializer when deserializing
                      solution.ParentGroup = solutionGroup;
 
@@ -94,31 +86,30 @@
 
          private void ConnectEventHandler()
          {
-             _vm.PropertyChanged += vm_PropertyChanged;
+             ViewModel.PropertyChanged += vm_PropertyChanged;
 
-             _view.AlterPageCanExecute += view_AlterPageCanExecute;
-             _view.AlterPageExecuted += view_AlterPageExecuted;
+             View.AlterPageCanExecute += view_AlterPageCanExecute;
+             View.AlterPageExecuted += view_AlterPageExecuted;
          }
 
          private void FillDefault()
          {
-             if (_vm.SolutionGroups.Count == 0)
+             if (ViewModel.SolutionGroups.Count == 0)
                  AddGroup();
          }
 
          private SolutionGroup AddGroup(string groupName = "Group Name")
          {
-             var newGroup = UnityFactory.Resolve<SolutionGroup>();
-             newGroup.GroupName = groupName;
+             var newGroup = new SolutionGroup(_viewStateProvider) {GroupName = groupName};
              newGroup.AlterSolutionGroupCanExecute += solutionGroup_AlterSolutionGroupCanExecute;
              newGroup.AlterSolutionGroupExecuted += solutionGroup_AlterSolutionGroupExecuted;
-             _vm.SolutionGroups.Add(newGroup);
+             ViewModel.SolutionGroups.Add(newGroup);
              return newGroup;
          }
 
          private void AddSolutionsBulk(bool singleGroup)
          {
-             var selectedPath = _view.BrowseBulkAddRootFolder();
+             var selectedPath = View.BrowseBulkAddRootFolder();
              if (!String.IsNullOrEmpty(selectedPath))
                  AddSolutionsByBulk(selectedPath, singleGroup);
          }
@@ -143,11 +134,7 @@
              {
                  var g = AddGroup(group.Key);
                  foreach (var sln in group.Value
-                     .Select(fileInfo => UnityFactory.Resolve<Solution>(new ParameterOverrides
-                     {
-                         {"group", g},
-                         {"solutionPath", fileInfo.FullName}
-                     })))
+                     .Select(fileInfo => new Solution(_viewStateProvider, _fileSystem, g, fileInfo.FullName)))
                      AddSolution(g, sln);
              }
          }
@@ -156,19 +143,23 @@
          {
              group.AlterSolutionGroupCanExecute -= solutionGroup_AlterSolutionGroupCanExecute;
              group.AlterSolutionGroupExecuted -= solutionGroup_AlterSolutionGroupExecuted;
-             _vm.SolutionGroups.Remove(group);
+             ViewModel.SolutionGroups.Remove(group);
          }
 
          private void DeleteGroups()
          {
-             while (_vm.SolutionGroups.Count > 0)
-                 RemoveGroup(_vm.SolutionGroups[0]);
+             while (ViewModel.SolutionGroups.Count > 0)
+                 RemoveGroup(ViewModel.SolutionGroups[0]);
          }
 
          private void AddSolution(SolutionGroup group, Solution solution = null)
          {
              if (solution == null)
-                 solution = _view.BrowseSolution(group);
+             {
+                 var path = View.BrowseSolution(group);
+                 if (!String.IsNullOrEmpty(path))
+                     solution = new Solution(_viewStateProvider, _fileSystem, group, path);
+             }
              if (solution == null)
                  return;
 
@@ -215,9 +206,9 @@
          private async void vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
          {
              if (e.PropertyName == "EditModeEnabled"
-              && _vm.EditModeEnabled == false)
+              && ViewModel.EditModeEnabled == false)
              {
-                 await _model.SaveConfiguration(_configuration.ApplyViewModel(_vm));
+                 await _model.SaveConfiguration(_configuration.ApplyViewModel(ViewModel));
              }
          }
 
@@ -229,10 +220,10 @@
              switch (param)
              {
                  case CommandParameter.ALTER_SOLUTION_GROUP_MOVE_GROUP_BACK:
-                     e.CanExecute = _vm.SolutionGroups.IndexOf(group) != 0;
+                     e.CanExecute = ViewModel.SolutionGroups.IndexOf(group) != 0;
                      break;
                  case CommandParameter.ALTER_SOLUTION_GROUP_MOVE_GROUP_FORWARD:
-                     e.CanExecute = _vm.SolutionGroups.IndexOf(group) != _vm.SolutionGroups.Count - 1;
+                     e.CanExecute = ViewModel.SolutionGroups.IndexOf(group) != ViewModel.SolutionGroups.Count - 1;
                      break;
                  case CommandParameter.ALTER_SOLUTION_GROUP_REMOVE_GROUP:
                      e.CanExecute = true;
@@ -253,14 +244,14 @@
              switch (param)
              {
                  case CommandParameter.ALTER_SOLUTION_GROUP_MOVE_GROUP_BACK:
-                     oldIdx = _vm.SolutionGroups.IndexOf(group);
+                     oldIdx = ViewModel.SolutionGroups.IndexOf(group);
                      newIdx = oldIdx - 1;
-                     _vm.SolutionGroups.Move(oldIdx, newIdx);
+                     ViewModel.SolutionGroups.Move(oldIdx, newIdx);
                      break;
                  case CommandParameter.ALTER_SOLUTION_GROUP_MOVE_GROUP_FORWARD:
-                     oldIdx = _vm.SolutionGroups.IndexOf(group);
+                     oldIdx = ViewModel.SolutionGroups.IndexOf(group);
                      newIdx = oldIdx + 1;
-                     _vm.SolutionGroups.Move(oldIdx, newIdx);
+                     ViewModel.SolutionGroups.Move(oldIdx, newIdx);
                      break;
                  case CommandParameter.ALTER_SOLUTION_GROUP_REMOVE_GROUP:
                      RemoveGroup(group);
@@ -284,7 +275,7 @@
                      e.CanExecute = true;
                      break;
                  case CommandParameter.ALTER_PAGE_DELETE_ALL_GROUPS:
-                     e.CanExecute = _vm.SolutionGroups.Count > 0;
+                     e.CanExecute = ViewModel.SolutionGroups.Count > 0;
                      break;
              }
          }
@@ -317,12 +308,12 @@
              {
                  case CommandParameter.OPEN_SOLUTION_OPEN:
                      solution.SolutionAvailable =
-                     e.CanExecute = !_vm.EditModeEnabled
+                     e.CanExecute = !ViewModel.EditModeEnabled
                                  && _model.FileExists(solution.SolutionPath);
                      break;
                  case CommandParameter.OPEN_SOLUTION_OPEN_EXPLORER:
                      solution.SolutionDirectoryAvailable =
-                     e.CanExecute = !_vm.EditModeEnabled
+                     e.CanExecute = !ViewModel.EditModeEnabled
                                  && _model.DirectoryExists(solution.ComputedSolutionDirectory);
                      break;
              }
@@ -335,8 +326,8 @@
              switch (param)
              {
                  case CommandParameter.OPEN_SOLUTION_OPEN:
-                     if (Ide != null)
-                         Ide.OpenSolution(solution.SolutionPath);
+                     if (_ide != null)
+                         _ide.OpenSolution(solution.SolutionPath);
                      break;
                  case CommandParameter.OPEN_SOLUTION_OPEN_EXPLORER:
                      OpenSolutionDirectoryExplorer(solution);

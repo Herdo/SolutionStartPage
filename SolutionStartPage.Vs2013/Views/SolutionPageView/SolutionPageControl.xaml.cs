@@ -3,10 +3,9 @@
      using System;
      using System.Windows.Forms;
      using System.Windows.Input;
-     using Microsoft.Practices.Unity;
      using Shared.Extensions;
-     using Shared.Funtionality;
      using Shared.Models;
+     using Shared.Views;
      using Shared.Views.SolutionPageView;
      using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
@@ -46,9 +45,9 @@
          public event EventHandler<CanExecuteRoutedEventArgs> AlterPageCanExecute;
          public event EventHandler<ExecutedRoutedEventArgs> AlterPageExecuted;
 
-         void ISolutionPageView.ConnectDataSource(ISolutionPageViewModel vm)
+         void IView<ISolutionPageViewModel>.ConnectDataSource(ISolutionPageViewModel viewModel)
          {
-             DataContext = vm;
+             DataContext = viewModel;
          }
 
          string ISolutionPageView.BrowseBulkAddRootFolder()
@@ -67,7 +66,7 @@
              return selectedPath;
          }
 
-         Solution ISolutionPageView.BrowseSolution(SolutionGroup solutionGroup)
+         string ISolutionPageView.BrowseSolution(SolutionGroup solutionGroup)
          {
              var ofd = new OpenFileDialog
              {
@@ -82,16 +81,9 @@
                  Title = @"Browse for solution or other file..."
              };
 
-             if (ofd.ShowDialog() == true)
-             {
-                 return UnityFactory.Resolve<Solution>(new ParameterOverrides
-                 {
-                     {"group", solutionGroup},
-                     {"solutionPath", ofd.FileName}
-                 });
-             }
-
-             return null;
+             return ofd.ShowDialog() == true
+                 ? ofd.FileName
+                 : null;
          }
 
          #endregion

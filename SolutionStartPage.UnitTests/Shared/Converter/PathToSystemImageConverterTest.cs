@@ -6,7 +6,6 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using SolutionStartPage.Shared.Converter;
     using SolutionStartPage.Shared.DAL;
-    using SolutionStartPage.Shared.Funtionality;
     using Telerik.JustMock;
 
     [TestClass]
@@ -19,9 +18,8 @@
         {
             // Arrange
             var fileSystem = Mock.Create<IFileSystem>();
-            UnityFactory.RegisterInstance(fileSystem);
 
-            var converter = new PathToSystemImageConverter();
+            var converter = new PathToSystemImageConverter(fileSystem);
 
             // Act
             converter.ConvertBack(null, null, null, null);
@@ -32,9 +30,8 @@
         {
             // Arrange
             var fileSystem = Mock.Create<IFileSystem>();
-            UnityFactory.RegisterInstance(fileSystem);
 
-            var converter = new PathToSystemImageConverter();
+            var converter = new PathToSystemImageConverter(fileSystem);
 
             // Act
             var result = converter.Convert(0.0, null, null, null);
@@ -48,9 +45,8 @@
         {
             // Arrange
             var fileSystem = Mock.Create<IFileSystem>();
-            UnityFactory.RegisterInstance(fileSystem);
 
-            var converter = new PathToSystemImageConverter();
+            var converter = new PathToSystemImageConverter(fileSystem);
 
             // Act
             var result = converter.Convert(@"D:\fileWithoutExtension", null, null, null);
@@ -63,7 +59,9 @@
         public void Convert_Null_value()
         {
             // Arrange
-            var converter = new PathToSystemImageConverter();
+            var fileSystem = Mock.Create<IFileSystem>();
+
+            var converter = new PathToSystemImageConverter(fileSystem);
 
             // Act
             var result = converter.Convert(null, null, null, null);
@@ -79,9 +77,7 @@
             var fileSystem = Mock.Create<IFileSystem>();
             Mock.Arrange(() => fileSystem.WriteAllTextToFile(Arg.AnyString, Arg.AnyString)).DoInstead<string, string>(File.WriteAllText);
 
-            UnityFactory.RegisterInstance(fileSystem);
-
-            var converter = new PathToSystemImageConverter();
+            var converter = new PathToSystemImageConverter(fileSystem);
 
             // Act
             var result = converter.Convert(@"D:\fileWithoutExtension.sln", null, null, null);
@@ -100,9 +96,7 @@
             Mock.Arrange(() => fileSystem.DirectoryExists(@"\fileWithoutExtension.sln")).Returns(true);
             Mock.Arrange(() => fileSystem.FileExists(@"\fileWithoutExtension.sln")).Returns(true);
 
-            UnityFactory.RegisterInstance(fileSystem);
-
-            var converter = new PathToSystemImageConverter();
+            var converter = new PathToSystemImageConverter(fileSystem);
 
             // Act
             converter.Convert(@"\fileWithoutExtension.sln", null, null, null);

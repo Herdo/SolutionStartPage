@@ -46,14 +46,12 @@
   <ItemGroup>
     <Compile Include="Commands\CommandParameter.cs" />
     <Compile Include="Commands\Commands.cs" />
-    <Compile Include="Constants.cs" />
     <Compile Include="Converter\BoolToOpacityConverter.cs" />
     <Compile Include="Converter\BoolToVisibilityConverter.cs" />
     <Compile Include="Converter\PathToSystemImageConverter.cs" />
     <Compile Include="Converter\SolutionWidthToTextWidthConverter.cs" />
     <Compile Include="DAL\IFileSystem.cs" />
     <Compile Include="Extensions\EventHandlerExtension.cs" />
-    <Compile Include="Funtionality\UnityFactory.cs" />
     <Compile Include="IBootstrapper.cs" />
     <Compile Include="Models\IIde.cs" />
     <Compile Include="Models\IIdeModel.cs" />
@@ -62,12 +60,16 @@
     <Compile Include="Models\SolutionPageConfiguration.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\BasePresenter.cs" />
     <Compile Include="Views\BasicPart\IVsoPagePresenter.cs" />
     <Compile Include="Views\BasicPart\IVsoPageView.cs" />
     <Compile Include="Views\BasicPart\IVsoPageViewModel.cs" />
     <Compile Include="Views\BasicPart\VsoPageViewModelBase.cs" />
     <Compile Include="Views\IAppControlHost.cs" />
     <Compile Include="Views\IBasicControlSubject.cs" />
+    <Compile Include="Views\IPresenter.cs" />
+    <Compile Include="Views\IView.cs" />
+    <Compile Include="Views\IViewModel.cs" />
     <Compile Include="Views\IViewStateProvider.cs" />
     <Compile Include="Views\PageRootView\IPageRootView.cs" />
     <Compile Include="Views\SolutionPageView\ISolutionControl.cs" />

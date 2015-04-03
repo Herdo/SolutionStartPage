@@ -1,6 +1,6 @@
 ﻿namespace SolutionStartPage.Shared.Views.BasicPart
 {
-    public interface IVsoPagePresenter
+    public interface IVsoPagePresenter : IPresenter<IVsoPageView, IVsoPageViewModel>
     {
          
     }

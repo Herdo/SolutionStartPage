@@ -4,12 +4,12 @@
     using System.Windows.Input;
     using Models;
 
-    public interface ISolutionPageView : IBasicControlSubject
+    public interface ISolutionPageView : IView<ISolutionPageViewModel>,
+                                         IBasicControlSubject
     {
         event EventHandler<CanExecuteRoutedEventArgs> AlterPageCanExecute;
         event EventHandler<ExecutedRoutedEventArgs> AlterPageExecuted;
-        void ConnectDataSource(ISolutionPageViewModel vm);
         string BrowseBulkAddRootFolder();
-        Solution BrowseSolution(SolutionGroup solutionGroup);
+        string BrowseSolution(SolutionGroup solutionGroup);
     }
 }

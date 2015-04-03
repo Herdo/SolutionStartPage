@@ -1,10 +1,9 @@
 ﻿namespace SolutionStartPage.Shared.Views.SolutionPageView
 {
     using System.Collections.ObjectModel;
-    using System.ComponentModel;
     using Models;
 
-    public interface ISolutionPageViewModel : INotifyPropertyChanged
+    public interface ISolutionPageViewModel : IViewModel
     {
         bool EditModeEnabled { get; set; }
 

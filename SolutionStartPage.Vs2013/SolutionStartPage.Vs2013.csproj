@@ -149,10 +149,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SolutionStartPage.Proxies\SolutionStartPage.Proxies.csproj">
-      <Project>{fcdf6c72-fde2-45af-b53b-e95427f2540e}</Project>
-      <Name>SolutionStartPage.Proxies</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SolutionStartPage.Shared\SolutionStartPage.Shared.csproj">
       <Project>{221b199f-4d2f-4f3d-a04e-6c3a389f73c3}</Project>
       <Name>SolutionStartPage.Shared</Name>

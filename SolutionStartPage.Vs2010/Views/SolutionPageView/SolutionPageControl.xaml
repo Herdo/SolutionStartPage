@@ -6,7 +6,6 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:commands="clr-namespace:SolutionStartPage.Shared.Commands;assembly=SolutionStartPage.Shared"
              xmlns:converter="clr-namespace:SolutionStartPage.Shared.Converter;assembly=SolutionStartPage.Shared"
-             xmlns:views="clr-namespace:SolutionStartPage.Proxies.Views;assembly=SolutionStartPage.Proxies"
              xmlns:solutionPageView="clr-namespace:SolutionStartPage.Vs2010.Views.SolutionPageView"
              xmlns:vsfx="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.10.0"
              mc:Ignorable="d"
@@ -67,7 +66,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <views:SolutionGroupControlProxy DataContext="{Binding}"/>
+                        <solutionPageView:SolutionGroupControl DataContext="{Binding}"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

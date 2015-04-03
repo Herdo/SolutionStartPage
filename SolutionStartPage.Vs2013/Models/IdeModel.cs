@@ -1,11 +1,10 @@
 ﻿namespace SolutionStartPage.Vs2013.Models
 {
+    using System;
     using System.ComponentModel;
     using System.Diagnostics;
     using EnvDTE80;
     using Microsoft.Internal.VisualStudio.PlatformUI;
-    using Microsoft.Practices.Unity;
-    using Shared.Funtionality;
     using Shared.Models;
 
     public class IdeModel : IIdeModel
@@ -37,12 +36,15 @@
         /////////////////////////////////////////////////////////
         #region IIdeModel Member
 
-        public IIde GetIde(object dataContext)
+        IIde IIdeModel.GetIde(object dataContext, Func<IIde> ideResolver)
         {
             var dte = GetDte(dataContext);
-            return dte == null
-                ? null
-                : UnityFactory.Resolve<IIde>(new ParameterOverride("dte", dte));
+            if (dte == null)
+                return null;
+
+            var ide = ideResolver();
+            ide.IdeAccess = dte;
+            return ide;
         }
 
         #endregion

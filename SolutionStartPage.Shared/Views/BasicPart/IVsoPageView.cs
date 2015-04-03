@@ -1,7 +1,7 @@
 ﻿namespace SolutionStartPage.Shared.Views.BasicPart
 {
-    public interface IVsoPageView : IBasicControlSubject
+    public interface IVsoPageView : IView<IVsoPageViewModel>,
+                                    IBasicControlSubject
     {
-        void ConnectDataSource(IVsoPageViewModel vm);
     }
 }

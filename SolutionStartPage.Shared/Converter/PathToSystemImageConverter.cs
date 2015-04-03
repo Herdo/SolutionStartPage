@@ -12,7 +12,6 @@
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
     using DAL;
-    using Funtionality;
 
     public class PathToSystemImageConverter : IValueConverter
     {
@@ -26,10 +25,6 @@
 
         /////////////////////////////////////////////////////////
         #region Constructors
-
-        public PathToSystemImageConverter()
-            : this(UnityFactory.Resolve<IFileSystem>())
-        {}
 
         public PathToSystemImageConverter(IFileSystem fileSystem)
         {

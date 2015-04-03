@@ -44,13 +44,10 @@
         /////////////////////////////////////////////////////////
         #region Constructors
 
-        protected SolutionPageViewModelBase(IViewStateProvider viewStateProvider, SolutionPageConfiguration config)
+        protected SolutionPageViewModelBase(IViewStateProvider viewStateProvider)
         {
             _viewStateProvider = viewStateProvider;
             _viewStateProvider.PropertyChanged += viewStateProvider_PropertyChanged;
-
-            Columns = config.Columns;
-            SolutionGroups = new ObservableCollection<SolutionGroup>(config.SolutionGroups);
         }
 
         #endregion
