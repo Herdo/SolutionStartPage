@@ -2,7 +2,6 @@
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
-    using System.Windows;
     using Annotations;
     using Shared.Extensions;
     using Shared.Views;
@@ -13,7 +12,6 @@
         #region Fields
 
         private bool _editModeEnabled;
-        private FontWeight _groupHeaderFontWeight;
 
         #endregion
 
@@ -37,17 +35,6 @@
             {
                 if (value == _editModeEnabled) return;
                 _editModeEnabled = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public FontWeight GroupHeaderFontWeight
-        {
-            get { return _groupHeaderFontWeight; }
-            set
-            {
-                if (value == _groupHeaderFontWeight) return;
-                _groupHeaderFontWeight = value;
                 OnPropertyChanged();
             }
         }
