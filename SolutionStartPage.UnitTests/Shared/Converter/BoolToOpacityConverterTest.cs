@@ -30,7 +30,7 @@
             var result = converter.Convert(true, null, null, null);
 
             // Assert
-            Assert.AreEqual(result, 1.0);
+            Assert.AreEqual(1.0, result);
         }
 
         [TestMethod]
@@ -43,7 +43,7 @@
             var result = converter.Convert(false, null, "0.5", null);
 
             // Assert
-            Assert.AreEqual(result, 0.5);
+            Assert.AreEqual(0.5, result);
         }
         
         [TestMethod]

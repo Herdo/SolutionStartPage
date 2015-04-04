@@ -31,7 +31,7 @@
             var result = converter.Convert(true, null, null, null);
 
             // Assert
-            Assert.AreEqual(result, Visibility.Visible);
+            Assert.AreEqual(Visibility.Visible, result);
         }
 
         [TestMethod]
@@ -44,7 +44,7 @@
             var result = converter.Convert(true, null, "invert", null);
 
             // Assert
-            Assert.AreEqual(result, Visibility.Collapsed);
+            Assert.AreEqual(Visibility.Collapsed, result);
         }
 
         [TestMethod]
@@ -57,7 +57,7 @@
             var result = converter.Convert(false, null, null, null);
 
             // Assert
-            Assert.AreEqual(result, Visibility.Collapsed);
+            Assert.AreEqual(Visibility.Collapsed, result);
         }
 
         [TestMethod]
@@ -70,7 +70,7 @@
             var result = converter.Convert(false, null, "invert", null);
 
             // Assert
-            Assert.AreEqual(result, Visibility.Visible);
+            Assert.AreEqual(Visibility.Visible, result);
         }
 
         [TestMethod]
