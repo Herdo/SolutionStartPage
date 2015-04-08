@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel;
+    using System.Diagnostics;
 
     public static class EventHandlerExtension
     {
@@ -11,6 +12,7 @@
         /// <param name="self">Represents the method that will handle an event when the event provides data.</param>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An object that contains the event data.</param>
+        [DebuggerStepThrough]
         public static void SafeInvoke(this EventHandler self, object sender, EventArgs e)
         {
             if (self != null)
@@ -24,6 +26,7 @@
         /// <param name="self">Represents the method that will handle an event when the event provides data.</param>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An object that contains the event data.</param>
+        [DebuggerStepThrough]
         public static void SafeInvoke<TEventArgs>(this EventHandler<TEventArgs> self, object sender, TEventArgs e) where TEventArgs : EventArgs
         {
             if (self != null)
@@ -36,6 +39,7 @@
         /// <param name="self">Represents the method that will handle an PropertyChangedEvent when the PropertyChangedEvent provides data.</param>
         /// <param name="sender">The source of the PropertyChangedEvent.</param>
         /// <param name="propertyName">The name of the property that changed.</param>
+        [DebuggerStepThrough]
         public static void SafeInvoke(this PropertyChangedEventHandler self, object sender,
             string propertyName)
         {
