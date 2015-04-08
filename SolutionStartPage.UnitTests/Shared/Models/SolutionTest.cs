@@ -307,6 +307,24 @@
         }
 
         [TestMethod]
+        public void EditModeEnabled_Set()
+        {
+            // Arrange
+            var expected = false;
+            var sln = new Solution();
+            var vsp = Mock.Create<IViewStateProvider>();
+            sln.ViewStateProvider = vsp;
+            Mock.ArrangeSet(() => vsp.EditModeEnabled = Arg.AnyBool)
+                .DoInstead(() => expected = true);
+
+            // Act
+            sln.EditModeEnabled = true;
+
+            // Assert
+            Assert.IsTrue(expected);
+        }
+
+        [TestMethod]
         public void SolutionAvailable_GetSet()
         {
             // Arrange
