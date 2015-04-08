@@ -199,12 +199,14 @@
 
         private void ComputeSolutionDirectory()
         {
+            string tempDir;
+
             // If nothing set, return empty
             if ((String.IsNullOrWhiteSpace(SolutionPath)
              && String.IsNullOrWhiteSpace(SolutionDirectory))
              || FileSystem == null)
             {
-                ComputedSolutionDirectory = String.Empty;
+                tempDir = String.Empty;
             }
             else
             {
@@ -216,14 +218,16 @@
 
                 // Default, use solution file directory
                 if (String.IsNullOrWhiteSpace(SolutionDirectory))
-                    ComputedSolutionDirectory = Path.GetDirectoryName(SolutionPath);
+                    SolutionDirectory = Path.GetDirectoryName(SolutionPath);
 
                 // Check if relative or absolute
-                ComputedSolutionDirectory = Path.IsPathRooted(SolutionDirectory)
+                tempDir = Path.IsPathRooted(SolutionDirectory)
                                          && FileSystem.DirectoryExists(SolutionDirectory)
                     ? SolutionDirectory
-                    : new Uri(Path.Combine(Path.GetDirectoryName(SolutionPath) ?? @"\\", SolutionDirectory)).AbsolutePath;
+                    : new Uri(Path.Combine(Path.GetDirectoryName(SolutionPath) ?? @"\\", SolutionDirectory ?? String.Empty)).AbsolutePath;
             }
+
+            ComputedSolutionDirectory = tempDir;
         }
 
         #endregion

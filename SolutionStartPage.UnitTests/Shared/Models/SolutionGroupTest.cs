@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -88,6 +89,42 @@
 
             // Assert
             Assert.AreSame(vsp, group.ViewStateProvider);
+            Assert.IsFalse(invoked);
+        }
+
+        [TestMethod]
+        public void ViewStateProvider_GetSet_PropertyChanged()
+        {
+            // Arrange
+            var group = new SolutionGroup();
+            var invoked = false;
+            group.PropertyChanged += (sender, args) => invoked = true;
+            var vsp = Mock.Create<IViewStateProvider>();
+            group.ViewStateProvider = vsp;
+
+            // Act
+            Mock.Raise(() => vsp.PropertyChanged += null, new PropertyChangedEventArgs(null));
+
+            // Assert
+            Assert.IsTrue(invoked);
+        }
+
+        [TestMethod]
+        public void ViewStateProvider_GetSet_PropertyChangedWithOldVsp()
+        {
+            // Arrange
+            var group = new SolutionGroup();
+            var invoked = false;
+            group.PropertyChanged += (sender, args) => invoked = true;
+            var vsp1 = Mock.Create<IViewStateProvider>();
+            var vsp2 = Mock.Create<IViewStateProvider>();
+            group.ViewStateProvider = vsp1;
+            group.ViewStateProvider = vsp2;
+
+            // Act
+            Mock.Raise(() => vsp1.PropertyChanged += null, new PropertyChangedEventArgs(null));
+
+            // Assert
             Assert.IsFalse(invoked);
         }
 

@@ -1,6 +1,7 @@
 ﻿namespace SolutionStartPage.UnitTests.Shared.Models
 {
     using System;
+    using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using SolutionStartPage.Shared.DAL;
@@ -132,6 +133,42 @@
 
             // Assert
             Assert.AreSame(vsp, sln.ViewStateProvider);
+            Assert.IsFalse(invoked);
+        }
+
+        [TestMethod]
+        public void ViewStateProvider_GetSet_PropertyChanged()
+        {
+            // Arrange
+            var sln = new Solution();
+            var invoked = false;
+            sln.PropertyChanged += (sender, args) => invoked = true;
+            var vsp = Mock.Create<IViewStateProvider>();
+            sln.ViewStateProvider = vsp;
+
+            // Act
+            Mock.Raise(() => vsp.PropertyChanged += null, new PropertyChangedEventArgs(null));
+
+            // Assert
+            Assert.IsTrue(invoked);
+        }
+
+        [TestMethod]
+        public void ViewStateProvider_GetSet_PropertyChangedWithOldVsp()
+        {
+            // Arrange
+            var sln = new Solution();
+            var invoked = false;
+            sln.PropertyChanged += (sender, args) => invoked = true;
+            var vsp1 = Mock.Create<IViewStateProvider>();
+            var vsp2 = Mock.Create<IViewStateProvider>();
+            sln.ViewStateProvider = vsp1;
+            sln.ViewStateProvider = vsp2;
+
+            // Act
+            Mock.Raise(() => vsp1.PropertyChanged += null, new PropertyChangedEventArgs(null));
+
+            // Assert
             Assert.IsFalse(invoked);
         }
 
@@ -291,6 +328,23 @@
         }
 
         [TestMethod]
+        public void SolutionDirectory_Get_BySolutionPath()
+        {
+            // Arrange
+            var sln = new Solution();
+            var fs = Mock.Create<IFileSystem>();
+            sln.FileSystem = fs;
+            Mock.Arrange(() => fs.FileExists(Arg.AnyString)).Returns(true);
+            Mock.Arrange(() => fs.DirectoryExists(Arg.AnyString)).Returns(true);
+
+            // Act
+            sln.SolutionPath = @"C:\Users\Administrator\foo.sln";
+
+            // Assert
+            Assert.AreEqual(@"C:\Users\Administrator", sln.SolutionDirectory);
+        }
+
+        [TestMethod]
         public void EditModeEnabled_Get()
         {
             // Arrange
@@ -417,8 +471,28 @@
             sln.SolutionPath = @"C:\Users\Administrator\foo.sln";
 
             // Assert
-            Assert.AreEqual(@"C:/Users/Administrator", sln.ComputedSolutionDirectory);
+            Assert.AreEqual(@"C:\Users\Administrator", sln.ComputedSolutionDirectory);
             Assert.IsTrue(invoked);
+        }
+
+        [TestMethod]
+        public void ComputedSolutionDirectory_Get_SameValue()
+        {
+            // Arrange
+            var sln = new Solution();
+            var invokeCount = 0;
+            sln.PropertyChanged += (sender, args) => invokeCount++;
+            var fs = Mock.Create<IFileSystem>();
+            sln.FileSystem = fs;
+            Mock.Arrange(() => fs.FileExists(Arg.AnyString)).Returns(true);
+            Mock.Arrange(() => fs.DirectoryExists(Arg.AnyString)).Returns(true);
+
+            // Act
+            sln.SolutionPath = @"C:\Users\Administrator\foo.sln";
+            sln.SolutionPath = @"C:\Users\Administrator\bar.sln";
+
+            // Assert
+            Assert.AreEqual(5, invokeCount);
         }
 
         [TestMethod]

@@ -28,6 +28,20 @@
         }
 
         [TestMethod]
+        public void Columns_GetSet_SameValue()
+        {
+            // Arrange
+            var config = new SolutionPageConfiguration {Columns = 2};
+
+            // Act
+            config.Columns = 2;
+            var result = config.Columns;
+
+            // Assert
+            Assert.AreEqual(2, result);
+        }
+
+        [TestMethod]
         public void Columns_Minvalue()
         {
             // Arrange
