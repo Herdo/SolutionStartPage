@@ -1,5 +1,7 @@
-﻿namespace SolutionStartPage.Shared.Views
+﻿namespace SolutionStartPage.Core.Views
 {
+    using Shared.Views;
+
     public abstract class BasePresenter<TView, TViewModel>
         where TView : IView<TViewModel>
         where TViewModel : IViewModel

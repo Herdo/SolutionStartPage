@@ -3,7 +3,6 @@
     using System;
     using Models;
     using Shared.Models;
-    using Shared.Views;
     using Shared.Views.BasicPart;
 
     public class VsoPagePresenter : BasePresenter<IVsoPageView, IVsoPageViewModel>,

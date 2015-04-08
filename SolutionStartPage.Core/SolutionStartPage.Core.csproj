@@ -46,6 +46,7 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\AppControlHost.cs" />
+    <Compile Include="Views\BasePresenter.cs" />
     <Compile Include="Views\BasicPart\VsoPagePresenter.cs" />
     <Compile Include="Views\SolutionPageView\SolutionPagePresenter.cs" />
     <Compile Include="Models\VisualStudioVersion.cs" />

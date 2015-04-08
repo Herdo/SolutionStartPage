@@ -60,7 +60,6 @@
     <Compile Include="Models\SolutionPageConfiguration.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\BasePresenter.cs" />
     <Compile Include="Views\BasicPart\IVsoPagePresenter.cs" />
     <Compile Include="Views\BasicPart\IVsoPageView.cs" />
     <Compile Include="Views\BasicPart\IVsoPageViewModel.cs" />
