@@ -74,20 +74,6 @@
         }
 
         [TestMethod]
-        public void TriggerAlterSolution_CanExecute_NotSubscribed()
-        {
-            // Arrange
-            var sln = new Solution();
-            var invoked = false;
-
-            // Act
-            sln.TriggerAlterSolution_CanExecute(this, null);
-
-            // Assert
-            Assert.IsFalse(invoked);
-        }
-
-        [TestMethod]
         public void TriggerAlterSolution_Executed_Subscribed()
         {
             // Arrange
@@ -100,20 +86,6 @@
 
             // Assert
             Assert.IsTrue(invoked);
-        }
-
-        [TestMethod]
-        public void TriggerAlterSolution_Executed_NotSubscribed()
-        {
-            // Arrange
-            var sln = new Solution();
-            var invoked = false;
-
-            // Act
-            sln.TriggerAlterSolution_Executed(this, null);
-
-            // Assert
-            Assert.IsFalse(invoked);
         }
 
         [TestMethod]
@@ -132,20 +104,6 @@
         }
 
         [TestMethod]
-        public void TriggerOpenSolution_CanExecute_NotSubscribed()
-        {
-            // Arrange
-            var sln = new Solution();
-            var invoked = false;
-
-            // Act
-            sln.TriggerOpenSolution_CanExecute(this, null);
-
-            // Assert
-            Assert.IsFalse(invoked);
-        }
-
-        [TestMethod]
         public void TriggerOpenSolution_Executed_Subscribed()
         {
             // Arrange
@@ -161,24 +119,12 @@
         }
 
         [TestMethod]
-        public void TriggerOpenSolution_Executed_NotSubscribed()
-        {
-            // Arrange
-            var sln = new Solution();
-            var invoked = false;
-
-            // Act
-            sln.TriggerOpenSolution_Executed(this, null);
-
-            // Assert
-            Assert.IsFalse(invoked);
-        }
-
-        [TestMethod]
         public void ViewStateProvider_GetSet()
         {
             // Arrange
             var sln = new Solution();
+            var invoked = false;
+            sln.PropertyChanged += (sender, args) => invoked = true;
             var vsp = Mock.Create<IViewStateProvider>();
 
             // Act
@@ -186,6 +132,7 @@
 
             // Assert
             Assert.AreSame(vsp, sln.ViewStateProvider);
+            Assert.IsFalse(invoked);
         }
 
         [TestMethod]
@@ -193,6 +140,8 @@
         {
             // Arrange
             var sln = new Solution();
+            var invoked = false;
+            sln.PropertyChanged += (sender, args) => invoked = true;
             var fs = Mock.Create<IFileSystem>();
 
             // Act
@@ -200,6 +149,7 @@
 
             // Assert
             Assert.AreSame(fs, sln.FileSystem);
+            Assert.IsTrue(invoked);
         }
 
         [TestMethod]
@@ -207,6 +157,8 @@
         {
             // Arrange
             var sln = new Solution();
+            var invoked = false;
+            sln.PropertyChanged += (sender, args) => invoked = true;
             var group = new SolutionGroup();
 
             // Act
@@ -214,6 +166,7 @@
 
             // Assert
             Assert.AreSame(group, sln.ParentGroup);
+            Assert.IsFalse(invoked);
         }
 
         [TestMethod]
@@ -246,12 +199,31 @@
         {
             // Arrange
             var sln = new Solution { SolutionPath = @"C:\Users\Administrator\foo.sln" };
+            var invoked = false;
+            sln.PropertyChanged += (sender, args) => invoked = true;
 
             // Act
             sln.SolutionDisplayName = "foo";
 
             // Assert
             Assert.AreEqual("foo", sln.SolutionDisplayName);
+            Assert.IsTrue(invoked);
+        }
+
+        [TestMethod]
+        public void SolutionDisplayName_GetSet_SameValue()
+        {
+            // Arrange
+            var sln = new Solution { SolutionDisplayName = @"foo" };
+            var invoked = false;
+            sln.PropertyChanged += (sender, args) => invoked = true;
+
+            // Act
+            sln.SolutionDisplayName = "foo";
+
+            // Assert
+            Assert.AreEqual("foo", sln.SolutionDisplayName);
+            Assert.IsFalse(invoked);
         }
 
         [TestMethod]
@@ -259,12 +231,31 @@
         {
             // Arrange
             var sln = new Solution();
+            var invoked = false;
+            sln.PropertyChanged += (sender, args) => invoked = true;
 
             // Act
             sln.SolutionPath = "foo";
 
             // Assert
             Assert.AreEqual("foo", sln.SolutionPath);
+            Assert.IsTrue(invoked);
+        }
+
+        [TestMethod]
+        public void SolutionPath_GetSet_SameValue()
+        {
+            // Arrange
+            var sln = new Solution {SolutionPath = "foo"};
+            var invoked = false;
+            sln.PropertyChanged += (sender, args) => invoked = true;
+
+            // Act
+            sln.SolutionPath = "foo";
+
+            // Assert
+            Assert.AreEqual("foo", sln.SolutionPath);
+            Assert.IsFalse(invoked);
         }
 
         [TestMethod]
@@ -272,12 +263,31 @@
         {
             // Arrange
             var sln = new Solution();
+            var invoked = false;
+            sln.PropertyChanged += (sender, args) => invoked = true;
 
             // Act
             sln.SolutionDirectory = @"C:\Users\Administrator\";
 
             // Assert
             Assert.AreEqual(@"C:\Users\Administrator\", sln.SolutionDirectory);
+            Assert.IsTrue(invoked);
+        }
+
+        [TestMethod]
+        public void SolutionDirectory_GetSet_SameValue()
+        {
+            // Arrange
+            var sln = new Solution { SolutionDirectory = @"C:\Users\Administrator\" };
+            var invoked = false;
+            sln.PropertyChanged += (sender, args) => invoked = true;
+
+            // Act
+            sln.SolutionDirectory = @"C:\Users\Administrator\";
+
+            // Assert
+            Assert.AreEqual(@"C:\Users\Administrator\", sln.SolutionDirectory);
+            Assert.IsFalse(invoked);
         }
 
         [TestMethod]
@@ -301,12 +311,31 @@
         {
             // Arrange
             var sln = new Solution();
+            var invoked = false;
+            sln.PropertyChanged += (sender, args) => invoked = true;
 
             // Act
             sln.SolutionAvailable = true;
 
             // Assert
             Assert.IsTrue(sln.SolutionAvailable);
+            Assert.IsTrue(invoked);
+        }
+
+        [TestMethod]
+        public void SolutionAvailable_GetSet_SameValue()
+        {
+            // Arrange
+            var sln = new Solution {SolutionAvailable = true};
+            var invoked = false;
+            sln.PropertyChanged += (sender, args) => invoked = true;
+
+            // Act
+            sln.SolutionAvailable = true;
+
+            // Assert
+            Assert.IsTrue(sln.SolutionAvailable);
+            Assert.IsFalse(invoked);
         }
 
         [TestMethod]
@@ -314,12 +343,31 @@
         {
             // Arrange
             var sln = new Solution();
+            var invoked = false;
+            sln.PropertyChanged += (sender, args) => invoked = true;
 
             // Act
             sln.SolutionDirectoryAvailable = true;
 
             // Assert
             Assert.IsTrue(sln.SolutionDirectoryAvailable);
+            Assert.IsTrue(invoked);
+        }
+
+        [TestMethod]
+        public void SolutionDirectoryAvailable_GetSet_SameValue()
+        {
+            // Arrange
+            var sln = new Solution {SolutionDirectoryAvailable = true};
+            var invoked = false;
+            sln.PropertyChanged += (sender, args) => invoked = true;
+
+            // Act
+            sln.SolutionDirectoryAvailable = true;
+
+            // Assert
+            Assert.IsTrue(sln.SolutionDirectoryAvailable);
+            Assert.IsFalse(invoked);
         }
 
         [TestMethod]
@@ -340,6 +388,8 @@
         {
             // Arrange
             var sln = new Solution();
+            var invoked = false;
+            sln.PropertyChanged += (sender, args) => invoked = true;
             var fs = Mock.Create<IFileSystem>();
             sln.FileSystem = fs;
             Mock.Arrange(() => fs.FileExists(Arg.AnyString)).Returns(true);
@@ -350,6 +400,7 @@
 
             // Assert
             Assert.AreEqual(@"C:/Users/Administrator", sln.ComputedSolutionDirectory);
+            Assert.IsTrue(invoked);
         }
 
         [TestMethod]
@@ -357,6 +408,8 @@
         {
             // Arrange
             var sln = new Solution();
+            var invoked = false;
+            sln.PropertyChanged += (sender, args) => invoked = true;
             var fs = Mock.Create<IFileSystem>();
             sln.FileSystem = fs;
             Mock.Arrange(() => fs.FileExists(Arg.AnyString)).Returns(true);
@@ -367,6 +420,7 @@
 
             // Assert
             Assert.AreEqual(@"C:/Users/Administrator", sln.ComputedSolutionDirectory);
+            Assert.IsTrue(invoked);
         }
 
         [TestMethod]
@@ -374,6 +428,8 @@
         {
             // Arrange
             var sln = new Solution();
+            var invoked = false;
+            sln.PropertyChanged += (sender, args) => invoked = true;
             var fs = Mock.Create<IFileSystem>();
             sln.FileSystem = fs;
             Mock.Arrange(() => fs.FileExists(Arg.AnyString)).Returns(true);
@@ -385,6 +441,7 @@
 
             // Assert
             Assert.AreEqual(@"C:/Users/", sln.ComputedSolutionDirectory);
+            Assert.IsTrue(invoked);
         }
 
         [TestMethod]
@@ -392,6 +449,8 @@
         {
             // Arrange
             var sln = new Solution();
+            var invoked = false;
+            sln.PropertyChanged += (sender, args) => invoked = true;
             var fs = Mock.Create<IFileSystem>();
             sln.FileSystem = fs;
             Mock.Arrange(() => fs.FileExists(Arg.AnyString)).Returns(true);
@@ -403,6 +462,7 @@
 
             // Assert
             Assert.AreEqual(@"C:/", sln.ComputedSolutionDirectory);
+            Assert.IsTrue(invoked);
         }
     }
 }
