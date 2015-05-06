@@ -1,6 +1,8 @@
 ﻿namespace SolutionStartPage.Core.Views
 {
     using System;
+    using System.Collections.Generic;
+    using System.Globalization;
     using System.Windows;
     using System.Windows.Controls;
     using BasicPart;
@@ -9,7 +11,6 @@
     using Models;
     using Shared;
     using Shared.DAL;
-    using Shared.Extensions;
     using Shared.Models;
     using Shared.Views;
     using Shared.Views.BasicPart;
@@ -55,8 +56,31 @@
                 PreConfigureApp(container);
                 ConfigureApp(container);
                 ConfigureSelf(container);
+                PrepareUi(container);
 
                 Content = container.Resolve<IPageRootView>();
+            }
+        }
+
+        private void PrepareUi(IUnityContainer container)
+        {
+            var resourceProvider = container.Resolve<IResourceProvider>();
+            var ideAccess = container.Resolve<IIde>();
+            var resources = new Dictionary<object, object>
+            {
+                {"Texts", resourceProvider}
+            };
+
+            RegisterGlobalResources(resourceProvider, ideAccess, resources);
+        }
+
+        private void RegisterGlobalResources(IResourceProvider resourceProvider, IIde ideAccess, Dictionary<object, object> resources)
+        {
+            resourceProvider.Culture = new CultureInfo(ideAccess.LCID);
+
+            foreach (var resource in resources)
+            {
+                Application.Current.Resources.Add(resource.Key, resource.Value);
             }
         }
 
@@ -79,6 +103,7 @@
                 // Determine Singletons
                 .RegisterType<VisualStudioVersion>(new ContainerControlledLifetimeManager())
                 .RegisterType<IViewStateProvider, ViewStateProvider>(new ContainerControlledLifetimeManager())
+                .RegisterType<IResourceProvider, MainResourceProvider>(new ContainerControlledLifetimeManager())
                 // Register DAL
                 .RegisterType<IFileSystem, FileSystem>(new ContainerControlledLifetimeManager())
                 // Register Bootstrappers for each VS Version

@@ -117,14 +117,14 @@
             </StackPanel>
             <Image Style="{StaticResource ResourceNotAvailableWarningStyle}"
                    Visibility="{Binding SolutionAvailable, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}"
-                   ToolTip="The solution file doesn't exist."/>
+                   ToolTip="{Binding [SolutionDoesntExist_ToolTip], Source={StaticResource Texts}}"/>
         </Grid>
 
         <TextBox Grid.Row="0"
                  Text="{Binding SolutionDisplayName, UpdateSourceTrigger=PropertyChanged}"
                  FontSize="{Binding ElementName=DisplayNameTextBlock, Path=FontSize}"
                  VerticalAlignment="Top"
-                 ToolTip="Set the display name."
+                 ToolTip="{Binding [SetDisplayName_ToolTip], Source={StaticResource Texts}}"
                  Visibility="{Binding EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}}"/>
 
         <!-- Solution Directory -->
@@ -148,7 +148,7 @@
             </StackPanel>
             <Image Style="{StaticResource ResourceNotAvailableWarningStyle}"
                    Visibility="{Binding SolutionDirectoryAvailable, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}"
-                   ToolTip="The directory doesn't exist."/>
+                   ToolTip="{Binding [DirectoryDoesntExist_ToolTip], Source={StaticResource Texts}}"/>
         </Grid>
         
         <Grid Grid.Row="2"
@@ -168,10 +168,10 @@
                      Text="{Binding SolutionDirectory, UpdateSourceTrigger=PropertyChanged}"
                      FontSize="{Binding ElementName=SolutionDirectoryTextBlock, Path=FontSize}"
                      VerticalAlignment="Top"
-                     ToolTip="Set a relative path to the solution file, or an absolute path to any directory."/>
+                     ToolTip="{Binding [SetSolutionDirectoryPath_ToolTip], Source={StaticResource Texts}}"/>
             <TextBlock Grid.Row="1"
                        Grid.Column="0"
-                       Text="Directory Preview:"
+                       Text="{Binding [DirectoryPreview], Source={StaticResource Texts}}"
                        FontSize="{Binding ElementName=SolutionDirectoryTextBlock, Path=FontSize}"
                        Style="{DynamicResource StartPage.DiscoverVS.RegularTextStyle}"
                        VerticalAlignment="Top"
@@ -187,11 +187,11 @@
                        ToolTip="{Binding ComputedSolutionDirectory}"/>
         </Grid>
         
-        <!-- Commands -->
+        <!-- Header Commands -->
         <StackPanel Grid.Row="3"
                     Orientation="Horizontal"
                     Visibility="{Binding EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}}">
-            <Button ToolTip="Move Up"
+            <Button ToolTip="{Binding [HeaderCommand_MoveUp_ToolTip], Source={StaticResource Texts}}"
                     Command="commands:Commands.AlterSolution"
                     CommandParameter="{x:Static commands:CommandParameter.ALTER_SOLUTION_MOVE_UP}"
                     Margin="5"
@@ -201,7 +201,7 @@
                        Height="16"
                        Width="16"/>
             </Button>
-            <Button ToolTip="Move Down"
+            <Button ToolTip="{Binding [HeaderCommand_MoveDown_ToolTip], Source={StaticResource Texts}}"
                     Command="commands:Commands.AlterSolution"
                     CommandParameter="{x:Static commands:CommandParameter.ALTER_SOLUTION_MOVE_DOWN}"
                     Margin="5"
@@ -211,7 +211,7 @@
                        Height="16"
                        Width="16"/>
             </Button>
-            <Button ToolTip="Remove Solution"
+            <Button ToolTip="{Binding [HeaderCommand_RemoveSolution_ToolTip], Source={StaticResource Texts}}"
                     Command="commands:Commands.AlterSolution"
                     CommandParameter="{x:Static commands:CommandParameter.ALTER_SOLUTION_REMOVE_SOLUTION}"
                     Margin="5"

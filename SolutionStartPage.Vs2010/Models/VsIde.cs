@@ -26,6 +26,11 @@
             set { _dte = value as DTE2; }
         }
 
+        int IIde.LCID
+        {
+            get { return _dte.LocaleID; }
+        }
+
         void IIde.OpenSolution(string path)
         {
             if (path != null)

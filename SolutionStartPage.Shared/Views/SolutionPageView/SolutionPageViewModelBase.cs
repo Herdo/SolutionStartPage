@@ -13,6 +13,7 @@
         #region Fields
         
         private readonly IViewStateProvider _viewStateProvider;
+        private readonly IResourceProvider _resourceProvider;
         private int _columns;
 
         #endregion
@@ -44,10 +45,11 @@
         /////////////////////////////////////////////////////////
         #region Constructors
 
-        protected SolutionPageViewModelBase(IViewStateProvider viewStateProvider)
+        protected SolutionPageViewModelBase(IViewStateProvider viewStateProvider, IResourceProvider resourceProvider)
         {
             _viewStateProvider = viewStateProvider;
             _viewStateProvider.PropertyChanged += viewStateProvider_PropertyChanged;
+            _resourceProvider = resourceProvider;
         }
 
         #endregion

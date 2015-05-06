@@ -1,7 +1,10 @@
 ﻿namespace SolutionStartPage.Vs2010.Views.PageRootView
 {
+    using System.Globalization;
     using System.Windows;
     using System.Windows.Controls;
+    using Shared.Models;
+    using Shared.Views;
     using Shared.Views.BasicPart;
     using Shared.Views.PageRootView;
     using Shared.Views.SolutionPageView;

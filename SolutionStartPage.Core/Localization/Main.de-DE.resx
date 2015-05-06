@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Actions" xml:space="preserve">
+    <value>Aktionen</value>
+  </data>
+  <data name="AddGroup_ToolTip" xml:space="preserve">
+    <value>Gruppe hinzufügen</value>
+  </data>
+  <data name="BulkAddSolutionsMultipleGroups" xml:space="preserve">
+    <value>Menge von Projektmappen hinzufügen (mehrere Gruppen)</value>
+  </data>
+  <data name="BulkAddSolutionsMultipleGroups_ToolTip" xml:space="preserve">
+    <value>Fügt alle Projektmappen die innerhalb eines Stammverzeichnisses gefunden werden einer jeweiligen Gruppe für ihr übergeordnetes Verzeichnis hinzu.</value>
+  </data>
+  <data name="BulkAddSolutionsSingleGroup" xml:space="preserve">
+    <value>Menge von Projektmappen hinzufügen (eine Gruppe)</value>
+  </data>
+  <data name="BulkAddSolutionsSingleGroup_ToolTip" xml:space="preserve">
+    <value>Fügt alle Projektmappen die innerhalb eines Stammverzeichnisses gefunden werden einer Gruppe hinzu.</value>
+  </data>
+  <data name="BulkAddSolutions_ToolTip" xml:space="preserve">
+    <value>Menge von Projektmappen hinzufügen...</value>
+  </data>
+  <data name="ClosePageAfterProjectLoad" xml:space="preserve">
+    <value>Seite nach Laden des Projektes schließen</value>
+  </data>
+  <data name="Columns" xml:space="preserve">
+    <value>Spalten:</value>
+  </data>
+  <data name="ConnectToTFS" xml:space="preserve">
+    <value>Zum Team Foundation Server verbinden</value>
+  </data>
+  <data name="ContextCommand_EnableEditing" xml:space="preserve">
+    <value>Bearbeiten aktivieren</value>
+  </data>
+  <data name="DeleteAllGroups_ToolTip" xml:space="preserve">
+    <value>Alle Gruppen löschen</value>
+  </data>
+  <data name="DirectoryDoesntExist_ToolTip" xml:space="preserve">
+    <value>Das Verzeichnis existiert nicht</value>
+  </data>
+  <data name="DirectoryPreview" xml:space="preserve">
+    <value>Verzeichnis Vorschau:</value>
+  </data>
+  <data name="HeaderCommand_AddSolution_ToolTip" xml:space="preserve">
+    <value>Projektmappe hinzufügen</value>
+  </data>
+  <data name="HeaderCommand_MoveBack_ToolTip" xml:space="preserve">
+    <value>Zurück bewegen</value>
+  </data>
+  <data name="HeaderCommand_MoveDown_ToolTip" xml:space="preserve">
+    <value>Abwärts bewegen</value>
+  </data>
+  <data name="HeaderCommand_MoveForward_ToolTip" xml:space="preserve">
+    <value>Vorwärts bewegen</value>
+  </data>
+  <data name="HeaderCommand_MoveUp_ToolTip" xml:space="preserve">
+    <value>Aufwärts bewegen</value>
+  </data>
+  <data name="HeaderCommand_RemoveGroup_ToolTip" xml:space="preserve">
+    <value>Gruppe entfernen</value>
+  </data>
+  <data name="HeaderCommand_RemoveSolution_ToolTip" xml:space="preserve">
+    <value>Projektmappe entfernen</value>
+  </data>
+  <data name="KeepPageOpenAfterLoad" xml:space="preserve">
+    <value>Seite nach Laden des Projektes geöffnet lassen</value>
+  </data>
+  <data name="Layout" xml:space="preserve">
+    <value>Layout</value>
+  </data>
+  <data name="NewProject" xml:space="preserve">
+    <value>Neues Projekt...</value>
+  </data>
+  <data name="OpenFromSourceControl" xml:space="preserve">
+    <value>Aus Quellcodeverwaltung öffnen...</value>
+  </data>
+  <data name="OpenProject" xml:space="preserve">
+    <value>Projekt öffnen...</value>
+  </data>
+  <data name="Recent" xml:space="preserve">
+    <value>Zuletzt</value>
+  </data>
+  <data name="RecentProjects" xml:space="preserve">
+    <value>Letzte Projekte</value>
+  </data>
+  <data name="SetDisplayName_ToolTip" xml:space="preserve">
+    <value>Den Anzeigenamen setzten.</value>
+  </data>
+  <data name="SetSolutionDirectoryPath_ToolTip" xml:space="preserve">
+    <value>Einen relativen Pfad zur Projektmappen-Datei angeben, oder einen absoluten Pfad zu irgend einem Verzeichnis.</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="ShowPageOnStartup" xml:space="preserve">
+    <value>Seite beim Start anzeigen</value>
+  </data>
+  <data name="SolutionDoesntExist_ToolTip" xml:space="preserve">
+    <value>Die Projektmappe existiert nicht.</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+</root>
