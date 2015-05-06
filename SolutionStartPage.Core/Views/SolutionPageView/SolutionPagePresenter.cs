@@ -183,19 +183,45 @@
 
          private void OpenSolutionDirectoryExplorer(Solution solution)
          {
-             if (Keyboard.Modifiers == ModifierKeys.Shift)
+             var depth = 0;
+             if (Keyboard.Modifiers.HasFlag(ModifierKeys.Shift))
+                 depth += 1;
+             if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
+                 depth += 1;
+
+             string targetDirectory;
+
+             switch (depth)
              {
-                 if (_model.GetParentDirectory(solution.ComputedSolutionDirectory) == null) return;
-                 // If shift, open the parent directory of the computed
-                 // directory, and select the computed directory.
-                 var argument = String.Format(@"/select,{0}", new Uri(solution.ComputedSolutionDirectory).LocalPath);
-                 Process.Start("explorer", argument);
-             }
-             else
-             {
-                 if (_model.DirectoryExists(solution.ComputedSolutionDirectory))
-                     // If no shift, just open the computed directory.
-                     Process.Start(solution.ComputedSolutionDirectory);
+                 case 0:
+                     if (_model.DirectoryExists(solution.ComputedSolutionDirectory))
+                         Process.Start(solution.ComputedSolutionDirectory);
+                     break;
+                 case 1:
+                     targetDirectory = solution.ComputedSolutionDirectory;
+                     if (_model.GetParentDirectory(targetDirectory) == null) return;
+
+                     var parentArgument = String.Format(@"/select,{0}", new Uri(targetDirectory).LocalPath);
+                     Process.Start("explorer", parentArgument);
+                     break;
+                 case 2:
+                     targetDirectory = solution.ComputedSolutionDirectory;
+                     var parent = _model.GetParentDirectory(targetDirectory);
+                     if (parent == null) return;
+
+                     targetDirectory = parent.FullName;
+                     parent = _model.GetParentDirectory(targetDirectory);
+                     if (parent == null)
+                     {
+                         // if no 2nd-level parent exists, use the first-level parent
+                         targetDirectory = solution.ComputedSolutionDirectory;
+                     }
+
+                     var parentParentArgument = String.Format(@"/select,{0}", new Uri(targetDirectory).LocalPath);
+                     Process.Start("explorer", parentParentArgument);
+                     break;
+                 default:
+                     throw new ArgumentOutOfRangeException();
              }
          }
 
