@@ -1,4 +1,5 @@
-﻿namespace SolutionStartPage.Shared.Commands
+﻿// ReSharper disable InconsistentNaming
+namespace SolutionStartPage.Shared.Commands
 {
     public static class CommandParameter
     {
