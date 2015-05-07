@@ -4,9 +4,9 @@
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using SolutionStartPage.Shared.BLL.Provider;
     using SolutionStartPage.Shared.DAL;
     using SolutionStartPage.Shared.Models;
-    using SolutionStartPage.Shared.Views;
     using Telerik.JustMock;
 
     [TestClass]

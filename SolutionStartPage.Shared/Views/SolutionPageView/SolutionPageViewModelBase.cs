@@ -4,6 +4,7 @@
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using Annotations;
+    using BLL.Provider;
     using Extensions;
     using Models;
 
@@ -13,7 +14,6 @@
         #region Fields
         
         private readonly IViewStateProvider _viewStateProvider;
-        private readonly IResourceProvider _resourceProvider;
         private int _columns;
 
         #endregion
@@ -49,7 +49,6 @@
         {
             _viewStateProvider = viewStateProvider;
             _viewStateProvider.PropertyChanged += viewStateProvider_PropertyChanged;
-            _resourceProvider = resourceProvider;
         }
 
         #endregion

@@ -8,9 +8,9 @@
     using System.Windows.Input;
     using System.Xml.Serialization;
     using Annotations;
+    using BLL.Provider;
     using DAL;
     using Extensions;
-    using Views;
 
     public class Solution : INotifyPropertyChanged
     {

@@ -1,6 +1,5 @@
 ﻿namespace SolutionStartPage.Vs2010.Views.SolutionPageView
 {
-    using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;

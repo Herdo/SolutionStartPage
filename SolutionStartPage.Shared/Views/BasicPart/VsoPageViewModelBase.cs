@@ -10,18 +10,7 @@
         /////////////////////////////////////////////////////////
         #region Fields
 
-        private readonly IResourceProvider _resourceProvider;
         private string _fullEditionName;
-
-        #endregion
-
-        /////////////////////////////////////////////////////////
-        #region Constructors
-
-        protected VsoPageViewModelBase(IResourceProvider resourceProvider)
-        {
-            _resourceProvider = resourceProvider;
-        }
 
         #endregion
 

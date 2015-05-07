@@ -1,6 +1,5 @@
 ﻿namespace SolutionStartPage.Vs2010.Models
 {
-    using System;
     using EnvDTE80;
     using Shared.Models;
 
@@ -16,25 +15,19 @@
         /////////////////////////////////////////////////////////
         #region IIde Member
 
-        string IIde.Edition
-        {
-            get { return _dte.Edition; }
-        }
+        string IIde.Edition => _dte.Edition;
 
         object IIde.IdeAccess
         {
             set { _dte = value as DTE2; }
         }
 
-        int IIde.LCID
-        {
-            get { return _dte.LocaleID; }
-        }
+        int IIde.LCID => _dte.LocaleID;
 
         void IIde.OpenSolution(string path)
         {
             if (path != null)
-                _dte.ExecuteCommand("File.OpenProject", String.Format("\"{0}\"", path));
+                _dte.ExecuteCommand("File.OpenProject", $"\"{path}\"");
         }
 
         #endregion

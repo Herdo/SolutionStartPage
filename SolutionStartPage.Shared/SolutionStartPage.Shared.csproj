@@ -69,10 +69,10 @@
     <Compile Include="Views\IAppControlHost.cs" />
     <Compile Include="Views\IBasicControlSubject.cs" />
     <Compile Include="Views\IPresenter.cs" />
-    <Compile Include="Views\IResourceProvider.cs" />
+    <Compile Include="BLL\Provider\IResourceProvider.cs" />
     <Compile Include="Views\IView.cs" />
     <Compile Include="Views\IViewModel.cs" />
-    <Compile Include="Views\IViewStateProvider.cs" />
+    <Compile Include="BLL\Provider\IViewStateProvider.cs" />
     <Compile Include="Views\PageRootView\IPageRootView.cs" />
     <Compile Include="Views\SolutionPageView\ISolutionControl.cs" />
     <Compile Include="Views\SolutionPageView\ISolutionGroupControl.cs" />

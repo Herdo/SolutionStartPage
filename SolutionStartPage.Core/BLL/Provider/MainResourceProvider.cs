@@ -1,9 +1,9 @@
-﻿namespace SolutionStartPage.Core.Views
+﻿namespace SolutionStartPage.Core.BLL.Provider
 {
     using System.Globalization;
     using System.Windows;
     using Localization;
-    using Shared.Views;
+    using Shared.BLL.Provider;
 
     public class MainResourceProvider : IResourceProvider
     {

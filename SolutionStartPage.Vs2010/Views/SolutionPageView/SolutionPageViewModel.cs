@@ -1,6 +1,6 @@
 ﻿﻿namespace SolutionStartPage.Vs2010.Views.SolutionPageView
 {
-    using Shared.Views;
+    using Shared.BLL.Provider;
     using Shared.Views.SolutionPageView;
 
     public sealed class SolutionPageViewModel : SolutionPageViewModelBase

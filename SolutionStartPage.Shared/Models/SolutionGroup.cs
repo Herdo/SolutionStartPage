@@ -7,8 +7,8 @@
     using System.Windows.Input;
     using System.Xml.Serialization;
     using Annotations;
+    using BLL.Provider;
     using Extensions;
-    using Views;
 
     public class SolutionGroup : INotifyPropertyChanged
     {

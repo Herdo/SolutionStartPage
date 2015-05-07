@@ -6,8 +6,8 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using SolutionStartPage.Shared.BLL.Provider;
     using SolutionStartPage.Shared.Models;
-    using SolutionStartPage.Shared.Views;
     using Telerik.JustMock;
 
     [TestClass]

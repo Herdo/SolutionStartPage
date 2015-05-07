@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-
+﻿
 #pragma warning disable 1591
 // ReSharper disable UnusedMember.Global
 // ReSharper disable MemberCanBePrivate.Global
@@ -11,6 +9,8 @@ using System.Diagnostics;
 
 namespace SolutionStartPage.Shared.Annotations
 {
+    using System;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
 
     /// <summary>

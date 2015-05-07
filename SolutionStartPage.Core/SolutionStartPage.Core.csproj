@@ -60,10 +60,10 @@
     <Compile Include="Views\AppControlHost.cs" />
     <Compile Include="Views\BasePresenter.cs" />
     <Compile Include="Views\BasicPart\VsoPagePresenter.cs" />
-    <Compile Include="Views\MainResourceProvider.cs" />
+    <Compile Include="BLL\Provider\MainResourceProvider.cs" />
     <Compile Include="Views\SolutionPageView\SolutionPagePresenter.cs" />
     <Compile Include="Models\VisualStudioVersion.cs" />
-    <Compile Include="Views\ViewStateProvider.cs" />
+    <Compile Include="BLL\Provider\ViewStateProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SolutionStartPage.Shared\SolutionStartPage.Shared.csproj">

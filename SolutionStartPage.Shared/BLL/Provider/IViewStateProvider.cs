@@ -1,4 +1,4 @@
-﻿namespace SolutionStartPage.Shared.Views
+﻿namespace SolutionStartPage.Shared.BLL.Provider
 {
     using System.ComponentModel;
 

@@ -6,10 +6,12 @@
     using System.Windows;
     using System.Windows.Controls;
     using BasicPart;
+    using BLL.Provider;
     using DAL;
     using Microsoft.Practices.Unity;
     using Models;
     using Shared;
+    using Shared.BLL.Provider;
     using Shared.DAL;
     using Shared.Models;
     using Shared.Views;

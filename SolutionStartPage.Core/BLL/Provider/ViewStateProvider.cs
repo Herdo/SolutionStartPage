@@ -1,10 +1,10 @@
-﻿namespace SolutionStartPage.Core.Views
+﻿namespace SolutionStartPage.Core.BLL.Provider
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using Annotations;
+    using Shared.BLL.Provider;
     using Shared.Extensions;
-    using Shared.Views;
 
     public class ViewStateProvider : IViewStateProvider
     {

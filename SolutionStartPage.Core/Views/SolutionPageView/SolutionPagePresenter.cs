@@ -8,10 +8,10 @@
      using System.IO;
      using System.Linq;
      using System.Windows.Input;
+     using Shared.BLL.Provider;
      using Shared.Commands;
      using Shared.DAL;
      using Shared.Models;
-     using Shared.Views;
      using Shared.Views.SolutionPageView;
 
      public class SolutionPagePresenter : BasePresenter<ISolutionPageView, ISolutionPageViewModel>,

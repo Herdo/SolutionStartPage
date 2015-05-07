@@ -70,8 +70,7 @@
                     Command="{x:Static sp:VSCommands.ExecuteCommand}" CommandParameter="Team.ConnecttoTeamFoundationServer"
                     ImageNormal="pack://application:,,,/Microsoft.VisualStudio.Shell.StartPage;component/Images/StartPage/ConnectToTFS.png"
                     ImageHover="pack://application:,,,/Microsoft.VisualStudio.Shell.StartPage;component/Images/StartPage/ConnectToTFSMouseOver.png"
-                    ImagePressed="pack://application:,,,/Microsoft.VisualStudio.Shell.StartPage;component/Images/StartPage/ConnectToTFSMouseDown.png">
-            </vs:ImageButton>
+                    ImagePressed="pack://application:,,,/Microsoft.VisualStudio.Shell.StartPage;component/Images/StartPage/ConnectToTFSMouseDown.png" />
 
             <vs:ImageButton
                     Grid.Row="2"
@@ -83,8 +82,7 @@
                     Command="{x:Static sp:VSCommands.ExecuteCommand}" CommandParameter="File.NewProject"
                     ImageNormal="pack://application:,,,/Microsoft.VisualStudio.Shell.StartPage;component/Images/StartPage/NewProject.png"
                     ImageHover="pack://application:,,,/Microsoft.VisualStudio.Shell.StartPage;component/Images/StartPage/NewProjectMouseOver.png"
-                    ImagePressed="pack://application:,,,/Microsoft.VisualStudio.Shell.StartPage;component/Images/StartPage/NewProjectMouseDown.png">
-            </vs:ImageButton>
+                    ImagePressed="pack://application:,,,/Microsoft.VisualStudio.Shell.StartPage;component/Images/StartPage/NewProjectMouseDown.png" />
 
             <vs:ImageButton
                     Grid.Row="4"
@@ -96,8 +94,7 @@
                     Command="{x:Static sp:VSCommands.ExecuteCommand}" CommandParameter="File.OpenProject"
                     ImageNormal="pack://application:,,,/Microsoft.VisualStudio.Shell.StartPage;component/Images/StartPage/OpenProject.png"
                     ImageHover="pack://application:,,,/Microsoft.VisualStudio.Shell.StartPage;component/Images/StartPage/OpenProjectMouseOver.png"
-                    ImagePressed="pack://application:,,,/Microsoft.VisualStudio.Shell.StartPage;component/Images/StartPage/OpenProjectMouseDown.png">
-            </vs:ImageButton>
+                    ImagePressed="pack://application:,,,/Microsoft.VisualStudio.Shell.StartPage;component/Images/StartPage/OpenProjectMouseDown.png" />
         </Grid>
 
 

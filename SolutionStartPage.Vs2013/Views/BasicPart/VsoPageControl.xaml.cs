@@ -1,6 +1,5 @@
 ﻿namespace SolutionStartPage.Vs2013.Views.BasicPart
 {
-    using System.Diagnostics;
     using Shared.Views.BasicPart;
 
     /// <summary>
