@@ -8,8 +8,8 @@
         /////////////////////////////////////////////////////////
         #region Constructors
         
-        public SolutionPageViewModel(IViewStateProvider viewStateProvider, IResourceProvider resourceProvider)
-            : base(viewStateProvider, resourceProvider)
+        public SolutionPageViewModel(IViewStateProvider viewStateProvider)
+            : base(viewStateProvider)
         {
         }
 

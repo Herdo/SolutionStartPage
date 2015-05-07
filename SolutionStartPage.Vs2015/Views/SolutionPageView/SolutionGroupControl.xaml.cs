@@ -1,4 +1,4 @@
-﻿namespace SolutionStartPage.Vs2010.Views.SolutionPageView
+﻿namespace SolutionStartPage.Vs2015.Views.SolutionPageView
 {
     using System.Windows.Input;
     using Shared.Models;

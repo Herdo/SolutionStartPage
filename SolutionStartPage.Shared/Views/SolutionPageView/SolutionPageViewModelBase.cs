@@ -45,7 +45,7 @@
         /////////////////////////////////////////////////////////
         #region Constructors
 
-        protected SolutionPageViewModelBase(IViewStateProvider viewStateProvider, IResourceProvider resourceProvider)
+        protected SolutionPageViewModelBase(IViewStateProvider viewStateProvider)
         {
             _viewStateProvider = viewStateProvider;
             _viewStateProvider.PropertyChanged += viewStateProvider_PropertyChanged;

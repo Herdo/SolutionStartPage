@@ -1,6 +1,5 @@
 ﻿namespace SolutionStartPage.Core.Views.BasicPart
 {
-    using System;
     using Models;
     using Shared.Models;
     using Shared.Views.BasicPart;
@@ -37,7 +36,7 @@
         
         private void LoadVmContent()
         {
-            ViewModel.FullEditionName = String.Format("{0} {1}", _ide.Edition, _vsVersion.LongVersion);
+            ViewModel.FullEditionName = $"{_ide.Edition} {_vsVersion.LongVersion}";
         }
 
         #endregion

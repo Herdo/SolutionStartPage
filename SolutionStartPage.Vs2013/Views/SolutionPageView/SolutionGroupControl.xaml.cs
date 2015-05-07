@@ -12,10 +12,7 @@
         /////////////////////////////////////////////////////////
         #region Properties
 
-        private SolutionGroup SolutionGroup
-        {
-            get { return DataContext as SolutionGroup; }
-        }
+        private SolutionGroup SolutionGroup => DataContext as SolutionGroup;
 
         #endregion
         
@@ -34,14 +31,12 @@
 
         private void AlterSolutionGroup_OnExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            if (SolutionGroup != null)
-                SolutionGroup.TriggerAlterSolutionGroup_Executed(e);
+            SolutionGroup?.TriggerAlterSolutionGroup_Executed(e);
         }
 
         private void AlterSolutionGroup_OnCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            if (SolutionGroup != null)
-                SolutionGroup.TriggerAlterSolutionGroup_CanExecute(e);
+            SolutionGroup?.TriggerAlterSolutionGroup_CanExecute(e);
         }
 
         #endregion

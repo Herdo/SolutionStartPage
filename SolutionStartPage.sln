@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolutionStartPage.Vs2010", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolutionStartPage.UnitTests", "SolutionStartPage.UnitTests\SolutionStartPage.UnitTests.csproj", "{6CD788AD-87C4-4178-A63B-D51F4B6C36AF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolutionStartPage.Vs2015", "SolutionStartPage.Vs2015\SolutionStartPage.Vs2015.csproj", "{BA455B7B-895C-45FA-9FF4-C5EFA4F69DD7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +60,10 @@ Global
 		{6CD788AD-87C4-4178-A63B-D51F4B6C36AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CD788AD-87C4-4178-A63B-D51F4B6C36AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CD788AD-87C4-4178-A63B-D51F4B6C36AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA455B7B-895C-45FA-9FF4-C5EFA4F69DD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA455B7B-895C-45FA-9FF4-C5EFA4F69DD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA455B7B-895C-45FA-9FF4-C5EFA4F69DD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA455B7B-895C-45FA-9FF4-C5EFA4F69DD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

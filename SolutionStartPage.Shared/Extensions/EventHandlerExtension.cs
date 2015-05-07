@@ -15,8 +15,7 @@
         [DebuggerStepThrough]
         public static void SafeInvoke(this EventHandler self, object sender, EventArgs e)
         {
-            if (self != null)
-                self(sender, e);
+            self?.Invoke(sender, e);
         }
 
         /// <summary>
@@ -29,8 +28,7 @@
         [DebuggerStepThrough]
         public static void SafeInvoke<TEventArgs>(this EventHandler<TEventArgs> self, object sender, TEventArgs e) where TEventArgs : EventArgs
         {
-            if (self != null)
-                self(sender, e);
+            self?.Invoke(sender, e);
         }
 
         /// <summary>
@@ -43,8 +41,7 @@
         public static void SafeInvoke(this PropertyChangedEventHandler self, object sender,
             string propertyName)
         {
-            if (self != null)
-                self(sender, new PropertyChangedEventArgs(propertyName));
+            self?.Invoke(sender, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

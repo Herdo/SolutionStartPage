@@ -6,6 +6,7 @@
 // ReSharper disable IntroduceOptionalParameters.Global
 // ReSharper disable MemberCanBeProtected.Global
 // ReSharper disable InconsistentNaming
+// ReSharper disable CheckNamespace
 
 namespace SolutionStartPage.Vs2013.Annotations
 {

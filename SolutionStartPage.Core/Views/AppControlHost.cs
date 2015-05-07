@@ -21,6 +21,7 @@
     using SolutionPageView;
     using Vs2010;
     using Vs2013;
+    using Vs2015;
 
     /// <summary>
     /// Basic app control host.
@@ -111,6 +112,7 @@
                 // Register Bootstrappers for each VS Version
                 .RegisterType<IBootstrapper, Vs2010Bootstrapper>(new Version(10, 0).ToString(_VERSION_STRING_DETAIL_SPECIFIC))
                 .RegisterType<IBootstrapper, Vs2013Bootstrapper>(new Version(12, 0).ToString(_VERSION_STRING_DETAIL_SPECIFIC))
+                .RegisterType<IBootstrapper, Vs2015Bootstrapper>(new Version(14, 0).ToString(_VERSION_STRING_DETAIL_SPECIFIC))
             ;
         }
 
@@ -124,8 +126,7 @@
             }
             catch (ResolutionFailedException)
             {
-                throw new NotSupportedException(
-                    String.Format("Visual Studio Version {0} is not supported by this extension!", version.FullVersion));
+                throw new NotSupportedException($"Visual Studio Version {version.FullVersion} is not supported by this extension!");
             }
             
             bootstrapper.Configure(container);

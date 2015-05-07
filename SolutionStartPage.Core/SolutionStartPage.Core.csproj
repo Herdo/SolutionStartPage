@@ -78,6 +78,10 @@
       <Project>{d338e438-f108-4b43-9d22-a99066c1aa5e}</Project>
       <Name>SolutionStartPage.Vs2013</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SolutionStartPage.Vs2015\SolutionStartPage.Vs2015.csproj">
+      <Project>{ba455b7b-895c-45fa-9ff4-c5efa4f69dd7}</Project>
+      <Name>SolutionStartPage.Vs2015</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -86,6 +90,7 @@
     <EmbeddedResource Include="Localization\Main.de-DE.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Main.de-DE.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Localization\Main.resx">
       <Generator>ResXFileCodeGenerator</Generator>

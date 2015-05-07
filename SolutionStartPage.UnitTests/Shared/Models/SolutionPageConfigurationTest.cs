@@ -1,4 +1,5 @@
-﻿namespace SolutionStartPage.UnitTests.Shared.Models
+﻿// ReSharper disable UseObjectOrCollectionInitializer
+namespace SolutionStartPage.UnitTests.Shared.Models
 {
     using System;
     using System.Collections.ObjectModel;

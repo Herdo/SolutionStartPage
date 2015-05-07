@@ -16,10 +16,7 @@
         /////////////////////////////////////////////////////////
         #region Properties
 
-        private Solution Solution
-        {
-            get { return DataContext as Solution; }
-        }
+        private Solution Solution => DataContext as Solution;
 
         #endregion
 
@@ -40,7 +37,7 @@
 
         private void SetImageBinding()
         {
-            if (Solution == null || Solution.FileSystem == null)
+            if (Solution?.FileSystem == null)
                 return;
 
             var converter = new PathToSystemImageConverter(Solution.FileSystem);
@@ -59,26 +56,22 @@
 
         private void OpenSolution_OnExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            if (Solution != null)
-                Solution.TriggerOpenSolution_Executed(Solution, e);
+            Solution?.TriggerOpenSolution_Executed(Solution, e);
         }
 
         private void OpenSolution_OnCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            if (Solution != null)
-                Solution.TriggerOpenSolution_CanExecute(Solution, e);
+            Solution?.TriggerOpenSolution_CanExecute(Solution, e);
         }
 
         private void AlterSolution_OnExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            if (Solution != null)
-                Solution.TriggerAlterSolution_Executed(Solution, e);
+            Solution?.TriggerAlterSolution_Executed(Solution, e);
         }
 
         private void AlterSolution_OnCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            if (Solution != null)
-                Solution.TriggerAlterSolution_CanExecute(Solution, e);
+            Solution?.TriggerAlterSolution_CanExecute(Solution, e);
         }
 
         void SolutionControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)

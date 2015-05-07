@@ -8,7 +8,7 @@
 // ReSharper disable InconsistentNaming
 // ReSharper disable CheckNamespace
 
-namespace SolutionStartPage.Vs2010.Annotations
+namespace SolutionStartPage.Vs2015.Annotations
 {
     using System;
     using System.Diagnostics;

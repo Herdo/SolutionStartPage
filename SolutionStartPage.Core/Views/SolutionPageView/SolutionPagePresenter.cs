@@ -201,7 +201,7 @@
                      targetDirectory = solution.ComputedSolutionDirectory;
                      if (_model.GetParentDirectory(targetDirectory) == null) return;
 
-                     var parentArgument = String.Format(@"/select,{0}", new Uri(targetDirectory).LocalPath);
+                     var parentArgument = $@"/select,{new Uri(targetDirectory).LocalPath}";
                      Process.Start("explorer", parentArgument);
                      break;
                  case 2:
@@ -217,7 +217,7 @@
                          targetDirectory = solution.ComputedSolutionDirectory;
                      }
 
-                     var parentParentArgument = String.Format(@"/select,{0}", new Uri(targetDirectory).LocalPath);
+                     var parentParentArgument = $@"/select,{new Uri(targetDirectory).LocalPath}";
                      Process.Start("explorer", parentParentArgument);
                      break;
                  default:
@@ -353,8 +353,7 @@
              switch (param)
              {
                  case CommandParameter.OPEN_SOLUTION_OPEN:
-                     if (_ide != null)
-                         _ide.OpenSolution(solution.SolutionPath);
+                     _ide?.OpenSolution(solution.SolutionPath);
                      break;
                  case CommandParameter.OPEN_SOLUTION_OPEN_EXPLORER:
                      OpenSolutionDirectoryExplorer(solution);

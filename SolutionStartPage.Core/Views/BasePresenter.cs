@@ -7,19 +7,11 @@
         where TViewModel : IViewModel
     {
         /////////////////////////////////////////////////////////
-        #region Fields
-
-        private readonly TView _view;
-        private readonly TViewModel _viewModel;
-
-        #endregion
-
-        /////////////////////////////////////////////////////////
         #region Properties
 
-        public TView View { get { return _view; } }
+        public TView View { get; }
 
-        public TViewModel ViewModel { get { return _viewModel; } }
+        public TViewModel ViewModel { get; }
 
         #endregion
 
@@ -28,8 +20,8 @@
 
         protected BasePresenter(TView view, TViewModel viewModel)
         {
-            _view = view;
-            _viewModel = viewModel;
+            View = view;
+            ViewModel = viewModel;
         }
 
         #endregion

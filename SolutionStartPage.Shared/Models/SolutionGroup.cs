@@ -9,6 +9,7 @@
     using Annotations;
     using BLL.Provider;
     using Extensions;
+    using static System.String;
 
     public class SolutionGroup : INotifyPropertyChanged
     {
@@ -64,10 +65,7 @@
         public ObservableCollection<Solution> Solutions { get; set; }
 
         [XmlIgnore]
-        public bool EditModeEnabled
-        {
-            get { return _viewStateProvider.EditModeEnabled; }
-        }
+        public bool EditModeEnabled => _viewStateProvider.EditModeEnabled;
 
         #endregion
 
@@ -84,7 +82,7 @@
         {
             ViewStateProvider = viewStateProvider;
 
-            GroupName = String.Empty;
+            GroupName = Empty;
             Solutions = new ObservableCollection<Solution>();
         }
 

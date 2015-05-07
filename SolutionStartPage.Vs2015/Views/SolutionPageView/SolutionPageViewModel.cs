@@ -1,4 +1,4 @@
-﻿﻿namespace SolutionStartPage.Vs2013.Views.SolutionPageView
+﻿﻿namespace SolutionStartPage.Vs2015.Views.SolutionPageView
  {
      using Shared.BLL.Provider;
      using Shared.Views.SolutionPageView;
