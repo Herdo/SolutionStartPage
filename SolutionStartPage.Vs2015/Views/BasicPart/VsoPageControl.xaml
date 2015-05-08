@@ -49,7 +49,6 @@
                 <RowDefinition Height="Auto"/>  <!-- Start -->
                 <RowDefinition Height="*"/>     <!-- Recent Project / Solution List -->
                 <RowDefinition Height="Auto" /> <!-- Options -->
-                <RowDefinition Height="Auto" /> <!-- Options -->
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="22"/>

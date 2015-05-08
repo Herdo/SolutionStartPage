@@ -1,3 +1,9 @@
+# 2.0
+- Added support for VS 2015 (RC)
+- Added "Open parent directory"-Feature (by holding Ctrl and/or Shift while clicking a directory)
+- Added warning icon and tooltip for not existing solution files or diretories
+- Added localization (implemented for en-US (default) and de-DE)
+
 # 1.5
 - Fixed "Solution Buttons are always disabled"
 - New layout for the Settings region

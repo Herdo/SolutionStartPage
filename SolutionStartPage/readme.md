@@ -1,6 +1,6 @@
 # Solution Start Page
 
-This is a start page based on the default VS2013 one.
+This is a start page based on the default VS2010, VS2013 and VS2015 one.
 The 'news' section is replaced by a customizable overview of your solutions.
 
 
