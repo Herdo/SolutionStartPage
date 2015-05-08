@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:platformUi="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.12.0"
              xmlns:vsfxim="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.Immutable.11.0"
-             xmlns:vsfx="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.12.0">
+             xmlns:vsfx="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.12.0"
+             Background="Transparent">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Microsoft.VisualStudio.Shell.12.0;component/ui/styles/startpageresources.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Microsoft.VisualStudio.Shell.12.0;component/ui/styles/startpageresources.xaml"/>
                 <ResourceDictionary>
                     <Style x:Key="StartPage.ProjectCommand.LinkStyle" TargetType="{x:Type platformUi:ImageButton}" BasedOn="{StaticResource StartPage.ProjectCommand.ButtonStyle}">
                         <Setter Property="Template">
@@ -48,35 +49,28 @@
                 <RowDefinition Height="Auto"/>  <!-- Start -->
                 <RowDefinition Height="*"/>     <!-- Recent Project / Solution List -->
                 <RowDefinition Height="Auto" /> <!-- Options -->
+                <RowDefinition Height="Auto" /> <!-- Options -->
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="32"/>
+                <ColumnDefinition Width="22"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-
-            <!-- Symbol -->
-            <Polygon Grid.Row="0"
-                     Grid.Column="0"
-                     VerticalAlignment="Center"
-                     HorizontalAlignment="Left"
-                     Margin="0,40,0,0"
-                     Stroke="{DynamicResource {x:Static vsfx:VsBrushes.ControlOutlineKey}}"
-                     Fill="{DynamicResource {x:Static vsfx:VsBrushes.ControlOutlineKey}}"
-                     Points="0,0 19,20 0,40"/>
 
             <!-- Header -->
             <TextBlock Grid.Row="0"
                        Grid.Column="1"
                        x:Name="VisualStudioEditionTextBlock"
                        Style="{DynamicResource StartPage.AnnouncementsHeadingTextStyle}"
-                       Margin="0,41,0,0"
-                       FontSize="26"
-                       Text="{Binding FullEditionName}"/>
+                       Margin="0,25,0,0"
+                       FontSize="28"
+                       FontWeight="ExtraBold"
+                       FontStretch="SemiCondensed"
+                       Text="{Binding StartPageHeaderTitle}"/>
 
             <!-- Start -->
             <Grid Grid.Row="1"
                   Grid.Column="1"
-                  Margin="2,31,30,0">
+                  Margin="6,37,30,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -108,7 +102,7 @@
             <!-- Recent Project / Solution List -->
             <Grid Grid.Row="2"
                   Grid.Column="1"
-                  Margin="2,33,30,0">
+                  Margin="7,34,30,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>

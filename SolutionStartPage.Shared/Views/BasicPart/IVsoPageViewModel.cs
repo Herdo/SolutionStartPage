@@ -2,6 +2,6 @@
 {
     public interface IVsoPageViewModel : IViewModel
     {
-        string FullEditionName { get; set; }
+        string StartPageHeaderTitle { get; set; }
     }
 }

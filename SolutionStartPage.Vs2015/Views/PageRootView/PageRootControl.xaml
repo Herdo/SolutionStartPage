@@ -5,7 +5,8 @@
              mc:Ignorable="d" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             d:DesignHeight="600" d:DesignWidth="800">
+             d:DesignHeight="600" d:DesignWidth="800"
+             Background="{DynamicResource {x:Static vsfx:VsBrushes.StartPageBackgroundKey}}">
     <Grid>
         <Grid.Resources>
             <ResourceDictionary>
@@ -16,8 +17,7 @@
         </Grid.Resources>
 
         <Grid x:Name="LayoutGrid"
-              Style="{DynamicResource StartPage.OuterGridStyle}"
-              Background="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowBackgroundKey}}">
+              Style="{DynamicResource StartPage.OuterGridStyle}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition MinWidth="275" Width="3*" MaxWidth="330" />
                 <ColumnDefinition Width="7*" MinWidth="0"/>

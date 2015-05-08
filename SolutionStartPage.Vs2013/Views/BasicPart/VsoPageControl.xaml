@@ -71,7 +71,7 @@
                        Style="{DynamicResource StartPage.AnnouncementsHeadingTextStyle}"
                        Margin="0,41,0,0"
                        FontSize="26"
-                       Text="{Binding FullEditionName}"/>
+                       Text="{Binding StartPageHeaderTitle}"/>
 
             <!-- Start -->
             <Grid Grid.Row="1"

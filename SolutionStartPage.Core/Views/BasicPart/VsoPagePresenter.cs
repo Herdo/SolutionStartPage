@@ -36,7 +36,7 @@
         
         private void LoadVmContent()
         {
-            ViewModel.FullEditionName = $"{_ide.Edition} {_vsVersion.LongVersion}";
+            ViewModel.StartPageHeaderTitle = $"{_ide.Edition} {_vsVersion.LongVersion}";
         }
 
         #endregion

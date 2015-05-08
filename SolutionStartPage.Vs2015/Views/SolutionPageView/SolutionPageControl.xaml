@@ -10,7 +10,7 @@
              xmlns:solutionPageView="clr-namespace:SolutionStartPage.Vs2015.Views.SolutionPageView"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=solutionPageView:SolutionPageViewModel, IsDesignTimeCreatable=True}"
-             Background="Transparent">
+             Background="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowBackgroundKey}}">
     
     <UserControl.CommandBindings>
         <CommandBinding Command="commands:Commands.AlterPage"

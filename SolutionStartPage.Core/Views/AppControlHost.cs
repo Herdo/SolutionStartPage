@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Globalization;
+    using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
     using BasicPart;
@@ -81,10 +82,8 @@
         {
             resourceProvider.Culture = new CultureInfo(ideAccess.LCID);
 
-            foreach (var resource in resources)
-            {
+            foreach (var resource in resources.Where(resource => !Application.Current.Resources.Contains(resource.Key)))
                 Application.Current.Resources.Add(resource.Key, resource.Value);
-            }
         }
 
         private void ConfigureSelf(IUnityContainer container)
