@@ -1,10 +1,8 @@
 ﻿namespace SolutionStartPage.Vs2015.Models
 {
     using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
     using EnvDTE80;
-    using Microsoft.Internal.VisualStudio.PlatformUI;
+    using Microsoft.VisualStudio.Shell.Interop;
     using Shared.Models;
 
     public class IdeModel : IIdeModel
@@ -14,20 +12,17 @@
 
         private static DTE2 GetDte(object dataContext)
         {
-            if (dataContext == null)
-                return null;
-            var typeDescriptor = dataContext as ICustomTypeDescriptor;
-            if (typeDescriptor != null)
-            {
-                PropertyDescriptorCollection propertyCollection = typeDescriptor.GetProperties();
-                return propertyCollection.Find("DTE", false).GetValue(dataContext) as DTE2;
-            }
-            var dataSource = dataContext as DataSource;
+            var dataSource = dataContext as IVsUIDataSource;
             if (dataSource != null)
             {
-                return dataSource.GetValue("DTE") as DTE2;
+                IVsUIObject obj;
+                object result;
+                if (dataSource.GetValue("DTE", out obj) == 0
+                 && obj.get_Data(out result) == 0)
+                {
+                    return result as DTE2;
+                }
             }
-            Debug.Assert(false, "Could not get DTE instance, was " + (dataContext == null ? "null" : dataContext.GetType().ToString()));
             return null;
         }
 
