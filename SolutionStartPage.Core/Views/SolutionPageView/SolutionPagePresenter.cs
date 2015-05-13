@@ -13,6 +13,7 @@
      using Shared.DAL;
      using Shared.Models;
      using Shared.Views.SolutionPageView;
+     using static System.String;
 
      public class SolutionPagePresenter : BasePresenter<ISolutionPageView, ISolutionPageViewModel>,
                                           ISolutionPagePresenter
@@ -111,7 +112,7 @@
          private void AddSolutionsBulk(bool singleGroup)
          {
              var selectedPath = View.BrowseBulkAddRootFolder();
-             if (!String.IsNullOrEmpty(selectedPath))
+             if (!IsNullOrEmpty(selectedPath))
                  AddSolutionsByBulk(selectedPath, singleGroup);
          }
 
@@ -123,7 +124,7 @@
              var groups = new Dictionary<string, List<FileInfo>>();
              foreach (var fileInfo in files)
              {
-                 var rootDir = (singleGroup ? selectedPath : fileInfo.DirectoryName) ?? String.Empty;
+                 var rootDir = (singleGroup ? selectedPath : fileInfo.DirectoryName) ?? Empty;
                  if (!groups.ContainsKey(rootDir))
                      groups.Add(rootDir, new List<FileInfo>());
                  var group = groups[rootDir];
@@ -158,7 +159,7 @@
              if (solution == null)
              {
                  var path = View.BrowseSolution(group);
-                 if (!String.IsNullOrEmpty(path))
+                 if (!IsNullOrEmpty(path))
                      solution = new Solution(_viewStateProvider, _fileSystem, group, path);
              }
              if (solution == null)
@@ -211,11 +212,8 @@
 
                      targetDirectory = parent.FullName;
                      parent = _model.GetParentDirectory(targetDirectory);
-                     if (parent == null)
-                     {
-                         // if no 2nd-level parent exists, use the first-level parent
-                         targetDirectory = solution.ComputedSolutionDirectory;
-                     }
+                     // if no 2nd-level parent exists, use the first-level parent
+                     targetDirectory = parent?.FullName ?? solution.ComputedSolutionDirectory;
 
                      var parentParentArgument = $@"/select,{new Uri(targetDirectory).LocalPath}";
                      Process.Start("explorer", parentParentArgument);
