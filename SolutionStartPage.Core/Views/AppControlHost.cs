@@ -7,11 +7,13 @@
     using System.Windows;
     using System.Windows.Controls;
     using BasicPart;
+    using BLL.Interfaces;
     using BLL.Provider;
     using DAL;
     using Microsoft.Practices.Unity;
     using Models;
     using Shared;
+    using Shared.BLL.Interfaces;
     using Shared.BLL.Provider;
     using Shared.DAL;
     using Shared.Models;
@@ -106,6 +108,8 @@
                 .RegisterType<VisualStudioVersion>(new ContainerControlledLifetimeManager())
                 .RegisterType<IViewStateProvider, ViewStateProvider>(new ContainerControlledLifetimeManager())
                 .RegisterType<IResourceProvider, MainResourceProvider>(new ContainerControlledLifetimeManager())
+                .RegisterType<ISystemInterface, SystemInterface>(new ContainerControlledLifetimeManager())
+                .RegisterType<IUserIOInterface, UserIOInterface>(new ContainerControlledLifetimeManager())
                 // Register DAL
                 .RegisterType<IFileSystem, FileSystem>(new ContainerControlledLifetimeManager())
                 // Register Bootstrappers for each VS Version

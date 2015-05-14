@@ -44,6 +44,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\Interfaces\SystemInterface.cs" />
+    <Compile Include="BLL\Interfaces\UserIOInterface.cs" />
     <Compile Include="DAL\FileSystem.cs" />
     <Compile Include="Localization\Main.de-DE.Designer.cs">
       <AutoGen>True</AutoGen>

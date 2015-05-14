@@ -8,6 +8,7 @@
      using System.IO;
      using System.Linq;
      using System.Windows.Input;
+     using Shared.BLL.Interfaces;
      using Shared.BLL.Provider;
      using Shared.Commands;
      using Shared.DAL;
@@ -26,18 +27,29 @@
          private readonly IIde _ide;
          private readonly IViewStateProvider _viewStateProvider;
          private readonly IFileSystem _fileSystem;
+         private readonly ISystemInterface _systemInterface;
+         private readonly IUserIOInterface _userIOInterface;
 
          #endregion
 
          /////////////////////////////////////////////////////////
          #region Constructors
 
-         public SolutionPagePresenter(ISolutionPageView view, ISolutionPageViewModel viewModel, ISolutionPageModel model, IViewStateProvider viewStateProvider, IFileSystem fileSystem, IIde ide)
+         public SolutionPagePresenter(ISolutionPageView view,
+                                      ISolutionPageViewModel viewModel,
+                                      ISolutionPageModel model,
+                                      IViewStateProvider viewStateProvider,
+                                      IFileSystem fileSystem,
+                                      ISystemInterface systemInterface,
+                                      IUserIOInterface userIOInterface,
+                                      IIde ide)
              : base(view, viewModel)
          {
              _model = model;
              _viewStateProvider = viewStateProvider;
              _fileSystem = fileSystem;
+             _systemInterface = systemInterface;
+             _userIOInterface = userIOInterface;
              _ide = ide;
 
              _configuration = _model.LoadConfiguration();
@@ -185,9 +197,9 @@
          private void OpenSolutionDirectoryExplorer(Solution solution)
          {
              var depth = 0;
-             if (Keyboard.Modifiers.HasFlag(ModifierKeys.Shift))
+             if (_userIOInterface.IsModifierKeyDown(ModifierKeys.Shift))
                  depth += 1;
-             if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
+             if (_userIOInterface.IsModifierKeyDown(ModifierKeys.Control))
                  depth += 1;
 
              string targetDirectory;
@@ -196,14 +208,14 @@
              {
                  case 0:
                      if (_model.DirectoryExists(solution.ComputedSolutionDirectory))
-                         Process.Start(solution.ComputedSolutionDirectory);
+                         _systemInterface.StartProcess(new ProcessStartInfo(solution.ComputedSolutionDirectory));
                      break;
                  case 1:
                      targetDirectory = solution.ComputedSolutionDirectory;
                      if (_model.GetParentDirectory(targetDirectory) == null) return;
 
                      var parentArgument = $@"/select,{new Uri(targetDirectory).LocalPath}";
-                     Process.Start("explorer", parentArgument);
+                     _systemInterface.StartProcess(new ProcessStartInfo("explorer", parentArgument));
                      break;
                  case 2:
                      targetDirectory = solution.ComputedSolutionDirectory;
@@ -216,8 +228,8 @@
                      targetDirectory = parent?.FullName ?? solution.ComputedSolutionDirectory;
 
                      var parentParentArgument = $@"/select,{new Uri(targetDirectory).LocalPath}";
-                     Process.Start("explorer", parentParentArgument);
-                     break;
+                    _systemInterface.StartProcess(new ProcessStartInfo("explorer", parentParentArgument));
+                    break;
                  default:
                      throw new ArgumentOutOfRangeException();
              }
