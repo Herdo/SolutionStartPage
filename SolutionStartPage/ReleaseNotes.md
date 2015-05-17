@@ -1,3 +1,6 @@
+# 2.1
+- Fixed "MRU List doesn't open any solution" (in VS 2015)
+
 # 2.0
 - Added support for VS 2015 (RC)
 - Added "Open parent directory"-Feature (by holding Ctrl and/or Shift while clicking a directory)
