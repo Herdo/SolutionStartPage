@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vsfx="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.12.0"
+             xmlns:vsfx="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.14.0"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:commands="clr-namespace:SolutionStartPage.Shared.Commands;assembly=SolutionStartPage.Shared"
              xmlns:converter="clr-namespace:SolutionStartPage.Shared.Converter;assembly=SolutionStartPage.Shared"
@@ -21,7 +21,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Microsoft.VisualStudio.Shell.12.0;component/ui/styles/startpageresources.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Microsoft.VisualStudio.Shell.14.0;component/ui/styles/startpageresources.xaml" />
                 <ResourceDictionary>
                     <!-- Converter -->
                     <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
