@@ -43,7 +43,7 @@
         <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
             <MenuItem IsCheckable="True"
                       IsChecked="{Binding EditModeEnabled}"
-                      Header="{Binding [ContextCommand_EnableEditing], Source={StaticResource Texts}}"/>
+                      Header="{Binding [ContextCommand_EnableEditing], Source={StaticResource SSP_Texts}}"/>
         </ContextMenu>
     </UserControl.ContextMenu>
 
@@ -89,7 +89,7 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Header -->
-                <TextBlock Text="{Binding [Settings], Source={StaticResource Texts}}"
+                <TextBlock Text="{Binding [Settings], Source={StaticResource SSP_Texts}}"
                            Style="{DynamicResource StartPage.ItemHeadingTextStyle}"
                            TextDecorations="Underline"
                            FontSize="24"
@@ -97,11 +97,11 @@
 
                 <GroupBox Grid.Row="0"
                           Grid.Column="2"
-                          Header="{Binding [Actions], Source={StaticResource Texts}}">
+                          Header="{Binding [Actions], Source={StaticResource SSP_Texts}}">
                     <StackPanel VerticalAlignment="Center"
                                 HorizontalAlignment="Left"
                                 Orientation="Horizontal">
-                        <Button ToolTip="{Binding [AddGroup_ToolTip], Source={StaticResource Texts}}"
+                        <Button ToolTip="{Binding [AddGroup_ToolTip], Source={StaticResource SSP_Texts}}"
                                 Command="commands:Commands.AlterPage"
                                 CommandParameter="{x:Static commands:CommandParameter.ALTER_PAGE_ADD_GROUP}"
                                 Margin="5"
@@ -115,7 +115,7 @@
                                              Margin="5"
                                              VerticalAlignment="Center"
                                              HorizontalAlignment="Left"
-                                             ToolTip="{Binding [BulkAddSolutions_ToolTip], Source={StaticResource Texts}}">
+                                             ToolTip="{Binding [BulkAddSolutions_ToolTip], Source={StaticResource SSP_Texts}}">
                             <xctk:DropDownButton.Content>
                                 <Image Source="pack://application:,,,/SolutionStartPage.Shared;component/Content/folder.png"
                                        Height="16"
@@ -123,14 +123,14 @@
                             </xctk:DropDownButton.Content>
                             <xctk:DropDownButton.DropDownContent>
                                 <StackPanel>
-                                    <Button Content="{Binding [BulkAddSolutionsSingleGroup], Source={StaticResource Texts}}"
-                                            ToolTip="{Binding [BulkAddSolutionsSingleGroup_ToolTip], Source={StaticResource Texts}}"
+                                    <Button Content="{Binding [BulkAddSolutionsSingleGroup], Source={StaticResource SSP_Texts}}"
+                                            ToolTip="{Binding [BulkAddSolutionsSingleGroup_ToolTip], Source={StaticResource SSP_Texts}}"
                                             Command="commands:Commands.AlterPage"
                                             CommandParameter="{x:Static commands:CommandParameter.ALTER_PAGE_ADD_GROUP_BULK_SINGLE}"
                                             Margin="5"
                                             Height="24"/>
-                                    <Button Content="{Binding [BulkAddSolutionsMultipleGroups], Source={StaticResource Texts}}"
-                                            ToolTip="{Binding [BulkAddSolutionsMultipleGroups_ToolTip], Source={StaticResource Texts}}"
+                                    <Button Content="{Binding [BulkAddSolutionsMultipleGroups], Source={StaticResource SSP_Texts}}"
+                                            ToolTip="{Binding [BulkAddSolutionsMultipleGroups_ToolTip], Source={StaticResource SSP_Texts}}"
                                             Command="commands:Commands.AlterPage"
                                             CommandParameter="{x:Static commands:CommandParameter.ALTER_PAGE_ADD_GROUP_BULK_MULTIPLE}"
                                             Margin="5"
@@ -138,7 +138,7 @@
                                 </StackPanel>
                             </xctk:DropDownButton.DropDownContent>
                         </xctk:DropDownButton>
-                        <Button ToolTip="{Binding [DeleteAllGroups_ToolTip], Source={StaticResource Texts}}"
+                        <Button ToolTip="{Binding [DeleteAllGroups_ToolTip], Source={StaticResource SSP_Texts}}"
                                 Command="commands:Commands.AlterPage"
                                 CommandParameter="{x:Static commands:CommandParameter.ALTER_PAGE_DELETE_ALL_GROUPS}"
                                 Margin="5"
@@ -154,7 +154,7 @@
                 <GroupBox Grid.Row="1"
                           Grid.Column="0"
                           Grid.ColumnSpan="3"
-                          Header="{Binding [Layout], Source={StaticResource Texts}}">
+                          Header="{Binding [Layout], Source={StaticResource SSP_Texts}}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -163,7 +163,7 @@
 
                         <!-- Columns -->
                         <TextBlock Style="{DynamicResource StartPage.ItemHeadingTextStyle}"
-                                   Text="{Binding [Columns], Source={StaticResource Texts}}"/>
+                                   Text="{Binding [Columns], Source={StaticResource SSP_Texts}}"/>
                         <xctk:IntegerUpDown Grid.Column="1"
                                             VerticalAlignment="Center"
                                             HorizontalAlignment="Left"

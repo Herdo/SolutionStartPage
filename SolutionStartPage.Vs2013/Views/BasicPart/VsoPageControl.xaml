@@ -87,20 +87,20 @@
                 <TextBlock Grid.Row="0"
                            Margin="0,10"
                            Style="{DynamicResource StartPage.ItemHeadingTextStyle}"
-                           Text="{Binding [Start], Source={StaticResource Texts}}"/>
+                           Text="{Binding [Start], Source={StaticResource SSP_Texts}}"/>
                 <platformUi:ImageButton Grid.Row="1"
                                         Margin="0,3"
-                                        Content="{Binding [NewProject], Source={StaticResource Texts}}"
+                                        Content="{Binding [NewProject], Source={StaticResource SSP_Texts}}"
                                         Style="{StaticResource StartPage.ProjectCommand.LinkStyle}"
                                         Command="{x:Static vsfxim:VSCommands.ExecuteCommand}" CommandParameter="File.NewProject"/>
                 <platformUi:ImageButton Grid.Row="2"
                                         Margin="0,3"
-                                        Content="{Binding [OpenProject], Source={StaticResource Texts}}"
+                                        Content="{Binding [OpenProject], Source={StaticResource SSP_Texts}}"
                                         Style="{StaticResource StartPage.ProjectCommand.LinkStyle}"
                                         Command="{x:Static vsfxim:VSCommands.ExecuteCommand}" CommandParameter="File.OpenProject"/>
                 <platformUi:ImageButton Grid.Row="3"
                                         Margin="0,3"
-                                        Content="{Binding [OpenFromSourceControl], Source={StaticResource Texts}}"
+                                        Content="{Binding [OpenFromSourceControl], Source={StaticResource SSP_Texts}}"
                                         Style="{StaticResource StartPage.ProjectCommand.LinkStyle}"
                                         Command="{x:Static vsfxim:VSCommands.ExecuteCommand}" CommandParameter="File.OpenfromSourceControl"/>
             </Grid>
@@ -116,7 +116,7 @@
                 <TextBlock Grid.Row="0"
                            Margin="0,10"
                            Style="{DynamicResource StartPage.ItemHeadingTextStyle}"
-                           Text="{Binding [Recent], Source={StaticResource Texts}}"/>
+                           Text="{Binding [Recent], Source={StaticResource SSP_Texts}}"/>
 
                 <platformUi:MruListBox Grid.Row="1"
                                        Margin="-28,0,0,0"
@@ -133,11 +133,11 @@
                         Margin="4,0,30,49">
                 <CheckBox Style="{StaticResource StartPage.CheckBoxStyle}"
                           Margin="0,5,0,0"
-                          Content="{Binding [KeepPageOpenAfterLoad], Source={StaticResource Texts}}"
+                          Content="{Binding [KeepPageOpenAfterLoad], Source={StaticResource SSP_Texts}}"
                           IsChecked="{Binding KeepPageOpenAfterOpenProject, Mode=TwoWay}"/>
                 <CheckBox Style="{StaticResource StartPage.CheckBoxStyle}"
                           Margin="0,5,0,0"
-                          Content="{Binding [ShowPageOnStartup], Source={StaticResource Texts}}"
+                          Content="{Binding [ShowPageOnStartup], Source={StaticResource SSP_Texts}}"
                           IsChecked="{Binding ShowPageAtStartup, Mode=TwoWay}"/>
             </StackPanel>
         </Grid>

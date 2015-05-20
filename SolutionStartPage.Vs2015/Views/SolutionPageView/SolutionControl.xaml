@@ -117,14 +117,14 @@
             </StackPanel>
             <Image Style="{StaticResource ResourceNotAvailableWarningStyle}"
                    Visibility="{Binding SolutionAvailable, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}"
-                   ToolTip="{Binding [SolutionDoesntExist_ToolTip], Source={StaticResource Texts}}"/>
+                   ToolTip="{Binding [SolutionDoesntExist_ToolTip], Source={StaticResource SSP_Texts}}"/>
         </Grid>
 
         <TextBox Grid.Row="0"
                  Text="{Binding SolutionDisplayName, UpdateSourceTrigger=PropertyChanged}"
                  FontSize="{Binding ElementName=DisplayNameTextBlock, Path=FontSize}"
                  VerticalAlignment="Top"
-                 ToolTip="{Binding [SetDisplayName_ToolTip], Source={StaticResource Texts}}"
+                 ToolTip="{Binding [SetDisplayName_ToolTip], Source={StaticResource SSP_Texts}}"
                  Visibility="{Binding EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}}"/>
 
         <!-- Solution Directory -->
@@ -148,7 +148,7 @@
             </StackPanel>
             <Image Style="{StaticResource ResourceNotAvailableWarningStyle}"
                    Visibility="{Binding SolutionDirectoryAvailable, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}"
-                   ToolTip="{Binding [DirectoryDoesntExist_ToolTip], Source={StaticResource Texts}}"/>
+                   ToolTip="{Binding [DirectoryDoesntExist_ToolTip], Source={StaticResource SSP_Texts}}"/>
         </Grid>
 
         <StackPanel Grid.Row="2"
@@ -156,9 +156,9 @@
             <TextBox Text="{Binding SolutionDirectory, UpdateSourceTrigger=PropertyChanged}"
                      FontSize="{Binding ElementName=SolutionDirectoryTextBlock, Path=FontSize}"
                      VerticalAlignment="Top"
-                     ToolTip="{Binding [SetSolutionDirectoryPath_ToolTip], Source={StaticResource Texts}}"/>
+                     ToolTip="{Binding [SetSolutionDirectoryPath_ToolTip], Source={StaticResource SSP_Texts}}"/>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding [DirectoryPreview], Source={StaticResource Texts}}"
+                <TextBlock Text="{Binding [DirectoryPreview], Source={StaticResource SSP_Texts}}"
                            FontSize="{Binding ElementName=SolutionDirectoryTextBlock, Path=FontSize}"
                            Style="{DynamicResource StartPage.DiscoverVS.RegularTextStyle}"
                            VerticalAlignment="Top"
@@ -177,7 +177,7 @@
         <StackPanel Grid.Row="3"
                     Orientation="Horizontal"
                     Visibility="{Binding EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}}">
-            <Button ToolTip="{Binding [HeaderCommand_MoveUp_ToolTip], Source={StaticResource Texts}}"
+            <Button ToolTip="{Binding [HeaderCommand_MoveUp_ToolTip], Source={StaticResource SSP_Texts}}"
                     Command="commands:Commands.AlterSolution"
                     CommandParameter="{x:Static commands:CommandParameter.ALTER_SOLUTION_MOVE_UP}"
                     Margin="5"
@@ -187,7 +187,7 @@
                        Height="16"
                        Width="16"/>
             </Button>
-            <Button ToolTip="{Binding [HeaderCommand_MoveDown_ToolTip], Source={StaticResource Texts}}"
+            <Button ToolTip="{Binding [HeaderCommand_MoveDown_ToolTip], Source={StaticResource SSP_Texts}}"
                     Command="commands:Commands.AlterSolution"
                     CommandParameter="{x:Static commands:CommandParameter.ALTER_SOLUTION_MOVE_DOWN}"
                     Margin="5"
@@ -197,7 +197,7 @@
                        Height="16"
                        Width="16"/>
             </Button>
-            <Button ToolTip="{Binding [HeaderCommand_RemoveSolution_ToolTip], Source={StaticResource Texts}}"
+            <Button ToolTip="{Binding [HeaderCommand_RemoveSolution_ToolTip], Source={StaticResource SSP_Texts}}"
                     Command="commands:Commands.AlterSolution"
                     CommandParameter="{x:Static commands:CommandParameter.ALTER_SOLUTION_REMOVE_SOLUTION}"
                     Margin="5"

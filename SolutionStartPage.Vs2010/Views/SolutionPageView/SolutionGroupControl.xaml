@@ -119,7 +119,7 @@
                      VerticalAlignment="Center"
                      Rows="2"
                      Columns="2">
-            <Button ToolTip="{Binding [HeaderCommand_MoveBack_ToolTip], Source={StaticResource Texts}}"
+            <Button ToolTip="{Binding [HeaderCommand_MoveBack_ToolTip], Source={StaticResource SSP_Texts}}"
                     Command="commands:Commands.AlterSolutionGroup"
                     CommandParameter="{x:Static commands:CommandParameter.ALTER_SOLUTION_GROUP_MOVE_GROUP_BACK}"
                     Margin="5"
@@ -129,7 +129,7 @@
                        Height="16"
                        Width="16"/>
             </Button>
-            <Button ToolTip="{Binding [HeaderCommand_MoveForward_ToolTip], Source={StaticResource Texts}}"
+            <Button ToolTip="{Binding [HeaderCommand_MoveForward_ToolTip], Source={StaticResource SSP_Texts}}"
                     Command="commands:Commands.AlterSolutionGroup"
                     CommandParameter="{x:Static commands:CommandParameter.ALTER_SOLUTION_GROUP_MOVE_GROUP_FORWARD}"
                     Margin="5"
@@ -139,7 +139,7 @@
                        Height="16"
                        Width="16"/>
             </Button>
-            <Button ToolTip="{Binding [HeaderCommand_AddSolution_ToolTip], Source={StaticResource Texts}}"
+            <Button ToolTip="{Binding [HeaderCommand_AddSolution_ToolTip], Source={StaticResource SSP_Texts}}"
                     Command="commands:Commands.AlterSolutionGroup"
                     CommandParameter="{x:Static commands:CommandParameter.ALTER_SOLUTION_GROUP_ADD_SOLUTION}"
                     Margin="5"
@@ -149,7 +149,7 @@
                        Height="16"
                        Width="16"/>
             </Button>
-            <Button ToolTip="{Binding [HeaderCommand_RemoveGroup_ToolTip], Source={StaticResource Texts}}"
+            <Button ToolTip="{Binding [HeaderCommand_RemoveGroup_ToolTip], Source={StaticResource SSP_Texts}}"
                     Command="commands:Commands.AlterSolutionGroup"
                     CommandParameter="{x:Static commands:CommandParameter.ALTER_SOLUTION_GROUP_REMOVE_GROUP}"
                     Margin="5"

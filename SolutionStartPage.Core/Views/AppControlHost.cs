@@ -74,7 +74,7 @@
             var ideAccess = container.Resolve<IIde>();
             var resources = new Dictionary<object, object>
             {
-                {"Texts", resourceProvider}
+                {"SSP_Texts", resourceProvider}
             };
 
             RegisterGlobalResources(resourceProvider, ideAccess, resources);
