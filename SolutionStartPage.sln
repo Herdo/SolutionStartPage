@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolutionStartPage.UnitTests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolutionStartPage.Vs2015", "SolutionStartPage.Vs2015\SolutionStartPage.Vs2015.csproj", "{BA455B7B-895C-45FA-9FF4-C5EFA4F69DD7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartPageDebugHelper", "StartPageDebugHelper\StartPageDebugHelper.csproj", "{49970AF0-2C3F-48EA-8EBE-D236A1FF88FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,10 @@ Global
 		{BA455B7B-895C-45FA-9FF4-C5EFA4F69DD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA455B7B-895C-45FA-9FF4-C5EFA4F69DD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA455B7B-895C-45FA-9FF4-C5EFA4F69DD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49970AF0-2C3F-48EA-8EBE-D236A1FF88FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49970AF0-2C3F-48EA-8EBE-D236A1FF88FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49970AF0-2C3F-48EA-8EBE-D236A1FF88FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49970AF0-2C3F-48EA-8EBE-D236A1FF88FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
