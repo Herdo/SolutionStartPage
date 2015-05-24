@@ -7,7 +7,6 @@
              xmlns:vsfx="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.14.0"
              xmlns:models="clr-namespace:SolutionStartPage.Shared.Models;assembly=SolutionStartPage.Shared"
              xmlns:commands="clr-namespace:SolutionStartPage.Shared.Commands;assembly=SolutionStartPage.Shared"
-             xmlns:converter="clr-namespace:SolutionStartPage.Shared.Converter;assembly=SolutionStartPage.Shared"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=models:Solution, IsDesignTimeCreatable=True}"
              Margin="0,5,0,0"
@@ -26,21 +25,10 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Microsoft.VisualStudio.Shell.14.0;component/ui/styles/startpageresources.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/SolutionStartPage.Shared;component/Resources/CommonStyles.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/SolutionStartPage.Shared;component/Resources/CommonConverter.xaml"/>
                 <ResourceDictionary>
-                    <!-- Converter -->
-                    <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-                    <converter:SolutionWidthToTextWidthConverter x:Key="SolutionWidthToTextWidthConverter"/>
-                    <converter:BoolToOpacityConverter x:Key="BoolToOpacityConverter"/>
-                    
                     <!-- Styles -->
-                    <Style x:Key="SolutionImageStyle"
-                           TargetType="Image">
-                        <Setter Property="Width" Value="16"/>
-                        <Setter Property="Height" Value="16"/>
-                        <Setter Property="Margin" Value="5"/>
-                        <Setter Property="VerticalAlignment" Value="Center"/>
-                        <Setter Property="HorizontalAlignment" Value="Center"/>
-                    </Style>
                     <Style x:Key="StartPage.ProjectCommand.LinkStyle" TargetType="{x:Type platformUi:ImageButton}" BasedOn="{StaticResource StartPage.ProjectCommand.ButtonStyle}">
                         <Setter Property="Template">
                             <Setter.Value>
@@ -71,16 +59,6 @@
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
-                    </Style>
-                    <Style x:Key="ResourceNotAvailableWarningStyle"
-                           TargetType="{x:Type Image}">
-                        <Style.Setters>
-                            <Setter Property="VerticalAlignment" Value="Center"/>
-                            <Setter Property="HorizontalAlignment" Value="Center"/>
-                            <Setter Property="Width" Value="24"/>
-                            <Setter Property="Height" Value="24"/>
-                            <Setter Property="Source" Value="pack://application:,,,/SolutionStartPage.Shared;component/Content/warning.png"/>
-                        </Style.Setters>
                     </Style>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
@@ -132,8 +110,7 @@
               Visibility="{Binding EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}">
             <StackPanel Orientation="Horizontal"
                         Opacity="{Binding SolutionDirectoryAvailable, Converter={StaticResource BoolToOpacityConverter}, ConverterParameter=0.3, Mode=OneWay}">
-                <Image Source="pack://application:,,,/SolutionStartPage.Shared;component/Content/folder.png"
-                       Style="{StaticResource SolutionImageStyle}"/>
+                <Image Style="{StaticResource SolutionImageFolderStyle}"/>
                 <platformUi:ImageButton Margin="5,0,0,0"
                                         Content="{Binding ComputedSolutionDirectory}"
                                         Style="{StaticResource StartPage.ProjectCommand.LinkStyle}"
@@ -180,32 +157,20 @@
             <Button ToolTip="{Binding [HeaderCommand_MoveUp_ToolTip], Source={StaticResource SSP_Texts}}"
                     Command="commands:Commands.AlterSolution"
                     CommandParameter="{x:Static commands:CommandParameter.ALTER_SOLUTION_MOVE_UP}"
-                    Margin="5"
-                    Height="24"
-                    Width="24">
-                <Image Source="pack://application:,,,/SolutionStartPage.Shared;component/Content/up.png"
-                       Height="16"
-                       Width="16"/>
+                    Style="{StaticResource CommandButtonStyle}">
+                <Image Style="{StaticResource UpCommandImageStyle}"/>
             </Button>
             <Button ToolTip="{Binding [HeaderCommand_MoveDown_ToolTip], Source={StaticResource SSP_Texts}}"
                     Command="commands:Commands.AlterSolution"
                     CommandParameter="{x:Static commands:CommandParameter.ALTER_SOLUTION_MOVE_DOWN}"
-                    Margin="5"
-                    Height="24"
-                    Width="24">
-                <Image Source="pack://application:,,,/SolutionStartPage.Shared;component/Content/down.png"
-                       Height="16"
-                       Width="16"/>
+                    Style="{StaticResource CommandButtonStyle}">
+                <Image Style="{StaticResource DownCommandImageStyle}"/>
             </Button>
             <Button ToolTip="{Binding [HeaderCommand_RemoveSolution_ToolTip], Source={StaticResource SSP_Texts}}"
                     Command="commands:Commands.AlterSolution"
                     CommandParameter="{x:Static commands:CommandParameter.ALTER_SOLUTION_REMOVE_SOLUTION}"
-                    Margin="5"
-                    Height="24"
-                    Width="24">
-                <Image Source="pack://application:,,,/SolutionStartPage.Shared;component/Content/remove.png"
-                       Height="16"
-                       Width="16"/>
+                    Style="{StaticResource CommandButtonStyle}">
+                <Image Style="{StaticResource RemoveCommandImageStyle}"/>
             </Button>
         </StackPanel>
         

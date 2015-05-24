@@ -6,7 +6,6 @@
              xmlns:vsfx="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.12.0"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:commands="clr-namespace:SolutionStartPage.Shared.Commands;assembly=SolutionStartPage.Shared"
-             xmlns:converter="clr-namespace:SolutionStartPage.Shared.Converter;assembly=SolutionStartPage.Shared"
              xmlns:solutionPageView="clr-namespace:SolutionStartPage.Vs2013.Views.SolutionPageView"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=solutionPageView:SolutionPageViewModel, IsDesignTimeCreatable=True}"
@@ -22,10 +21,9 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Microsoft.VisualStudio.Shell.12.0;component/ui/styles/startpageresources.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/SolutionStartPage.Shared;component/Resources/CommonStyles.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/SolutionStartPage.Shared;component/Resources/CommonConverter.xaml"/>
                 <ResourceDictionary>
-                    <!-- Converter -->
-                    <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-                    
                     <!-- Styles -->
                     <Style TargetType="TextBlock">
                         <Setter Property="Foreground" Value="{DynamicResource {x:Static vsfx:VsBrushes.StartPageTextControlLinkSelectedKey}}"/>
@@ -118,9 +116,7 @@
                                 Margin="5"
                                 Height="{Binding ElementName=BulkAddDropDownButton, Path=Height}"
                                 Width="{Binding ElementName=BulkAddDropDownButton, Path=Width}">
-                            <Image Source="pack://application:,,,/SolutionStartPage.Shared;component/Content/add.png"
-                                   Height="16"
-                                   Width="16"/>
+                            <Image Style="{StaticResource AddCommandImageStyle}"/>
                         </Button>
                         <xctk:DropDownButton x:Name="BulkAddDropDownButton"
                                              Margin="5"
@@ -128,9 +124,7 @@
                                              HorizontalAlignment="Left"
                                              ToolTip="{Binding [BulkAddSolutions_ToolTip], Source={StaticResource SSP_Texts}}">
                             <xctk:DropDownButton.Content>
-                                <Image Source="pack://application:,,,/SolutionStartPage.Shared;component/Content/folder.png"
-                                       Height="16"
-                                       Width="16"/>
+                                <Image Style="{StaticResource FolderCommandImageStyle}"/>
                             </xctk:DropDownButton.Content>
                             <xctk:DropDownButton.DropDownContent>
                                 <StackPanel>
@@ -155,9 +149,7 @@
                                 Margin="5"
                                 Height="{Binding ElementName=BulkAddDropDownButton, Path=Height}"
                                 Width="{Binding ElementName=BulkAddDropDownButton, Path=Width}">
-                            <Image Source="pack://application:,,,/SolutionStartPage.Shared;component/Content/delete_all.png"
-                                   Height="16"
-                                   Width="16"/>
+                            <Image Style="{StaticResource DeleteAllCommandImageStyle}"/>
                         </Button>
                     </StackPanel>
                 </GroupBox>

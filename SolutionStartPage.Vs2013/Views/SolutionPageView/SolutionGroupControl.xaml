@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:models="clr-namespace:SolutionStartPage.Shared.Models;assembly=SolutionStartPage.Shared"
              xmlns:commands="clr-namespace:SolutionStartPage.Shared.Commands;assembly=SolutionStartPage.Shared"
-             xmlns:converter="clr-namespace:SolutionStartPage.Shared.Converter;assembly=SolutionStartPage.Shared"
              xmlns:solutionPageView="clr-namespace:SolutionStartPage.Vs2013.Views.SolutionPageView"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=models:SolutionGroup, IsDesignTimeCreatable=True}"
@@ -23,10 +22,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Microsoft.VisualStudio.Shell.12.0;component/ui/styles/startpageresources.xaml" />
-                <ResourceDictionary>
-                    <!-- Converter -->
-                    <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-                </ResourceDictionary>
+                <ResourceDictionary Source="pack://application:,,,/SolutionStartPage.Shared;component/Resources/CommonStyles.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/SolutionStartPage.Shared;component/Resources/CommonConverter.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -68,42 +65,26 @@
             <Button ToolTip="{Binding [HeaderCommand_MoveBack_ToolTip], Source={StaticResource SSP_Texts}}"
                     Command="commands:Commands.AlterSolutionGroup"
                     CommandParameter="{x:Static commands:CommandParameter.ALTER_SOLUTION_GROUP_MOVE_GROUP_BACK}"
-                    Margin="5"
-                    Height="24"
-                    Width="24">
-                <Image Source="pack://application:,,,/SolutionStartPage.Shared;component/Content/back.png"
-                       Height="16"
-                       Width="16"/>
+                    Style="{StaticResource CommandButtonStyle}">
+                <Image Style="{StaticResource BackCommandImageStyle}"/>
             </Button>
             <Button ToolTip="{Binding [HeaderCommand_MoveForward_ToolTip], Source={StaticResource SSP_Texts}}"
                     Command="commands:Commands.AlterSolutionGroup"
                     CommandParameter="{x:Static commands:CommandParameter.ALTER_SOLUTION_GROUP_MOVE_GROUP_FORWARD}"
-                    Margin="5"
-                    Height="24"
-                    Width="24">
-                <Image Source="pack://application:,,,/SolutionStartPage.Shared;component/Content/forward.png"
-                       Height="16"
-                       Width="16"/>
+                    Style="{StaticResource CommandButtonStyle}">
+                <Image Style="{StaticResource ForwardCommandImageStyle}"/>
             </Button>
             <Button ToolTip="{Binding [HeaderCommand_AddSolution_ToolTip], Source={StaticResource SSP_Texts}}"
                     Command="commands:Commands.AlterSolutionGroup"
                     CommandParameter="{x:Static commands:CommandParameter.ALTER_SOLUTION_GROUP_ADD_SOLUTION}"
-                    Margin="5"
-                    Height="24"
-                    Width="24">
-                <Image Source="pack://application:,,,/SolutionStartPage.Shared;component/Content/add.png"
-                       Height="16"
-                       Width="16"/>
+                    Style="{StaticResource CommandButtonStyle}">
+                <Image Style="{StaticResource AddCommandImageStyle}"/>
             </Button>
             <Button ToolTip="{Binding [HeaderCommand_RemoveGroup_ToolTip], Source={StaticResource SSP_Texts}}"
                     Command="commands:Commands.AlterSolutionGroup"
                     CommandParameter="{x:Static commands:CommandParameter.ALTER_SOLUTION_GROUP_REMOVE_GROUP}"
-                    Margin="5"
-                    Height="24"
-                    Width="24">
-                <Image Source="pack://application:,,,/SolutionStartPage.Shared;component/Content/remove.png"
-                       Height="16"
-                       Width="16"/>
+                    Style="{StaticResource CommandButtonStyle}">
+                <Image Style="{StaticResource RemoveCommandImageStyle}"/>
             </Button>
         </UniformGrid>
 

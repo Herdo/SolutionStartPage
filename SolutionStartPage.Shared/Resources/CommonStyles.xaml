@@ -1,0 +1,117 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!-- Commanding -->
+    <Style x:Key="CommandImageStyle"
+           TargetType="Image">
+        <Style.Setters>
+            <Setter Property="Height" Value="16"/>
+            <Setter Property="Width" Value="16"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style.Setters>
+    </Style>
+    
+    <Style x:Key="AddCommandImageStyle"
+           TargetType="Image"
+           BasedOn="{StaticResource CommandImageStyle}">
+        <Style.Setters>
+            <Setter Property="Source" Value="../Content/add.png"/>
+        </Style.Setters>
+    </Style>
+
+    <Style x:Key="BackCommandImageStyle"
+           TargetType="Image"
+           BasedOn="{StaticResource CommandImageStyle}">
+        <Style.Setters>
+            <Setter Property="Source" Value="../Content/back.png"/>
+        </Style.Setters>
+    </Style>
+
+    <Style x:Key="DeleteAllCommandImageStyle"
+           TargetType="Image"
+           BasedOn="{StaticResource CommandImageStyle}">
+        <Style.Setters>
+            <Setter Property="Source" Value="../Content/delete_all.png"/>
+        </Style.Setters>
+    </Style>
+
+    <Style x:Key="DownCommandImageStyle"
+           TargetType="Image"
+           BasedOn="{StaticResource CommandImageStyle}">
+        <Style.Setters>
+            <Setter Property="Source" Value="../Content/down.png"/>
+        </Style.Setters>
+    </Style>
+
+    <Style x:Key="FolderCommandImageStyle"
+           TargetType="Image"
+           BasedOn="{StaticResource CommandImageStyle}">
+        <Style.Setters>
+            <Setter Property="Source" Value="../Content/folder.png"/>
+        </Style.Setters>
+    </Style>
+
+    <Style x:Key="ForwardCommandImageStyle"
+           TargetType="Image"
+           BasedOn="{StaticResource CommandImageStyle}">
+        <Style.Setters>
+            <Setter Property="Source" Value="../Content/forward.png"/>
+        </Style.Setters>
+    </Style>
+
+    <Style x:Key="RemoveCommandImageStyle"
+           TargetType="Image"
+           BasedOn="{StaticResource CommandImageStyle}">
+        <Style.Setters>
+            <Setter Property="Source" Value="../Content/remove.png"/>
+        </Style.Setters>
+    </Style>
+
+    <Style x:Key="UpCommandImageStyle"
+           TargetType="Image"
+           BasedOn="{StaticResource CommandImageStyle}">
+        <Style.Setters>
+            <Setter Property="Source" Value="../Content/up.png"/>
+        </Style.Setters>
+    </Style>
+
+    <Style x:Key="CommandButtonStyle"
+           TargetType="Button">
+        <Style.Setters>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="Width" Value="24"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style.Setters>
+    </Style>
+    
+    <!-- Control Parts -->
+    <Style x:Key="SolutionImageStyle"
+           TargetType="Image">
+        <Setter Property="Width" Value="16"/>
+        <Setter Property="Height" Value="16"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+    
+    <Style x:Key="SolutionImageFolderStyle"
+           TargetType="Image"
+           BasedOn="{StaticResource SolutionImageStyle}">
+        <Setter Property="Source" Value="../Content/folder.png"/>
+    </Style>
+    
+    <Style x:Key="ResourceNotAvailableWarningStyle"
+           TargetType="Image">
+        <Style.Setters>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="24"/>
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="Source" Value="pack://application:,,,/SolutionStartPage.Shared;component/Content/warning.png"/>
+        </Style.Setters>
+    </Style>
+
+</ResourceDictionary>
