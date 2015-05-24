@@ -36,13 +36,17 @@
                  && CheckDirectoryExistence(args[1], dir => { BinDirectory = dir; }))
                 {
                     var rootAction = ConstructActionTree();
-                    rootAction.ExecuteAction();
+
+                    while (true)
+                    {
+                        rootAction.ExecuteAction();
+
+                        ResetColor();
+                        WriteLine("Press any <Enter> to return to the main menu...");
+                        ReadLine();
+                    }
                 }
             }
-
-            ResetColor();
-            WriteLine("Press any <Enter> to exit...");
-            ReadLine();
         }
 
         private static bool CheckDirectoryExistence(string dir, Action<string> targetPropertySetter)
@@ -65,8 +69,9 @@
         {
             return new ActionSet("Main Menu", new Dictionary<int, IActionProvider>
             {
-                {0, new ExecuteableAction("Clean Debug Data", CleanDebugAction.CleanData)},
-                {1, new ExecuteableAction("Copy Debug Data", CopyDebugAction.CopyData)}
+                {0, new ExecuteableAction("Exit", () => Environment.Exit(0)) },
+                {1, new ExecuteableAction("Copy Debug Data", CopyDebugAction.CopyData)},
+                {2, new ExecuteableAction("Clean Debug Data", CleanDebugAction.CleanData)},
             });
         }
 
