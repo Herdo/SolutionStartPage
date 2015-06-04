@@ -67,6 +67,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Core\Views\BasicPart\VsoPagePresenterTest.cs" />
     <Compile Include="Shared\Converter\PathToSystemImageConverterTest.cs" />
     <Compile Include="Shared\Converter\SolutionWidthToTextWidthConverterTest.cs" />
     <Compile Include="Shared\Converter\BoolToOpacityConverterTest.cs" />
@@ -78,6 +79,10 @@
     <Compile Include="Shared\Models\SolutionTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SolutionStartPage.Core\SolutionStartPage.Core.csproj">
+      <Project>{1D7DB17C-44E8-4535-B30C-2A9AFFA3F7C6}</Project>
+      <Name>SolutionStartPage.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SolutionStartPage.Shared\SolutionStartPage.Shared.csproj">
       <Project>{221b199f-4d2f-4f3d-a04e-6c3a389f73c3}</Project>
       <Name>SolutionStartPage.Shared</Name>
