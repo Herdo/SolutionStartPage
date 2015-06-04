@@ -1,6 +1,5 @@
 ﻿namespace SolutionStartPage.Core.Views.BasicPart
 {
-    using Models;
     using Shared.Models;
     using Shared.Views.BasicPart;
 
@@ -10,7 +9,7 @@
         /////////////////////////////////////////////////////////
         #region Fields
 
-        private readonly VisualStudioVersion _vsVersion;
+        private readonly IVisualStudioVersion _vsVersion;
         private readonly IIde _ide;
 
         #endregion
@@ -18,7 +17,7 @@
         /////////////////////////////////////////////////////////
         #region Constructors
 
-        public VsoPagePresenter(VisualStudioVersion vsVersion, IIde ide, IVsoPageView view, IVsoPageViewModel viewModel)
+        public VsoPagePresenter(IVisualStudioVersion vsVersion, IIde ide, IVsoPageView view, IVsoPageViewModel viewModel)
             : base(view, viewModel)
         {
             _vsVersion = vsVersion;

@@ -3,37 +3,15 @@
     using System;
     using System.IO;
     using Shared.DAL;
+    using Shared.Models;
 
-    public class VisualStudioVersion
+    public class VisualStudioVersion : IVisualStudioVersion
     {
         /////////////////////////////////////////////////////////
-        #region Properties
+        #region Fields
 
-        public Version FullVersion { get; }
-
-        public string LongVersion { get; }
-
-        public bool Vs2015OrLater => FullVersion >= new Version(14, 0);
-
-        public bool Vs2013OrLater => FullVersion >= new Version(12, 0);
-
-        public bool Vs2012OrLater => FullVersion >= new Version(11, 0);
-
-        public bool Vs2010OrLater => FullVersion >= new Version(10, 0);
-
-        public bool Vs2008OrOlder => FullVersion < new Version(9, 0);
-
-        public bool Vs2005 => FullVersion.Major == 8;
-
-        public bool Vs2008 => FullVersion.Major == 9;
-
-        public bool Vs2010 => FullVersion.Major == 10;
-
-        public bool Vs2012 => FullVersion.Major == 11;
-
-        public bool Vs2013 => FullVersion.Major == 12;
-
-        public bool Vs2015 => FullVersion.Major == 14;
+        private readonly Version _fullVersion;
+        private readonly string _longVersion;
 
         #endregion
 
@@ -42,7 +20,7 @@
 
         public VisualStudioVersion(IFileSystem fileSystem)
         {
-            if (FullVersion == null)
+            if (_fullVersion == null)
             {
                 var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "devenv.exe");
 
@@ -61,11 +39,11 @@
                             break;
                         }
                     }
-                    FullVersion = new Version(verName);
-                    LongVersion = GetLongVisualStudioVersion();
+                    _fullVersion = new Version(verName);
+                    _longVersion = GetLongVisualStudioVersion();
                 }
                 else
-                    FullVersion = new Version(0, 0); // Not running inside Visual Studio!
+                    _fullVersion = new Version(0, 0); // Not running inside Visual Studio!
             }
         }
 
@@ -76,7 +54,7 @@
 
         private string GetLongVisualStudioVersion()
         {
-            switch (FullVersion.Major)
+            switch (_fullVersion.Major)
             {
                 case 8:
                     return "2005";
@@ -94,6 +72,37 @@
                     throw new NotSupportedException("Version is not supported.");
             }
         }
+
+        #endregion
+
+        /////////////////////////////////////////////////////////
+        #region IVisualStudioVersion Member
+
+        Version IVisualStudioVersion.FullVersion => _fullVersion;
+
+        string IVisualStudioVersion.LongVersion => _longVersion;
+
+        bool IVisualStudioVersion.Vs2015OrLater => _fullVersion >= new Version(14, 0);
+
+        bool IVisualStudioVersion.Vs2013OrLater => _fullVersion >= new Version(12, 0);
+
+        bool IVisualStudioVersion.Vs2012OrLater => _fullVersion >= new Version(11, 0);
+
+        bool IVisualStudioVersion.Vs2010OrLater => _fullVersion >= new Version(10, 0);
+
+        bool IVisualStudioVersion.Vs2008OrOlder => _fullVersion < new Version(9, 0);
+
+        bool IVisualStudioVersion.Vs2005 => _fullVersion.Major == 8;
+
+        bool IVisualStudioVersion.Vs2008 => _fullVersion.Major == 9;
+
+        bool IVisualStudioVersion.Vs2010 => _fullVersion.Major == 10;
+
+        bool IVisualStudioVersion.Vs2012 => _fullVersion.Major == 11;
+
+        bool IVisualStudioVersion.Vs2013 => _fullVersion.Major == 12;
+
+        bool IVisualStudioVersion.Vs2015 => _fullVersion.Major == 14;
 
         #endregion
     }

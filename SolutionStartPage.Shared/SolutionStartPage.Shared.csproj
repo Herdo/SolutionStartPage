@@ -59,6 +59,7 @@
     <Compile Include="IBootstrapper.cs" />
     <Compile Include="Models\IIde.cs" />
     <Compile Include="Models\IIdeModel.cs" />
+    <Compile Include="Models\IVisualStudioVersion.cs" />
     <Compile Include="Models\Solution.cs" />
     <Compile Include="Models\SolutionGroup.cs" />
     <Compile Include="Models\SolutionPageConfiguration.cs" />

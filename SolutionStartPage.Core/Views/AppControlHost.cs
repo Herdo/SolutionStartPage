@@ -105,7 +105,7 @@
                 .RegisterType<Solution>()
                 .RegisterType<SolutionGroup>()
                 // Determine Singletons
-                .RegisterType<VisualStudioVersion>(new ContainerControlledLifetimeManager())
+                .RegisterType<IVisualStudioVersion, VisualStudioVersion>(new ContainerControlledLifetimeManager())
                 .RegisterType<IViewStateProvider, ViewStateProvider>(new ContainerControlledLifetimeManager())
                 .RegisterType<IResourceProvider, MainResourceProvider>(new ContainerControlledLifetimeManager())
                 .RegisterType<ISystemInterface, SystemInterface>(new ContainerControlledLifetimeManager())
@@ -121,7 +121,7 @@
 
         private void ConfigureApp(IUnityContainer container)
         {
-            var version = container.Resolve<VisualStudioVersion>();
+            var version = container.Resolve<IVisualStudioVersion>();
             IBootstrapper bootstrapper;
             try
             {
