@@ -7,6 +7,7 @@
      using System.Diagnostics;
      using System.IO;
      using System.Linq;
+     using System.Windows;
      using System.Windows.Input;
      using Shared.BLL.Interfaces;
      using Shared.BLL.Provider;
@@ -51,23 +52,30 @@
              _systemInterface = systemInterface;
              _userIOInterface = userIOInterface;
              _ide = ide;
-
              _configuration = _model.LoadConfiguration();
-             
-             PrepareLoadedData();
-             ConnectEventHandler();
-
-             View.ConnectDataSource(ViewModel);
-
-             FillDefault();
          }
 
-         #endregion
+        #endregion
 
-         /////////////////////////////////////////////////////////
-         #region Private Methods
+        /////////////////////////////////////////////////////////
+        #region Base Overrides
 
-         private void PrepareLoadedData()
+        protected override void View_Loaded(object sender, RoutedEventArgs e)
+        {
+            PrepareLoadedData();
+            ConnectEventHandler();
+
+            View.ConnectDataSource(ViewModel);
+
+            FillDefault();
+        }
+
+        #endregion
+
+        /////////////////////////////////////////////////////////
+        #region Private Methods
+
+        private void PrepareLoadedData()
          {
              ViewModel.Columns = _configuration.Columns;
              ViewModel.SolutionGroups = new ObservableCollection<SolutionGroup>(_configuration.SolutionGroups);

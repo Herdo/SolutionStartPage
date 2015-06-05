@@ -1,5 +1,6 @@
 ﻿namespace SolutionStartPage.UnitTests.Core.Views.BasicPart
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using SolutionStartPage.Core.Views.BasicPart;
@@ -12,7 +13,7 @@
     public class VsoPagePresenterTest
     {
         [TestMethod]
-        public void Constructor()
+        public void ViewLoaded()
         {
             // Arrange
             var vsVersion = Mock.Create<IVisualStudioVersion>();
@@ -25,9 +26,10 @@
 
             Mock.Arrange(() => view.ConnectDataSource(vm)).DoInstead(() => dataSourceConnected = true);
             Mock.ArrangeSet(() => vm.StartPageHeaderTitle = Arg.AnyString).DoInstead(() => startPageHeaderTitleSet = true);
+            var presenter = new VsoPagePresenter(vsVersion, ide, view, vm);
 
             // Act
-            var presenter = new VsoPagePresenter(vsVersion, ide, view, vm);
+            Mock.Raise(() => view.Loaded += null, new EventArgs());
 
             // Assert
             Assert.IsTrue(dataSourceConnected);

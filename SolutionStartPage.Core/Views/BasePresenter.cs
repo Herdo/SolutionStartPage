@@ -1,5 +1,6 @@
 ﻿namespace SolutionStartPage.Core.Views
 {
+    using System.Windows;
     using Shared.Views;
 
     public abstract class BasePresenter<TView, TViewModel>
@@ -21,8 +22,17 @@
         protected BasePresenter(TView view, TViewModel viewModel)
         {
             View = view;
+            View.Loaded += View_Loaded;
+
             ViewModel = viewModel;
         }
+
+        #endregion
+
+        /////////////////////////////////////////////////////////
+        #region Protected Methods
+
+        protected abstract void View_Loaded(object sender, RoutedEventArgs e);
 
         #endregion
     }

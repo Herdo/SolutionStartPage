@@ -1,5 +1,6 @@
 ﻿namespace SolutionStartPage.Core.Views.BasicPart
 {
+    using System.Windows;
     using Shared.Models;
     using Shared.Views.BasicPart;
 
@@ -22,9 +23,16 @@
         {
             _vsVersion = vsVersion;
             _ide = ide;
+        }
 
+        #endregion
+
+        /////////////////////////////////////////////////////////
+        #region Base Overrides
+
+        protected override void View_Loaded(object sender, RoutedEventArgs e)
+        {
             LoadVmContent();
-
             View.ConnectDataSource(ViewModel);
         }
 
@@ -32,7 +40,7 @@
 
         /////////////////////////////////////////////////////////
         #region Private Methods
-        
+
         private void LoadVmContent()
         {
             ViewModel.StartPageHeaderTitle = $"{_ide.Edition} {_vsVersion.LongVersion}";
