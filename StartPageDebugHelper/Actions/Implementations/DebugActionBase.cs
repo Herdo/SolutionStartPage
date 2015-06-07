@@ -12,25 +12,27 @@
     public abstract class DebugActionBase
     {
         /////////////////////////////////////////////////////////
+
         #region Fields
 
         private static readonly ReadOnlyCollection<string> ValidBuildConfigurations;
         private static readonly ReadOnlyCollection<string> ValidVisualStudioVersions;
-        private static readonly ReadOnlyDictionary<string, string> VisualStudioVersionMapping; 
+        private static readonly ReadOnlyDictionary<string, string> VisualStudioVersionMapping;
 
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Constructors
 
         static DebugActionBase()
         {
-            ValidBuildConfigurations = new ReadOnlyCollection<string>(new []
+            ValidBuildConfigurations = new ReadOnlyCollection<string>(new[]
             {
                 "Debug",
                 "Release"
             });
-            ValidVisualStudioVersions = new ReadOnlyCollection<string>(new []
+            ValidVisualStudioVersions = new ReadOnlyCollection<string>(new[]
             {
                 "10.0",
                 "12.0",
@@ -47,6 +49,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Protected Methods
 
         /// <summary>
@@ -67,23 +70,33 @@
             var documentDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             var vsStartPageDir = Path.Combine(documentDir, $"Visual Studio {vsVersion.Item2}", "StartPages");
             var vsPrivateAssembliesDir = Path.Combine(Program.ProgramFilesDirectory,
-                                                      $"Microsoft Visual Studio {vsVersion.Item1}/Common7/IDE/PrivateAssemblies/");
+                $"Microsoft Visual Studio {vsVersion.Item1}/Common7/IDE/PrivateAssemblies/");
 
             // Compute xaml files
-            var results = (from xamlFile in xamlFiles let fileName = Path.GetFileName(xamlFile) where fileName != null select new FileData(FileType.XAML, xamlFile, Path.Combine(vsStartPageDir, fileName))).ToList();
+            var results = (from xamlFile in xamlFiles
+                let fileName = Path.GetFileName(xamlFile)
+                where fileName != null
+                select new FileData(FileType.XAML, xamlFile, Path.Combine(vsStartPageDir, fileName))).ToList();
 
             // Compute dll files
-            results.AddRange(from dllFile in dllFiles let fileName = Path.GetFileName(dllFile) where fileName != null select new FileData(FileType.DLL, dllFile, Path.Combine(vsPrivateAssembliesDir, fileName)));
+            results.AddRange(from dllFile in dllFiles
+                let fileName = Path.GetFileName(dllFile)
+                where fileName != null
+                select new FileData(FileType.DLL, dllFile, Path.Combine(vsPrivateAssembliesDir, fileName)));
 
             // Compute pdb files
-            results.AddRange(from pdbFile in pdbFiles let fileName = Path.GetFileName(pdbFile) where fileName != null select new FileData(FileType.PDB, pdbFile, Path.Combine(vsPrivateAssembliesDir, fileName)));
-            
+            results.AddRange(from pdbFile in pdbFiles
+                let fileName = Path.GetFileName(pdbFile)
+                where fileName != null
+                select new FileData(FileType.PDB, pdbFile, Path.Combine(vsPrivateAssembliesDir, fileName)));
+
             return results.ToArray();
         }
 
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Private Methods
 
         /// <summary>
@@ -133,7 +146,7 @@
                 WriteLine(" ]:");
                 result = ReadLine();
             } while (!IsNullOrWhiteSpace(result)
-                  && !options.Contains(result));
+                     && !options.Contains(result));
 
             return result;
         }

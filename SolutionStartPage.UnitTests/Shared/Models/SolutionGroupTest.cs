@@ -55,7 +55,7 @@
 
             // Act
             group.TriggerAlterSolutionGroup_CanExecute(null);
-            
+
             // Assert
             Assert.IsTrue(invoked);
         }
@@ -170,7 +170,7 @@
             var sln = new Solution();
 
             // Act
-            group.Solutions = new ObservableCollection<Solution>{sln};
+            group.Solutions = new ObservableCollection<Solution> {sln};
 
             // Assert
             Assert.AreSame(sln, group.Solutions.Single());

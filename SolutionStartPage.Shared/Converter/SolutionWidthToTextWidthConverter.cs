@@ -8,7 +8,7 @@
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var d = (double)value;
+            var d = (double) value;
             return d - 32.0;
         }
 

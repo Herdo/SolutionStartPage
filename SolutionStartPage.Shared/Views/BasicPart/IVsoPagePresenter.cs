@@ -2,6 +2,5 @@
 {
     public interface IVsoPagePresenter : IPresenter<IVsoPageView, IVsoPageViewModel>
     {
-         
     }
 }

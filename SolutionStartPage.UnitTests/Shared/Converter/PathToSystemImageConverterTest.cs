@@ -13,7 +13,7 @@
     public class PathToSystemImageConverterTest
     {
         [TestMethod]
-        [ExpectedException(typeof(NotSupportedException))]
+        [ExpectedException(typeof (NotSupportedException))]
         public void ConvertBack_NotSupportedException()
         {
             // Arrange
@@ -75,7 +75,8 @@
         {
             // Arrange
             var fileSystem = Mock.Create<IFileSystem>();
-            Mock.Arrange(() => fileSystem.WriteAllTextToFile(Arg.AnyString, Arg.AnyString)).DoInstead<string, string>(File.WriteAllText);
+            Mock.Arrange(() => fileSystem.WriteAllTextToFile(Arg.AnyString, Arg.AnyString))
+                .DoInstead<string, string>(File.WriteAllText);
 
             var converter = new PathToSystemImageConverter(fileSystem);
 
@@ -87,12 +88,13 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof (ArgumentException))]
         public void Convert_RelativeWithExtension_value()
         {
             // Arrange
             var fileSystem = Mock.Create<IFileSystem>();
-            Mock.Arrange(() => fileSystem.WriteAllTextToFile(Arg.AnyString, Arg.AnyString)).DoInstead<string, string>(File.WriteAllText);
+            Mock.Arrange(() => fileSystem.WriteAllTextToFile(Arg.AnyString, Arg.AnyString))
+                .DoInstead<string, string>(File.WriteAllText);
             Mock.Arrange(() => fileSystem.DirectoryExists(@"\fileWithoutExtension.sln")).Returns(true);
             Mock.Arrange(() => fileSystem.FileExists(@"\fileWithoutExtension.sln")).Returns(true);
 

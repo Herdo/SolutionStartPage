@@ -74,6 +74,7 @@
     <Compile Include="Shared\Converter\BoolToVisibilityConverterTest.cs" />
     <Compile Include="Shared\Extensions\EventHandlerExtensionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shared\UtilitiesTest.cs" />
     <Compile Include="Shared\Models\SolutionPageConfigurationTest.cs" />
     <Compile Include="Shared\Models\SolutionGroupTest.cs" />
     <Compile Include="Shared\Models\SolutionTest.cs" />

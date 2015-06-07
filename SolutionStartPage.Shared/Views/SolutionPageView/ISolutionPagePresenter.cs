@@ -2,6 +2,5 @@
 {
     public interface ISolutionPagePresenter : IPresenter<ISolutionPageView, ISolutionPageViewModel>
     {
-         
     }
 }

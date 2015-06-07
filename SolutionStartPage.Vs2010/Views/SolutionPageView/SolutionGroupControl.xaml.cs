@@ -10,13 +10,15 @@
     public partial class SolutionGroupControl : ISolutionGroupControl
     {
         /////////////////////////////////////////////////////////
+
         #region Properties
 
         private SolutionGroup SolutionGroup => DataContext as SolutionGroup;
 
         #endregion
-        
+
         /////////////////////////////////////////////////////////
+
         #region Constructors
 
         public SolutionGroupControl()
@@ -27,6 +29,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Event Handler
 
         private void AlterSolutionGroup_OnExecuted(object sender, ExecutedRoutedEventArgs e)

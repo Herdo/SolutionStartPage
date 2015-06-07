@@ -6,16 +6,18 @@
     using static System.Int32;
 
     public class ActionSet : BaseActionProvider,
-                             IActionProvider
+        IActionProvider
     {
         /////////////////////////////////////////////////////////
+
         #region Fields
-            
+
         private readonly IDictionary<int, IActionProvider> _set;
 
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Constructors
 
         /// <summary>
@@ -32,13 +34,14 @@
                 throw new ArgumentNullException(nameof(set));
             if (set.Count <= 0)
                 throw new ArgumentException("Count must be greater than 0.", nameof(set.Count));
-            
+
             _set = set;
         }
 
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region IActionProvider Member
 
         string IActionProvider.DisplayName => DisplayName;
@@ -54,7 +57,7 @@
                 foreach (var actionProvider in _set)
                     WriteLine($"[{actionProvider.Key}] - {actionProvider.Value.DisplayName}");
             } while (!TryParse(ReadLine(), out resultAction)
-                  && !_set.ContainsKey(resultAction));
+                     && !_set.ContainsKey(resultAction));
 
             _set[resultAction].ExecuteAction();
         }

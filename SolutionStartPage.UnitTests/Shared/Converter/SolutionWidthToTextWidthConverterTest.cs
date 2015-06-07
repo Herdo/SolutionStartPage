@@ -10,7 +10,7 @@
     public class SolutionWidthToTextWidthConverterTest
     {
         [TestMethod]
-        [ExpectedException(typeof(NotSupportedException))]
+        [ExpectedException(typeof (NotSupportedException))]
         public void ConvertBack_NotSupportedException()
         {
             // Arrange
@@ -34,7 +34,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidCastException))]
+        [ExpectedException(typeof (InvalidCastException))]
         public void Convert_InvalidCastException_value()
         {
             // Arrange
@@ -45,7 +45,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
+        [ExpectedException(typeof (NullReferenceException))]
         public void Convert_NullReferenceException_value()
         {
             // Arrange

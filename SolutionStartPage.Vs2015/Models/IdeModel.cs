@@ -8,6 +8,7 @@
     public class IdeModel : IIdeModel
     {
         /////////////////////////////////////////////////////////
+
         #region Private Methods
 
         private static DTE2 GetDte(object dataContext)
@@ -18,7 +19,7 @@
                 IVsUIObject obj;
                 object result;
                 if (dataSource.GetValue("DTE", out obj) == 0
-                 && obj.get_Data(out result) == 0)
+                    && obj.get_Data(out result) == 0)
                 {
                     return result as DTE2;
                 }
@@ -29,6 +30,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region IIdeModel Member
 
         IIde IIdeModel.GetIde(object dataContext, Func<IIde> ideResolver)

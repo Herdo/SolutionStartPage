@@ -2,12 +2,15 @@
 {
     using System;
     using System.IO;
+    using Annotations;
     using Shared.DAL;
     using Shared.Models;
+    using static Shared.Utilities;
 
     public class VisualStudioVersion : IVisualStudioVersion
     {
         /////////////////////////////////////////////////////////
+
         #region Fields
 
         private readonly Version _fullVersion;
@@ -16,10 +19,13 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Constructors
 
-        public VisualStudioVersion(IFileSystem fileSystem)
+        public VisualStudioVersion([NotNull] IFileSystem fileSystem)
         {
+            ThrowIfNull(fileSystem, nameof(fileSystem));
+
             if (_fullVersion == null)
             {
                 var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "devenv.exe");
@@ -50,6 +56,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Private Methods
 
         private string GetLongVisualStudioVersion()
@@ -76,6 +83,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region IVisualStudioVersion Member
 
         Version IVisualStudioVersion.FullVersion => _fullVersion;

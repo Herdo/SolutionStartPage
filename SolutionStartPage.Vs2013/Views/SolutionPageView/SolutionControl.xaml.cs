@@ -14,6 +14,7 @@
     public partial class SolutionControl : ISolutionControl
     {
         /////////////////////////////////////////////////////////
+
         #region Properties
 
         private Solution Solution => DataContext as Solution;
@@ -21,6 +22,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Constructors
 
         public SolutionControl()
@@ -33,6 +35,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Private Methods
 
         private void SetImageBinding()
@@ -52,6 +55,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Event Handler
 
         private void OpenSolution_OnExecuted(object sender, ExecutedRoutedEventArgs e)
@@ -74,7 +78,7 @@
             Solution?.TriggerAlterSolution_CanExecute(Solution, e);
         }
 
-        void SolutionControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void SolutionControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (Solution != null)
                 SetImageBinding();

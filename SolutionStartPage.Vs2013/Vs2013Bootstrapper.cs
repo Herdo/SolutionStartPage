@@ -19,7 +19,7 @@
                 // Register Models
                 .RegisterType<IIdeModel, IdeModel>(new ContainerControlledLifetimeManager())
                 .RegisterType<IIde, VsIde>(new ContainerControlledLifetimeManager())
-                
+
                 // Register Views & their components
                 // Root View
                 .RegisterType<IPageRootView, PageRootControl>()
@@ -32,7 +32,7 @@
                 .RegisterType<ISolutionControl, SolutionControl>()
                 .RegisterType<ISolutionPageModel, SolutionPageModel>()
                 .RegisterType<ISolutionPageViewModel, SolutionPageViewModel>()
-            ;
+                ;
         }
     }
 }

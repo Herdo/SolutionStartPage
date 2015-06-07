@@ -10,6 +10,7 @@
     public class IdeModel : IIdeModel
     {
         /////////////////////////////////////////////////////////
+
         #region Private Methods
 
         private static DTE2 GetDte(object dataContext)
@@ -27,19 +28,21 @@
             {
                 return dataSource.GetValue("DTE") as DTE2;
             }
-            Debug.Assert(false, "Could not get DTE instance, was " + (dataContext == null ? "null" : dataContext.GetType().ToString()));
+            Debug.Assert(false,
+                "Could not get DTE instance, was " + (dataContext == null ? "null" : dataContext.GetType().ToString()));
             return null;
         }
 
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region IIdeModel Member
 
         IIde IIdeModel.GetIde(object dataContext, Func<IIde> ideResolver)
         {
             var dte = GetDte(dataContext);
-            if(dte == null)
+            if (dte == null)
                 return null;
 
             var ide = ideResolver();

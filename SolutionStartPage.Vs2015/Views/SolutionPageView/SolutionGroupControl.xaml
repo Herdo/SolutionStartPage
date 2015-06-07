@@ -11,34 +11,37 @@
              MinHeight="150"
              Margin="10"
              Background="Transparent">
-    
+
     <UserControl.CommandBindings>
         <CommandBinding Command="commands:Commands.AlterSolutionGroup"
                         Executed="AlterSolutionGroup_OnExecuted"
-                        CanExecute="AlterSolutionGroup_OnCanExecute"/>
+                        CanExecute="AlterSolutionGroup_OnCanExecute" />
     </UserControl.CommandBindings>
 
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Microsoft.VisualStudio.Shell.14.0;component/ui/styles/startpageresources.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/SolutionStartPage.Shared;component/Resources/CommonStyles.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/SolutionStartPage.Shared;component/Resources/CommonConverter.xaml"/>
+                <ResourceDictionary
+                    Source="pack://application:,,,/Microsoft.VisualStudio.Shell.14.0;component/ui/styles/startpageresources.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/SolutionStartPage.Shared;component/Resources/CommonStyles.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/SolutionStartPage.Shared;component/Resources/CommonConverter.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="10"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-            
+
         <!-- Header -->
         <TextBlock Grid.Row="0"
                    Grid.Column="0"
@@ -47,14 +50,14 @@
                    Text="{Binding GroupName}"
                    FontSize="24"
                    TextTrimming="CharacterEllipsis"
-                   Visibility="{Binding EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}"/>
+                   Visibility="{Binding EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}" />
         <TextBox Grid.Row="0"
                  Grid.Column="0"
                  FontSize="{Binding ElementName=GroupHeaderTextBlock, Path=FontSize}"
                  Text="{Binding GroupName, UpdateSourceTrigger=PropertyChanged}"
                  VerticalAlignment="Top"
                  HorizontalAlignment="Stretch"
-                 Visibility="{Binding EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                 Visibility="{Binding EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}}" />
 
         <!-- Header Commands -->
         <UniformGrid Grid.Row="0"
@@ -67,25 +70,25 @@
                     Command="commands:Commands.AlterSolutionGroup"
                     CommandParameter="{x:Static commands:CommandParameter.ALTER_SOLUTION_GROUP_MOVE_GROUP_BACK}"
                     Style="{StaticResource CommandButtonStyle}">
-                <Image Style="{StaticResource BackCommandImageStyle}"/>
+                <Image Style="{StaticResource BackCommandImageStyle}" />
             </Button>
             <Button ToolTip="{Binding [HeaderCommand_MoveForward_ToolTip], Source={StaticResource SSP_Texts}}"
                     Command="commands:Commands.AlterSolutionGroup"
                     CommandParameter="{x:Static commands:CommandParameter.ALTER_SOLUTION_GROUP_MOVE_GROUP_FORWARD}"
                     Style="{StaticResource CommandButtonStyle}">
-                <Image Style="{StaticResource ForwardCommandImageStyle}"/>
+                <Image Style="{StaticResource ForwardCommandImageStyle}" />
             </Button>
             <Button ToolTip="{Binding [HeaderCommand_AddSolution_ToolTip], Source={StaticResource SSP_Texts}}"
                     Command="commands:Commands.AlterSolutionGroup"
                     CommandParameter="{x:Static commands:CommandParameter.ALTER_SOLUTION_GROUP_ADD_SOLUTION}"
                     Style="{StaticResource CommandButtonStyle}">
-                <Image Style="{StaticResource AddCommandImageStyle}"/>
+                <Image Style="{StaticResource AddCommandImageStyle}" />
             </Button>
             <Button ToolTip="{Binding [HeaderCommand_RemoveGroup_ToolTip], Source={StaticResource SSP_Texts}}"
                     Command="commands:Commands.AlterSolutionGroup"
                     CommandParameter="{x:Static commands:CommandParameter.ALTER_SOLUTION_GROUP_REMOVE_GROUP}"
                     Style="{StaticResource CommandButtonStyle}">
-                <Image Style="{StaticResource RemoveCommandImageStyle}"/>
+                <Image Style="{StaticResource RemoveCommandImageStyle}" />
             </Button>
         </UniformGrid>
 
@@ -96,12 +99,12 @@
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Vertical"
-                                VerticalAlignment="Top"/>
+                                VerticalAlignment="Top" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <solutionPageView:SolutionControl DataContext="{Binding}"/>
+                    <solutionPageView:SolutionControl DataContext="{Binding}" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

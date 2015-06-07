@@ -4,17 +4,18 @@
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using Shared.BLL.Interfaces;
+    using static Shared.Utilities;
 
     [ExcludeFromCodeCoverage]
     public class SystemInterface : ISystemInterface
     {
         /////////////////////////////////////////////////////////
+
         #region ISystemInterface Member
 
         void ISystemInterface.StartProcess(ProcessStartInfo startInfo, Action<Process> modifyAction)
         {
-            if (startInfo == null)
-                throw new ArgumentNullException(nameof(startInfo));
+            ThrowIfNull(startInfo, nameof(startInfo));
 
             var process = new Process
             {

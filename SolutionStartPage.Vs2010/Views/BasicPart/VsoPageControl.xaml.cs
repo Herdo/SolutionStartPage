@@ -8,6 +8,7 @@
     public partial class VsoPageControl : IVsoPageView
     {
         /////////////////////////////////////////////////////////
+
         #region Constructors
 
         public VsoPageControl()
@@ -18,6 +19,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region IVsoPageView Members
 
         public void ConnectDataSource(IVsoPageViewModel vm)

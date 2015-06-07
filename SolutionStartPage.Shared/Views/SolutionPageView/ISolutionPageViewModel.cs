@@ -10,6 +10,5 @@
         int Columns { get; set; }
 
         ObservableCollection<SolutionGroup> SolutionGroups { get; set; }
-
     }
 }

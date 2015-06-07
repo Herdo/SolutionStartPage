@@ -1,4 +1,5 @@
 ﻿// ReSharper disable UseObjectOrCollectionInitializer
+
 namespace SolutionStartPage.UnitTests.Shared.Models
 {
     using System;
@@ -71,7 +72,7 @@ namespace SolutionStartPage.UnitTests.Shared.Models
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
+        [ExpectedException(typeof (NullReferenceException))]
         public void ApplyViewModel_NullReferenceException()
         {
             // Arrange
@@ -89,7 +90,7 @@ namespace SolutionStartPage.UnitTests.Shared.Models
             var vm = Mock.Create<ISolutionPageViewModel>();
             var group = new SolutionGroup();
             Mock.Arrange(() => vm.Columns).Returns(2);
-            Mock.Arrange(() => vm.SolutionGroups).Returns(new ObservableCollection<SolutionGroup> { group });
+            Mock.Arrange(() => vm.SolutionGroups).Returns(new ObservableCollection<SolutionGroup> {group});
 
             // Act
             var result = config.ApplyViewModel(vm);

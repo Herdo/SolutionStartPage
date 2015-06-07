@@ -3,6 +3,7 @@
     public class FileData
     {
         /////////////////////////////////////////////////////////
+
         #region Properties 
 
         public FileType FileType { get; }
@@ -12,6 +13,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Constructors
 
         public FileData(FileType fileType, string sourcePath, string targetPath)

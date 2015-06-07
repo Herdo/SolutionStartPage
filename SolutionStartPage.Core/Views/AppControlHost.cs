@@ -31,9 +31,10 @@
     /// Takes care about dependency injection and basic business logic.
     /// </summary>
     public class AppControlHost : UserControl,
-                                  IAppControlHost
+        IAppControlHost
     {
         /////////////////////////////////////////////////////////
+
         #region Constants
 
         private const int _VERSION_STRING_DETAIL_SPECIFIC = 2;
@@ -41,6 +42,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Constructors
 
         public AppControlHost()
@@ -51,6 +53,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Private Methods
 
         private void Initialize()
@@ -80,7 +83,8 @@
             RegisterGlobalResources(resourceProvider, ideAccess, resources);
         }
 
-        private void RegisterGlobalResources(IResourceProvider resourceProvider, IIde ideAccess, Dictionary<object, object> resources)
+        private void RegisterGlobalResources(IResourceProvider resourceProvider, IIde ideAccess,
+            Dictionary<object, object> resources)
         {
             resourceProvider.Culture = new CultureInfo(ideAccess.LCID);
 
@@ -113,10 +117,13 @@
                 // Register DAL
                 .RegisterType<IFileSystem, FileSystem>(new ContainerControlledLifetimeManager())
                 // Register Bootstrappers for each VS Version
-                .RegisterType<IBootstrapper, Vs2010Bootstrapper>(new Version(10, 0).ToString(_VERSION_STRING_DETAIL_SPECIFIC))
-                .RegisterType<IBootstrapper, Vs2013Bootstrapper>(new Version(12, 0).ToString(_VERSION_STRING_DETAIL_SPECIFIC))
-                .RegisterType<IBootstrapper, Vs2015Bootstrapper>(new Version(14, 0).ToString(_VERSION_STRING_DETAIL_SPECIFIC))
-            ;
+                .RegisterType<IBootstrapper, Vs2010Bootstrapper>(
+                    new Version(10, 0).ToString(_VERSION_STRING_DETAIL_SPECIFIC))
+                .RegisterType<IBootstrapper, Vs2013Bootstrapper>(
+                    new Version(12, 0).ToString(_VERSION_STRING_DETAIL_SPECIFIC))
+                .RegisterType<IBootstrapper, Vs2015Bootstrapper>(
+                    new Version(14, 0).ToString(_VERSION_STRING_DETAIL_SPECIFIC))
+                ;
         }
 
         private void ConfigureApp(IUnityContainer container)
@@ -125,26 +132,29 @@
             IBootstrapper bootstrapper;
             try
             {
-                bootstrapper = container.Resolve<IBootstrapper>(version.FullVersion.ToString(_VERSION_STRING_DETAIL_SPECIFIC));
+                bootstrapper =
+                    container.Resolve<IBootstrapper>(version.FullVersion.ToString(_VERSION_STRING_DETAIL_SPECIFIC));
             }
             catch (ResolutionFailedException)
             {
-                throw new NotSupportedException($"Visual Studio Version {version.FullVersion} is not supported by this extension!");
+                throw new NotSupportedException(
+                    $"Visual Studio Version {version.FullVersion} is not supported by this extension!");
             }
-            
+
             bootstrapper.Configure(container);
         }
 
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Event Handler
 
-        void AppControlHost_Loaded(object sender, RoutedEventArgs e)
+        private void AppControlHost_Loaded(object sender, RoutedEventArgs e)
         {
             Initialize();
         }
-        
+
         #endregion
     }
 }

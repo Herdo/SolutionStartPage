@@ -8,6 +8,7 @@
     public class UserIOInterface : IUserIOInterface
     {
         /////////////////////////////////////////////////////////
+
         #region IUserIOInterface Member
 
         bool IUserIOInterface.IsModifierKeyDown(ModifierKeys key)

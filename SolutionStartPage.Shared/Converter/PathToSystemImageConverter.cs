@@ -16,6 +16,7 @@
     public class PathToSystemImageConverter : IValueConverter
     {
         /////////////////////////////////////////////////////////
+
         #region Fields
 
         private readonly Dictionary<string, ImageSource> _sourceCache;
@@ -24,6 +25,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Constructors
 
         public PathToSystemImageConverter(IFileSystem fileSystem)
@@ -35,6 +37,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Private Methods
 
         private ImageSource GetFromCache(string file)
@@ -62,14 +65,14 @@
             if (fileName.IndexOf(":", StringComparison.Ordinal) == -1)
                 flags = flags | Natives.SHGFI_USEFILEATTRIBUTES;
             flags = flags | Natives.SHGFI_ICON | Natives.SHGFI_SMALLICON;
-            Natives.SHGetFileInfo(fileName, 0, ref shinfo, (uint)Marshal.SizeOf(shinfo), flags);
+            Natives.SHGetFileInfo(fileName, 0, ref shinfo, (uint) Marshal.SizeOf(shinfo), flags);
             var icon = Icon.FromHandle(shinfo.hIcon);
             var bitmap = icon.ToBitmap();
             var hBitmap = bitmap.GetHbitmap();
             try
             {
                 return Imaging.CreateBitmapSourceFromHBitmap(hBitmap, IntPtr.Zero, Int32Rect.Empty,
-                BitmapSizeOptions.FromEmptyOptions());
+                    BitmapSizeOptions.FromEmptyOptions());
             }
             finally
             {
@@ -79,10 +82,10 @@
             }
         }
 
-
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region IValueConverter Member
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -110,10 +113,10 @@
 
             [DllImport("shell32.dll")]
             internal static extern IntPtr SHGetFileInfo(string pszPath,
-                                                       uint dwFileAttributes,
-                                                       ref SHFILEINFO psfi,
-                                                       uint cbSizeFileInfo,
-                                                       uint uFlags);
+                uint dwFileAttributes,
+                ref SHFILEINFO psfi,
+                uint cbSizeFileInfo,
+                uint uFlags);
 
             [DllImport("gdi32.dll")]
             internal static extern bool DeleteObject(IntPtr hObject);
@@ -128,6 +131,7 @@
                 [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 80)] private readonly string szTypeName;
             };
         }
+
         // ReSharper restore InconsistentNaming
     }
 }

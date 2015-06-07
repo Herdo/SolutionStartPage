@@ -12,6 +12,7 @@
     public partial class PageRootControl : IPageRootView
     {
         /////////////////////////////////////////////////////////
+
         #region Fields
 
         private readonly FrameworkElement _vsoPageControl;
@@ -20,6 +21,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Constructors
 
         public PageRootControl(IVsoPagePresenter vsoPagePresenter, ISolutionPagePresenter solutionPagePresenter)
@@ -35,6 +37,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Private Methods
 
         private void LayoutViewComponents()
@@ -45,7 +48,7 @@
             Grid.SetColumn(_vsoPageControl, 0);
             _vsoPageControl.Margin = new Thickness(15, -35, 15, 15);
             _vsoPageControl.VerticalAlignment = VerticalAlignment.Stretch;
-            
+
             // Add Solution Page Control
             LayoutGrid.Children.Add(_solutionPageControl);
             Grid.SetRow(_solutionPageControl, 1);

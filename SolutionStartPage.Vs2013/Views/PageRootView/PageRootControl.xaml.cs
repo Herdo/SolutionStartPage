@@ -12,6 +12,7 @@
     public partial class PageRootControl : IPageRootView
     {
         /////////////////////////////////////////////////////////
+
         #region Fields
 
         private readonly FrameworkElement _vsoPageControl;
@@ -20,6 +21,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Constructors
 
         public PageRootControl(IVsoPagePresenter vsoPagePresenter, ISolutionPagePresenter solutionPagePresenter)
@@ -35,6 +37,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Private Methods
 
         private void LayoutViewComponents()

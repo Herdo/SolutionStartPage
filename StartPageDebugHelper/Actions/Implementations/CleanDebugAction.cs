@@ -9,6 +9,7 @@
     public class CleanDebugAction : DebugActionBase
     {
         /////////////////////////////////////////////////////////
+
         #region Public Methods
 
         public static void CleanData()
@@ -29,6 +30,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Private Methods
 
         private static void DeleteFile(FileData file)

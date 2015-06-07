@@ -14,6 +14,7 @@
     public class SolutionGroup : INotifyPropertyChanged
     {
         /////////////////////////////////////////////////////////
+
         #region Events
 
         public event EventHandler<CanExecuteRoutedEventArgs> AlterSolutionGroupCanExecute;
@@ -22,6 +23,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Fields
 
         private IViewStateProvider _viewStateProvider;
@@ -31,6 +33,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Properties
 
         [XmlIgnore]
@@ -70,13 +73,15 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Constructors
 
         /// <summary>
         /// <see cref="XmlSerializer"/> constructor.
         /// </summary>
         public SolutionGroup()
-        {}
+        {
+        }
 
         public SolutionGroup(IViewStateProvider viewStateProvider)
         {
@@ -89,6 +94,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Public Methods
 
         public void TriggerAlterSolutionGroup_CanExecute(CanExecuteRoutedEventArgs args)
@@ -104,9 +110,10 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Event Handler
 
-        void viewStateProvider_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void viewStateProvider_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             OnPropertyChanged(e.PropertyName);
         }
@@ -114,6 +121,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region INotifyPropertyChanged Members & Extension
 
         public event PropertyChangedEventHandler PropertyChanged;

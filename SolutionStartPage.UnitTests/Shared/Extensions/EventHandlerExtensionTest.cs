@@ -10,9 +10,9 @@
     [ExcludeFromCodeCoverage]
     public class EventHandlerExtensionTest
     {
-        event EventHandler SaveInvokeNormalTestSubscribed;
-        event EventHandler<EventArgs> SaveInvokeGenericTestSubscribed;
-        event PropertyChangedEventHandler SaveInvokPropertyChangedTestSubscribed;
+        private event EventHandler SaveInvokeNormalTestSubscribed;
+        private event EventHandler<EventArgs> SaveInvokeGenericTestSubscribed;
+        private event PropertyChangedEventHandler SaveInvokPropertyChangedTestSubscribed;
 
         [TestMethod]
         public void SaveInvoke_NormalEventHandler_Subscribed()

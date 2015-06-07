@@ -2,15 +2,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="SolutionStartPage.Vs2010.Views.PageRootView.PageRootControl"
              xmlns:vsfx="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.10.0"
-             mc:Ignorable="d" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              d:DesignHeight="600" d:DesignWidth="800">
     <Grid>
         <Grid.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="pack://application:,,,/Microsoft.VisualStudio.Shell.StartPage;component/Styles/startpageresources.xaml" />
+                    <ResourceDictionary
+                        Source="pack://application:,,,/Microsoft.VisualStudio.Shell.StartPage;component/Styles/startpageresources.xaml" />
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
         </Grid.Resources>
@@ -20,14 +21,14 @@
               Background="{DynamicResource {x:Static vsfx:VsBrushes.StartPageBackgroundKey}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition MinWidth="275" Width="3*" MaxWidth="330" />   <!-- VS Basic Overview -->
-                <ColumnDefinition Width="6"/>                                   <!-- Gutter -->
-                <ColumnDefinition Width="7*" MinWidth="0"/>                     <!-- Content -->
+                <ColumnDefinition Width="6" />                                   <!-- Gutter -->
+                <ColumnDefinition Width="7*" MinWidth="0" />                     <!-- Content -->
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="130"/>   <!-- Logo -->
-                <RowDefinition Height="*"/>     <!-- Content -->
+                <RowDefinition Height="130" />   <!-- Logo -->
+                <RowDefinition Height="*" />     <!-- Content -->
             </Grid.RowDefinitions>
-            
+
             <!-- Logo -->
             <Image Grid.Row="0"
                    Grid.Column="0"

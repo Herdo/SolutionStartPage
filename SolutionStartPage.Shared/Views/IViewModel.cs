@@ -4,6 +4,5 @@
 
     public interface IViewModel : INotifyPropertyChanged
     {
-         
     }
 }

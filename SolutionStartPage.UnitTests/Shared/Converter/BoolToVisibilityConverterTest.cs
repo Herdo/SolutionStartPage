@@ -11,7 +11,7 @@
     public class BoolToVisibilityConverterTest
     {
         [TestMethod]
-        [ExpectedException(typeof(NotSupportedException))]
+        [ExpectedException(typeof (NotSupportedException))]
         public void ConvertBack_NotSupportedException()
         {
             // Arrange
@@ -74,7 +74,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidCastException))]
+        [ExpectedException(typeof (InvalidCastException))]
         public void Convert_InvalidCastException_value()
         {
             // Arrange
@@ -85,7 +85,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidCastException))]
+        [ExpectedException(typeof (InvalidCastException))]
         public void Convert_InvalidCastException_parameter()
         {
             // Arrange

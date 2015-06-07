@@ -7,9 +7,10 @@
     using Actions.Implementations;
     using static System.Console;
 
-    class Program
+    internal class Program
     {
         /////////////////////////////////////////////////////////
+
         #region Properties
 
         public static string ProgramFilesDirectory { get; private set; }
@@ -19,9 +20,10 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Main
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             if (args.Length != 2)
             {
@@ -33,7 +35,7 @@
             else
             {
                 if (CheckDirectoryExistence(args[0], dir => { ProgramFilesDirectory = dir; })
-                 && CheckDirectoryExistence(args[1], dir => { BinDirectory = dir; }))
+                    && CheckDirectoryExistence(args[1], dir => { BinDirectory = dir; }))
                 {
                     var rootAction = ConstructActionTree();
 
@@ -63,13 +65,14 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Private Methods
 
         private static IActionProvider ConstructActionTree()
         {
             return new ActionSet("Main Menu", new Dictionary<int, IActionProvider>
             {
-                {0, new ExecuteableAction("Exit", () => Environment.Exit(0)) },
+                {0, new ExecuteableAction("Exit", () => Environment.Exit(0))},
                 {1, new ExecuteableAction("Copy Debug Data", CopyDebugAction.CopyData)},
                 {2, new ExecuteableAction("Clean Debug Data", CleanDebugAction.CleanData)},
             });
@@ -85,6 +88,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Internal Methods
 
         internal static void PrintSuccess(string successMessage)

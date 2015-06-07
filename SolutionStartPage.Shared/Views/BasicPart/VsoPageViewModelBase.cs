@@ -5,17 +5,22 @@
     public abstract class VsoPageViewModelBase : IVsoPageViewModel
     {
         /////////////////////////////////////////////////////////
+
         #region IVsoPageViewModel Member
 
         public string StartPageHeaderTitle
         {
             get { return "Visual Studio"; }
-            set { /* Ignore */ }
+            set
+            {
+                /* Ignore */
+            }
         }
 
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region INotifyPropertyChanged Members
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -26,11 +26,13 @@ namespace SolutionStartPage.Vs2013.Annotations
     /// }
     /// </code></example>
     [AttributeUsage(
-      AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property |
-      AttributeTargets.Delegate | AttributeTargets.Field | AttributeTargets.Event)]
+        AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property |
+        AttributeTargets.Delegate | AttributeTargets.Field | AttributeTargets.Event)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class CanBeNullAttribute : Attribute { }
+    public sealed class CanBeNullAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// Indicates that the value of the marked element could never be <c>null</c>
@@ -41,31 +43,37 @@ namespace SolutionStartPage.Vs2013.Annotations
     /// }
     /// </code></example>
     [AttributeUsage(
-      AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property |
-      AttributeTargets.Delegate | AttributeTargets.Field | AttributeTargets.Event)]
+        AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property |
+        AttributeTargets.Delegate | AttributeTargets.Field | AttributeTargets.Event)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class NotNullAttribute : Attribute { }
+    public sealed class NotNullAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// Indicates that collection or enumerable value does not contain null elements
     /// </summary>
     [AttributeUsage(
-      AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property |
-      AttributeTargets.Delegate | AttributeTargets.Field)]
+        AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property |
+        AttributeTargets.Delegate | AttributeTargets.Field)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class ItemNotNullAttribute : Attribute { }
+    public sealed class ItemNotNullAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// Indicates that collection or enumerable value can contain null elements
     /// </summary>
     [AttributeUsage(
-      AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property |
-      AttributeTargets.Delegate | AttributeTargets.Field)]
+        AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property |
+        AttributeTargets.Delegate | AttributeTargets.Field)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class ItemCanBeNullAttribute : Attribute { }
+    public sealed class ItemCanBeNullAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// Indicates that the marked method builds string by format pattern and (optional) arguments.
@@ -80,7 +88,7 @@ namespace SolutionStartPage.Vs2013.Annotations
     /// }
     /// </code></example>
     [AttributeUsage(
-      AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Delegate)]
+        AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Delegate)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
     public sealed class StringFormatMethodAttribute : Attribute
@@ -128,7 +136,9 @@ namespace SolutionStartPage.Vs2013.Annotations
     [AttributeUsage(AttributeTargets.Parameter)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class InvokerParameterNameAttribute : Attribute { }
+    public sealed class InvokerParameterNameAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// Indicates that the method is contained in a type that implements
@@ -171,7 +181,10 @@ namespace SolutionStartPage.Vs2013.Annotations
     [ExcludeFromCodeCoverage]
     public sealed class NotifyPropertyChangedInvocatorAttribute : Attribute
     {
-        public NotifyPropertyChangedInvocatorAttribute() { }
+        public NotifyPropertyChangedInvocatorAttribute()
+        {
+        }
+
         public NotifyPropertyChangedInvocatorAttribute(string parameterName)
         {
             ParameterName = parameterName;
@@ -229,7 +242,9 @@ namespace SolutionStartPage.Vs2013.Annotations
     public sealed class ContractAnnotationAttribute : Attribute
     {
         public ContractAnnotationAttribute([NotNull] string contract)
-            : this(contract, false) { }
+            : this(contract, false)
+        {
+        }
 
         public ContractAnnotationAttribute([NotNull] string contract, bool forceFullStates)
         {
@@ -255,7 +270,10 @@ namespace SolutionStartPage.Vs2013.Annotations
     [ExcludeFromCodeCoverage]
     public sealed class LocalizationRequiredAttribute : Attribute
     {
-        public LocalizationRequiredAttribute() : this(true) { }
+        public LocalizationRequiredAttribute() : this(true)
+        {
+        }
+
         public LocalizationRequiredAttribute(bool required)
         {
             Required = required;
@@ -284,10 +302,12 @@ namespace SolutionStartPage.Vs2013.Annotations
     /// }
     /// </code></example>
     [AttributeUsage(
-      AttributeTargets.Interface | AttributeTargets.Class | AttributeTargets.Struct)]
+        AttributeTargets.Interface | AttributeTargets.Class | AttributeTargets.Struct)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class CannotApplyEqualityOperatorAttribute : Attribute { }
+    public sealed class CannotApplyEqualityOperatorAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// When applied to a target attribute, specifies a requirement for any type marked
@@ -300,7 +320,7 @@ namespace SolutionStartPage.Vs2013.Annotations
     /// public class MyComponent : IComponent { }
     /// </code></example>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    [BaseTypeRequired(typeof(Attribute))]
+    [BaseTypeRequired(typeof (Attribute))]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
     public sealed class BaseTypeRequiredAttribute : Attribute
@@ -325,16 +345,22 @@ namespace SolutionStartPage.Vs2013.Annotations
     public sealed class UsedImplicitlyAttribute : Attribute
     {
         public UsedImplicitlyAttribute()
-            : this(ImplicitUseKindFlags.Default, ImplicitUseTargetFlags.Default) { }
+            : this(ImplicitUseKindFlags.Default, ImplicitUseTargetFlags.Default)
+        {
+        }
 
         public UsedImplicitlyAttribute(ImplicitUseKindFlags useKindFlags)
-            : this(useKindFlags, ImplicitUseTargetFlags.Default) { }
+            : this(useKindFlags, ImplicitUseTargetFlags.Default)
+        {
+        }
 
         public UsedImplicitlyAttribute(ImplicitUseTargetFlags targetFlags)
-            : this(ImplicitUseKindFlags.Default, targetFlags) { }
+            : this(ImplicitUseKindFlags.Default, targetFlags)
+        {
+        }
 
         public UsedImplicitlyAttribute(
-          ImplicitUseKindFlags useKindFlags, ImplicitUseTargetFlags targetFlags)
+            ImplicitUseKindFlags useKindFlags, ImplicitUseTargetFlags targetFlags)
         {
             UseKindFlags = useKindFlags;
             TargetFlags = targetFlags;
@@ -355,16 +381,22 @@ namespace SolutionStartPage.Vs2013.Annotations
     public sealed class MeansImplicitUseAttribute : Attribute
     {
         public MeansImplicitUseAttribute()
-            : this(ImplicitUseKindFlags.Default, ImplicitUseTargetFlags.Default) { }
+            : this(ImplicitUseKindFlags.Default, ImplicitUseTargetFlags.Default)
+        {
+        }
 
         public MeansImplicitUseAttribute(ImplicitUseKindFlags useKindFlags)
-            : this(useKindFlags, ImplicitUseTargetFlags.Default) { }
+            : this(useKindFlags, ImplicitUseTargetFlags.Default)
+        {
+        }
 
         public MeansImplicitUseAttribute(ImplicitUseTargetFlags targetFlags)
-            : this(ImplicitUseKindFlags.Default, targetFlags) { }
+            : this(ImplicitUseKindFlags.Default, targetFlags)
+        {
+        }
 
         public MeansImplicitUseAttribute(
-          ImplicitUseKindFlags useKindFlags, ImplicitUseTargetFlags targetFlags)
+            ImplicitUseKindFlags useKindFlags, ImplicitUseTargetFlags targetFlags)
         {
             UseKindFlags = useKindFlags;
             TargetFlags = targetFlags;
@@ -372,6 +404,7 @@ namespace SolutionStartPage.Vs2013.Annotations
 
         [UsedImplicitly]
         public ImplicitUseKindFlags UseKindFlags { get; private set; }
+
         [UsedImplicitly]
         public ImplicitUseTargetFlags TargetFlags { get; private set; }
     }
@@ -380,15 +413,19 @@ namespace SolutionStartPage.Vs2013.Annotations
     public enum ImplicitUseKindFlags
     {
         Default = Access | Assign | InstantiatedWithFixedConstructorSignature,
+
         /// <summary>Only entity marked with attribute considered used</summary>
         Access = 1,
+
         /// <summary>Indicates implicit assignment to a member</summary>
         Assign = 2,
+
         /// <summary>
         /// Indicates implicit instantiation of a type with fixed constructor signature.
         /// That means any unused constructor parameters won't be reported as such.
         /// </summary>
         InstantiatedWithFixedConstructorSignature = 4,
+
         /// <summary>Indicates implicit instantiation of a type</summary>
         InstantiatedNoFixedConstructorSignature = 8,
     }
@@ -402,8 +439,10 @@ namespace SolutionStartPage.Vs2013.Annotations
     {
         Default = Itself,
         Itself = 1,
+
         /// <summary>Members of entity marked with attribute are considered used</summary>
         Members = 2,
+
         /// <summary>Entity marked with attribute and all its members considered used</summary>
         WithMembers = Itself | Members
     }
@@ -417,7 +456,10 @@ namespace SolutionStartPage.Vs2013.Annotations
     [ExcludeFromCodeCoverage]
     public sealed class PublicAPIAttribute : Attribute
     {
-        public PublicAPIAttribute() { }
+        public PublicAPIAttribute()
+        {
+        }
+
         public PublicAPIAttribute([NotNull] string comment)
         {
             Comment = comment;
@@ -436,7 +478,9 @@ namespace SolutionStartPage.Vs2013.Annotations
     [AttributeUsage(AttributeTargets.Parameter)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class InstantHandleAttribute : Attribute { }
+    public sealed class InstantHandleAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// Indicates that a method does not make any observable state changes.
@@ -451,7 +495,9 @@ namespace SolutionStartPage.Vs2013.Annotations
     /// </code></example>
     [AttributeUsage(AttributeTargets.Method)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
-    public sealed class PureAttribute : Attribute { }
+    public sealed class PureAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// Indicates that a parameter is a path to a file or a folder within a web project.
@@ -462,7 +508,10 @@ namespace SolutionStartPage.Vs2013.Annotations
     [ExcludeFromCodeCoverage]
     public class PathReferenceAttribute : Attribute
     {
-        public PathReferenceAttribute() { }
+        public PathReferenceAttribute()
+        {
+        }
+
         public PathReferenceAttribute([PathReference] string basePath)
         {
             BasePath = basePath;
@@ -560,7 +609,10 @@ namespace SolutionStartPage.Vs2013.Annotations
     [ExcludeFromCodeCoverage]
     public sealed class AspMvcActionAttribute : Attribute
     {
-        public AspMvcActionAttribute() { }
+        public AspMvcActionAttribute()
+        {
+        }
+
         public AspMvcActionAttribute(string anonymousProperty)
         {
             AnonymousProperty = anonymousProperty;
@@ -579,7 +631,10 @@ namespace SolutionStartPage.Vs2013.Annotations
     [ExcludeFromCodeCoverage]
     public sealed class AspMvcAreaAttribute : PathReferenceAttribute
     {
-        public AspMvcAreaAttribute() { }
+        public AspMvcAreaAttribute()
+        {
+        }
+
         public AspMvcAreaAttribute(string anonymousProperty)
         {
             AnonymousProperty = anonymousProperty;
@@ -599,7 +654,10 @@ namespace SolutionStartPage.Vs2013.Annotations
     [ExcludeFromCodeCoverage]
     public sealed class AspMvcControllerAttribute : Attribute
     {
-        public AspMvcControllerAttribute() { }
+        public AspMvcControllerAttribute()
+        {
+        }
+
         public AspMvcControllerAttribute(string anonymousProperty)
         {
             AnonymousProperty = anonymousProperty;
@@ -615,7 +673,9 @@ namespace SolutionStartPage.Vs2013.Annotations
     [AttributeUsage(AttributeTargets.Parameter)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class AspMvcMasterAttribute : Attribute { }
+    public sealed class AspMvcMasterAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// ASP.NET MVC attribute. Indicates that a parameter is an MVC model type. Use this attribute
@@ -624,7 +684,9 @@ namespace SolutionStartPage.Vs2013.Annotations
     [AttributeUsage(AttributeTargets.Parameter)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class AspMvcModelTypeAttribute : Attribute { }
+    public sealed class AspMvcModelTypeAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter is an MVC
@@ -635,7 +697,9 @@ namespace SolutionStartPage.Vs2013.Annotations
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class AspMvcPartialViewAttribute : PathReferenceAttribute { }
+    public sealed class AspMvcPartialViewAttribute : PathReferenceAttribute
+    {
+    }
 
     /// <summary>
     /// ASP.NET MVC attribute. Allows disabling inspections for MVC views within a class or a method
@@ -643,7 +707,9 @@ namespace SolutionStartPage.Vs2013.Annotations
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class AspMvcSupressViewErrorAttribute : Attribute { }
+    public sealed class AspMvcSupressViewErrorAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// ASP.NET MVC attribute. Indicates that a parameter is an MVC display template.
@@ -653,7 +719,9 @@ namespace SolutionStartPage.Vs2013.Annotations
     [AttributeUsage(AttributeTargets.Parameter)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class AspMvcDisplayTemplateAttribute : Attribute { }
+    public sealed class AspMvcDisplayTemplateAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// ASP.NET MVC attribute. Indicates that a parameter is an MVC editor template.
@@ -663,7 +731,9 @@ namespace SolutionStartPage.Vs2013.Annotations
     [AttributeUsage(AttributeTargets.Parameter)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class AspMvcEditorTemplateAttribute : Attribute { }
+    public sealed class AspMvcEditorTemplateAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// ASP.NET MVC attribute. Indicates that a parameter is an MVC template.
@@ -673,7 +743,9 @@ namespace SolutionStartPage.Vs2013.Annotations
     [AttributeUsage(AttributeTargets.Parameter)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class AspMvcTemplateAttribute : Attribute { }
+    public sealed class AspMvcTemplateAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
@@ -684,7 +756,9 @@ namespace SolutionStartPage.Vs2013.Annotations
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class AspMvcViewAttribute : PathReferenceAttribute { }
+    public sealed class AspMvcViewAttribute : PathReferenceAttribute
+    {
+    }
 
     /// <summary>
     /// ASP.NET MVC attribute. When applied to a parameter of an attribute,
@@ -700,15 +774,20 @@ namespace SolutionStartPage.Vs2013.Annotations
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class AspMvcActionSelectorAttribute : Attribute { }
+    public sealed class AspMvcActionSelectorAttribute : Attribute
+    {
+    }
 
     [AttributeUsage(
-      AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.Field)]
+        AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.Field)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
     public sealed class HtmlElementAttributesAttribute : Attribute
     {
-        public HtmlElementAttributesAttribute() { }
+        public HtmlElementAttributesAttribute()
+        {
+        }
+
         public HtmlElementAttributesAttribute(string name)
         {
             Name = name;
@@ -718,7 +797,7 @@ namespace SolutionStartPage.Vs2013.Annotations
     }
 
     [AttributeUsage(
-      AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property)]
+        AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
     public sealed class HtmlAttributeValueAttribute : Attribute
@@ -740,7 +819,9 @@ namespace SolutionStartPage.Vs2013.Annotations
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class RazorSectionAttribute : Attribute { }
+    public sealed class RazorSectionAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// Indicates how method invocation affects content of the collection
@@ -763,10 +844,13 @@ namespace SolutionStartPage.Vs2013.Annotations
     {
         /// <summary>Method does not use or modify content of the collection</summary>
         None = 0,
+
         /// <summary>Method only reads content of the collection but does not modify it</summary>
         Read = 1,
+
         /// <summary>Method can change content of the collection but does not add new elements</summary>
         ModifyExistingContent = 2,
+
         /// <summary>Method can add new elements to the collection</summary>
         UpdatedContent = ModifyExistingContent | 4
     }
@@ -779,7 +863,9 @@ namespace SolutionStartPage.Vs2013.Annotations
     [AttributeUsage(AttributeTargets.Method)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class AssertionMethodAttribute : Attribute { }
+    public sealed class AssertionMethodAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// Indicates the condition parameter of the assertion method. The method itself should be
@@ -807,10 +893,13 @@ namespace SolutionStartPage.Vs2013.Annotations
     {
         /// <summary>Marked parameter should be evaluated to true</summary>
         IS_TRUE = 0,
+
         /// <summary>Marked parameter should be evaluated to false</summary>
         IS_FALSE = 1,
+
         /// <summary>Marked parameter should be evaluated to null value</summary>
         IS_NULL = 2,
+
         /// <summary>Marked parameter should be evaluated to not null value</summary>
         IS_NOT_NULL = 3,
     }
@@ -823,7 +912,9 @@ namespace SolutionStartPage.Vs2013.Annotations
     [AttributeUsage(AttributeTargets.Method)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class TerminatesProgramAttribute : Attribute { }
+    public sealed class TerminatesProgramAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// Indicates that method is pure LINQ method, with postponed enumeration (like Enumerable.Select,
@@ -833,7 +924,9 @@ namespace SolutionStartPage.Vs2013.Annotations
     [AttributeUsage(AttributeTargets.Method)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class LinqTunnelAttribute : Attribute { }
+    public sealed class LinqTunnelAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// Indicates that IEnumerable, passed as parameter, is not enumerated.
@@ -841,7 +934,9 @@ namespace SolutionStartPage.Vs2013.Annotations
     [AttributeUsage(AttributeTargets.Parameter)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class NoEnumerationAttribute : Attribute { }
+    public sealed class NoEnumerationAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// Indicates that parameter is regular expression pattern.
@@ -849,7 +944,9 @@ namespace SolutionStartPage.Vs2013.Annotations
     [AttributeUsage(AttributeTargets.Parameter)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class RegexPatternAttribute : Attribute { }
+    public sealed class RegexPatternAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// XAML attribute. Indicates the type that has <c>ItemsSource</c> property and should be
@@ -859,7 +956,9 @@ namespace SolutionStartPage.Vs2013.Annotations
     [AttributeUsage(AttributeTargets.Class)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class XamlItemsControlAttribute : Attribute { }
+    public sealed class XamlItemsControlAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// XAML attibute. Indicates the property of some <c>BindingBase</c>-derived type, that
@@ -873,7 +972,9 @@ namespace SolutionStartPage.Vs2013.Annotations
     [AttributeUsage(AttributeTargets.Property)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class XamlItemBindingOfItemsControlAttribute : Attribute { }
+    public sealed class XamlItemBindingOfItemsControlAttribute : Attribute
+    {
+    }
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
@@ -893,17 +994,23 @@ namespace SolutionStartPage.Vs2013.Annotations
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Method)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class AspDataFieldAttribute : Attribute { }
+    public sealed class AspDataFieldAttribute : Attribute
+    {
+    }
 
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Method)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class AspDataFieldsAttribute : Attribute { }
+    public sealed class AspDataFieldsAttribute : Attribute
+    {
+    }
 
     [AttributeUsage(AttributeTargets.Property)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class AspMethodPropertyAttribute : Attribute { }
+    public sealed class AspMethodPropertyAttribute : Attribute
+    {
+    }
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
@@ -962,27 +1069,37 @@ namespace SolutionStartPage.Vs2013.Annotations
     [AttributeUsage(AttributeTargets.Method)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class RazorHelperCommonAttribute : Attribute { }
+    public sealed class RazorHelperCommonAttribute : Attribute
+    {
+    }
 
     [AttributeUsage(AttributeTargets.Property)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class RazorLayoutAttribute : Attribute { }
+    public sealed class RazorLayoutAttribute : Attribute
+    {
+    }
 
     [AttributeUsage(AttributeTargets.Method)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class RazorWriteLiteralMethodAttribute : Attribute { }
+    public sealed class RazorWriteLiteralMethodAttribute : Attribute
+    {
+    }
 
     [AttributeUsage(AttributeTargets.Method)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class RazorWriteMethodAttribute : Attribute { }
+    public sealed class RazorWriteMethodAttribute : Attribute
+    {
+    }
 
     [AttributeUsage(AttributeTargets.Parameter)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class RazorWriteMethodParameterAttribute : Attribute { }
+    public sealed class RazorWriteMethodParameterAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// Prevents the Member Reordering feature from tossing members of the marked class.
@@ -993,5 +1110,7 @@ namespace SolutionStartPage.Vs2013.Annotations
     [AttributeUsage(AttributeTargets.All)]
     [Conditional("JETBRAINS_ANNOTATIONS")]
     [ExcludeFromCodeCoverage]
-    public sealed class NoReorder : Attribute { }
+    public sealed class NoReorder : Attribute
+    {
+    }
 }

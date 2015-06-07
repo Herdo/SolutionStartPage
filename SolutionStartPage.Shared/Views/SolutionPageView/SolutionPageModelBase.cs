@@ -7,10 +7,12 @@
     using System.Xml.Serialization;
     using DAL;
     using Models;
+    using static Utilities;
 
     public abstract class SolutionPageModelBase : ISolutionPageModel
     {
         /////////////////////////////////////////////////////////
+
         #region Constants
 
         private const int _MAXIMUM_RETRIES = 15;
@@ -18,6 +20,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Fields
 
         private readonly IFileSystem _fileSystem;
@@ -27,18 +30,21 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Constructors
 
         protected SolutionPageModelBase(IFileSystem fileSystem, string settingsFileName)
         {
             _fileSystem = fileSystem;
-            _serializer = new XmlSerializer(typeof(SolutionPageConfiguration));
-            _settingsFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), settingsFileName);
+            _serializer = new XmlSerializer(typeof (SolutionPageConfiguration));
+            _settingsFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                settingsFileName);
         }
 
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region ISolutionPageModel Member
 
         SolutionPageConfiguration ISolutionPageModel.LoadConfiguration()
@@ -51,7 +57,7 @@
                 try
                 {
                     using (var reader = new StreamReader(_settingsFilePath))
-                        return (SolutionPageConfiguration)_serializer.Deserialize(reader);
+                        return (SolutionPageConfiguration) _serializer.Deserialize(reader);
                 }
                 catch (Exception)
                 {
@@ -62,15 +68,17 @@
             return new SolutionPageConfiguration();
         }
 
-        async Task ISolutionPageModel.SaveConfiguration(SolutionPageConfiguration groups)
+        async Task ISolutionPageModel.SaveConfiguration(SolutionPageConfiguration configuration)
         {
+            ThrowIfNull(configuration, nameof(configuration));
+
             for (var i = 0; i <= _MAXIMUM_RETRIES; i++)
             {
                 try
                 {
                     using (var writer = new StreamWriter(_settingsFilePath))
                     {
-                        _serializer.Serialize(writer, groups);
+                        _serializer.Serialize(writer, configuration);
                         return;
                     }
                 }

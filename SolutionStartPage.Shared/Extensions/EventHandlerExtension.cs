@@ -26,7 +26,8 @@
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An object that contains the event data.</param>
         [DebuggerStepThrough]
-        public static void SafeInvoke<TEventArgs>(this EventHandler<TEventArgs> self, object sender, TEventArgs e) where TEventArgs : EventArgs
+        public static void SafeInvoke<TEventArgs>(this EventHandler<TEventArgs> self, object sender, TEventArgs e)
+            where TEventArgs : EventArgs
         {
             self?.Invoke(sender, e);
         }

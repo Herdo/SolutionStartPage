@@ -11,14 +11,16 @@
     public abstract class SolutionPageViewModelBase : ISolutionPageViewModel
     {
         /////////////////////////////////////////////////////////
+
         #region Fields
-        
+
         private readonly IViewStateProvider _viewStateProvider;
         private int _columns;
 
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Properties
 
         public bool EditModeEnabled
@@ -43,6 +45,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Constructors
 
         protected SolutionPageViewModelBase(IViewStateProvider viewStateProvider)
@@ -54,9 +57,10 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Event Handler
-         
-        void viewStateProvider_PropertyChanged(object sender, PropertyChangedEventArgs e)
+
+        private void viewStateProvider_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             OnPropertyChanged(e.PropertyName);
         }
@@ -64,6 +68,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region INotifyPropertyChanged Members & Extension
 
         public event PropertyChangedEventHandler PropertyChanged;

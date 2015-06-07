@@ -2,8 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:converter="clr-namespace:SolutionStartPage.Shared.Converter;assembly=SolutionStartPage.Shared">
 
-    <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-    <converter:SolutionWidthToTextWidthConverter x:Key="SolutionWidthToTextWidthConverter"/>
-    <converter:BoolToOpacityConverter x:Key="BoolToOpacityConverter"/>
+    <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    <converter:SolutionWidthToTextWidthConverter x:Key="SolutionWidthToTextWidthConverter" />
+    <converter:BoolToOpacityConverter x:Key="BoolToOpacityConverter" />
 
 </ResourceDictionary>

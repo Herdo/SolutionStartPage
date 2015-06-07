@@ -7,8 +7,8 @@
 
     public class MainResourceProvider : IResourceProvider
     {
-
         /////////////////////////////////////////////////////////
+
         #region IResourceProvider Member
 
         CultureInfo IResourceProvider.Culture

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using System.Windows;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using SolutionStartPage.Core.Views.BasicPart;
     using SolutionStartPage.Shared.Models;
@@ -25,11 +26,12 @@
             var startPageHeaderTitleSet = false;
 
             Mock.Arrange(() => view.ConnectDataSource(vm)).DoInstead(() => dataSourceConnected = true);
-            Mock.ArrangeSet(() => vm.StartPageHeaderTitle = Arg.AnyString).DoInstead(() => startPageHeaderTitleSet = true);
+            Mock.ArrangeSet(() => vm.StartPageHeaderTitle = Arg.AnyString)
+                .DoInstead(() => startPageHeaderTitleSet = true);
             var presenter = new VsoPagePresenter(vsVersion, ide, view, vm);
 
             // Act
-            Mock.Raise(() => view.Loaded += null, new EventArgs());
+            Mock.Raise(() => view.Loaded += null, new RoutedEventArgs());
 
             // Assert
             Assert.IsTrue(dataSourceConnected);

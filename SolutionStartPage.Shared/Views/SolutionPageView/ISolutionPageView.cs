@@ -5,7 +5,7 @@
     using Models;
 
     public interface ISolutionPageView : IView<ISolutionPageViewModel>,
-                                         IBasicControlSubject
+        IBasicControlSubject
     {
         event EventHandler<CanExecuteRoutedEventArgs> AlterPageCanExecute;
         event EventHandler<ExecutedRoutedEventArgs> AlterPageExecuted;

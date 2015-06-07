@@ -9,6 +9,7 @@
     public class CopyDebugAction : DebugActionBase
     {
         /////////////////////////////////////////////////////////
+
         #region Public Methods
 
         public static void CopyData()
@@ -29,6 +30,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Private Methods
 
         private static void CopyFile(FileData file)
@@ -46,7 +48,8 @@
                 }
                 else
                 {
-                    PrintWarning($"Skipped file copy of {file.SourcePath} to {file.TargetPath}, because the source file doesn't exist.");
+                    PrintWarning(
+                        $"Skipped file copy of {file.SourcePath} to {file.TargetPath}, because the source file doesn't exist.");
                 }
             }
             catch (Exception e)

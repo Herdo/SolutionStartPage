@@ -8,6 +8,7 @@
     public class SolutionPageConfiguration
     {
         /////////////////////////////////////////////////////////
+
         #region Fields
 
         private int _columns;
@@ -15,6 +16,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Properties
 
         [XmlElement]
@@ -26,7 +28,7 @@
                 if (value == _columns) return;
                 if (value < 1)
                     _columns = 1;
-                else if (value >3)
+                else if (value > 3)
                     _columns = 3;
                 else
                     _columns = value;
@@ -40,6 +42,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Constructors
 
         public SolutionPageConfiguration()
@@ -51,6 +54,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Public Methods
 
         public SolutionPageConfiguration ApplyViewModel(ISolutionPageViewModel vm)

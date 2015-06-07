@@ -15,16 +15,18 @@
     public class Solution : INotifyPropertyChanged
     {
         /////////////////////////////////////////////////////////
+
         #region Events
 
         public event EventHandler<CanExecuteRoutedEventArgs> OpenSolutionCanExecute;
         public event EventHandler<ExecutedRoutedEventArgs> OpenSolutionExecuted;
         public event EventHandler<CanExecuteRoutedEventArgs> AlterSolutionCanExecute;
-        public event EventHandler<ExecutedRoutedEventArgs> AlterSolutionExecuted; 
+        public event EventHandler<ExecutedRoutedEventArgs> AlterSolutionExecuted;
 
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Fields
 
         private IViewStateProvider _viewStateProvider;
@@ -40,6 +42,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Properties
 
         [XmlIgnore]
@@ -169,15 +172,18 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Constructors
 
         /// <summary>
         /// <see cref="XmlSerializer"/> constructor.
         /// </summary>
         public Solution()
-        {}
+        {
+        }
 
-        public Solution(IViewStateProvider viewStateProvider, IFileSystem fileSystem, SolutionGroup group, string solutionPath)
+        public Solution(IViewStateProvider viewStateProvider, IFileSystem fileSystem, SolutionGroup group,
+            string solutionPath)
         {
             ViewStateProvider = viewStateProvider;
             FileSystem = fileSystem;
@@ -195,6 +201,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Private Methods
 
         private void ComputeSolutionDirectory()
@@ -203,8 +210,8 @@
 
             // If nothing set, return empty
             if ((String.IsNullOrWhiteSpace(SolutionPath)
-             && String.IsNullOrWhiteSpace(SolutionDirectory))
-             || FileSystem == null)
+                 && String.IsNullOrWhiteSpace(SolutionDirectory))
+                || FileSystem == null)
             {
                 tempDir = String.Empty;
             }
@@ -212,8 +219,8 @@
             {
                 // Make directory, even if file path given
                 if (!String.IsNullOrWhiteSpace(SolutionDirectory)
-                 && !FileSystem.DirectoryExists(SolutionDirectory)
-                 && FileSystem.FileExists(SolutionDirectory))
+                    && !FileSystem.DirectoryExists(SolutionDirectory)
+                    && FileSystem.FileExists(SolutionDirectory))
                     _solutionDirectory = Path.GetDirectoryName(SolutionDirectory);
 
                 // Default, use solution file directory
@@ -222,9 +229,10 @@
 
                 // Check if relative or absolute
                 tempDir = Path.IsPathRooted(SolutionDirectory)
-                                         && FileSystem.DirectoryExists(SolutionDirectory)
+                          && FileSystem.DirectoryExists(SolutionDirectory)
                     ? SolutionDirectory
-                    : new Uri(Path.Combine(Path.GetDirectoryName(SolutionPath) ?? @"\\", SolutionDirectory ?? String.Empty)).AbsolutePath;
+                    : new Uri(Path.Combine(Path.GetDirectoryName(SolutionPath) ?? @"\\",
+                        SolutionDirectory ?? String.Empty)).AbsolutePath;
             }
 
             ComputedSolutionDirectory = tempDir;
@@ -233,6 +241,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Public Methods
 
         public void TriggerOpenSolution_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -258,9 +267,10 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Event Handler
 
-        void viewStateProvider_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void viewStateProvider_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             OnPropertyChanged(e.PropertyName);
         }
@@ -268,6 +278,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region INotifyPropertyChanged Members & Extension
 
         public event PropertyChangedEventHandler PropertyChanged;

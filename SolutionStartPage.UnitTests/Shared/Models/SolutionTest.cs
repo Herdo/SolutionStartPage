@@ -69,7 +69,7 @@
 
             // Act
             sln.TriggerAlterSolution_CanExecute(this, null);
-            
+
             // Assert
             Assert.IsTrue(invoked);
         }
@@ -207,7 +207,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void SolutionDisplayName_GetSet_ArgumentNullException()
         {
             // Arrange
@@ -235,7 +235,7 @@
         public void SolutionDisplayName_GetSet()
         {
             // Arrange
-            var sln = new Solution { SolutionPath = @"C:\Users\Administrator\foo.sln" };
+            var sln = new Solution {SolutionPath = @"C:\Users\Administrator\foo.sln"};
             var invoked = false;
             sln.PropertyChanged += (sender, args) => invoked = true;
 
@@ -251,7 +251,7 @@
         public void SolutionDisplayName_GetSet_SameValue()
         {
             // Arrange
-            var sln = new Solution { SolutionDisplayName = @"foo" };
+            var sln = new Solution {SolutionDisplayName = @"foo"};
             var invoked = false;
             sln.PropertyChanged += (sender, args) => invoked = true;
 
@@ -315,7 +315,7 @@
         public void SolutionDirectory_GetSet_SameValue()
         {
             // Arrange
-            var sln = new Solution { SolutionDirectory = @"C:\Users\Administrator\" };
+            var sln = new Solution {SolutionDirectory = @"C:\Users\Administrator\"};
             var invoked = false;
             sln.PropertyChanged += (sender, args) => invoked = true;
 

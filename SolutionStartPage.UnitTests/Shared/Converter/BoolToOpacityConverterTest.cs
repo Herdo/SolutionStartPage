@@ -10,7 +10,7 @@
     public class BoolToOpacityConverterTest
     {
         [TestMethod]
-        [ExpectedException(typeof(NotSupportedException))]
+        [ExpectedException(typeof (NotSupportedException))]
         public void ConvertBack_NotSupportedException()
         {
             // Arrange
@@ -45,9 +45,9 @@
             // Assert
             Assert.AreEqual(0.5, result);
         }
-        
+
         [TestMethod]
-        [ExpectedException(typeof(InvalidCastException))]
+        [ExpectedException(typeof (InvalidCastException))]
         public void Convert_InvalidCastException_value()
         {
             // Arrange
@@ -58,7 +58,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(FormatException))]
+        [ExpectedException(typeof (FormatException))]
         public void Convert_FormatException_parameter()
         {
             // Arrange
@@ -69,7 +69,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
+        [ExpectedException(typeof (NullReferenceException))]
         public void Convert_NullReferenceException_value()
         {
             // Arrange
@@ -80,7 +80,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
+        [ExpectedException(typeof (NullReferenceException))]
         public void Convert_NullReferenceException_parameter()
         {
             // Arrange

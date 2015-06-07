@@ -9,6 +9,7 @@
     public class ViewStateProvider : IViewStateProvider
     {
         /////////////////////////////////////////////////////////
+
         #region Fields
 
         private bool _editModeEnabled;
@@ -16,6 +17,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Constructors
 
         public ViewStateProvider()
@@ -26,6 +28,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region IViewStateProvider Member
 
         public bool EditModeEnabled
@@ -42,6 +45,7 @@
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region INotifyPropertyChanged Members & Extension
 
         public event PropertyChangedEventHandler PropertyChanged;

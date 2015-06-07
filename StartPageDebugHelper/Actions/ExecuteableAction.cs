@@ -3,16 +3,18 @@
     using System;
 
     public class ExecuteableAction : BaseActionProvider,
-                                     IActionProvider
+        IActionProvider
     {
         /////////////////////////////////////////////////////////
+
         #region Fields
-            
+
         private readonly Action _action;
 
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region Constructors
 
         /// <summary>
@@ -26,13 +28,14 @@
         {
             if (action == null)
                 throw new ArgumentNullException(nameof(action));
-            
+
             _action = action;
         }
 
         #endregion
 
         /////////////////////////////////////////////////////////
+
         #region IActionProvider Member
 
         string IActionProvider.DisplayName => DisplayName;
