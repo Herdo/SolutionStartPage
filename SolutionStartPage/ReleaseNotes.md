@@ -1,3 +1,7 @@
+# 2.2
+- Improved startup process, when loading the start page
+- Minor improvements
+
 # 2.1
 - Fixed "MRU List doesn't open any solution" (in VS 2015)
 
