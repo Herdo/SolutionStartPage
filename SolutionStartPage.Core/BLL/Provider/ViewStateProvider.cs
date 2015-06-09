@@ -4,7 +4,6 @@
     using System.Runtime.CompilerServices;
     using Annotations;
     using Shared.BLL.Provider;
-    using Shared.Extensions;
 
     public class ViewStateProvider : IViewStateProvider
     {
@@ -53,7 +52,7 @@
         [NotifyPropertyChangedInvocator]
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChanged.SafeInvoke(this, propertyName);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #endregion

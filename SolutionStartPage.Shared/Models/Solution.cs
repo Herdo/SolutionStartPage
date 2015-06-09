@@ -10,7 +10,6 @@
     using Annotations;
     using BLL.Provider;
     using DAL;
-    using Extensions;
 
     public class Solution : INotifyPropertyChanged
     {
@@ -246,22 +245,22 @@
 
         public void TriggerOpenSolution_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            OpenSolutionExecuted.SafeInvoke(sender, e);
+            OpenSolutionExecuted?.Invoke(sender, e);
         }
 
         public void TriggerOpenSolution_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            OpenSolutionCanExecute.SafeInvoke(sender, e);
+            OpenSolutionCanExecute?.Invoke(sender, e);
         }
 
         public void TriggerAlterSolution_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            AlterSolutionExecuted.SafeInvoke(sender, e);
+            AlterSolutionExecuted?.Invoke(sender, e);
         }
 
         public void TriggerAlterSolution_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            AlterSolutionCanExecute.SafeInvoke(sender, e);
+            AlterSolutionCanExecute?.Invoke(sender, e);
         }
 
         #endregion
@@ -286,7 +285,7 @@
         [NotifyPropertyChangedInvocator]
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChanged.SafeInvoke(this, propertyName);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #endregion

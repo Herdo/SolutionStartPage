@@ -1,6 +1,5 @@
 ﻿namespace SolutionStartPage.UnitTests.Core.Views.BasicPart
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Windows;
     using Microsoft.VisualStudio.TestTools.UnitTesting;

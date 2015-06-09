@@ -3,7 +3,6 @@
     using System;
     using System.Windows.Forms;
     using System.Windows.Input;
-    using Shared.Extensions;
     using Shared.Models;
     using Shared.Views;
     using Shared.Views.SolutionPageView;
@@ -31,12 +30,12 @@
 
         private void AlterPage_OnCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            AlterPageCanExecute.SafeInvoke(sender, e);
+            AlterPageCanExecute?.Invoke(sender, e);
         }
 
         private void AlterPage_OnExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            AlterPageExecuted.SafeInvoke(sender, e);
+            AlterPageExecuted?.Invoke(sender, e);
         }
 
         #endregion

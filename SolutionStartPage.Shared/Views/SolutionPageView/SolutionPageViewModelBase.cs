@@ -5,7 +5,6 @@
     using System.Runtime.CompilerServices;
     using Annotations;
     using BLL.Provider;
-    using Extensions;
     using Models;
 
     public abstract class SolutionPageViewModelBase : ISolutionPageViewModel
@@ -76,7 +75,7 @@
         [NotifyPropertyChangedInvocator]
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChanged.SafeInvoke(this, propertyName);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #endregion

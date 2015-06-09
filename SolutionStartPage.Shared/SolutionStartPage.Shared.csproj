@@ -55,7 +55,6 @@
     <Compile Include="Converter\PathToSystemImageConverter.cs" />
     <Compile Include="Converter\SolutionWidthToTextWidthConverter.cs" />
     <Compile Include="DAL\IFileSystem.cs" />
-    <Compile Include="Extensions\EventHandlerExtension.cs" />
     <Compile Include="IBootstrapper.cs" />
     <Compile Include="Models\IIde.cs" />
     <Compile Include="Models\IIdeModel.cs" />

@@ -8,7 +8,6 @@
     using System.Xml.Serialization;
     using Annotations;
     using BLL.Provider;
-    using Extensions;
     using static System.String;
 
     public class SolutionGroup : INotifyPropertyChanged
@@ -99,12 +98,12 @@
 
         public void TriggerAlterSolutionGroup_CanExecute(CanExecuteRoutedEventArgs args)
         {
-            AlterSolutionGroupCanExecute.SafeInvoke(this, args);
+            AlterSolutionGroupCanExecute?.Invoke(this, args);
         }
 
         public void TriggerAlterSolutionGroup_Executed(ExecutedRoutedEventArgs args)
         {
-            AlterSolutionGroupExecuted.SafeInvoke(this, args);
+            AlterSolutionGroupExecuted?.Invoke(this, args);
         }
 
         #endregion
@@ -129,7 +128,7 @@
         [NotifyPropertyChangedInvocator]
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChanged.SafeInvoke(this, propertyName);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #endregion
