@@ -1,3 +1,6 @@
+# 2.3
+- Added option to hide/display folders
+
 # 2.2
 - Improved startup process, when loading the start page
 - Minor improvements
