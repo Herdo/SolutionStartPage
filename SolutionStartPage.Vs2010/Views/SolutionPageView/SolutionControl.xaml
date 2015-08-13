@@ -112,24 +112,26 @@
         <!-- Solution Directory -->
         <Grid Grid.Row="1"
               Visibility="{Binding EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}">
-            <StackPanel Orientation="Horizontal"
-                        Opacity="{Binding SolutionDirectoryAvailable, Converter={StaticResource BoolToOpacityConverter}, ConverterParameter=0.3, Mode=OneWay}">
-                <Image Style="{StaticResource SolutionImageFolderStyle}" />
-                <vs:ImageButton Margin="5,0,0,0"
-                                Content="{Binding ComputedSolutionDirectory}"
-                                Style="{StaticResource StartPage.ProjectCommand.LinkStyle}"
-                                Command="commands:Commands.OpenSolution"
-                                CommandParameter="{x:Static commands:CommandParameter.OPEN_SOLUTION_OPEN_EXPLORER}"
-                                HorizontalAlignment="Left"
-                                HorizontalContentAlignment="Left"
-                                VerticalAlignment="Center"
-                                VerticalContentAlignment="Center"
-                                ToolTip="{Binding ComputedSolutionDirectory}"
-                                Width="{Binding ElementName=SolutionUserControlRoot, Path=ActualWidth, Converter={StaticResource SolutionWidthToTextWidthConverter}}" />
-            </StackPanel>
-            <Image Style="{StaticResource ResourceNotAvailableWarningStyle}"
-                   Visibility="{Binding SolutionDirectoryAvailable, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}"
-                   ToolTip="{Binding [DirectoryDoesntExist_ToolTip], Source={StaticResource SSP_Texts}}" />
+            <Grid Visibility="{Binding DisplayFolders, Converter={StaticResource BoolToVisibilityConverter}}">
+                <StackPanel Orientation="Horizontal"
+                            Opacity="{Binding SolutionDirectoryAvailable, Converter={StaticResource BoolToOpacityConverter}, ConverterParameter=0.3, Mode=OneWay}">
+                    <Image Style="{StaticResource SolutionImageFolderStyle}" />
+                    <vs:ImageButton Margin="5,0,0,0"
+                                    Content="{Binding ComputedSolutionDirectory}"
+                                    Style="{StaticResource StartPage.ProjectCommand.LinkStyle}"
+                                    Command="commands:Commands.OpenSolution"
+                                    CommandParameter="{x:Static commands:CommandParameter.OPEN_SOLUTION_OPEN_EXPLORER}"
+                                    HorizontalAlignment="Left"
+                                    HorizontalContentAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    ToolTip="{Binding ComputedSolutionDirectory}"
+                                    Width="{Binding ElementName=SolutionUserControlRoot, Path=ActualWidth, Converter={StaticResource SolutionWidthToTextWidthConverter}}" />
+                </StackPanel>
+                <Image Style="{StaticResource ResourceNotAvailableWarningStyle}"
+                       Visibility="{Binding SolutionDirectoryAvailable, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}"
+                       ToolTip="{Binding [DirectoryDoesntExist_ToolTip], Source={StaticResource SSP_Texts}}" />
+            </Grid>
         </Grid>
 
         <Grid Grid.Row="2"

@@ -168,6 +168,13 @@
             }
         }
 
+        [XmlIgnore]
+        public bool DisplayFolders
+        {
+            get { return ViewStateProvider.DisplayFolders; }
+            set { ViewStateProvider.DisplayFolders = value; }
+        }
+
         #endregion
 
         /////////////////////////////////////////////////////////

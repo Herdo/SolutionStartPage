@@ -35,6 +35,9 @@
             }
         }
 
+        [XmlElement]
+        public bool DisplayFolders { get; set; }
+
         [XmlArray("SolutionGroups")]
         [XmlArrayItem("SolutionGroup")]
         public SolutionGroup[] SolutionGroups { get; set; }
@@ -48,6 +51,7 @@
         public SolutionPageConfiguration()
         {
             Columns = 3;
+            DisplayFolders = true;
             SolutionGroups = new SolutionGroup[0];
         }
 
@@ -60,6 +64,7 @@
         public SolutionPageConfiguration ApplyViewModel(ISolutionPageViewModel vm)
         {
             Columns = vm.Columns;
+            DisplayFolders = vm.DisplayFolders;
             SolutionGroups = vm.SolutionGroups.ToArray();
 
             return this;

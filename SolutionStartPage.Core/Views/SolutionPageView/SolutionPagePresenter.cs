@@ -103,6 +103,7 @@
         private void PrepareLoadedData()
         {
             ViewModel.Columns = _configuration.Columns;
+            ViewModel.DisplayFolders = _configuration.DisplayFolders;
             ViewModel.SolutionGroups = new ObservableCollection<SolutionGroup>(_configuration.SolutionGroups);
 
             foreach (var solutionGroup in ViewModel.SolutionGroups)

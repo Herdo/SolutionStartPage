@@ -168,11 +168,18 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
 
                         <!-- Columns -->
-                        <TextBlock Style="{DynamicResource StartPage.ItemHeadingTextStyle}"
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="0"
+                                   Style="{DynamicResource StartPage.ItemHeadingTextStyle}"
                                    Text="{Binding [Columns], Source={StaticResource SSP_Texts}}" />
-                        <xctk:IntegerUpDown Grid.Column="1"
+                        <xctk:IntegerUpDown Grid.Row="0"
+                                            Grid.Column="1"
                                             VerticalAlignment="Center"
                                             HorizontalAlignment="Left"
                                             Width="40"
@@ -180,6 +187,17 @@
                                             Value="{Binding Columns}"
                                             Minimum="1"
                                             Maximum="3" />
+                        
+                        <!-- Display Folders -->
+                        <TextBlock Grid.Row="1"
+                                   Grid.Column="0"
+                                   Style="{DynamicResource StartPage.ItemHeadingTextStyle}"
+                                   Text="{Binding [DisplayFolders], Source={StaticResource SSP_Texts}}"/>
+                        <CheckBox Grid.Row="1"
+                                  Grid.Column="1"
+                                  Margin="5, 0, 0, 0"
+                                  VerticalAlignment="Center"
+                                  IsChecked="{Binding DisplayFolders}"/>
                     </Grid>
                 </GroupBox>
             </Grid>

@@ -28,6 +28,12 @@
             set { _viewStateProvider.EditModeEnabled = value; }
         }
 
+        public bool DisplayFolders
+        {
+            get { return _viewStateProvider.DisplayFolders; }
+            set { _viewStateProvider.DisplayFolders = value; }
+        }
+
         public int Columns
         {
             get { return _columns; }

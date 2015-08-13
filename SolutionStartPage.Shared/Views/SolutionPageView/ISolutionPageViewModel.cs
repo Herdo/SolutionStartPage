@@ -7,6 +7,8 @@
     {
         bool EditModeEnabled { get; set; }
 
+        bool DisplayFolders { get; set; }
+
         int Columns { get; set; }
 
         ObservableCollection<SolutionGroup> SolutionGroups { get; set; }

@@ -5,5 +5,6 @@
     public interface IViewStateProvider : INotifyPropertyChanged
     {
         bool EditModeEnabled { get; set; }
+        bool DisplayFolders { get; set; }
     }
 }

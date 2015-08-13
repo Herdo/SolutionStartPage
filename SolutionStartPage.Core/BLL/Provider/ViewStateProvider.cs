@@ -8,26 +8,25 @@
     public class ViewStateProvider : IViewStateProvider
     {
         /////////////////////////////////////////////////////////
-
         #region Fields
 
         private bool _editModeEnabled;
+        private bool _displayFolders;
 
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Constructors
 
         public ViewStateProvider()
         {
             _editModeEnabled = false;
+            _displayFolders = true;
         }
 
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region IViewStateProvider Member
 
         public bool EditModeEnabled
@@ -41,10 +40,20 @@
             }
         }
 
+        public bool DisplayFolders
+        {
+            get { return _displayFolders; }
+            set
+            {
+                if (value == _displayFolders) return;
+                _displayFolders = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region INotifyPropertyChanged Members & Extension
 
         public event PropertyChangedEventHandler PropertyChanged;
