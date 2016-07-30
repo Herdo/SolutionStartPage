@@ -132,7 +132,7 @@
             private set
             {
                 if (value == _computedSolutionDirectory) return;
-                _computedSolutionDirectory = HttpUtility.UrlDecode(value);
+                _computedSolutionDirectory = Uri.UnescapeDataString(value);
                 OnPropertyChanged();
             }
         }
