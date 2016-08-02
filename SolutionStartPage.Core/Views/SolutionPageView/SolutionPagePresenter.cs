@@ -387,7 +387,7 @@
                 case CommandParameter.OPEN_SOLUTION_OPEN:
                     solution.SolutionAvailable =
                         e.CanExecute = !ViewModel.EditModeEnabled
-                                       && _model.FileExists(solution.SolutionPath);
+                                       && _model.FileExists(solution.ComputedSolutionPath);
                     break;
                 case CommandParameter.OPEN_SOLUTION_OPEN_EXPLORER:
                     solution.SolutionDirectoryAvailable =
@@ -404,7 +404,7 @@
             switch (param)
             {
                 case CommandParameter.OPEN_SOLUTION_OPEN:
-                    _ide?.OpenSolution(solution.SolutionPath);
+                    _ide?.OpenSolution(solution.ComputedSolutionPath);
                     break;
                 case CommandParameter.OPEN_SOLUTION_OPEN_EXPLORER:
                     OpenSolutionDirectoryExplorer(solution);

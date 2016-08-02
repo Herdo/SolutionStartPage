@@ -31,6 +31,7 @@
             Assert.AreEqual(String.Empty, sln.SolutionDirectory);
             Assert.IsFalse(sln.SolutionDirectoryAvailable);
             Assert.IsNull(sln.SolutionPath);
+            Assert.IsNull(sln.ComputedSolutionPath);
         }
 
         [TestMethod]
@@ -56,6 +57,7 @@
             Assert.IsTrue(sln.SolutionDirectoryAvailable);
             Assert.IsNotNull(sln.SolutionDisplayName);
             Assert.IsNotNull(sln.SolutionPath);
+            Assert.IsNotNull(sln.ComputedSolutionPath);
             Assert.IsNotNull(sln.ViewStateProvider);
         }
 
@@ -276,6 +278,7 @@
 
             // Assert
             Assert.AreEqual("foo", sln.SolutionPath);
+            Assert.AreEqual("foo", sln.ComputedSolutionPath);
             Assert.IsTrue(invoked);
         }
 
@@ -292,6 +295,7 @@
 
             // Assert
             Assert.AreEqual("foo", sln.SolutionPath);
+            Assert.AreEqual("foo", sln.ComputedSolutionPath);
             Assert.IsFalse(invoked);
         }
 
@@ -492,7 +496,7 @@
             sln.SolutionPath = @"C:\Users\Administrator\bar.sln";
 
             // Assert
-            Assert.AreEqual(5, invokeCount);
+            Assert.AreEqual(6, invokeCount);
         }
 
         [TestMethod]
