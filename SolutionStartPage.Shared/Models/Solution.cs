@@ -314,10 +314,14 @@
 
         private string MakeAbsolutePath(string path)
         {
-            return Path.IsPathRooted(path)
-                && FileSystem.DirectoryExists(path)
-                ? path
-                : new Uri(Path.Combine(Path.GetDirectoryName(ComputedSolutionPath) ?? @"\\", path ?? Empty)).LocalPath;
+            if (Path.IsPathRooted(path)
+             && FileSystem.DirectoryExists(path))
+                return path;
+
+            var uri = new Uri(Path.Combine(Path.GetDirectoryName(ComputedSolutionPath) ?? @"\\", path ?? Empty));
+            return Path.IsPathRooted(uri.ToString())
+                ? uri.LocalPath
+                : uri.AbsolutePath;
         }
 
         #endregion

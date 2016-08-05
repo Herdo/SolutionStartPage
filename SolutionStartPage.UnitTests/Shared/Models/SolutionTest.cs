@@ -43,6 +43,7 @@
             var fileSystem = Mock.Create<IFileSystem>();
             var group = new SolutionGroup(vsp);
             var sln = new Solution(vsp, fileSystem, group, @"C:\Users\Administrator\foo.sln");
+            sln.ComputeProperties();
 
             // Act
             // Do nothing
@@ -227,7 +228,7 @@
             var sln = new Solution {SolutionPath = @"C:\Users\Administrator\foo.sln"};
 
             // Act
-            // Do nothing
+            sln.ComputeProperties();
 
             // Assert
             Assert.AreEqual("foo.sln", sln.SolutionDisplayName);
@@ -275,6 +276,7 @@
 
             // Act
             sln.SolutionPath = "foo";
+            sln.ComputeProperties();
 
             // Assert
             Assert.AreEqual("foo", sln.SolutionPath);
@@ -295,7 +297,6 @@
 
             // Assert
             Assert.AreEqual("foo", sln.SolutionPath);
-            Assert.AreEqual("foo", sln.ComputedSolutionPath);
             Assert.IsFalse(invoked);
         }
 
@@ -343,6 +344,7 @@
 
             // Act
             sln.SolutionPath = @"C:\Users\Administrator\foo.sln";
+            sln.ComputeProperties();
 
             // Assert
             Assert.AreEqual(@"C:\Users\Administrator", sln.SolutionDirectory);
@@ -473,6 +475,7 @@
 
             // Act
             sln.SolutionPath = @"C:\Users\Administrator\foo.sln";
+            sln.ComputeProperties();
 
             // Assert
             Assert.AreEqual(@"C:\Users\Administrator", sln.ComputedSolutionDirectory);
@@ -494,6 +497,7 @@
             // Act
             sln.SolutionPath = @"C:\Users\Administrator\foo.sln";
             sln.SolutionPath = @"C:\Users\Administrator\bar.sln";
+            sln.ComputeProperties();
 
             // Assert
             Assert.AreEqual(6, invokeCount);
@@ -513,6 +517,7 @@
 
             // Act
             sln.SolutionDirectory = @"C:\Users\Administrator\foo.sln";
+            sln.ComputeProperties();
 
             // Assert
             Assert.AreEqual(@"C:/Users/Administrator", sln.ComputedSolutionDirectory);
@@ -534,6 +539,7 @@
             // Act
             sln.SolutionPath = @"C:\Users\Administrator\foo.sln";
             sln.SolutionDirectory = @"..\";
+            sln.ComputeProperties();
 
             // Assert
             Assert.AreEqual(@"C:/Users/", sln.ComputedSolutionDirectory);
@@ -555,6 +561,7 @@
             // Act
             sln.SolutionPath = @"C:\Users\Administrator\foo.sln";
             sln.SolutionDirectory = @"..\..\..\..\";
+            sln.ComputeProperties();
 
             // Assert
             Assert.AreEqual(@"C:/", sln.ComputedSolutionDirectory);

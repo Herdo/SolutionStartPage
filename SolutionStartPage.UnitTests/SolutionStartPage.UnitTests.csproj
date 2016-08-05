@@ -68,6 +68,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Core\Views\BasicPart\VsoPagePresenterTest.cs" />
+    <Compile Include="Shared\Converter\InvertedBoolToOpacityConverterTest.cs" />
     <Compile Include="Shared\Converter\PathToSystemImageConverterTest.cs" />
     <Compile Include="Shared\Converter\SolutionWidthToTextWidthConverterTest.cs" />
     <Compile Include="Shared\Converter\BoolToOpacityConverterTest.cs" />
