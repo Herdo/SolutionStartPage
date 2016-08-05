@@ -80,7 +80,8 @@
 
         <!-- Display Name -->
         <Grid Grid.Row="0"
-              Visibility="{Binding EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}">
+              Visibility="{Binding EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}"
+              Opacity="{Binding HasError, Converter={StaticResource InvertedBoolToOpacityConverter}, ConverterParameter=0.3, Mode=OneWay}">
             <StackPanel Orientation="Horizontal"
                         Opacity="{Binding SolutionAvailable, Converter={StaticResource BoolToOpacityConverter}, ConverterParameter=0.3, Mode=OneWay}">
                 <Image x:Name="SolutionFileImage"
@@ -111,7 +112,8 @@
 
         <!-- Solution Directory -->
         <Grid Grid.Row="1"
-              Visibility="{Binding EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}">
+              Visibility="{Binding EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}"
+              Opacity="{Binding HasError, Converter={StaticResource InvertedBoolToOpacityConverter}, ConverterParameter=0.3, Mode=OneWay}">
             <Grid Visibility="{Binding DisplayFolders, Converter={StaticResource BoolToVisibilityConverter}}">
                 <StackPanel Orientation="Horizontal"
                             Opacity="{Binding SolutionDirectoryAvailable, Converter={StaticResource BoolToOpacityConverter}, ConverterParameter=0.3, Mode=OneWay}">
@@ -133,6 +135,18 @@
                        ToolTip="{Binding [DirectoryDoesntExist_ToolTip], Source={StaticResource SSP_Texts}}" />
             </Grid>
         </Grid>
+        
+        <!-- Error Overlay -->
+        <Border Grid.Row="0"
+                Grid.Column="0"
+                Grid.RowSpan="2"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Visibility="{Binding EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}">
+            <Image Style="{StaticResource ErrorImageStyle}"
+                   Visibility="{Binding HasError, Converter={StaticResource BoolToVisibilityConverter}}"
+                   ToolTip="{Binding ErrorText}"/>
+        </Border>
 
         <StackPanel Grid.Row="2"
                     Visibility="{Binding EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}}">
