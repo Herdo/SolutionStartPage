@@ -2,14 +2,15 @@
 {
     using System;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.IO;
     using System.Runtime.CompilerServices;
-    using System.Web;
     using System.Windows.Input;
     using System.Xml.Serialization;
     using Annotations;
     using BLL.Provider;
     using DAL;
+    using static System.String;
 
     public class Solution : INotifyPropertyChanged
     {
@@ -32,11 +33,14 @@
 
         private string _solutionDisplayName;
         private string _solutionPath;
+        private string _computedSolutionPath;
         private string _solutionDirectory;
         private string _computedSolutionDirectory;
         private bool _solutionAvailable;
         private bool _solutionDirectoryAvailable;
         private IFileSystem _fileSystem;
+        private bool _hasError;
+        private string _errorText;
 
         #endregion
 
@@ -67,6 +71,7 @@
             set
             {
                 _fileSystem = value;
+                ComputeSolutionPath();
                 ComputeSolutionDirectory();
             }
         }
@@ -80,7 +85,7 @@
         [XmlElement]
         public string SolutionDisplayName
         {
-            get { return _solutionDisplayName ?? new FileInfo(SolutionPath).Name; }
+            get { return _solutionDisplayName ?? new FileInfo(ComputedSolutionPath).Name; }
             set
             {
                 if (value == _solutionDisplayName) return;
@@ -92,6 +97,7 @@
         /// <summary>
         /// The path to the solution or project file.
         /// </summary>
+        /// <remarks>The path might contain environment variables, which will be resolved in the <see cref="ComputedSolutionPath"/>.</remarks>
         [XmlElement]
         public string SolutionPath
         {
@@ -101,24 +107,37 @@
                 if (value == _solutionPath) return;
                 _solutionPath = value;
                 OnPropertyChanged();
-                if (String.IsNullOrWhiteSpace(SolutionDirectory))
-                    ComputeSolutionDirectory();
             }
         }
 
         /// <summary>
-        /// The solution directory. Either relative to <see cref="SolutionPath"/>, or absolute. Default is the directory of <see cref="SolutionPath"/>.
+        /// 
+        /// </summary>
+        [XmlIgnore]
+        public string ComputedSolutionPath
+        {
+            get { return _computedSolutionPath; }
+            private set
+            {
+                if (value == _computedSolutionPath) return;
+                _computedSolutionPath = Uri.UnescapeDataString(value);
+                Debug.WriteLine($"{nameof(ComputedSolutionPath)} set to {_computedSolutionPath}");
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// The solution directory. Either relative to <see cref="ComputedSolutionPath"/>, or absolute. Default is the directory of <see cref="ComputedSolutionPath"/>.
         /// </summary>
         [XmlElement]
         public string SolutionDirectory
         {
-            get { return _solutionDirectory ?? String.Empty; }
+            get { return _solutionDirectory ?? Empty; }
             set
             {
                 if (value == _solutionDirectory) return;
                 _solutionDirectory = value;
                 OnPropertyChanged();
-                ComputeSolutionDirectory();
             }
         }
 
@@ -132,7 +151,8 @@
             private set
             {
                 if (value == _computedSolutionDirectory) return;
-                _computedSolutionDirectory = HttpUtility.UrlDecode(value);
+                _computedSolutionDirectory = Uri.UnescapeDataString(value);
+                Debug.WriteLine($"{nameof(ComputedSolutionDirectory)} set to {_computedSolutionDirectory}");
                 OnPropertyChanged();
             }
         }
@@ -175,6 +195,31 @@
             set { ViewStateProvider.DisplayFolders = value; }
         }
 
+        [XmlIgnore]
+        public bool HasError
+        {
+            get { return _hasError; }
+            private set
+            {
+                if (value == _hasError) return;
+                _hasError = value;
+                OnPropertyChanged();
+            }
+        }
+
+        [XmlIgnore]
+        public string ErrorText
+        {
+            get { return _errorText; }
+            private set
+            {
+                if (value == _errorText) return;
+                _errorText = value;
+                HasError = _errorText != null;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         /////////////////////////////////////////////////////////
@@ -198,7 +243,7 @@
             SolutionPath = solutionPath;
 
             SolutionDisplayName = null;
-            SolutionDirectory = String.Empty;
+            SolutionDirectory = Empty;
 
             SolutionAvailable = true;
             SolutionDirectoryAvailable = true;
@@ -207,48 +252,101 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Private Methods
+
+        private void ComputeSolutionPath()
+        {
+            var result = SolutionPath;
+            
+            // Resolve environment variables
+            result = ResolvePath(result);
+
+            ComputedSolutionPath = result;
+        }
 
         private void ComputeSolutionDirectory()
         {
-            string tempDir;
+            string directory;
 
-            // If nothing set, return empty
-            if ((String.IsNullOrWhiteSpace(SolutionPath)
-                 && String.IsNullOrWhiteSpace(SolutionDirectory))
-                || FileSystem == null)
+            // If no information is given set, return empty
+            if (FileSystem == null
+             || (IsNullOrWhiteSpace(SolutionPath)
+              && IsNullOrWhiteSpace(SolutionDirectory)))
             {
-                tempDir = String.Empty;
+                directory = Empty;
             }
             else
             {
-                // Make directory, even if file path given
-                if (!String.IsNullOrWhiteSpace(SolutionDirectory)
-                    && !FileSystem.DirectoryExists(SolutionDirectory)
-                    && FileSystem.FileExists(SolutionDirectory))
-                    _solutionDirectory = Path.GetDirectoryName(SolutionDirectory);
-
-                // Default, use solution file directory
-                if (String.IsNullOrWhiteSpace(SolutionDirectory))
-                    SolutionDirectory = Path.GetDirectoryName(SolutionPath);
-
-                // Check if relative or absolute
-                tempDir = Path.IsPathRooted(SolutionDirectory)
-                          && FileSystem.DirectoryExists(SolutionDirectory)
-                    ? SolutionDirectory
-                    : new Uri(Path.Combine(Path.GetDirectoryName(SolutionPath) ?? @"\\",
-                        SolutionDirectory ?? String.Empty)).AbsolutePath;
+                directory = ResolvePath(SolutionDirectory);
+                directory = MakeDirectoryIfFile(directory);
+                directory = UseDirectoryOfSolutionIfEmpty(directory);
+                directory = MakeAbsolutePath(directory);
             }
 
-            ComputedSolutionDirectory = tempDir;
+            ComputedSolutionDirectory = directory;
+        }
+
+        private static string ResolvePath(string path)
+        {
+            return IsNullOrWhiteSpace(path)
+                ? path
+                : Environment.ExpandEnvironmentVariables(path);
+        }
+
+        private string MakeDirectoryIfFile(string path)
+        {
+            return !IsNullOrWhiteSpace(path)
+                && !FileSystem.DirectoryExists(path)
+                && FileSystem.FileExists(path)
+                       ? Path.GetDirectoryName(path)
+                       : path;
+        }
+
+        private string UseDirectoryOfSolutionIfEmpty(string path)
+        {
+            if (!IsNullOrWhiteSpace(path))
+                return path;
+
+            var solutionDirectory = Path.GetDirectoryName(ComputedSolutionPath);
+            SolutionDirectory = solutionDirectory;
+            return solutionDirectory;
+        }
+
+        private string MakeAbsolutePath(string path)
+        {
+            if (Path.IsPathRooted(path)
+             && FileSystem.DirectoryExists(path))
+                return path;
+
+            var uri = new Uri(Path.Combine(Path.GetDirectoryName(ComputedSolutionPath) ?? @"\\", path ?? Empty));
+            return Path.IsPathRooted(uri.ToString())
+                ? uri.LocalPath
+                : uri.AbsolutePath;
         }
 
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Public Methods
+
+        public void ComputeProperties()
+        {
+            try
+            {
+                ComputeSolutionPath();
+                ComputeSolutionDirectory();
+                ErrorText = null;
+            }
+            catch (Exception e)
+            {
+                // Prevent errors during calculation to crash the whole start page
+                ErrorText = $"Error loading solution:{Environment.NewLine}"
+                          + $"{e}{Environment.NewLine}{Environment.NewLine}"
+                          + $"Advanced information:{Environment.NewLine}"
+                          + $"Solution path: {SolutionPath}{Environment.NewLine}"
+                          + $"Solution directory: {SolutionDirectory}";
+            }
+        }
 
         public void TriggerOpenSolution_Executed(object sender, ExecutedRoutedEventArgs e)
         {
@@ -273,7 +371,6 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Event Handler
 
         private void viewStateProvider_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -284,7 +381,6 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region INotifyPropertyChanged Members & Extension
 
         public event PropertyChangedEventHandler PropertyChanged;

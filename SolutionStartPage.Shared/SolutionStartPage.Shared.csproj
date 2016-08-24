@@ -51,6 +51,7 @@
     <Compile Include="BLL\Interfaces\IUserIOInterface.cs" />
     <Compile Include="Commands\CommandParameter.cs" />
     <Compile Include="Commands\Commands.cs" />
+    <Compile Include="Converter\InvertedBoolToOpacityConverter.cs" />
     <Compile Include="Converter\BoolToOpacityConverter.cs" />
     <Compile Include="Converter\BoolToVisibilityConverter.cs" />
     <Compile Include="Converter\PathToSystemImageConverter.cs" />
@@ -128,6 +129,9 @@
     <Resource Include="Resources\CommonConverter.xaml">
       <SubType>Designer</SubType>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\error.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

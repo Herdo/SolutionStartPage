@@ -23,7 +23,6 @@
         ISolutionPagePresenter
     {
         /////////////////////////////////////////////////////////
-
         #region Fields
 
         private readonly ISolutionPageModel _model;
@@ -37,7 +36,6 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Constructors
 
         /// <summary>
@@ -81,11 +79,11 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Base Overrides
 
         protected override void View_Loaded(object sender, RoutedEventArgs e)
         {
+            ComputeConfigurationProperties();
             PrepareLoadedData();
             ConnectEventHandler();
 
@@ -97,8 +95,19 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Private Methods
+
+        private void ComputeConfigurationProperties()
+        {
+            foreach (var solutionGroup in _configuration.SolutionGroups)
+            {
+                foreach (var solution in solutionGroup.Solutions)
+                {
+                    solution.ComputeProperties();
+                    solution.PropertyChanged += Solution_PropertyChanged;
+                }
+            }
+        }
 
         private void PrepareLoadedData()
         {
@@ -215,10 +224,15 @@
             if (solution == null)
                 return;
 
+            solution.ComputeProperties();
+
             solution.OpenSolutionCanExecute += solution_OpenSolutionCanExecute;
             solution.OpenSolutionExecuted += solution_OpenSolutionExecuted;
             solution.AlterSolutionCanExecute += solution_AlterSolutionCanExecute;
             solution.AlterSolutionExecuted += solution_AlterSolutionExecuted;
+
+            solution.PropertyChanged += Solution_PropertyChanged;
+
             group.Solutions.Add(solution);
         }
 
@@ -230,6 +244,8 @@
             solution.OpenSolutionExecuted -= solution_OpenSolutionExecuted;
             solution.AlterSolutionCanExecute -= solution_AlterSolutionCanExecute;
             solution.AlterSolutionExecuted -= solution_AlterSolutionExecuted;
+
+            solution.PropertyChanged -= Solution_PropertyChanged;
 
             solution.ParentGroup.Solutions.Remove(solution);
         }
@@ -385,14 +401,14 @@
             switch (param)
             {
                 case CommandParameter.OPEN_SOLUTION_OPEN:
-                    solution.SolutionAvailable =
-                        e.CanExecute = !ViewModel.EditModeEnabled
-                                       && _model.FileExists(solution.SolutionPath);
+                    solution.SolutionAvailable = !ViewModel.EditModeEnabled
+                                              && _model.FileExists(solution.ComputedSolutionPath);
+                    e.CanExecute = solution.SolutionAvailable && !solution.HasError;
                     break;
                 case CommandParameter.OPEN_SOLUTION_OPEN_EXPLORER:
-                    solution.SolutionDirectoryAvailable =
-                        e.CanExecute = !ViewModel.EditModeEnabled
-                                       && _model.DirectoryExists(solution.ComputedSolutionDirectory);
+                    solution.SolutionDirectoryAvailable = !ViewModel.EditModeEnabled
+                                                       && _model.DirectoryExists(solution.ComputedSolutionDirectory);
+                    e.CanExecute = solution.SolutionDirectoryAvailable && !solution.HasError;
                     break;
             }
         }
@@ -404,7 +420,7 @@
             switch (param)
             {
                 case CommandParameter.OPEN_SOLUTION_OPEN:
-                    _ide?.OpenSolution(solution.SolutionPath);
+                    _ide?.OpenSolution(solution.ComputedSolutionPath);
                     break;
                 case CommandParameter.OPEN_SOLUTION_OPEN_EXPLORER:
                     OpenSolutionDirectoryExplorer(solution);
@@ -453,6 +469,16 @@
                 case CommandParameter.ALTER_SOLUTION_REMOVE_SOLUTION:
                     e.CanExecute = true;
                     break;
+            }
+        }
+
+        private void Solution_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            var solution = (Solution) sender;
+            if (e.PropertyName == nameof(Solution.SolutionPath)
+             || e.PropertyName == nameof(Solution.SolutionDirectory))
+            {
+                solution.ComputeProperties();
             }
         }
 
