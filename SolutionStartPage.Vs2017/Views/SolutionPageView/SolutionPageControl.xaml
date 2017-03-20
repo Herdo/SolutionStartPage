@@ -1,0 +1,208 @@
+﻿<UserControl x:Class="SolutionStartPage.Vs2017.Views.SolutionPageView.SolutionPageControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vsfx="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.14.0"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:commands="clr-namespace:SolutionStartPage.Shared.Commands;assembly=SolutionStartPage.Shared"
+             xmlns:solutionPageView="clr-namespace:SolutionStartPage.Vs2017.Views.SolutionPageView"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=solutionPageView:SolutionPageViewModel, IsDesignTimeCreatable=True}"
+             Background="Transparent">
+
+    <UserControl.CommandBindings>
+        <CommandBinding Command="commands:Commands.AlterPage"
+                        Executed="AlterPage_OnExecuted"
+                        CanExecute="AlterPage_OnCanExecute" />
+    </UserControl.CommandBindings>
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="pack://application:,,,/Microsoft.VisualStudio.Shell.14.0;component/ui/styles/startpageresources.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/SolutionStartPage.Shared;component/Resources/CommonStyles.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/SolutionStartPage.Shared;component/Resources/CommonConverter.xaml" />
+                <ResourceDictionary>
+                    <!-- Styles -->
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground"
+                                Value="{DynamicResource {x:Static vsfx:VsBrushes.StartPageTextControlLinkSelectedKey}}" />
+                    </Style>
+
+                    <Style TargetType="GroupBox">
+                        <Setter Property="BorderBrush"
+                                Value="{DynamicResource {x:Static vsfx:VsBrushes.StartPageTextControlLinkSelectedKey}}" />
+                        <Setter Property="HeaderTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <TextBlock Style="{DynamicResource StartPage.ItemHeadingTextStyle}"
+                                               FontSize="16"
+                                               Text="{Binding}" />
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <UserControl.ContextMenu>
+        <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+            <MenuItem IsCheckable="True"
+                      IsChecked="{Binding EditModeEnabled}"
+                      Header="{Binding [ContextCommand_EnableEditing], Source={StaticResource SSP_Texts}}" />
+        </ContextMenu>
+    </UserControl.ContextMenu>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Content -->
+        <ScrollViewer Grid.Row="0"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl ItemsSource="{Binding SolutionGroups}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="{Binding Columns}"
+                                     VerticalAlignment="Top" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <solutionPageView:SolutionGroupControl DataContext="{Binding}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <!-- Configuration -->
+        <Border Grid.Row="1"
+                Visibility="{Binding EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}}"
+                Background="{DynamicResource {x:Static vsfx:VsBrushes.TitleBarActiveKey}}"
+                Padding="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <!-- Header & Actions Row -->
+                    <RowDefinition />
+                    <!-- Advanced Settings -->
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Header -->
+                <TextBlock Text="{Binding [Settings], Source={StaticResource SSP_Texts}}"
+                           Style="{DynamicResource StartPage.ItemHeadingTextStyle}"
+                           TextDecorations="Underline"
+                           FontSize="24"
+                           Margin="0, 0, 0, 15" />
+
+                <GroupBox Grid.Row="0"
+                          Grid.Column="2"
+                          Header="{Binding [Actions], Source={StaticResource SSP_Texts}}">
+                    <StackPanel VerticalAlignment="Center"
+                                HorizontalAlignment="Left"
+                                Orientation="Horizontal">
+                        <Button ToolTip="{Binding [AddGroup_ToolTip], Source={StaticResource SSP_Texts}}"
+                                Command="commands:Commands.AlterPage"
+                                CommandParameter="{x:Static commands:CommandParameter.ALTER_PAGE_ADD_GROUP}"
+                                Margin="5"
+                                Height="{Binding ElementName=BulkAddDropDownButton, Path=Height}"
+                                Width="{Binding ElementName=BulkAddDropDownButton, Path=Width}">
+                            <Image Style="{StaticResource AddCommandImageStyle}" />
+                        </Button>
+                        <xctk:DropDownButton x:Name="BulkAddDropDownButton"
+                                             Margin="5"
+                                             VerticalAlignment="Center"
+                                             HorizontalAlignment="Left"
+                                             ToolTip="{Binding [BulkAddSolutions_ToolTip], Source={StaticResource SSP_Texts}}">
+                            <xctk:DropDownButton.Content>
+                                <Image Style="{StaticResource FolderCommandImageStyle}" />
+                            </xctk:DropDownButton.Content>
+                            <xctk:DropDownButton.DropDownContent>
+                                <StackPanel>
+                                    <Button
+                                        Content="{Binding [BulkAddSolutionsSingleGroup], Source={StaticResource SSP_Texts}}"
+                                        ToolTip="{Binding [BulkAddSolutionsSingleGroup_ToolTip], Source={StaticResource SSP_Texts}}"
+                                        Command="commands:Commands.AlterPage"
+                                        CommandParameter="{x:Static commands:CommandParameter.ALTER_PAGE_ADD_GROUP_BULK_SINGLE}"
+                                        Margin="5"
+                                        Height="24" />
+                                    <Button
+                                        Content="{Binding [BulkAddSolutionsMultipleGroups], Source={StaticResource SSP_Texts}}"
+                                        ToolTip="{Binding [BulkAddSolutionsMultipleGroups_ToolTip], Source={StaticResource SSP_Texts}}"
+                                        Command="commands:Commands.AlterPage"
+                                        CommandParameter="{x:Static commands:CommandParameter.ALTER_PAGE_ADD_GROUP_BULK_MULTIPLE}"
+                                        Margin="5"
+                                        Height="24" />
+                                </StackPanel>
+                            </xctk:DropDownButton.DropDownContent>
+                        </xctk:DropDownButton>
+                        <Button ToolTip="{Binding [DeleteAllGroups_ToolTip], Source={StaticResource SSP_Texts}}"
+                                Command="commands:Commands.AlterPage"
+                                CommandParameter="{x:Static commands:CommandParameter.ALTER_PAGE_DELETE_ALL_GROUPS}"
+                                Margin="5"
+                                Height="{Binding ElementName=BulkAddDropDownButton, Path=Height}"
+                                Width="{Binding ElementName=BulkAddDropDownButton, Path=Width}">
+                            <Image Style="{StaticResource DeleteAllCommandImageStyle}" />
+                        </Button>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Grid.Row="1"
+                          Grid.Column="0"
+                          Grid.ColumnSpan="3"
+                          Header="{Binding [Layout], Source={StaticResource SSP_Texts}}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Columns -->
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="0"
+                                   Style="{DynamicResource StartPage.ItemHeadingTextStyle}"
+                                   Text="{Binding [Columns], Source={StaticResource SSP_Texts}}" />
+                        <xctk:IntegerUpDown Grid.Row="0"
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Left"
+                                            Width="40"
+                                            Margin="5,0,0,0"
+                                            Value="{Binding Columns}"
+                                            Minimum="1"
+                                            Maximum="3" />
+
+                        <!-- Display Folders -->
+                        <TextBlock Grid.Row="1"
+                                   Grid.Column="0"
+                                   Style="{DynamicResource StartPage.ItemHeadingTextStyle}"
+                                   Text="{Binding [DisplayFolders], Source={StaticResource SSP_Texts}}"/>
+                        <CheckBox Grid.Row="1"
+                                  Grid.Column="1"
+                                  Margin="5, 0, 0, 0"
+                                  VerticalAlignment="Center"
+                                  IsChecked="{Binding DisplayFolders}"/>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
