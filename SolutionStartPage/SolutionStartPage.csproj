@@ -168,6 +168,14 @@
       <Project>{d338e438-f108-4b43-9d22-a99066c1aa5e}</Project>
       <Name>SolutionStartPage.Vs2013</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SolutionStartPage.Vs2015\SolutionStartPage.Vs2015.csproj">
+      <Project>{ba455b7b-895c-45fa-9ff4-c5efa4f69dd7}</Project>
+      <Name>SolutionStartPage.Vs2015</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SolutionStartPage.Vs2017\SolutionStartPage.Vs2017.csproj">
+      <Project>{db752cef-065e-44b4-9f6e-2fd0ef74919a}</Project>
+      <Name>SolutionStartPage.Vs2017</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v12.0\VSSDK\Microsoft.VsSDK.targets" />

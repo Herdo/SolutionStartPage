@@ -9,7 +9,6 @@
         IActionProvider
     {
         /////////////////////////////////////////////////////////
-
         #region Fields
 
         private readonly IDictionary<int, IActionProvider> _set;
@@ -17,7 +16,6 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Constructors
 
         /// <summary>
@@ -41,7 +39,6 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region IActionProvider Member
 
         string IActionProvider.DisplayName => DisplayName;

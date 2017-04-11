@@ -77,6 +77,7 @@
     <Compile Include="Actions\Implementations\DebugActionBase.cs" />
     <Compile Include="Models\FileData.cs" />
     <Compile Include="Models\FileType.cs" />
+    <Compile Include="Models\VsVersionInformation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -9,7 +9,6 @@
     public class CleanDebugAction : DebugActionBase
     {
         /////////////////////////////////////////////////////////
-
         #region Public Methods
 
         public static void CleanData()
@@ -30,7 +29,6 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Private Methods
 
         private static void DeleteFile(FileData file)
@@ -39,6 +37,14 @@
             {
                 if (File.Exists(file.TargetPath))
                 {
+                    // If the file to delete is newer than the source version, we shall not delete it (might cause Visual Studio installation to malfunction)
+                    if (file.SourceVersion != null
+                     && file.TargetVersion != null
+                     && file.TargetVersion > file.SourceVersion)
+                    {
+                        PrintWarning($"Skipped file deletion of {file.TargetPath}, because it's newer thatn the source file and might be required by the Visual Studio installation.");
+                        return;
+                    }
                     WriteLine("Deleting file: {0}", file.TargetPath);
                     File.Delete(file.TargetPath);
                     if (!File.Exists(file.TargetPath))

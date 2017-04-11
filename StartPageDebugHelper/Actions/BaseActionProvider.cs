@@ -7,7 +7,6 @@
     public abstract class BaseActionProvider
     {
         /////////////////////////////////////////////////////////
-
         #region Fields
 
         protected readonly string DisplayName;
@@ -15,7 +14,6 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Constructors
 
         /// <summary>
@@ -34,7 +32,6 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Protected Methods
 
         protected void PrintActionBase()

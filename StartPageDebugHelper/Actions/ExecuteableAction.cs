@@ -6,7 +6,6 @@
         IActionProvider
     {
         /////////////////////////////////////////////////////////
-
         #region Fields
 
         private readonly Action _action;
@@ -14,7 +13,6 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Constructors
 
         /// <summary>
@@ -35,7 +33,6 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region IActionProvider Member
 
         string IActionProvider.DisplayName => DisplayName;

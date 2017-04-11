@@ -75,6 +75,8 @@
                     return "2013";
                 case 14:
                     return "2015";
+                case 15:
+                    return "2017";
                 default:
                     throw new NotSupportedException("Version is not supported.");
             }
