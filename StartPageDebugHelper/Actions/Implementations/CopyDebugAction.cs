@@ -53,7 +53,7 @@
                          && file.TargetVersion != null
                          && file.TargetVersion != file.SourceVersion)
                         {
-                            PrintWarning($"Skipped file copy of {file.SourcePath} to {file.TargetPath}, because the existing version is newer.");
+                            PrintWarning($"Skipped file copy of {file.SourcePath} to {file.TargetPath}, because the existing version is different.");
                             return;
                         }
                     }

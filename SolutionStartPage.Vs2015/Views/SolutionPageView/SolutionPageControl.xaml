@@ -66,9 +66,7 @@
         </Grid.RowDefinitions>
 
         <!-- Content -->
-        <ScrollViewer Grid.Row="0"
-                      VerticalScrollBarVisibility="Auto"
-                      HorizontalScrollBarVisibility="Disabled">
+        <Grid Grid.Row="0">
             <ItemsControl ItemsSource="{Binding SolutionGroups}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -82,7 +80,7 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-        </ScrollViewer>
+        </Grid>
 
         <!-- Configuration -->
         <Border Grid.Row="1"
