@@ -37,10 +37,10 @@
             {
                 if (File.Exists(file.TargetPath))
                 {
-                    // If the file to delete is newer than the source version, we shall not delete it (might cause Visual Studio installation to malfunction)
+                    // If the version of the file to delete is different from the source version, we shall not delete it (might cause Visual Studio installation to malfunction)
                     if (file.SourceVersion != null
                      && file.TargetVersion != null
-                     && file.TargetVersion > file.SourceVersion)
+                     && file.TargetVersion != file.SourceVersion)
                     {
                         PrintWarning($"Skipped file deletion of {file.TargetPath}, because it's newer thatn the source file and might be required by the Visual Studio installation.");
                         return;

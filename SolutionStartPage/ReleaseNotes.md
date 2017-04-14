@@ -1,3 +1,6 @@
+# 2.5
+- Added support for VS 2017
+
 # 2.3
 - Added option to hide/display folders
 

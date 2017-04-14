@@ -1,6 +1,6 @@
 # Solution Start Page
 
-This is a start page replacing the start pages of VS2010, VS2013 and VS2015.
+This is a start page replacing the start pages of VS2010, VS2013, VS2015 and VS2017.
 The 'news' section is replaced by a customizable overview of your solutions.
 
 

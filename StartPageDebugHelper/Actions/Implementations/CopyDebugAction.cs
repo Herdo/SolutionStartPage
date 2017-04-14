@@ -48,10 +48,10 @@
                             PrintWarning($"Skipped file copy of {file.SourcePath} to {file.TargetPath}, because they are equal.");
                             return;
                         }
-                        // Check if existing version is higher than the current version
+                        // Check if existing version does not match the current version
                         if (file.SourceVersion != null
                          && file.TargetVersion != null
-                         && file.TargetVersion > file.SourceVersion)
+                         && file.TargetVersion != file.SourceVersion)
                         {
                             PrintWarning($"Skipped file copy of {file.SourcePath} to {file.TargetPath}, because the existing version is newer.");
                             return;

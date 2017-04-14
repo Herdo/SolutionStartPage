@@ -8,7 +8,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SolutionStartPage.UnitTests</RootNamespace>
     <AssemblyName>SolutionStartPage.UnitTests</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -96,6 +96,7 @@
     <Compile Include="Shared\Models\SolutionPageConfigurationTest.cs" />
     <Compile Include="Shared\Models\SolutionGroupTest.cs" />
     <Compile Include="Shared\Models\SolutionTest.cs" />
+    <Compile Include="Start\AssemblyDataProviderTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SolutionStartPage.Core\SolutionStartPage.Core.csproj">

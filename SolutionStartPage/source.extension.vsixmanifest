@@ -5,9 +5,9 @@
   <Identifier Id="080E4A52-2AA6-4554-B4A3-5861BF34B0AE">
     <Name>Solution Start Page</Name>
     <Author>Stefan Over</Author>
-    <Version>2.4.1</Version>
+    <Version>2.5.0</Version>
     <Description xml:space="preserve">
-This is a start page replacing the start pages of VS2010, VS2013 and VS2015.
+This is a start page replacing the start pages of VS2010, VS2013, VS2015 and VS2017.
 The 'news' section is replaced by a customizable overview of your solutions.
     </Description>
     <Locale>1033</Locale>
@@ -26,8 +26,11 @@ The 'news' section is replaced by a customizable overview of your solutions.
       <VisualStudio Version="14.0">
         <Edition>Pro</Edition>
       </VisualStudio>
+      <VisualStudio Version="15.0">
+        <Edition>Pro</Edition>
+      </VisualStudio>
     </SupportedProducts>
-    <SupportedFrameworkRuntimeEdition MinVersion="4.5.1" MaxVersion="4.6.1" />
+    <SupportedFrameworkRuntimeEdition MinVersion="4.5.1" MaxVersion="4.7.0" />
   </Identifier>
   <References />
   <Content>

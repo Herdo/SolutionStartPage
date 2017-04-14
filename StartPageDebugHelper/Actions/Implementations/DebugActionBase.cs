@@ -82,7 +82,6 @@
         /// Gets a collection of file path pairs, used in the derived action.
         /// </summary>
         /// <returns>A collection of file path pairs.</returns>
-        /// <remarks>The <see cref="Tuple"/>s consist of the following parts: file-extension, source-file, target-file.</remarks>
         protected static FileData[] GetFilesForAction()
         {
             var vsVersion = GetVisualStudioVersion();
