@@ -22,8 +22,6 @@
     using Shared.Views.PageRootView;
     using Shared.Views.SolutionPageView;
     using SolutionPageView;
-    using Vs2010;
-    using Vs2013;
     using Vs2015;
     using Vs2017;
 
@@ -115,10 +113,6 @@
                 // Register DAL
                 .RegisterType<IFileSystem, FileSystem>(new ContainerControlledLifetimeManager())
                 // Register Bootstrappers for each VS Version
-                .RegisterType<IBootstrapper, Vs2010Bootstrapper>(
-                    new Version(10, 0).ToString(_VERSION_STRING_DETAIL_SPECIFIC))
-                .RegisterType<IBootstrapper, Vs2013Bootstrapper>(
-                    new Version(12, 0).ToString(_VERSION_STRING_DETAIL_SPECIFIC))
                 .RegisterType<IBootstrapper, Vs2015Bootstrapper>(
                     new Version(14, 0).ToString(_VERSION_STRING_DETAIL_SPECIFIC))
                 .RegisterType<IBootstrapper, Vs2017Bootstrapper>(

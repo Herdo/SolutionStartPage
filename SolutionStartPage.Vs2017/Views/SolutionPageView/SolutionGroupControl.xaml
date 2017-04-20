@@ -22,7 +22,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary
-                    Source="pack://application:,,,/Microsoft.VisualStudio.Shell.14.0;component/ui/styles/startpageresources.xaml" />
+                    Source="pack://application:,,,/Microsoft.VisualStudio.Shell.15.0;component/ui/styles/startpageresources.xaml" />
                 <ResourceDictionary
                     Source="pack://application:,,,/SolutionStartPage.Shared;component/Resources/CommonStyles.xaml" />
                 <ResourceDictionary

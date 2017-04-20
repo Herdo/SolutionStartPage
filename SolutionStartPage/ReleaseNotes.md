@@ -1,5 +1,11 @@
-# 2.5
+# 3.0
 - Added support for VS 2017
+- Changed .NET Framework version to 4.7
+- Discontinued support for VS 2010 and VS 2013
+- Fixed scrolling on the start page
+
+# 2.4
+- Added support for environment variables in the paths
 
 # 2.3
 - Added option to hide/display folders

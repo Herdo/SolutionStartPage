@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SolutionStartPage.Core</RootNamespace>
     <AssemblyName>SolutionStartPage.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -89,14 +89,6 @@
     <ProjectReference Include="..\SolutionStartPage.Shared\SolutionStartPage.Shared.csproj">
       <Project>{221b199f-4d2f-4f3d-a04e-6c3a389f73c3}</Project>
       <Name>SolutionStartPage.Shared</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SolutionStartPage.Vs2010\SolutionStartPage.Vs2010.csproj">
-      <Project>{837dd941-6370-4d38-9142-4d9064c1a7a3}</Project>
-      <Name>SolutionStartPage.Vs2010</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SolutionStartPage.Vs2013\SolutionStartPage.Vs2013.csproj">
-      <Project>{d338e438-f108-4b43-9d22-a99066c1aa5e}</Project>
-      <Name>SolutionStartPage.Vs2013</Name>
     </ProjectReference>
     <ProjectReference Include="..\SolutionStartPage.Vs2015\SolutionStartPage.Vs2015.csproj">
       <Project>{ba455b7b-895c-45fa-9ff4-c5efa4f69dd7}</Project>
