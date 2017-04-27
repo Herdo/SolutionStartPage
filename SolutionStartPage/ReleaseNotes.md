@@ -1,6 +1,6 @@
 # 3.0
 - Added support for VS 2017
-- Changed .NET Framework version to 4.7
+- Changed .NET Framework version to 4.6.2
 - Discontinued support for VS 2010 and VS 2013
 - Fixed scrolling on the start page
 
