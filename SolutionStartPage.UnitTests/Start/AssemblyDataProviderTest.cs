@@ -14,7 +14,7 @@
         public void CheckCorrectAssemblyReferences()
         {
             // Arrange
-            const int numberOfSupportedVersions = 4;
+            const int numberOfSupportedVersions = 2;
             var testAssembly = Assembly.GetAssembly(typeof(AssemblyDataProviderTest));
             var testAssemblyDirecotry = Path.GetDirectoryName(testAssembly.Location);
             Assert.IsNotNull(testAssemblyDirecotry);

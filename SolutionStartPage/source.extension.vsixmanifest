@@ -24,4 +24,8 @@ The 'news' section is replaced by a customizable overview of your solutions.</De
   <Prerequisites>
     <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" DisplayName="Visual Studio-Kern-Editor" Version="[13.0,)" />
   </Prerequisites>
+  <Assets>
+    <Asset Type="Microsoft.VisualStudio.VsPackage" Path="StartPage.pkgdef" />
+    <Asset Type="StartPage" Path="StartPage.xaml" />
+  </Assets>
 </PackageManifest>
