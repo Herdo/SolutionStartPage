@@ -3,7 +3,7 @@
   <Metadata>
     <Identity Id="080E4A52-2AA6-4554-B4A3-5861BF34B0AE" Version="3.0" Language="en-US" Publisher="Stefan Over" />
     <DisplayName>Solution Start Page</DisplayName>
-    <Description xml:space="preserve">This is a start page replacing the start pages of VS2010, VS2013, VS2015 and VS2017.
+    <Description xml:space="preserve">This is a start page replacing the start pages of VS2015 and VS2017.
 The 'news' section is replaced by a customizable overview of your solutions.</Description>
     <MoreInfo>https://github.com/Herdo/SolutionStartPage</MoreInfo>
     <License>License.txt</License>
