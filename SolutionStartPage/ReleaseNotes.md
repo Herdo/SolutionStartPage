@@ -1,3 +1,7 @@
+# 3.1
+- Fixed issue #16 (Start page doesn't change background color on theme change)
+- Disabled MRU list due to invalid DataContext provided by Visual Studio
+
 # 3.0
 - Added support for VS 2017
 - Changed .NET Framework version to 4.6.2

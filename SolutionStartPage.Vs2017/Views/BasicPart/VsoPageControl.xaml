@@ -62,7 +62,7 @@
         <TextBlock Grid.Row="0"
                    Grid.Column="1"
                    x:Name="VisualStudioEditionTextBlock"
-                   Style="{DynamicResource StartPage.HeadingTextStyle}"
+                   Style="{DynamicResource StartPage.AnnouncementsHeadingTextStyle}"
                    Margin="0,25,0,0"
                    FontSize="28"
                    FontStretch="SemiCondensed"
@@ -104,7 +104,7 @@
         </Grid>
 
         <!-- Recent Project / Solution List -->
-        <Grid Grid.Row="2"
+        <!--<Grid Grid.Row="2"
               Grid.Column="1"
               Margin="7,34,30,0">
             <Grid.RowDefinitions>
@@ -117,13 +117,14 @@
                        Text="{Binding [Recent], Source={StaticResource SSP_Texts}}" />
 
             <platformUi:MruListBox Grid.Row="1"
+                                   x:Name="MruList"
                                    Margin="-28,0,0,0"
                                    DataContext="{Binding RecentProjects}"
                                    ItemsSource="{Binding Path=Items}"
                                    Background="Transparent"
                                    BorderThickness="0"
                                    AutomationProperties.AutomationId="MruList" />
-        </Grid>
+        </Grid>-->
 
         <!-- Options -->
         <StackPanel Grid.Row="3"
