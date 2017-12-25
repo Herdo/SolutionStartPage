@@ -22,9 +22,8 @@
     using Shared.Views.PageRootView;
     using Shared.Views.SolutionPageView;
     using SolutionPageView;
-    using Vs2010;
-    using Vs2013;
     using Vs2015;
+    using Vs2017;
 
     /// <summary>
     /// Basic app control host.
@@ -34,7 +33,6 @@
         IAppControlHost
     {
         /////////////////////////////////////////////////////////
-
         #region Constants
 
         private const int _VERSION_STRING_DETAIL_SPECIFIC = 2;
@@ -42,7 +40,6 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Constructors
 
         public AppControlHost()
@@ -53,7 +50,6 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Private Methods
 
         private void Initialize()
@@ -117,12 +113,10 @@
                 // Register DAL
                 .RegisterType<IFileSystem, FileSystem>(new ContainerControlledLifetimeManager())
                 // Register Bootstrappers for each VS Version
-                .RegisterType<IBootstrapper, Vs2010Bootstrapper>(
-                    new Version(10, 0).ToString(_VERSION_STRING_DETAIL_SPECIFIC))
-                .RegisterType<IBootstrapper, Vs2013Bootstrapper>(
-                    new Version(12, 0).ToString(_VERSION_STRING_DETAIL_SPECIFIC))
                 .RegisterType<IBootstrapper, Vs2015Bootstrapper>(
                     new Version(14, 0).ToString(_VERSION_STRING_DETAIL_SPECIFIC))
+                .RegisterType<IBootstrapper, Vs2017Bootstrapper>(
+                    new Version(15, 0).ToString(_VERSION_STRING_DETAIL_SPECIFIC))
                 ;
         }
 
@@ -147,7 +141,6 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Event Handler
 
         private void AppControlHost_Loaded(object sender, RoutedEventArgs e)

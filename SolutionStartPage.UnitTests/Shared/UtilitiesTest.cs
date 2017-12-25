@@ -1,8 +1,8 @@
-﻿namespace SolutionStartPage.UnitTests.Shared.Extensions
+﻿namespace SolutionStartPage.UnitTests.Shared
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using static SolutionStartPage.Shared.Utilities;
+    using SolutionStartPage.Shared;
 
     [TestClass]
     public class UtilitiesTest
@@ -17,10 +17,10 @@
             var testObject4 = new Uri("http://www.google.com", UriKind.Absolute);
 
             // Act
-            ThrowIfNull(testObject1, nameof(testObject1));
-            ThrowIfNull(testObject2, nameof(testObject2));
-            ThrowIfNull(testObject3, nameof(testObject3));
-            ThrowIfNull(testObject4, nameof(testObject4));
+            Utilities.ThrowIfNull(testObject1, nameof(testObject1));
+            Utilities.ThrowIfNull(testObject2, nameof(testObject2));
+            Utilities.ThrowIfNull(testObject3, nameof(testObject3));
+            Utilities.ThrowIfNull(testObject4, nameof(testObject4));
 
             // Assert
             // Nothing to assert / No exception thrown
@@ -34,7 +34,7 @@
             int? testObject = null;
 
             // Act
-            ThrowIfNull(testObject, nameof(testObject));
+            Utilities.ThrowIfNull(testObject, nameof(testObject));
 
             // Assert
             // Nothing to assert / Exception thrown
@@ -48,7 +48,7 @@
             DateTime? testObject = null;
 
             // Act
-            ThrowIfNull(testObject, nameof(testObject));
+            Utilities.ThrowIfNull(testObject, nameof(testObject));
 
             // Assert
             // Nothing to assert / Exception thrown
@@ -62,7 +62,7 @@
             string testObject = null;
 
             // Act
-            ThrowIfNull(testObject, nameof(testObject));
+            Utilities.ThrowIfNull(testObject, nameof(testObject));
 
             // Assert
             // Nothing to assert / Exception thrown
@@ -76,7 +76,7 @@
             Uri testObject = null;
 
             // Act
-            ThrowIfNull(testObject, nameof(testObject));
+            Utilities.ThrowIfNull(testObject, nameof(testObject));
 
             // Assert
             // Nothing to assert / Exception thrown

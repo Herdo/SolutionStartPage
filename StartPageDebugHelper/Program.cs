@@ -10,7 +10,6 @@
     internal class Program
     {
         /////////////////////////////////////////////////////////
-
         #region Properties
 
         public static string ProgramFilesDirectory { get; private set; }
@@ -20,7 +19,6 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Main
 
         private static void Main(string[] args)
@@ -31,6 +29,8 @@
                 WriteLine("Expected arguments:");
                 WriteLine("[0] - Program files directory (cointaining Visual Studio directories)");
                 WriteLine("[1] - Working directory (bin directory of start page output project)");
+                WriteLine("Press any key to exit...");
+                Console.ReadKey();
             }
             else
             {
@@ -65,7 +65,6 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Private Methods
 
         private static IActionProvider ConstructActionTree()
@@ -88,7 +87,6 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Internal Methods
 
         internal static void PrintSuccess(string successMessage)

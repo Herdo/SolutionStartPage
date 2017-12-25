@@ -12,4 +12,4 @@ The solution is structured into several projects, seperated into their concerns:
 - SolutionStartPage.Vs#### --> Visual Studio Version specific implementation of controls
 
 The SolutionStartPage project (main project, containing the StartPage.xaml file) must reference
-the all other projects (even if declared as "Unused Reference" by ReSharper), in order to include them inside the VSIX.
+all the other projects (even if declared as "Unused Reference" by ReSharper), in order to include them inside the VSIX.

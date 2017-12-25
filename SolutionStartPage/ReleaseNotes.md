@@ -1,3 +1,16 @@
+# 3.1
+- Fixed issue #16 (Start page doesn't change background color on theme change)
+- Disabled MRU list due to invalid DataContext provided by Visual Studio
+
+# 3.0
+- Added support for VS 2017
+- Changed .NET Framework version to 4.6.2
+- Discontinued support for VS 2010 and VS 2013
+- Fixed scrolling on the start page
+
+# 2.4
+- Added support for environment variables in the paths
+
 # 2.3
 - Added option to hide/display folders
 

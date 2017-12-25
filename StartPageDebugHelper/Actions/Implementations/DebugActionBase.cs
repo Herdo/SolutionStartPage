@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
     using System.IO;
     using System.Linq;
     using Models;
@@ -12,17 +13,16 @@
     public abstract class DebugActionBase
     {
         /////////////////////////////////////////////////////////
-
         #region Fields
 
         private static readonly ReadOnlyCollection<string> ValidBuildConfigurations;
         private static readonly ReadOnlyCollection<string> ValidVisualStudioVersions;
-        private static readonly ReadOnlyDictionary<string, string> VisualStudioVersionMapping;
+        private static readonly ReadOnlyCollection<string> ValidVisualStudioEditions;
+        private static readonly ReadOnlyDictionary<string, VsVersionInformation> VisualStudioVersionMapping;
 
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Constructors
 
         static DebugActionBase()
@@ -36,27 +36,52 @@
             {
                 "10.0",
                 "12.0",
-                "14.0"
+                "14.0",
+                "15.0"
             });
-            VisualStudioVersionMapping = new ReadOnlyDictionary<string, string>(new Dictionary<string, string>
+            ValidVisualStudioEditions = new ReadOnlyCollection<string>(new[]
             {
-                {"10.0", "2010"},
-                {"12.0", "2013"},
-                {"14.0", "2015"}
+                "Community",
+                "Professional",
+                "Enterprise"
+            });
+            VisualStudioVersionMapping = new ReadOnlyDictionary<string, VsVersionInformation>(new Dictionary<string, VsVersionInformation>
+            {
+                {"10.0", new VsVersionInformation
+                {
+                    InternalVersion = "10.0",
+                    PublicVersion = "2010",
+                    UseLegacyPath = true
+                }},
+                {"12.0", new VsVersionInformation
+                {
+                    InternalVersion = "12.0",
+                    PublicVersion = "2013",
+                    UseLegacyPath = true
+                }},
+                {"14.0", new VsVersionInformation
+                {
+                    InternalVersion = "14.0",
+                    PublicVersion = "2015",
+                    UseLegacyPath = true
+                }},
+                {"15.0", new VsVersionInformation
+                {
+                    InternalVersion = "15.0",
+                    PublicVersion = "2017"
+                }},
             });
         }
-
+        
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Protected Methods
 
         /// <summary>
         /// Gets a collection of file path pairs, used in the derived action.
         /// </summary>
         /// <returns>A collection of file path pairs.</returns>
-        /// <remarks>The <see cref="Tuple"/>s consist of the following parts: file-extension, source-file, target-file.</remarks>
         protected static FileData[] GetFilesForAction()
         {
             var vsVersion = GetVisualStudioVersion();
@@ -68,27 +93,32 @@
                 = Directory.GetFiles(sourceDirectory, "*.pdb", SearchOption.TopDirectoryOnly);
 
             var documentDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            var vsStartPageDir = Path.Combine(documentDir, $"Visual Studio {vsVersion.Item2}", "StartPages");
-            var vsPrivateAssembliesDir = Path.Combine(Program.ProgramFilesDirectory,
-                $"Microsoft Visual Studio {vsVersion.Item1}/Common7/IDE/PrivateAssemblies/");
+            var vsStartPageDir = Path.Combine(documentDir, $"Visual Studio {vsVersion.PublicVersion}", "StartPages");
+            var vsPrivateAssembliesDir = ResolvePrivateAssemblyDirectory(vsVersion);
 
             // Compute xaml files
             var results = (from xamlFile in xamlFiles
-                let fileName = Path.GetFileName(xamlFile)
-                where fileName != null
-                select new FileData(FileType.XAML, xamlFile, Path.Combine(vsStartPageDir, fileName))).ToList();
+                           let fileName = Path.GetFileName(xamlFile)
+                           where fileName != null
+                           select new FileData(FileType.XAML, xamlFile, Path.Combine(vsStartPageDir, fileName), null, null)).ToList();
 
             // Compute dll files
             results.AddRange(from dllFile in dllFiles
-                let fileName = Path.GetFileName(dllFile)
-                where fileName != null
-                select new FileData(FileType.DLL, dllFile, Path.Combine(vsPrivateAssembliesDir, fileName)));
+                             let fileName = Path.GetFileName(dllFile)
+                             where fileName != null
+                             let targetFile = Path.Combine(vsPrivateAssembliesDir, fileName)
+                             let sourceVersion = GetVersionForFile(dllFile)
+                             let targetVersion = GetVersionForFile(targetFile)
+                             select new FileData(FileType.DLL, dllFile, targetFile, sourceVersion, targetVersion));
 
             // Compute pdb files
             results.AddRange(from pdbFile in pdbFiles
-                let fileName = Path.GetFileName(pdbFile)
-                where fileName != null
-                select new FileData(FileType.PDB, pdbFile, Path.Combine(vsPrivateAssembliesDir, fileName)));
+                             let fileName = Path.GetFileName(pdbFile)
+                             where fileName != null
+                             let targetFile = Path.Combine(vsPrivateAssembliesDir, fileName)
+                             let sourceVersion = GetVersionForFile(pdbFile)
+                             let targetVersion = GetVersionForFile(targetFile)
+                             select new FileData(FileType.PDB, pdbFile, targetFile, sourceVersion, targetVersion));
 
             return results.ToArray();
         }
@@ -96,18 +126,16 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Private Methods
 
         /// <summary>
         /// Gets a pair for the Visual Studio version
         /// </summary>
         /// <returns>The version pair.</returns>
-        /// <remarks>The <see cref="Tuple"/> consists of the following parts: short/internal version, display version/year.</remarks>
-        private static Tuple<string, string> GetVisualStudioVersion()
+        private static VsVersionInformation GetVisualStudioVersion()
         {
             var version = GetUserSelection("Select a Visual Studio version", ValidVisualStudioVersions);
-            return new Tuple<string, string>(version, VisualStudioVersionMapping[version]);
+            return VisualStudioVersionMapping[version];
         }
 
         private static string GetSourceDirectory()
@@ -149,6 +177,43 @@
                      && !options.Contains(result));
 
             return result;
+        }
+
+        private static string ResolvePrivateAssemblyDirectory(VsVersionInformation vsVersion)
+        {
+            if (vsVersion.UseLegacyPath)
+                return PrivateAssemblyPathResolver_Legacy(vsVersion.InternalVersion);
+            
+            vsVersion.Edition = GetUserSelection("Select a Visual Studio edition", ValidVisualStudioEditions);
+            return PrivateAssemblyPathResolver(vsVersion.PublicVersion, vsVersion.Edition);
+        }
+
+        private static string PrivateAssemblyPathResolver_Legacy(string internalVersion)
+        {
+            return Path.Combine(Program.ProgramFilesDirectory,
+                $"Microsoft Visual Studio {internalVersion}\\Common7\\IDE\\PrivateAssemblies\\");
+        }
+
+        private static string PrivateAssemblyPathResolver(string publicVersion, string edition)
+        {
+            return Path.Combine(Program.ProgramFilesDirectory,
+                $"Microsoft Visual Studio\\{publicVersion}\\{edition}\\Common7\\IDE\\PrivateAssemblies\\");
+        }
+
+        private static Version GetVersionForFile(string file)
+        {
+            if (!File.Exists(file))
+                return null;
+
+            var fiv = FileVersionInfo.GetVersionInfo(file);
+
+            // Try product version before file version
+            // If product version cannot be parsed, use the file version
+            // If neither succeeds, return null (version cannot be determined)
+            return Version.TryParse(fiv.ProductVersion, out Version version)
+                || Version.TryParse(fiv.FileVersion, out version)
+                    ? version
+                    : null;
         }
 
         #endregion
