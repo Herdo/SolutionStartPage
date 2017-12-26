@@ -1,4 +1,6 @@
-﻿namespace SolutionStartPage.Vs2015.Views.SolutionPageView
+﻿using SolutionStartPage.Shared.Helpers;
+
+namespace SolutionStartPage.Vs2015.Views.SolutionPageView
 {
     using System;
     using System.Windows.Forms;
@@ -55,15 +57,13 @@
         string ISolutionPageView.BrowseBulkAddRootFolder()
         {
             string selectedPath = null;
-            var fbd = new FolderBrowserDialog
-            {
-                Description = @"Browse for a root folder...",
-                ShowNewFolderButton = false,
-                RootFolder = Environment.SpecialFolder.Desktop
+
+            var fsd = new FolderSelectDialog {
+                Title = @"Browse for a root folder...",
+                InitialDirectory =Environment.SpecialFolder.Desktop.ToString()
             };
-            var dialogResult = fbd.ShowDialog();
-            if (dialogResult == DialogResult.OK)
-                selectedPath = fbd.SelectedPath;
+            if (fsd.ShowDialog(IntPtr.Zero))
+                selectedPath = fsd.SelectedFolderFullPath;
 
             return selectedPath;
         }
