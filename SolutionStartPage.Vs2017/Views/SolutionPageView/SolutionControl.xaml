@@ -111,7 +111,7 @@
                  ToolTip="{Binding [SetDisplayName_ToolTip], Source={StaticResource SSP_Texts}}"
                  Visibility="{Binding EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}}" />
 
-        <!-- Solution Directory -->
+        <!-- Solution Directory --><!--
         <Grid Grid.Row="1"
               Visibility="{Binding EditModeEnabled, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}"
               Opacity="{Binding HasError, Converter={StaticResource InvertedBoolToOpacityConverter}, ConverterParameter=0.3, Mode=OneWay}">
@@ -135,7 +135,7 @@
                        Visibility="{Binding SolutionDirectoryAvailable, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=invert}"
                        ToolTip="{Binding [DirectoryDoesntExist_ToolTip], Source={StaticResource SSP_Texts}}" />
             </Grid>
-        </Grid>
+        </Grid>-->
         
         <!-- Error Overlay -->
         <Border Grid.Row="0"
