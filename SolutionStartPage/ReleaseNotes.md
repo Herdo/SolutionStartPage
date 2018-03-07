@@ -1,3 +1,6 @@
+# 3.1.1
+- Fixed issue #19 (Blank white page for VS 2017 15.6.0)
+
 # 3.1
 - Fixed issue #16 (Start page doesn't change background color on theme change)
 - Disabled MRU list due to invalid DataContext provided by Visual Studio

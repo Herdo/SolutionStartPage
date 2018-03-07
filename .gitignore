@@ -107,3 +107,9 @@ $RECYCLE.BIN/
 
 # Mac crap
 .DS_Store
+
+# Visual Studio crap
+*.lock
+*.ide
+*.ide-shm
+*.ide-wal

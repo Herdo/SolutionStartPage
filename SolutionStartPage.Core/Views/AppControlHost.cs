@@ -35,7 +35,7 @@
         /////////////////////////////////////////////////////////
         #region Constants
 
-        private const int _VERSION_STRING_DETAIL_SPECIFIC = 2;
+        private const int _VERSION_STRING_DETAIL_SPECIFIC = 1;
 
         #endregion
 
