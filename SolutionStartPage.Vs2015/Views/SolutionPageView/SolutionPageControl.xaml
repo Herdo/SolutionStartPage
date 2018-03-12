@@ -171,6 +171,8 @@
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
                         </Grid.RowDefinitions>
 
                         <!-- Columns -->
@@ -198,6 +200,28 @@
                                   Margin="5, 0, 0, 0"
                                   VerticalAlignment="Center"
                                   IsChecked="{Binding DisplayFolders}"/>
+
+                        <!-- Display Icons -->
+                        <TextBlock Grid.Row="2"
+                                   Grid.Column="0"
+                                   Style="{DynamicResource StartPage.ItemHeadingTextStyle}"
+                                   Text="{Binding [DisplayIcons], Source={StaticResource SSP_Texts}}"/>
+                        <CheckBox Grid.Row="2"
+                                  Grid.Column="1"
+                                  Margin="5, 0, 0, 0"
+                                  VerticalAlignment="Center"
+                                  IsChecked="{Binding DisplayIcons}"/>
+
+                        <!-- Display Separator -->
+                        <TextBlock Grid.Row="3"
+                                   Grid.Column="0"
+                                   Style="{DynamicResource StartPage.ItemHeadingTextStyle}"
+                                   Text="{Binding [DisplaySeparator], Source={StaticResource SSP_Texts}}"/>
+                        <CheckBox Grid.Row="3"
+                                  Grid.Column="1"
+                                  Margin="5, 0, 0, 0"
+                                  VerticalAlignment="Center"
+                                  IsChecked="{Binding DisplaySeparator}"/>
                     </Grid>
                 </GroupBox>
             </Grid>

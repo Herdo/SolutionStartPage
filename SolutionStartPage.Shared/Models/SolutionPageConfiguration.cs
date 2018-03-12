@@ -8,7 +8,6 @@
     public class SolutionPageConfiguration
     {
         /////////////////////////////////////////////////////////
-
         #region Fields
 
         private int _columns;
@@ -16,13 +15,12 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Properties
 
         [XmlElement]
         public int Columns
         {
-            get { return _columns; }
+            get => _columns;
             set
             {
                 if (value == _columns) return;
@@ -38,6 +36,12 @@
         [XmlElement]
         public bool DisplayFolders { get; set; }
 
+        [XmlElement]
+        public bool DisplayIcons { get; set; }
+
+        [XmlElement]
+        public bool DisplaySeparator { get; set; }
+
         [XmlArray("SolutionGroups")]
         [XmlArrayItem("SolutionGroup")]
         public SolutionGroup[] SolutionGroups { get; set; }
@@ -45,26 +49,28 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Constructors
 
         public SolutionPageConfiguration()
         {
             Columns = 3;
             DisplayFolders = true;
+            DisplayIcons = true;
+            DisplaySeparator = true;
             SolutionGroups = new SolutionGroup[0];
         }
 
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Public Methods
 
         public SolutionPageConfiguration ApplyViewModel(ISolutionPageViewModel vm)
         {
             Columns = vm.Columns;
             DisplayFolders = vm.DisplayFolders;
+            DisplayIcons = vm.DisplayIcons;
+            DisplaySeparator = vm.DisplaySeparator;
             SolutionGroups = vm.SolutionGroups.ToArray();
 
             return this;

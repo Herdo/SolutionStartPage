@@ -162,6 +162,12 @@
   <data name="DisplayFolders" xml:space="preserve">
     <value>Ordner anzeigen</value>
   </data>
+  <data name="DisplayIcons" xml:space="preserve">
+    <value>Icons anzeigen</value>
+  </data>
+  <data name="DisplaySeparator" xml:space="preserve">
+    <value>Trenner anzeigen</value>
+  </data>
   <data name="HeaderCommand_AddSolution_ToolTip" xml:space="preserve">
     <value>Projektmappe hinzufügen</value>
   </data>

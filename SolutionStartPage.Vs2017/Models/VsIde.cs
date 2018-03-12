@@ -6,7 +6,6 @@
     public class VsIde : IIde
     {
         /////////////////////////////////////////////////////////
-
         #region Fields
 
         private DTE2 _dte;
@@ -14,7 +13,6 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region IIde Member
 
         string IIde.Edition => _dte.Edition;

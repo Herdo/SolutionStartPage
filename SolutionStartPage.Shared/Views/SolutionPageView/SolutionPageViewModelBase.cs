@@ -10,7 +10,6 @@
     public abstract class SolutionPageViewModelBase : ISolutionPageViewModel
     {
         /////////////////////////////////////////////////////////
-
         #region Fields
 
         private readonly IViewStateProvider _viewStateProvider;
@@ -19,24 +18,35 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Properties
 
         public bool EditModeEnabled
         {
-            get { return _viewStateProvider.EditModeEnabled; }
-            set { _viewStateProvider.EditModeEnabled = value; }
+            get => _viewStateProvider.EditModeEnabled;
+            set => _viewStateProvider.EditModeEnabled = value;
         }
 
         public bool DisplayFolders
         {
-            get { return _viewStateProvider.DisplayFolders; }
-            set { _viewStateProvider.DisplayFolders = value; }
+            get => _viewStateProvider.DisplayFolders;
+            set => _viewStateProvider.DisplayFolders = value;
+        }
+
+        public bool DisplayIcons
+        {
+            get => _viewStateProvider.DisplayIcons;
+            set => _viewStateProvider.DisplayIcons = value;
+        }
+
+        public bool DisplaySeparator
+        {
+            get => _viewStateProvider.DisplaySeparator;
+            set => _viewStateProvider.DisplaySeparator = value;
         }
 
         public int Columns
         {
-            get { return _columns; }
+            get => _columns;
             set
             {
                 if (value == _columns) return;
@@ -50,7 +60,6 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Constructors
 
         protected SolutionPageViewModelBase(IViewStateProvider viewStateProvider)
@@ -62,7 +71,6 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Event Handler
 
         private void viewStateProvider_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -73,7 +81,6 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region INotifyPropertyChanged Members & Extension
 
         public event PropertyChangedEventHandler PropertyChanged;

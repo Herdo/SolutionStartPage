@@ -51,7 +51,7 @@
         [XmlIgnore]
         public IViewStateProvider ViewStateProvider
         {
-            get { return _viewStateProvider; }
+            get => _viewStateProvider;
             set
             {
                 if (_viewStateProvider != null)
@@ -67,7 +67,7 @@
         [XmlIgnore]
         public IFileSystem FileSystem
         {
-            get { return _fileSystem; }
+            get => _fileSystem;
             set
             {
                 _fileSystem = value;
@@ -85,7 +85,7 @@
         [XmlElement]
         public string SolutionDisplayName
         {
-            get { return _solutionDisplayName ?? new FileInfo(ComputedSolutionPath).Name; }
+            get => _solutionDisplayName ?? new FileInfo(ComputedSolutionPath).Name;
             set
             {
                 if (value == _solutionDisplayName) return;
@@ -101,7 +101,7 @@
         [XmlElement]
         public string SolutionPath
         {
-            get { return _solutionPath; }
+            get => _solutionPath;
             set
             {
                 if (value == _solutionPath) return;
@@ -116,7 +116,7 @@
         [XmlIgnore]
         public string ComputedSolutionPath
         {
-            get { return _computedSolutionPath; }
+            get => _computedSolutionPath;
             private set
             {
                 if (value == _computedSolutionPath) return;
@@ -132,7 +132,7 @@
         [XmlElement]
         public string SolutionDirectory
         {
-            get { return _solutionDirectory ?? Empty; }
+            get => _solutionDirectory ?? Empty;
             set
             {
                 if (value == _solutionDirectory) return;
@@ -147,7 +147,7 @@
         [XmlIgnore]
         public string ComputedSolutionDirectory
         {
-            get { return _computedSolutionDirectory; }
+            get => _computedSolutionDirectory;
             private set
             {
                 if (value == _computedSolutionDirectory) return;
@@ -160,14 +160,14 @@
         [XmlIgnore]
         public bool EditModeEnabled
         {
-            get { return ViewStateProvider.EditModeEnabled; }
-            set { ViewStateProvider.EditModeEnabled = value; }
+            get => ViewStateProvider.EditModeEnabled;
+            set => ViewStateProvider.EditModeEnabled = value;
         }
 
         [XmlIgnore]
         public bool SolutionAvailable
         {
-            get { return _solutionAvailable; }
+            get => _solutionAvailable;
             set
             {
                 if (value.Equals(_solutionAvailable)) return;
@@ -179,7 +179,7 @@
         [XmlIgnore]
         public bool SolutionDirectoryAvailable
         {
-            get { return _solutionDirectoryAvailable; }
+            get => _solutionDirectoryAvailable;
             set
             {
                 if (value.Equals(_solutionDirectoryAvailable)) return;
@@ -191,14 +191,28 @@
         [XmlIgnore]
         public bool DisplayFolders
         {
-            get { return ViewStateProvider.DisplayFolders; }
-            set { ViewStateProvider.DisplayFolders = value; }
+            get => ViewStateProvider.DisplayFolders;
+            set => ViewStateProvider.DisplayFolders = value;
+        }
+
+        [XmlIgnore]
+        public bool DisplayIcons
+        {
+            get => ViewStateProvider.DisplayIcons;
+            set => ViewStateProvider.DisplayIcons = value;
+        }
+
+        [XmlIgnore]
+        public bool DisplaySeparator
+        {
+            get => ViewStateProvider.DisplaySeparator;
+            set => ViewStateProvider.DisplaySeparator = value;
         }
 
         [XmlIgnore]
         public bool HasError
         {
-            get { return _hasError; }
+            get => _hasError;
             private set
             {
                 if (value == _hasError) return;
@@ -210,7 +224,7 @@
         [XmlIgnore]
         public string ErrorText
         {
-            get { return _errorText; }
+            get => _errorText;
             private set
             {
                 if (value == _errorText) return;
@@ -223,7 +237,6 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Constructors
 
         /// <summary>

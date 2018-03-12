@@ -19,7 +19,7 @@ namespace SolutionStartPage.Core.Localization {
     // -Klasse über ein Tool wie ResGen oder Visual Studio automatisch generiert.
     // Um einen Member hinzuzufügen oder zu entfernen, bearbeiten Sie die .ResX-Datei und führen dann ResGen
     // mit der /str-Option erneut aus, oder Sie erstellen Ihr VS-Projekt neu.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Main {
@@ -192,6 +192,24 @@ namespace SolutionStartPage.Core.Localization {
         internal static string DisplayFolders {
             get {
                 return ResourceManager.GetString("DisplayFolders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Display icons ähnelt.
+        /// </summary>
+        internal static string DisplayIcons {
+            get {
+                return ResourceManager.GetString("DisplayIcons", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Display separator ähnelt.
+        /// </summary>
+        internal static string DisplaySeparator {
+            get {
+                return ResourceManager.GetString("DisplaySeparator", resourceCulture);
             }
         }
         

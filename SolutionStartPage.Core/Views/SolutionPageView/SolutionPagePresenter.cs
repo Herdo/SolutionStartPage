@@ -7,6 +7,7 @@
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Input;
     using Annotations;
@@ -26,12 +27,13 @@
         #region Fields
 
         private readonly ISolutionPageModel _model;
-        private readonly SolutionPageConfiguration _configuration;
         private readonly IIde _ide;
         private readonly IViewStateProvider _viewStateProvider;
         private readonly IFileSystem _fileSystem;
         private readonly ISystemInterface _systemInterface;
         private readonly IUserIOInterface _userIOInterface;
+
+        private SolutionPageConfiguration _configuration;
 
         #endregion
 
@@ -73,7 +75,6 @@
             _systemInterface = systemInterface;
             _userIOInterface = userIOInterface;
             _ide = ide;
-            _configuration = _model.LoadConfiguration();
         }
 
         #endregion
@@ -81,8 +82,10 @@
         /////////////////////////////////////////////////////////
         #region Base Overrides
 
-        protected override void View_Loaded(object sender, RoutedEventArgs e)
+        protected override async Task View_Loaded(object sender, RoutedEventArgs e)
         {
+            _configuration = await _model.LoadConfiguration().ConfigureAwait(true);
+
             ComputeConfigurationProperties();
             PrepareLoadedData();
             ConnectEventHandler();
@@ -113,6 +116,8 @@
         {
             ViewModel.Columns = _configuration.Columns;
             ViewModel.DisplayFolders = _configuration.DisplayFolders;
+            ViewModel.DisplayIcons = _configuration.DisplayIcons;
+            ViewModel.DisplaySeparator = _configuration.DisplaySeparator;
             ViewModel.SolutionGroups = new ObservableCollection<SolutionGroup>(_configuration.SolutionGroups);
 
             foreach (var solutionGroup in ViewModel.SolutionGroups)

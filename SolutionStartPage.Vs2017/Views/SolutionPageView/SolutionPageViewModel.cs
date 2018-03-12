@@ -6,7 +6,6 @@
     public sealed class SolutionPageViewModel : SolutionPageViewModelBase
     {
         /////////////////////////////////////////////////////////
-
         #region Constructors
 
         public SolutionPageViewModel(IViewStateProvider viewStateProvider)

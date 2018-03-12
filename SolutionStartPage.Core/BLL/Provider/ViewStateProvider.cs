@@ -12,6 +12,8 @@
 
         private bool _editModeEnabled;
         private bool _displayFolders;
+        private bool _displayIcons;
+        private bool _displaySeparator;
 
         #endregion
 
@@ -31,7 +33,7 @@
 
         public bool EditModeEnabled
         {
-            get { return _editModeEnabled; }
+            get => _editModeEnabled;
             set
             {
                 if (value == _editModeEnabled) return;
@@ -42,11 +44,33 @@
 
         public bool DisplayFolders
         {
-            get { return _displayFolders; }
+            get => _displayFolders;
             set
             {
                 if (value == _displayFolders) return;
                 _displayFolders = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool DisplayIcons
+        {
+            get => _displayIcons;
+            set
+            {
+                if (value == _displayIcons) return;
+                _displayIcons = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool DisplaySeparator
+        {
+            get => _displaySeparator;
+            set
+            {
+                if (value == _displaySeparator) return;
+                _displaySeparator = value;
                 OnPropertyChanged();
             }
         }

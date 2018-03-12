@@ -1,5 +1,6 @@
 ﻿namespace SolutionStartPage.Core.Views.BasicPart
 {
+    using System.Threading.Tasks;
     using System.Windows;
     using Annotations;
     using Shared.Models;
@@ -10,7 +11,6 @@
         IVsoPagePresenter
     {
         /////////////////////////////////////////////////////////
-
         #region Fields
 
         private readonly IVisualStudioVersion _vsVersion;
@@ -19,7 +19,6 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Constructors
 
         /// <summary>
@@ -46,19 +45,18 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Base Overrides
 
-        protected override void View_Loaded(object sender, RoutedEventArgs e)
+        protected override Task View_Loaded(object sender, RoutedEventArgs e)
         {
             LoadVmContent();
             View.ConnectDataSource(ViewModel);
+            return Task.CompletedTask;
         }
 
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Private Methods
 
         private void LoadVmContent()

@@ -162,6 +162,12 @@
   <data name="DisplayFolders" xml:space="preserve">
     <value>Display folders</value>
   </data>
+  <data name="DisplayIcons" xml:space="preserve">
+    <value>Display icons</value>
+  </data>
+  <data name="DisplaySeparator" xml:space="preserve">
+    <value>Display separator</value>
+  </data>
   <data name="HeaderCommand_AddSolution_ToolTip" xml:space="preserve">
     <value>Add Solution</value>
   </data>

@@ -14,7 +14,7 @@
         /// <returns>A <see cref="SolutionPageConfiguration"/> for the current Visual Studio version
         /// or a default configuration, if none is found</returns>
         [NotNull]
-        SolutionPageConfiguration LoadConfiguration();
+        Task<SolutionPageConfiguration> LoadConfiguration();
 
         /// <summary>
         /// Saves the configuration for the current Visual Studio instance.

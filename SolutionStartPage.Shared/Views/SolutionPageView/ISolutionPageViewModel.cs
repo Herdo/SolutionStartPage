@@ -9,6 +9,10 @@
 
         bool DisplayFolders { get; set; }
 
+        bool DisplayIcons { get; set; }
+
+        bool DisplaySeparator { get; set; }
+
         int Columns { get; set; }
 
         ObservableCollection<SolutionGroup> SolutionGroups { get; set; }

@@ -1,5 +1,6 @@
 ﻿namespace SolutionStartPage.Core.Views
 {
+    using System.Threading.Tasks;
     using System.Windows;
     using Annotations;
     using Shared.Views;
@@ -10,7 +11,6 @@
         where TViewModel : IViewModel
     {
         /////////////////////////////////////////////////////////
-
         #region Properties
 
         /// <summary>
@@ -26,7 +26,6 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Constructors
 
         /// <summary>
@@ -42,7 +41,7 @@
             ThrowIfNull(viewModel, nameof(viewModel));
 
             View = view;
-            View.Loaded += View_Loaded;
+            View.Loaded += async (sender, e) => await View_Loaded(sender, e);
 
             ViewModel = viewModel;
         }
@@ -50,10 +49,9 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Protected Methods
 
-        protected abstract void View_Loaded(object sender, RoutedEventArgs e);
+        protected abstract Task View_Loaded(object sender, RoutedEventArgs e);
 
         #endregion
     }

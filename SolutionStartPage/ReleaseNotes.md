@@ -1,3 +1,8 @@
+# 3.2
+- Implemented change request #20 (Vista like folder browse dialog)
+- Implemented change request #15 (Additional configurations (display/hide icons; display/hide separator))
+- Updated third party libraries
+
 # 3.1.1
 - Fixed issue #19 (Blank white page for VS 2017 15.6.0)
 

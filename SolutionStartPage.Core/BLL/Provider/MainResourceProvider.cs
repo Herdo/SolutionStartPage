@@ -12,8 +12,8 @@
 
         CultureInfo IResourceProvider.Culture
         {
-            get { return Main.Culture; }
-            set { Main.Culture = value; }
+            get => Main.Culture;
+            set => Main.Culture = value;
         }
 
         public string this[string key]

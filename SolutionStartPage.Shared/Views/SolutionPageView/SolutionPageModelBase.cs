@@ -12,7 +12,6 @@
     public abstract class SolutionPageModelBase : ISolutionPageModel
     {
         /////////////////////////////////////////////////////////
-
         #region Constants
 
         private const int _MAXIMUM_RETRIES = 15;
@@ -20,23 +19,19 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Fields
 
         private readonly IFileSystem _fileSystem;
-        private readonly XmlSerializer _serializer;
         private readonly string _settingsFilePath;
 
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Constructors
 
         protected SolutionPageModelBase(IFileSystem fileSystem, string settingsFileName)
         {
             _fileSystem = fileSystem;
-            _serializer = new XmlSerializer(typeof (SolutionPageConfiguration));
             _settingsFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                 settingsFileName);
         }
@@ -44,51 +39,60 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region ISolutionPageModel Member
 
-        SolutionPageConfiguration ISolutionPageModel.LoadConfiguration()
+        async Task<SolutionPageConfiguration> ISolutionPageModel.LoadConfiguration()
         {
             if (!_fileSystem.FileExists(_settingsFilePath))
                 return new SolutionPageConfiguration();
 
-            for (var i = 0; i <= _MAXIMUM_RETRIES; i++)
+            return await Task.Run(() =>
             {
-                try
+                var serializer = new XmlSerializer(typeof(SolutionPageConfiguration));
+
+                for (var i = 0; i <= _MAXIMUM_RETRIES; i++)
                 {
-                    using (var reader = new StreamReader(_settingsFilePath))
-                        return (SolutionPageConfiguration) _serializer.Deserialize(reader);
+                    try
+                    {
+                        using (var reader = new StreamReader(_settingsFilePath))
+                            return (SolutionPageConfiguration)serializer.Deserialize(reader);
+                    }
+                    catch (Exception)
+                    {
+                        if (i >= _MAXIMUM_RETRIES)
+                            return new SolutionPageConfiguration();
+                    }
                 }
-                catch (Exception)
-                {
-                    if (i >= _MAXIMUM_RETRIES)
-                        return new SolutionPageConfiguration();
-                }
-            }
-            return new SolutionPageConfiguration();
+                return new SolutionPageConfiguration();
+            }).ConfigureAwait(false);
         }
 
         async Task ISolutionPageModel.SaveConfiguration(SolutionPageConfiguration configuration)
         {
             ThrowIfNull(configuration, nameof(configuration));
 
-            for (var i = 0; i <= _MAXIMUM_RETRIES; i++)
+            await Task.Run(async () =>
             {
-                try
+                var serializer = new XmlSerializer(typeof(SolutionPageConfiguration));
+
+                for (var i = 0; i <= _MAXIMUM_RETRIES; i++)
                 {
-                    using (var writer = new StreamWriter(_settingsFilePath))
+                    try
                     {
-                        _serializer.Serialize(writer, configuration);
-                        return;
+                        using (var writer = new StreamWriter(_settingsFilePath))
+                        {
+                            serializer.Serialize(writer, configuration);
+                            return;
+                        }
                     }
+                    catch (Exception)
+                    {
+                        if (i >= _MAXIMUM_RETRIES)
+                            return;
+                    }
+                    await Task.Delay(200);
                 }
-                catch (Exception)
-                {
-                    if (i >= _MAXIMUM_RETRIES)
-                        return;
-                }
-                await Task.Delay(200);
-            }
+            }).ConfigureAwait(false);
         }
 
         IEnumerable<FileInfo> ISolutionPageModel.GetFilesInDirectory(string directory, string pattern)

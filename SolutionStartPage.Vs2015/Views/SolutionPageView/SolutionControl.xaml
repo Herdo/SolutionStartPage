@@ -85,7 +85,8 @@
             <StackPanel Orientation="Horizontal"
                         Opacity="{Binding SolutionAvailable, Converter={StaticResource BoolToOpacityConverter}, ConverterParameter=0.3, Mode=OneWay}">
                 <Image x:Name="SolutionFileImage"
-                       Style="{StaticResource SolutionImageStyle}" />
+                       Style="{StaticResource SolutionImageStyle}"
+                       Visibility="{Binding DisplayIcons, Converter={StaticResource BoolToVisibilityConverter}}" />
                 <platformUi:ImageButton Margin="5,0,0,0"
                                         Content="{Binding SolutionDisplayName}"
                                         Style="{StaticResource StartPage.ProjectCommand.LinkStyle}"
@@ -117,7 +118,8 @@
             <Grid Visibility="{Binding DisplayFolders, Converter={StaticResource BoolToVisibilityConverter}}">
                 <StackPanel Orientation="Horizontal"
                             Opacity="{Binding SolutionDirectoryAvailable, Converter={StaticResource BoolToOpacityConverter}, ConverterParameter=0.3, Mode=OneWay}">
-                    <Image Style="{StaticResource SolutionImageFolderStyle}" />
+                    <Image Style="{StaticResource SolutionImageFolderStyle}"
+                           Visibility="{Binding DisplayIcons, Converter={StaticResource BoolToVisibilityConverter}}"/>
                     <platformUi:ImageButton Margin="5,0,0,0"
                                             Content="{Binding ComputedSolutionDirectory}"
                                             Style="{StaticResource StartPage.ProjectCommand.LinkStyle}"
@@ -197,6 +199,7 @@
         <!-- Seperator -->
         <Separator Grid.Row="4"
                    Grid.ColumnSpan="2"
+                   Visibility="{Binding DisplaySeparator, Converter={StaticResource BoolToVisibilityConverter}}"
                    Margin="0,5,0,5" />
     </Grid>
 </UserControl>
