@@ -1,6 +1,6 @@
 ﻿namespace SolutionStartPage.Shared
 {
-    using Microsoft.Practices.Unity;
+    using Unity;
 
     public interface IBootstrapper
     {

@@ -1,12 +1,13 @@
 ﻿namespace SolutionStartPage.Vs2015
 {
-    using Microsoft.Practices.Unity;
     using Models;
     using Shared;
     using Shared.Models;
     using Shared.Views.BasicPart;
     using Shared.Views.PageRootView;
     using Shared.Views.SolutionPageView;
+    using Unity;
+    using Unity.Lifetime;
     using Views.BasicPart;
     using Views.PageRootView;
     using Views.SolutionPageView;

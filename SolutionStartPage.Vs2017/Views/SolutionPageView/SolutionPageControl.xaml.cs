@@ -1,7 +1,6 @@
 ﻿namespace SolutionStartPage.Vs2017.Views.SolutionPageView
 {
     using System;
-    using System.Windows.Forms;
     using System.Windows.Input;
     using Shared.Models;
     using Shared.Views;
@@ -14,7 +13,6 @@
     public partial class SolutionPageControl : ISolutionPageView
     {
         /////////////////////////////////////////////////////////
-
         #region Constructors
 
         public SolutionPageControl()
@@ -25,7 +23,6 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region Event Handler
 
         private void AlterPage_OnCanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -41,7 +38,6 @@
         #endregion
 
         /////////////////////////////////////////////////////////
-
         #region ISolutionPageView Member
 
         public event EventHandler<CanExecuteRoutedEventArgs> AlterPageCanExecute;
@@ -55,14 +51,15 @@
         string ISolutionPageView.BrowseBulkAddRootFolder()
         {
             string selectedPath = null;
-            var fbd = new FolderBrowserDialog
+            var fbd = new Ookii.Dialogs.Wpf.VistaFolderBrowserDialog
             {
                 Description = @"Browse for a root folder...",
+                RootFolder = Environment.SpecialFolder.Recent,
                 ShowNewFolderButton = false,
-                RootFolder = Environment.SpecialFolder.Desktop
+                UseDescriptionForTitle = true
             };
             var dialogResult = fbd.ShowDialog();
-            if (dialogResult == DialogResult.OK)
+            if (dialogResult == true)
                 selectedPath = fbd.SelectedPath;
 
             return selectedPath;

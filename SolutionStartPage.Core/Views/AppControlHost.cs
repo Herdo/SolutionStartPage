@@ -10,7 +10,6 @@
     using BLL.Interfaces;
     using BLL.Provider;
     using DAL;
-    using Microsoft.Practices.Unity;
     using Models;
     using Shared;
     using Shared.BLL.Interfaces;
@@ -22,6 +21,9 @@
     using Shared.Views.PageRootView;
     using Shared.Views.SolutionPageView;
     using SolutionPageView;
+    using Unity;
+    using Unity.Exceptions;
+    using Unity.Lifetime;
     using Vs2015;
     using Vs2017;
 
