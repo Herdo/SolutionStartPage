@@ -142,6 +142,10 @@
                     solution.OpenSolutionExecuted += solution_OpenSolutionExecuted;
                     solution.AlterSolutionCanExecute += solution_AlterSolutionCanExecute;
                     solution.AlterSolutionExecuted += solution_AlterSolutionExecuted;
+
+                    // Check availability
+                    CheckSolutionAvailability(solution);
+                    CheckSolutionDirectoryAvailability(solution);
                 }
             }
         }
@@ -296,6 +300,18 @@
             }
         }
 
+        private void CheckSolutionAvailability(Solution solution)
+        {
+            solution.SolutionAvailable = !ViewModel.EditModeEnabled
+                                         && _model.FileExists(solution.ComputedSolutionPath);
+        }
+
+        private void CheckSolutionDirectoryAvailability(Solution solution)
+        {
+            solution.SolutionDirectoryAvailable = !ViewModel.EditModeEnabled
+                                                  && _model.DirectoryExists(solution.ComputedSolutionDirectory);
+        }
+
         #endregion
 
         /////////////////////////////////////////////////////////
@@ -406,13 +422,11 @@
             switch (param)
             {
                 case CommandParameter.OPEN_SOLUTION_OPEN:
-                    solution.SolutionAvailable = !ViewModel.EditModeEnabled
-                                              && _model.FileExists(solution.ComputedSolutionPath);
+                    CheckSolutionAvailability(solution);
                     e.CanExecute = solution.SolutionAvailable && !solution.HasError;
                     break;
                 case CommandParameter.OPEN_SOLUTION_OPEN_EXPLORER:
-                    solution.SolutionDirectoryAvailable = !ViewModel.EditModeEnabled
-                                                       && _model.DirectoryExists(solution.ComputedSolutionDirectory);
+                    CheckSolutionDirectoryAvailability(solution);
                     e.CanExecute = solution.SolutionDirectoryAvailable && !solution.HasError;
                     break;
             }
