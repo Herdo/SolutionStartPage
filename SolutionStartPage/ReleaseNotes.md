@@ -1,3 +1,8 @@
+# 3.3
+- Added Polish localization #23 (Localization pl-PL)
+- Checking if solutions are available directly when loading the configuration.
+  This should decrease the average time the warning symbols will be displayed at start.
+
 # 3.2
 - Implemented change request #20 (Vista like folder browse dialog)
 - Implemented change request #15 (Additional configurations (display/hide icons; display/hide separator))

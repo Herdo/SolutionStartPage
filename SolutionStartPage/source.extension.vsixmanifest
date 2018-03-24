@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="080E4A52-2AA6-4554-B4A3-5861BF34B0AE" Version="3.2" Language="en-US" Publisher="Stefan Over" />
+        <Identity Id="080E4A52-2AA6-4554-B4A3-5861BF34B0AE" Version="3.3" Language="en-US" Publisher="Stefan Over" />
         <DisplayName>Solution Start Page</DisplayName>
         <Description xml:space="preserve">This is a start page replacing the start pages of VS2015 and VS2017.
 The 'news' section is replaced by a customizable overview of your solutions.</Description>
